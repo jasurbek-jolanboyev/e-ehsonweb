@@ -2362,10 +2362,11 @@
                 toggleAdminPanel();
             });
 
-            document.getElementById('closeAdminPanel').addEventListener('click', function() {
-                isAdminMode = false;
-                updateUserInterface();
-            });
+           document.getElementById('closeAdminPanel').addEventListener('click', function() {
+           document.getElementById('adminSidebar').classList.remove('open'); 
+           document.getElementById('adminOverlay').classList.add('hidden');
+           isAdminMode = false;
+           updateUserInterface();});
 
             // document.getElementById('adminOverlay').addEventListener('click', function() {
             //     isAdminMode = false;
