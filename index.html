@@ -1846,227 +1846,267 @@
             });
         }
 
-        function loadAdminCampaigns() {
-            const tbody = document.getElementById('campaignsTableBody');
-            tbody.innerHTML = '';
+      // Admin kampaniyalarni yuklash (remove tugmasi bilan)
+function loadAdminCampaigns() {
+    const tbody = document.getElementById('campaignsTableBody');
+    tbody.innerHTML = '';
 
-            campaigns.forEach(campaign => {
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td class="font-mono text-sm">#${campaign.id}</td>
-                    <td class="font-medium">${campaign.title}</td>
-                    <td>${getCategoryName(campaign.category)}</td>
-                    <td>${formatCurrency(campaign.targetAmount)}</td>
-                    <td>${formatCurrency(campaign.raisedAmount)}</td>
-                    <td><span class="status-badge status-${campaign.status}">${campaign.status}</span></td>
-                    <td>
-                        <button class="text-blue-600 hover:text-blue-800">
-                            <i class="fas fa-eye"></i>
-                        </button>
-                    </td>
-                `;
-                tbody.appendChild(row);
-            });
+    campaigns.forEach(campaign => {
+        // Admin bo‘lsa va shartlar bajarilsa — remove tugmasi chiqadi
+        let removeBtn = '';
+        if (
+            currentUser && currentUser.isAdmin &&
+            campaign.raisedAmount >= campaign.targetAmount &&
+            campaign.daysLeft > 0
+        ) {
+            removeBtn = `
+                <button class="text-red-600 hover:text-red-800 ml-2" onclick="removeCampaign(${campaign.id})" title="Elonni olib tashlash">
+                    <i class="fas fa-trash"></i>
+                </button>
+            `;
         }
 
-        function loadAdminUsers() {
-            const tbody = document.getElementById('usersTableBody');
-            tbody.innerHTML = '';
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td class="font-mono text-sm">#${campaign.id}</td>
+            <td class="font-medium">${campaign.title}</td>
+            <td>${getCategoryName(campaign.category)}</td>
+            <td>${formatCurrency(campaign.targetAmount)}</td>
+            <td>${formatCurrency(campaign.raisedAmount)}</td>
+            <td><span class="status-badge status-${campaign.status}">${campaign.status}</span></td>
+            <td>
+                <button class="text-blue-600 hover:text-blue-800">
+                    <i class="fas fa-eye"></i>
+                </button>
+                ${removeBtn}
+            </td>
+        `;
+        tbody.appendChild(row);
+    });
+}
 
-            users.forEach(user => {
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td class="font-mono text-sm">#${user.id}</td>
-                    <td class="font-medium">${user.firstName} ${user.lastName}</td>
-                    <td>${user.phone}</td>
-                    <td>${user.email || '-'}</td>
-                    <td>${new Date(user.registeredAt).toLocaleDateString('uz-UZ')}</td>
-                    <td><span class="status-badge status-${user.status}">${user.status}</span></td>
-                `;
-                tbody.appendChild(row);
-            });
+// Kampaniyani olib tashlash funksiyasi
+function removeCampaign(campaignId) {
+    if (!currentUser || !currentUser.isAdmin) return;
+    if (!confirm("Elonni olib tashlashni tasdiqlaysizmi?")) return;
+    const idx = campaigns.findIndex(c => c.id === campaignId);
+    if (idx !== -1) {
+        campaigns.splice(idx, 1);
+        saveData();
+        renderCampaigns();
+        loadAdminCampaigns();
+        updateStats();
+        showNotification('Olib tashlandi', 'Elon muvaffaqiyatli olib tashlandi', 'success');
+    }
+}
+window.removeCampaign = removeCampaign;
+
+// Admin foydalanuvchilarni yuklash
+function loadAdminUsers() {
+    const tbody = document.getElementById('usersTableBody');
+    tbody.innerHTML = '';
+
+    users.forEach(user => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td class="font-mono text-sm">#${user.id}</td>
+            <td class="font-medium">${user.firstName} ${user.lastName}</td>
+            <td>${user.phone}</td>
+            <td>${user.email || '-'}</td>
+            <td>${new Date(user.registeredAt).toLocaleDateString('uz-UZ')}</td>
+            <td><span class="status-badge status-${user.status}">${user.status}</span></td>
+        `;
+        tbody.appendChild(row);
+    });
+}
+
+// Admin to‘lovlarni yuklash
+function loadAdminPayments() {
+    const tbody = document.getElementById('paymentsTableBody');
+    tbody.innerHTML = '';
+
+    payments.forEach(payment => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td class="font-mono text-sm">#${payment.id}</td>
+            <td class="font-medium">${payment.campaignTitle}</td>
+            <td>
+                <button class="text-blue-600 hover:text-blue-800 font-medium" onclick="showUserProfile(${payment.donorId})">
+                    ${payment.donorName}
+                </button>
+            </td>
+            <td>${formatCurrency(payment.amount)}</td>
+            <td class="capitalize">${payment.paymentMethod}</td>
+            <td>${new Date(payment.paidAt).toLocaleDateString('uz-UZ')}</td>
+            <td>
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-heart text-red-500"></i>
+                    <span>${payment.likes || 0}</span>
+                </div>
+            </td>
+            <td><span class="status-badge status-active">${payment.status}</span></td>
+        `;
+        tbody.appendChild(row);
+    });
+}
+
+// Kartalar boshqaruvi
+function loadCampaignCards() {
+    const select = document.getElementById('cardCampaignSelect');
+    const cardsList = document.getElementById('cardsList');
+    
+    // Kampaniya selectni to‘ldirish
+    select.innerHTML = '<option value="">Kampaniyani tanlang</option>';
+    campaigns.forEach(campaign => {
+        const option = document.createElement('option');
+        option.value = campaign.id;
+        option.textContent = campaign.title;
+        select.appendChild(option);
+    });
+    
+    // Kartalar ro‘yxati
+    cardsList.innerHTML = '';
+    campaignCards.forEach(card => {
+        const campaign = campaigns.find(c => c.id === card.campaignId);
+        const cardElement = document.createElement('div');
+        cardElement.className = 'bg-gray-50 rounded-xl p-4 border';
+        cardElement.innerHTML = `
+            <div class="flex justify-between items-start mb-3">
+                <div>
+                    <h5 class="font-medium text-gray-800">${campaign ? campaign.title : 'Noma\'lum kampaniya'}</h5>
+                    <p class="text-sm text-gray-600">${card.bankName}</p>
+                </div>
+                <div class="flex space-x-2">
+                    <button class="text-red-600 hover:text-red-800" onclick="removeCard(${card.id})" title="O'chirish">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                    <button class="text-gray-600 hover:text-gray-800" onclick="toggleCardStatus(${card.id})" title="${card.isActive ? 'O\'chirish' : 'Yoqish'}">
+                        <i class="fas fa-${card.isActive ? 'eye' : 'eye-slash'}"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg p-4 text-white">
+                <div class="flex justify-between items-start mb-4">
+                    <div class="text-sm opacity-75">Bank kartasi</div>
+                    <div class="text-sm opacity-75">${card.bankName}</div>
+                </div>
+                <div class="text-lg font-mono tracking-wider mb-2">
+                    ${card.cardNumber.replace(/(\d{4})/g, '$1 ').trim()}
+                </div>
+                <div class="text-sm font-medium">${card.cardHolder}</div>
+            </div>
+            <div class="mt-3 flex justify-between text-sm text-gray-500">
+                <span>Qo'shilgan: ${new Date(card.addedAt).toLocaleDateString('uz-UZ')}</span>
+                <span class="px-2 py-1 rounded-full text-xs ${card.isActive ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800'}">
+                    ${card.isActive ? 'Faol' : 'Nofaol'}
+                </span>
+            </div>
+        `;
+        cardsList.appendChild(cardElement);
+    });
+}
+
+function addCard(campaignId, cardNumber, cardHolder, bankName) {
+    const newCard = {
+        id: campaignCards.length + 1,
+        campaignId: parseInt(campaignId),
+        cardNumber: cardNumber.replace(/\s/g, ''),
+        cardHolder: cardHolder.toUpperCase(),
+        bankName: bankName,
+        isActive: true,
+        addedAt: new Date()
+    };
+    
+    campaignCards.push(newCard);
+    saveData();
+    loadCampaignCards();
+    showNotification('Muvaffaqiyat!', 'Yangi karta qo\'shildi');
+}
+
+function removeCard(cardId) {
+    if (confirm('Kartani o\'chirishni tasdiqlaysizmi?')) {
+        const index = campaignCards.findIndex(c => c.id === cardId);
+        if (index !== -1) {
+            campaignCards.splice(index, 1);
+            saveData();
+            loadCampaignCards();
+            showNotification('O\'chirildi', 'Karta o\'chirildi', 'warning');
         }
+    }
+}
 
-        function loadAdminPayments() {
-            const tbody = document.getElementById('paymentsTableBody');
-            tbody.innerHTML = '';
+function toggleCardStatus(cardId) {
+    const card = campaignCards.find(c => c.id === cardId);
+    if (card) {
+        card.isActive = !card.isActive;
+        saveData();
+        loadCampaignCards();
+        showNotification('O\'zgartirildi', `Karta ${card.isActive ? 'yoqildi' : 'o\'chirildi'}`, 'info');
+    }
+}
 
-            payments.forEach(payment => {
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td class="font-mono text-sm">#${payment.id}</td>
-                    <td class="font-medium">${payment.campaignTitle}</td>
-                    <td>
-                        <button class="text-blue-600 hover:text-blue-800 font-medium" onclick="showUserProfile(${payment.donorId})">
-                            ${payment.donorName}
-                        </button>
-                    </td>
-                    <td>${formatCurrency(payment.amount)}</td>
-                    <td class="capitalize">${payment.paymentMethod}</td>
-                    <td>${new Date(payment.paidAt).toLocaleDateString('uz-UZ')}</td>
-                    <td>
-                        <div class="flex items-center space-x-2">
+// Foydalanuvchi profili
+function showUserProfile(userId) {
+    const user = users.find(u => u.id === userId);
+    if (!user) return;
+    
+    currentViewingUser = user;
+    const userPayments = payments.filter(p => p.donorId === userId);
+    const totalDonated = userPayments.reduce((sum, p) => sum + p.amount, 0);
+    const totalLikes = userPayments.reduce((sum, p) => sum + (p.likes || 0), 0);
+    
+    document.getElementById('profileUserName').textContent = `${user.firstName} ${user.lastName}`;
+    document.getElementById('profileUserPhone').textContent = user.phone;
+    document.getElementById('profileUserJoined').textContent = `${new Date(user.registeredAt).getFullYear()}-yil ${new Date(user.registeredAt).toLocaleDateString('uz-UZ', { month: 'long' })}dan a'zo`;
+    document.getElementById('profileTotalDonated').textContent = formatCurrency(totalDonated);
+    document.getElementById('profileTotalDonations').textContent = userPayments.length;
+    document.getElementById('profileTotalLikes').textContent = totalLikes;
+    
+    const historyContainer = document.getElementById('profilePaymentHistory');
+    historyContainer.innerHTML = '';
+    
+    if (userPayments.length === 0) {
+        historyContainer.innerHTML = '<p class="text-gray-500 text-center py-8">Hali xayriya qilinmagan</p>';
+    } else {
+        userPayments.forEach(payment => {
+            const paymentElement = document.createElement('div');
+            paymentElement.className = 'bg-gray-50 rounded-xl p-4 border';
+            paymentElement.innerHTML = `
+                <div class="flex justify-between items-start mb-2">
+                    <h5 class="font-medium text-gray-800">${payment.campaignTitle}</h5>
+                    <span class="text-lg font-bold text-green-600">${formatCurrency(payment.amount)}</span>
+                </div>
+                <div class="flex justify-between items-center text-sm text-gray-600">
+                    <span>${new Date(payment.paidAt).toLocaleDateString('uz-UZ')}</span>
+                    <div class="flex items-center space-x-4">
+                        <div class="flex items-center space-x-1">
                             <i class="fas fa-heart text-red-500"></i>
                             <span>${payment.likes || 0}</span>
                         </div>
-                    </td>
-                    <td><span class="status-badge status-active">${payment.status}</span></td>
-                `;
-                tbody.appendChild(row);
-            });
-        }
-
-        function loadCampaignCards() {
-            const select = document.getElementById('cardCampaignSelect');
-            const cardsList = document.getElementById('cardsList');
-            
-            // Populate campaign select
-            select.innerHTML = '<option value="">Kampaniyani tanlang</option>';
-            campaigns.forEach(campaign => {
-                const option = document.createElement('option');
-                option.value = campaign.id;
-                option.textContent = campaign.title;
-                select.appendChild(option);
-            });
-            
-            // Populate cards list
-            cardsList.innerHTML = '';
-            campaignCards.forEach(card => {
-                const campaign = campaigns.find(c => c.id === card.campaignId);
-                const cardElement = document.createElement('div');
-                cardElement.className = 'bg-gray-50 rounded-xl p-4 border';
-                cardElement.innerHTML = `
-                    <div class="flex justify-between items-start mb-3">
-                        <div>
-                            <h5 class="font-medium text-gray-800">${campaign ? campaign.title : 'Noma\'lum kampaniya'}</h5>
-                            <p class="text-sm text-gray-600">${card.bankName}</p>
-                        </div>
-                        <div class="flex space-x-2">
-                            <button class="text-red-600 hover:text-red-800" onclick="removeCard(${card.id})" title="O'chirish">
-                                <i class="fas fa-trash"></i>
+                        ${currentUser && currentUser.id !== userId ? `
+                            <button class="text-blue-600 hover:text-blue-800" onclick="likePayment(${payment.id})" title="Minnatdorchilik bildirish">
+                                <i class="fas fa-thumbs-up"></i>
                             </button>
-                            <button class="text-gray-600 hover:text-gray-800" onclick="toggleCardStatus(${card.id})" title="${card.isActive ? 'O\'chirish' : 'Yoqish'}">
-                                <i class="fas fa-${card.isActive ? 'eye' : 'eye-slash'}"></i>
-                            </button>
-                        </div>
+                        ` : ''}
                     </div>
-                    <div class="bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg p-4 text-white">
-                        <div class="flex justify-between items-start mb-4">
-                            <div class="text-sm opacity-75">Bank kartasi</div>
-                            <div class="text-sm opacity-75">${card.bankName}</div>
-                        </div>
-                        <div class="text-lg font-mono tracking-wider mb-2">
-                            ${card.cardNumber.replace(/(\d{4})/g, '$1 ').trim()}
-                        </div>
-                        <div class="text-sm font-medium">${card.cardHolder}</div>
-                    </div>
-                    <div class="mt-3 flex justify-between text-sm text-gray-500">
-                        <span>Qo'shilgan: ${new Date(card.addedAt).toLocaleDateString('uz-UZ')}</span>
-                        <span class="px-2 py-1 rounded-full text-xs ${card.isActive ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800'}">
-                            ${card.isActive ? 'Faol' : 'Nofaol'}
-                        </span>
-                    </div>
-                `;
-                cardsList.appendChild(cardElement);
-            });
-        }
+                </div>
+            `;
+            historyContainer.appendChild(paymentElement);
+        });
+    }
+    
+    showModal(document.getElementById('userProfileModal'));
+}
 
-        function addCard(campaignId, cardNumber, cardHolder, bankName) {
-            const newCard = {
-                id: campaignCards.length + 1,
-                campaignId: parseInt(campaignId),
-                cardNumber: cardNumber.replace(/\s/g, ''),
-                cardHolder: cardHolder.toUpperCase(),
-                bankName: bankName,
-                isActive: true,
-                addedAt: new Date()
-            };
-            
-            campaignCards.push(newCard);
-            saveData();
-            loadCampaignCards();
-            showNotification('Muvaffaqiyat!', 'Yangi karta qo\'shildi');
-        }
+// Kampaniya donorlarini ko‘rsatish
+function showCampaignDonors(campaignId) {
+    const campaign = campaigns.find(c => c.id === campaignId);
+    if (!campaign) return;
+    
+    const campaignPayments = payments.filter(p => p.campaignId === campaignId);
+    // Shu yerda donorlarni chiqish logikasini yozishingiz mumkin
+}
 
-        function removeCard(cardId) {
-            if (confirm('Kartani o\'chirishni tasdiqlaysizmi?')) {
-                const index = campaignCards.findIndex(c => c.id === cardId);
-                if (index !== -1) {
-                    campaignCards.splice(index, 1);
-                    saveData();
-                    loadCampaignCards();
-                    showNotification('O\'chirildi', 'Karta o\'chirildi', 'warning');
-                }
-            }
-        }
-
-        function toggleCardStatus(cardId) {
-            const card = campaignCards.find(c => c.id === cardId);
-            if (card) {
-                card.isActive = !card.isActive;
-                saveData();
-                loadCampaignCards();
-                showNotification('O\'zgartirildi', `Karta ${card.isActive ? 'yoqildi' : 'o\'chirildi'}`, 'info');
-            }
-        }
-
-        function showUserProfile(userId) {
-            const user = users.find(u => u.id === userId);
-            if (!user) return;
-            
-            currentViewingUser = user;
-            const userPayments = payments.filter(p => p.donorId === userId);
-            const totalDonated = userPayments.reduce((sum, p) => sum + p.amount, 0);
-            const totalLikes = userPayments.reduce((sum, p) => sum + (p.likes || 0), 0);
-            
-            document.getElementById('profileUserName').textContent = `${user.firstName} ${user.lastName}`;
-            document.getElementById('profileUserPhone').textContent = user.phone;
-            document.getElementById('profileUserJoined').textContent = `${new Date(user.registeredAt).getFullYear()}-yil ${new Date(user.registeredAt).toLocaleDateString('uz-UZ', { month: 'long' })}dan a'zo`;
-            document.getElementById('profileTotalDonated').textContent = formatCurrency(totalDonated);
-            document.getElementById('profileTotalDonations').textContent = userPayments.length;
-            document.getElementById('profileTotalLikes').textContent = totalLikes;
-            
-            const historyContainer = document.getElementById('profilePaymentHistory');
-            historyContainer.innerHTML = '';
-            
-            if (userPayments.length === 0) {
-                historyContainer.innerHTML = '<p class="text-gray-500 text-center py-8">Hali xayriya qilinmagan</p>';
-            } else {
-                userPayments.forEach(payment => {
-                    const paymentElement = document.createElement('div');
-                    paymentElement.className = 'bg-gray-50 rounded-xl p-4 border';
-                    paymentElement.innerHTML = `
-                        <div class="flex justify-between items-start mb-2">
-                            <h5 class="font-medium text-gray-800">${payment.campaignTitle}</h5>
-                            <span class="text-lg font-bold text-green-600">${formatCurrency(payment.amount)}</span>
-                        </div>
-                        <div class="flex justify-between items-center text-sm text-gray-600">
-                            <span>${new Date(payment.paidAt).toLocaleDateString('uz-UZ')}</span>
-                            <div class="flex items-center space-x-4">
-                                <div class="flex items-center space-x-1">
-                                    <i class="fas fa-heart text-red-500"></i>
-                                    <span>${payment.likes || 0}</span>
-                                </div>
-                                ${currentUser && currentUser.id !== userId ? `
-                                    <button class="text-blue-600 hover:text-blue-800" onclick="likePayment(${payment.id})" title="Minnatdorchilik bildirish">
-                                        <i class="fas fa-thumbs-up"></i>
-                                    </button>
-                                ` : ''}
-                            </div>
-                        </div>
-                    `;
-                    historyContainer.appendChild(paymentElement);
-                });
-            }
-            
-            showModal(document.getElementById('userProfileModal'));
-        }
-
-        function showCampaignDonors(campaignId) {
-            const campaign = campaigns.find(c => c.id === campaignId);
-            if (!campaign) return;
-            
-            const campaignPayments = payments.filter(p => p.campaignId === campaignId);
             
             // Group payments by donor
             const donorGroups = {};
