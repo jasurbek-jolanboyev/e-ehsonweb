@@ -871,7 +871,7 @@
                 <div class="flex items-start space-x-3">
                     <input type="checkbox" id="agreeApplicationTerms" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 mt-1" required>
                     <label for="agreeApplicationTerms" class="text-sm text-gray-700">
-                        Men taqdim etgan ma'lumotlar to'g'ri ekanligini tasdiqlayaman va moderatsiya qoidalariga roziman
+                        Men taqdim etgan ma'lumotlar to'g'ri ekanligini tasdiqlayman va moderatsiya qoidalariga roziman
                     </label>
                 </div>
                 
@@ -2103,7 +2103,7 @@
                     <div class="space-y-4 max-h-96 overflow-y-auto">
                         ${donors.map((donor, index) => `
                             <div class="bg-gray-50 rounded-xl p-4 border">
-                                <div class="flex items-center justify-between">
+                                <div class="flex justify-between">
                                     <div class="flex items-center space-x-3">
                                         <div class="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center text-white font-bold">
                                             ${index + 1}
@@ -2362,24 +2362,35 @@
                 toggleAdminPanel();
             });
 
-           document.getElementById('closeAdminPanel').addEventListener('click', function() {
-           document.getElementById('adminSidebar').classList.remove('open'); 
-           document.getElementById('adminOverlay').classList.add('hidden');
-           isAdminMode = false;
-           updateUserInterface();});
+            document.getElementById('closeAdminPanel').addEventListener('click', function() {
+                isAdminMode = false;
+                updateUserInterface();
+            });
 
-            // document.getElementById('adminOverlay').addEventListener('click', function() {
-            //     isAdminMode = false;
-            //     updateUserInterface();
-            // });
+            document.getElementById('adminOverlay').addEventListener('click', function() {
+                isAdminMode = false;
+                updateUserInterface();
+            });
 
-
-            // Admin navigation
+            // Admin navigation (sectionlarni ko'rsatish uchun)
             document.querySelectorAll('.admin-nav-item').forEach(item => {
-                item.addEventListener('click', function(e) {
+                item.addEventListener('click', e => {
                     e.preventDefault();
-                    const section = this.dataset.section;
-                    showAdminSection(section);
+
+                    // Barcha nav itemlardan active ni olib tashlash
+                    document.querySelectorAll('.admin-nav-item').forEach(i => i.classList.remove('active'));
+                    item.classList.add('active');
+
+                    // Barcha sectionlarni yashirish
+                    document.querySelectorAll('.admin-section').forEach(sec => sec.classList.add('hidden'));
+
+                    // Tanlangan sectionni ko‘rsatish
+                    const sectionId = "admin" + item.dataset.section.charAt(0).toUpperCase() + item.dataset.section.slice(1);
+                    document.getElementById(sectionId).classList.remove('hidden');
+
+                    // Sidebar yopilsin (agar kerak bo'lsa)
+                    document.getElementById('adminSidebar').classList.remove('open');
+                    document.getElementById('adminOverlay').classList.add('hidden');
                 });
             });
 
