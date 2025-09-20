@@ -1,0 +1,1505 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Ehson - Xayriya Platformasi</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .gradient-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .gradient-success {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+        }
+        
+        .card-hover {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 30px rgba(102, 126, 234, 0.4);
+        }
+        
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .btn-primary:hover::before {
+            left: 100%;
+        }
+        
+        .progress-bar {
+            background: linear-gradient(90deg, #10b981, #059669);
+            border-radius: 9999px;
+            transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .progress-bar::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            background-image: linear-gradient(
+                -45deg,
+                rgba(255, 255, 255, .2) 25%,
+                transparent 25%,
+                transparent 50%,
+                rgba(255, 255, 255, .2) 50%,
+                rgba(255, 255, 255, .2) 75%,
+                transparent 75%,
+                transparent
+            );
+            background-size: 50px 50px;
+            animation: move 2s linear infinite;
+        }
+        
+        @keyframes move {
+            0% {
+                background-position: 0 0;
+            }
+            100% {
+                background-position: 50px 50px;
+            }
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .modal.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 1;
+        }
+        
+        .modal-content {
+            transform: scale(0.7);
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        
+        .modal.show .modal-content {
+            transform: scale(1);
+        }
+        
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1100;
+            transform: translateX(400px);
+            transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+        
+        .notification.show {
+            transform: translateX(0);
+        }
+        
+        .hero-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="white" opacity="0.1"/><circle cx="75" cy="75" r="1" fill="white" opacity="0.1"/><circle cx="50" cy="10" r="1" fill="white" opacity="0.1"/><circle cx="10" cy="90" r="1" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+        }
+        
+        .stats-counter {
+            font-variant-numeric: tabular-nums;
+        }
+        
+        .category-filter {
+            transition: all 0.3s ease;
+        }
+        
+        .category-filter.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .loading-spinner {
+            border: 3px solid #f3f4f6;
+            border-top: 3px solid #667eea;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .mobile-menu {
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .mobile-menu.show {
+            transform: translateX(0);
+        }
+        
+        .payment-card {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3730a3 100%);
+            color: white;
+            border-radius: 16px;
+            padding: 24px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .payment-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+        }
+        
+        .card-chip {
+            width: 40px;
+            height: 30px;
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+            border-radius: 6px;
+            position: relative;
+        }
+        
+        .card-chip::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 20px;
+            height: 15px;
+            background: repeating-linear-gradient(
+                90deg,
+                transparent,
+                transparent 2px,
+                rgba(0,0,0,0.1) 2px,
+                rgba(0,0,0,0.1) 4px
+            );
+        }
+
+        .file-upload-area {
+            border: 2px dashed #d1d5db;
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .file-upload-area:hover {
+            border-color: #3b82f6;
+            background-color: #f8fafc;
+        }
+
+        .file-upload-area.dragover {
+            border-color: #3b82f6;
+            background-color: #eff6ff;
+        }
+
+        .uploaded-file {
+            background: #f3f4f6;
+            border-radius: 8px;
+            padding: 12px;
+            margin: 8px 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .bank-card {
+            background: linear-gradient(135deg, #1e40af 0%, #3730a3 100%);
+            border-radius: 16px;
+            padding: 20px;
+            color: white;
+            margin: 10px 0;
+        }
+
+        .qr-code {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .payment-method-card {
+            transition: all 0.3s ease;
+        }
+
+        .payment-method-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        .donation-amount {
+            transition: all 0.3s ease;
+        }
+
+        .donation-amount:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        .donation-amount.selected {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .chart-container {
+            position: relative;
+            height: 300px;
+            margin: 20px 0;
+        }
+
+        .chart-bar {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .chart-bar:hover {
+            transform: scaleY(1.05);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .faq-item {
+            transition: all 0.3s ease;
+        }
+
+        .faq-item.active .faq-content {
+            max-height: 200px;
+            opacity: 1;
+            padding-top: 12px;
+        }
+
+        .faq-content {
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .success-story {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            border-radius: 16px;
+            padding: 24px;
+            transition: all 0.3s ease;
+        }
+
+        .success-story:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+
+        .language-selector {
+            position: relative;
+        }
+
+        .language-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            min-width: 150px;
+            z-index: 1000;
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            pointer-events: none;
+        }
+
+        .language-dropdown.show {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: all;
+        }
+
+        .social-link {
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+
+        .campaign-card {
+            transition: all 0.3s ease;
+        }
+
+        .campaign-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+        }
+
+        .search-container {
+            position: relative;
+        }
+
+        .search-results {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            max-height: 300px;
+            overflow-y: auto;
+            z-index: 100;
+            display: none;
+        }
+
+        .search-results.show {
+            display: block;
+        }
+
+        .search-result-item {
+            padding: 12px 16px;
+            border-bottom: 1px solid #f3f4f6;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+
+        .search-result-item:hover {
+            background: #f8fafc;
+        }
+
+        .search-result-item:last-child {
+            border-bottom: none;
+        }
+
+        .admin-sidebar {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3730a3 100%);
+            color: white;
+            width: 280px;
+            height: 100vh;
+            position: fixed;
+            left: 0;
+            top: 0;
+            z-index: 1000;
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+            overflow-y: auto;
+        }
+
+        .admin-sidebar.show {
+            transform: translateX(0);
+        }
+
+        .admin-content {
+            margin-left: 0;
+            transition: margin-left 0.3s ease;
+            min-height: 100vh;
+            background: #f8fafc;
+        }
+
+        .admin-content.shifted {
+            margin-left: 280px;
+        }
+
+        .admin-nav-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 20px;
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-left: 3px solid transparent;
+        }
+
+        .admin-nav-item:hover,
+        .admin-nav-item.active {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border-left-color: #fbbf24;
+        }
+
+        .admin-card {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .admin-card:hover {
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .status-badge {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .status-active {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .status-pending {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .status-rejected {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .data-table th {
+            background: #f8fafc;
+            padding: 16px;
+            text-align: left;
+            font-weight: 600;
+            color: #374151;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .data-table td {
+            padding: 16px;
+            border-bottom: 1px solid #f3f4f6;
+        }
+
+        .data-table tr:hover {
+            background: #f8fafc;
+        }
+
+        .admin-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            display: none;
+        }
+
+        .admin-overlay.show {
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .admin-content.shifted {
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Admin Panel Overlay -->
+    <div id="adminOverlay" class="admin-overlay"></div>
+
+    <!-- Admin Sidebar -->
+    <div id="adminSidebar" class="admin-sidebar">
+        <div class="p-6 border-b border-white border-opacity-20">
+            <div class="flex items-center space-x-3">
+                <div class="bg-yellow-500 p-2 rounded-lg">
+                    <i class="fas fa-crown text-white text-xl"></i>
+                </div>
+                <div>
+                    <h2 class="text-xl font-bold">Admin Panel</h2>
+                    <p class="text-sm opacity-75">E-Ehson Boshqaruvi</p>
+                </div>
+            </div>
+        </div>
+        
+        <nav class="py-4">
+            <a href="#" class="admin-nav-item active" data-section="dashboard">
+                <i class="fas fa-tachometer-alt mr-3"></i>
+                Dashboard
+            </a>
+            <a href="#" class="admin-nav-item" data-section="campaigns">
+                <i class="fas fa-bullhorn mr-3"></i>
+                Kampaniyalar
+            </a>
+            <a href="#" class="admin-nav-item" data-section="users">
+                <i class="fas fa-users mr-3"></i>
+                Foydalanuvchilar
+            </a>
+            <a href="#" class="admin-nav-item" data-section="applications">
+                <i class="fas fa-file-alt mr-3"></i>
+                Arizalar
+            </a>
+            <a href="#" class="admin-nav-item" data-section="payments">
+                <i class="fas fa-credit-card mr-3"></i>
+                To'lovlar
+            </a>
+            <a href="#" class="admin-nav-item" data-section="settings">
+                <i class="fas fa-cog mr-3"></i>
+                Sozlamalar
+            </a>
+        </nav>
+        
+        <div class="absolute bottom-0 left-0 right-0 p-6 border-t border-white border-opacity-20">
+            <button id="closeAdminPanel" class="w-full bg-white bg-opacity-20 hover:bg-opacity-30 text-white py-2 px-4 rounded-lg transition-all">
+                <i class="fas fa-times mr-2"></i>Yopish
+            </button>
+        </div>
+    </div>
+
+    <!-- Admin Content -->
+    <div id="adminContent" class="admin-content hidden">
+        <!-- Admin Dashboard -->
+        <div id="adminDashboard" class="admin-section p-8">
+            <div class="mb-8">
+                <h1 class="text-3xl font-bold text-gray-800 mb-2">Dashboard</h1>
+                <p class="text-gray-600">Platformaning umumiy ko'rsatkichlari</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                <div class="admin-card">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-gray-600 text-sm">Jami Kampaniyalar</p>
+                            <p class="text-3xl font-bold text-blue-600" id="adminTotalCampaigns">0</p>
+                        </div>
+                        <div class="bg-blue-100 p-3 rounded-full">
+                            <i class="fas fa-bullhorn text-blue-600 text-xl"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="admin-card">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-gray-600 text-sm">Jami Yig'ilgan</p>
+                            <p class="text-3xl font-bold text-green-600" id="adminTotalRaised">0</p>
+                        </div>
+                        <div class="bg-green-100 p-3 rounded-full">
+                            <i class="fas fa-coins text-green-600 text-xl"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="admin-card">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-gray-600 text-sm">Foydalanuvchilar</p>
+                            <p class="text-3xl font-bold text-purple-600" id="adminTotalUsers">0</p>
+                        </div>
+                        <div class="bg-purple-100 p-3 rounded-full">
+                            <i class="fas fa-users text-purple-600 text-xl"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="admin-card">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-gray-600 text-sm">Kutilayotgan Arizalar</p>
+                            <p class="text-3xl font-bold text-orange-600" id="adminPendingApplications">0</p>
+                        </div>
+                        <div class="bg-orange-100 p-3 rounded-full">
+                            <i class="fas fa-clock text-orange-600 text-xl"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div class="admin-card">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">So'nggi Kampaniyalar</h3>
+                    <div id="recentCampaigns" class="space-y-4">
+                        <!-- Recent campaigns will be populated here -->
+                    </div>
+                </div>
+                
+                <div class="admin-card">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">So'nggi To'lovlar</h3>
+                    <div id="recentPayments" class="space-y-4">
+                        <!-- Recent payments will be populated here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Admin Campaigns -->
+        <div id="adminCampaigns" class="admin-section hidden p-8">
+            <div class="flex justify-between items-center mb-8">
+                <div>
+                    <h1 class="text-3xl font-bold text-gray-800 mb-2">Kampaniyalar Boshqaruvi</h1>
+                    <p class="text-gray-600">Barcha kampaniyalarni ko'rish va boshqarish</p>
+                </div>
+                <button id="addCampaignBtn" class="btn-primary text-white px-6 py-3 rounded-lg">
+                    <i class="fas fa-plus mr-2"></i>Yangi Kampaniya
+                </button>
+            </div>
+            
+            <div class="admin-card">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nomi</th>
+                            <th>Kategoriya</th>
+                            <th>Maqsad</th>
+                            <th>Yig'ilgan</th>
+                            <th>Holat</th>
+                            <th>Amallar</th>
+                        </tr>
+                    </thead>
+                    <tbody id="campaignsTableBody">
+                        <!-- Campaigns will be populated here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Admin Users -->
+        <div id="adminUsers" class="admin-section hidden p-8">
+            <div class="mb-8">
+                <h1 class="text-3xl font-bold text-gray-800 mb-2">Foydalanuvchilar</h1>
+                <p class="text-gray-600">Ro'yxatdan o'tgan foydalanuvchilar</p>
+            </div>
+            
+            <div class="admin-card">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Ism Familiya</th>
+                            <th>Telefon</th>
+                            <th>Email</th>
+                            <th>Ro'yxatdan o'tgan</th>
+                            <th>Holat</th>
+                            <th>Amallar</th>
+                        </tr>
+                    </thead>
+                    <tbody id="usersTableBody">
+                        <!-- Users will be populated here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Admin Applications -->
+        <div id="adminApplications" class="admin-section hidden p-8">
+            <div class="mb-8">
+                <h1 class="text-3xl font-bold text-gray-800 mb-2">Arizalar Moderatsiyasi</h1>
+                <p class="text-gray-600">Yangi arizalarni ko'rib chiqish va tasdiqlash</p>
+            </div>
+            
+            <div class="admin-card">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Ariza nomi</th>
+                            <th>Kategoriya</th>
+                            <th>Miqdor</th>
+                            <th>Ariza beruvchi</th>
+                            <th>Sana</th>
+                            <th>Holat</th>
+                            <th>Amallar</th>
+                        </tr>
+                    </thead>
+                    <tbody id="applicationsTableBody">
+                        <!-- Applications will be populated here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Admin Payments -->
+        <div id="adminPayments" class="admin-section hidden p-8">
+            <div class="mb-8">
+                <h1 class="text-3xl font-bold text-gray-800 mb-2">To'lovlar Nazorati</h1>
+                <p class="text-gray-600">Barcha to'lovlar tarixi va statistika</p>
+            </div>
+            
+            <div class="admin-card">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Kampaniya</th>
+                            <th>Xayriyachi</th>
+                            <th>Miqdor</th>
+                            <th>To'lov usuli</th>
+                            <th>Sana</th>
+                            <th>Holat</th>
+                            <th>Amallar</th>
+                        </tr>
+                    </thead>
+                    <tbody id="paymentsTableBody">
+                        <!-- Payments will be populated here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Admin Settings -->
+        <div id="adminSettings" class="admin-section hidden p-8">
+            <div class="mb-8">
+                <h1 class="text-3xl font-bold text-gray-800 mb-2">Tizim Sozlamalari</h1>
+                <p class="text-gray-600">Platformaning umumiy sozlamalari</p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div class="admin-card">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">Umumiy Sozlamalar</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Platform nomi</label>
+                            <input type="text" class="w-full px-4 py-3 border border-gray-300 rounded-xl" value="E-Ehson">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Minimal xayriya miqdori</label>
+                            <input type="number" class="w-full px-4 py-3 border border-gray-300 rounded-xl" value="10000">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Maksimal xayriya miqdori</label>
+                            <input type="number" class="w-full px-4 py-3 border border-gray-300 rounded-xl" value="10000000">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="admin-card">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">Bildirishnoma Sozlamalari</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-700">Email bildirishnomalar</span>
+                            <label class="relative inline-flex items-center cursor-pointer">
+                                <input type="checkbox" class="sr-only peer" checked>
+                                <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+                            </label>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-700">SMS bildirishnomalar</span>
+                            <label class="relative inline-flex items-center cursor-pointer">
+                                <input type="checkbox" class="sr-only peer" checked>
+                                <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-8">
+                <button class="btn-primary text-white px-8 py-3 rounded-lg">
+                    <i class="fas fa-save mr-2"></i>Sozlamalarni Saqlash
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="gradient-primary text-white shadow-2xl sticky top-0 z-50">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center space-x-3">
+                    <div class="bg-white bg-opacity-20 p-2 rounded-lg">
+                        <i class="fas fa-heart text-2xl"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-2xl font-bold">E-Ehson</h1>
+                        <p class="text-sm opacity-90">Xayriya Platformasi</p>
+                    </div>
+                </div>
+                
+                <!-- Search Bar -->
+                <div class="hidden md:flex flex-1 max-w-md mx-8">
+                    <div class="search-container w-full relative">
+                        <input type="text" id="searchInput" class="w-full px-4 py-2 rounded-lg text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50" placeholder="Kampaniya qidirish...">
+                        <i class="fas fa-search absolute right-3 top-3 text-gray-500"></i>
+                        <div id="searchResults" class="search-results"></div>
+                    </div>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-6">
+                    <a href="#campaigns" class="hover:text-blue-200 transition-colors">Kampaniyalar</a>
+                    <a href="#" class="hover:text-blue-200 transition-colors" id="aboutLink">Biz haqimizda</a>
+                    <a href="#" class="hover:text-blue-200 transition-colors" id="contactLink">Aloqa</a>
+                    <a href="#" class="hover:text-blue-200 transition-colors" id="helpLink">Yordam</a>
+                </div>
+                
+                <!-- Language Selector -->
+                <div class="language-selector hidden md:block">
+                    <button id="languageBtn" class="bg-white bg-opacity-20 hover:bg-opacity-30 px-3 py-2 rounded-lg transition-all flex items-center space-x-2">
+                        <span id="currentLanguage">O'Z</span>
+                        <i class="fas fa-chevron-down text-sm"></i>
+                    </button>
+                    <div id="languageDropdown" class="language-dropdown">
+                        <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-50" data-lang="uz">🇺🇿 O'zbek</a>
+                        <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-50" data-lang="ru">🇷🇺 Русский</a>
+                        <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-50" data-lang="en">🇺🇸 English</a>
+                    </div>
+                </div>
+                
+                <!-- User Menu -->
+                <div class="flex items-center space-x-4">
+                    <div id="guestMenu" class="flex items-center space-x-3">
+                        <button id="loginBtn" class="bg-white bg-opacity-20 hover:bg-opacity-30 px-4 py-2 rounded-lg transition-all">
+                            <i class="fas fa-sign-in-alt mr-2"></i>Kirish
+                        </button>
+                        <button id="signupBtn" class="bg-white text-purple-600 hover:bg-gray-100 px-4 py-2 rounded-lg font-medium transition-all">
+                            <i class="fas fa-user-plus mr-2"></i>Ro'yxatdan o'tish
+                        </button>
+                    </div>
+                    
+                    <div id="userMenu" class="hidden flex items-center space-x-4">
+                        <div class="relative">
+                            <button id="profileDropdown" class="flex items-center space-x-2 bg-white bg-opacity-20 px-4 py-2 rounded-lg hover:bg-opacity-30 transition-all">
+                                <div class="w-8 h-8 bg-white bg-opacity-30 rounded-full flex items-center justify-center">
+                                    <i class="fas fa-user text-sm"></i>
+                                </div>
+                                <span id="userName">Foydalanuvchi</span>
+                                <i class="fas fa-chevron-down text-sm"></i>
+                            </button>
+                            
+                            <div id="dropdownMenu" class="hidden absolute right-0 mt-2 w-64 bg-white rounded-xl shadow-2xl py-2 z-50">
+                                <div class="px-4 py-3 border-b border-gray-100">
+                                    <p class="font-medium text-gray-800" id="userNameFull">Test Foydalanuvchi</p>
+                                    <p class="text-sm text-gray-600" id="userPhone">+998 90 123 45 67</p>
+                                </div>
+                                <a href="#" id="profileLink" class="flex items-center px-4 py-3 text-gray-700 hover:bg-gray-50">
+                                    <i class="fas fa-user mr-3 text-blue-500"></i>Profil
+                                </a>
+                                <a href="#" id="cardsLink" class="flex items-center px-4 py-3 text-gray-700 hover:bg-gray-50">
+                                    <i class="fas fa-credit-card mr-3 text-green-500"></i>Kartalarim
+                                </a>
+                                <a href="#" id="historyLink" class="flex items-center px-4 py-3 text-gray-700 hover:bg-gray-50">
+                                    <i class="fas fa-history mr-3 text-purple-500"></i>Xayriya tarixi
+                                </a>
+                                <a href="#" id="settingsLink" class="flex items-center px-4 py-3 text-gray-700 hover:bg-gray-50">
+                                    <i class="fas fa-cog mr-3 text-gray-500"></i>Sozlamalar
+                                </a>
+                                <a href="#" id="applyCharityLink" class="flex items-center px-4 py-3 text-gray-700 hover:bg-gray-50">
+                                    <i class="fas fa-file-alt mr-3 text-orange-500"></i>Xayriya uchun ariza
+                                </a>
+                                <a href="#" id="adminPanelLink" class="hidden flex items-center px-4 py-3 text-gray-700 hover:bg-gray-50">
+                                    <i class="fas fa-crown mr-3 text-yellow-500"></i>Admin Panel
+                                </a>
+                                <div class="border-t border-gray-100 mt-2">
+                                    <button id="logoutBtn" class="flex items-center w-full px-4 py-3 text-red-600 hover:bg-red-50">
+                                        <i class="fas fa-sign-out-alt mr-3"></i>Chiqish
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button id="menuBtn" class="md:hidden">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobileMenu" class="mobile-menu fixed top-0 right-0 h-full w-80 bg-white shadow-2xl z-50 md:hidden">
+        <div class="p-6">
+            <div class="flex justify-between items-center mb-8">
+                <h3 class="text-xl font-bold text-gray-800">Menyu</h3>
+                <button id="closeMobileMenu" class="text-gray-500 hover:text-gray-700">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+            
+            <!-- Mobile Search -->
+            <div class="mb-6">
+                <div class="search-container relative">
+                    <input type="text" id="mobileSearchInput" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Kampaniya qidirish...">
+                    <i class="fas fa-search absolute right-3 top-4 text-gray-500"></i>
+                    <div id="mobileSearchResults" class="search-results"></div>
+                </div>
+            </div>
+            
+            <div class="space-y-4">
+                <a href="#campaigns" class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-100">
+                    <i class="fas fa-bullhorn text-blue-500"></i>
+                    <span>Kampaniyalar</span>
+                </a>
+                <a href="#" class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-100" id="mobileAboutLink">
+                    <i class="fas fa-info-circle text-green-500"></i>
+                    <span>Biz haqimizda</span>
+                </a>
+                <a href="#" class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-100" id="mobileContactLink">
+                    <i class="fas fa-phone text-purple-500"></i>
+                    <span>Aloqa</span>
+                </a>
+                <a href="#" class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-100" id="mobileHelpLink">
+                    <i class="fas fa-question-circle text-orange-500"></i>
+                    <span>Yordam</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content bg-white rounded-2xl shadow-2xl p-8 max-w-md w-full mx-4">
+            <div class="text-center mb-6">
+                <div class="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-sign-in-alt text-blue-600 text-2xl"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-gray-800">Tizimga Kirish</h3>
+                <p class="text-gray-600 mt-2">Telefon raqamingizni kiriting</p>
+            </div>
+            
+            <div id="loginStep1" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Telefon raqam</label>
+                    <input type="tel" id="loginPhone" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="+998 90 123 45 67">
+                </div>
+                
+                <button id="sendOtpBtn" class="w-full btn-primary text-white py-3 rounded-xl font-medium">
+                    <span id="sendOtpText">SMS kod yuborish</span>
+                    <div id="sendOtpLoader" class="loading-spinner mx-auto hidden"></div>
+                </button>
+            </div>
+            
+            <div id="loginStep2" class="hidden space-y-4">
+                <div class="text-center mb-4">
+                    <p class="text-gray-600">SMS kod yuborildi:</p>
+                    <p class="font-bold text-lg" id="sentPhoneNumber"></p>
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Tasdiqlash kodi</label>
+                    <input type="text" id="otpCode" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent text-center text-2xl font-bold" placeholder="1234" maxlength="4">
+                </div>
+                
+                <button id="verifyOtpBtn" class="w-full btn-primary text-white py-3 rounded-xl font-medium">
+                    Tasdiqlash
+                </button>
+                
+                <div class="text-center">
+                    <button id="resendOtpBtn" class="text-blue-600 hover:text-blue-700 text-sm disabled:opacity-50" disabled>
+                        Qayta yuborish (<span id="resendTimer">60</span>s)
+                    </button>
+                </div>
+            </div>
+            
+            <div class="text-center mt-6">
+                <button id="closeLoginModal" class="text-gray-500 hover:text-gray-700">Bekor qilish</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Signup Modal -->
+    <div id="signupModal" class="modal">
+        <div class="modal-content bg-white rounded-2xl shadow-2xl p-8 max-w-md w-full mx-4">
+            <div class="text-center mb-6">
+                <div class="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-user-plus text-green-600 text-2xl"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-gray-800">Ro'yxatdan O'tish</h3>
+                <p class="text-gray-600 mt-2">Yangi hisob yarating</p>
+            </div>
+            
+            <div class="space-y-4">
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Ism</label>
+                        <input type="text" id="signupFirstName" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Ismingiz">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Familiya</label>
+                        <input type="text" id="signupLastName" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Familiyangiz">
+                    </div>
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Telefon raqam</label>
+                    <input type="tel" id="signupPhone" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="+998 90 123 45 67">
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Email (ixtiyoriy)</label>
+                    <input type="email" id="signupEmail" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="email@example.com">
+                </div>
+                
+                <div class="flex items-center">
+                    <input type="checkbox" id="agreeTerms" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500">
+                    <label for="agreeTerms" class="ml-2 text-sm text-gray-700">
+                        <a href="#" class="text-blue-600 hover:text-blue-700">Foydalanish shartlari</a>ga roziman
+                    </label>
+                </div>
+                
+                <button id="createAccountBtn" class="w-full btn-primary text-white py-3 rounded-xl font-medium">
+                    Hisob yaratish
+                </button>
+            </div>
+            
+            <div class="text-center mt-6">
+                <p class="text-gray-600">Hisobingiz bormi? 
+                    <button id="switchToLogin" class="text-blue-600 hover:text-blue-700 font-medium">Kirish</button>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Profile Modal -->
+    <div id="profileModal" class="modal">
+        <div class="modal-content bg-white rounded-2xl shadow-2xl p-8 max-w-md w-full mx-4">
+            <div class="text-center mb-6">
+                <div class="bg-blue-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-user text-blue-600 text-3xl"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-gray-800">Profil Ma'lumotlari</h3>
+            </div>
+            
+            <div class="space-y-4">
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Ism</label>
+                        <input type="text" id="profileFirstName" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Familiya</label>
+                        <input type="text" id="profileLastName" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                    </div>
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Telefon raqam</label>
+                    <input type="tel" id="profilePhone" class="w-full px-4 py-3 border border-gray-300 rounded-xl bg-gray-100" readonly>
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                    <input type="email" id="profileEmail" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Tug'ilgan sana</label>
+                    <input type="date" id="profileBirthdate" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Manzil</label>
+                    <textarea id="profileAddress" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent" rows="2" placeholder="Yashash manzili"></textarea>
+                </div>
+            </div>
+            
+            <div class="flex space-x-4 mt-8">
+                <button id="closeProfileModal" class="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-800 py-3 rounded-xl font-medium transition-all">
+                    Bekor qilish
+                </button>
+                <button id="saveProfileBtn" class="flex-1 btn-primary text-white py-3 rounded-xl font-medium">
+                    Saqlash
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cards Management Modal -->
+    <div id="cardsModal" class="modal">
+        <div class="modal-content bg-white rounded-2xl shadow-2xl p-8 max-w-2xl w-full mx-4 max-h-[90vh] overflow-y-auto">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-2xl font-bold text-gray-800">Kartalarim</h3>
+                <button id="closeCardsModal" class="text-gray-500 hover:text-gray-700">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+            
+            <div id="cardsContainer" class="space-y-4 mb-6">
+                <!-- Cards will be populated here -->
+            </div>
+            
+            <button id="addCardBtn" class="w-full border-2 border-dashed border-gray-300 hover:border-blue-500 py-8 rounded-xl text-gray-500 hover:text-blue-500 transition-all">
+                <i class="fas fa-plus text-2xl mb-2"></i>
+                <p class="font-medium">Yangi karta qo'shish</p>
+            </button>
+        </div>
+    </div>
+
+    <!-- Add Card Modal -->
+    <div id="addCardModal" class="modal">
+        <div class="modal-content bg-white rounded-2xl shadow-2xl p-8 max-w-md w-full mx-4">
+            <div class="text-center mb-6">
+                <div class="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-credit-card text-blue-600 text-2xl"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-gray-800">Karta Qo'shish</h3>
+                <p class="text-gray-600 mt-2">Yangi to'lov kartasini qo'shing</p>
+            </div>
+            
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Karta raqami</label>
+                    <input type="text" id="cardNumber" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="1234 5678 9012 3456" maxlength="19">
+                </div>
+                
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Amal qilish muddati</label>
+                        <input type="text" id="cardExpiry" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="MM/YY" maxlength="5">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">CVV</label>
+                        <input type="text" id="cardCvv" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="123" maxlength="3">
+                    </div>
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Karta egasining ismi</label>
+                    <input type="text" id="cardHolder" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="JOHN DOE">
+                </div>
+                
+                <div class="flex items-center">
+                    <input type="checkbox" id="saveCard" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500" checked>
+                    <label for="saveCard" class="ml-2 text-sm text-gray-700">Kartani saqlash</label>
+                </div>
+                
+                <button id="saveCardBtn" class="w-full btn-primary text-white py-3 rounded-xl font-medium">
+                    Kartani saqlash
+                </button>
+            </div>
+            
+            <div class="text-center mt-6">
+                <button id="closeAddCardModal" class="text-gray-500 hover:text-gray-700">Bekor qilish</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Donation History Modal -->
+    <div id="historyModal" class="modal">
+        <div class="modal-content bg-white rounded-2xl shadow-2xl p-8 max-w-4xl w-full mx-4 max-h-[90vh] overflow-y-auto">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-2xl font-bold text-gray-800">Xayriya Tarixi</h3>
+                <button id="closeHistoryModal" class="text-gray-500 hover:text-gray-700">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+            
+            <div class="mb-6">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="bg-gradient-to-r from-green-500 to-green-600 text-white p-6 rounded-xl">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-green-100">Jami xayriya</p>
+                                <p class="text-2xl font-bold" id="totalDonated">0 so'm</p>
+                            </div>
+                            <i class="fas fa-heart text-3xl text-green-200"></i>
+                        </div>
+                    </div>
+                    <div class="bg-gradient-to-r from-blue-500 to-blue-600 text-white p-6 rounded-xl">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-blue-100">Kampaniyalar soni</p>
+                                <p class="text-2xl font-bold" id="totalCampaignsSupported">0</p>
+                            </div>
+                            <i class="fas fa-bullhorn text-3xl text-blue-200"></i>
+                        </div>
+                    </div>
+                    <div class="bg-gradient-to-r from-purple-500 to-purple-600 text-white p-6 rounded-xl">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-purple-100">Oxirgi xayriya</p>
+                                <p class="text-lg font-bold" id="lastDonationDate">-</p>
+                            </div>
+                            <i class="fas fa-calendar text-3xl text-purple-200"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chart Section -->
+            <div class="mb-6">
+                <h4 class="text-lg font-bold text-gray-800 mb-4">Oylik Xayriya Statistikasi</h4>
+                <div class="chart-container bg-gray-50 rounded-xl p-6">
+                    <div class="flex items-end justify-between h-48 space-x-2" id="donationChart">
+                        <!-- Chart bars will be generated here -->
+                    </div>
+                    <div class="flex justify-between mt-4 text-sm text-gray-600">
+                        <span>Yan</span>
+                        <span>Fev</span>
+                        <span>Mar</span>
+                        <span>Apr</span>
+                        <span>May</span>
+                        <span>Iyun</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="donationHistoryList" class="space-y-4">
+                <div class="text-center py-12">
+                    <i class="fas fa-heart text-6xl text-gray-300 mb-4"></i>
+                    <p class="text-gray-500 text-lg">Hali xayriya qilmagansiz</p>
+                    <p class="text-gray-400">Birinchi xayriyangizni qiling va bu yerda ko'ring!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Settings Modal -->
+    <div id="settingsModal" class="modal">
+        <div class="modal-content bg-white rounded-2xl shadow-2xl p-8 max-w-md w-full mx-4">
+            <div class="text-center mb-6">
+                <div class="bg-gray-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-cog text-gray-600 text-2xl"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-gray-800">Sozlamalar</h3>
+            </div>
+            
+            <div class="space-y-6">
+                <div>
+                    <h4 class="font-medium text-gray-800 mb-3">Bildirishnomalar</h4>
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-700">Email bildirishnomalar</span>
+                            <label class="relative inline-flex items-center cursor-pointer">
+                                <input type="checkbox" id="emailNotifications" class="sr-only peer" checked>
+                                <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+                            </label>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-700">SMS bildirishnomalar</span>
+                            <label class="relative inline-flex items-center cursor-pointer">
+                                <input type="checkbox" id="smsNotifications" class="sr-only peer" checked>
+                                <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+                            </label>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-700">Push bildirishnomalar</span>
+                            <label class="relative inline-flex items-center cursor-pointer">
+                                <input type="checkbox" id="pushNotifications" class="sr-only peer">
+                                <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="font-medium text-gray-800 mb-3">Maxfiylik</h4>
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-700">Profilni ko'rsatish</span>
+                            <label class="relative inline-flex items-center cursor-pointer">
+                                <input type="checkbox" id="showProfile" class="sr-only peer" checked>
+                                <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+                            </label>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-700">Xayriya tarixini ko'rsatish</span>
+                            <label class="relative inline-flex items-center cursor-pointer">
+                                <input type="checkbox" id="showDonations" class="sr-only peer">
+                                <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="font-medium text-gray-800 mb-3">Til</h4>
+                    <select id="languageSelect" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                        <option value="uz">O'zbek tili</option>
+                        <option value="ru">Русский язык</option>
+                        <option value="en">English</option>
+                    </select>
+                </div>
+
+                <div>
+                    <h4 class="font-medium text-gray-800 mb-3">Mavzu</h4>
+                    <div class="grid grid-cols-2 gap-3">
+                        <button class="theme-option p-3 border-2 border-gray-200 rounded-xl hover:border-blue-500 transition-all" data-theme="light">
+                            <div class="w-full h-8 bg-white border border-gray-300 rounded mb-2"></div>
+                            <span class="text-sm">Yorug'</span>
+                        </button>
+                        <button class="theme-option p-3 border-2 border-gray-200 rounded-xl hover:border-blue-500 transition-all" data-theme="dark">
+                            <div class="w-full h-8 bg-gray-800 rounded mb-2"></div>
+                            <span class="text-sm">Qorong'u</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="flex space-x-4 mt-8">
+                <button id="closeSettingsModal" class="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-800 py-3 rounded-xl font-medium transition-all">
+                    Bekor qilish
+                </button>
+                <button id="saveSettingsBtn" class="flex-1 btn-primary text-white py-3 rounded-xl font-medium">
+                    Saqlash
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Charity Application Modal -->
+    <div id="charityApplicationModal" class="modal">
+        <div class="modal-content bg-white rounded-2xl shadow-2xl p-8 max-w-2xl w-full mx-4 max-h-[90vh] overflow-y-auto">
+            <div class="text-center mb-6">
+                <div class="bg-orange-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-file-alt text-orange-600 text-3xl"></i>
+                </div>
+                <h3 class="text-3xl font-bold text-gray-800">Xayriya Uchun Ariza</h3>
+                <p class="text-gray-600 mt-2">Yordam olish uchun ariza topshiring</p>
+            </div>
+            
+            <div class="space-y-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Ariza nomi *</label>
+                        <input type="text" id="applicationTitle" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Qisqacha nom">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Kategoriya *</label>
+                        <select id="applicationCategory" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                            <option value="">Kategoriyani tanlang</option>
+                            <option value="health">Sog'liqni saqlash</option>
+                            <option value="education">Ta'lim</option>
+                            <option value="children">Bolalar</option>
+                            <option value="emergency">Favqulodda vaziyat</option>
+                            <option value="family">Oilaviy muammolar</option>
+                            <option value="disability">Nogironlik</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Batafsil tavsif *</label>
+                    <textarea id="applicationDescription" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent" rows="4" placeholder="Vaziyatni batafsil tasvirlab bering..."></textarea>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Kerakli miqdor (so'm) *</label>
+                        <input type="number" id="applicationAmount" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="1000000">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Muddati (kun)</label>
+                        <input type="number" id="applicationDuration" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="30" value="30">
+                    </div>
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Ariza beruvchi ma'lumotlari</label>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <input type="text" id="applicantName" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="To'liq ism familiya">
+                        <input type="tel" id="applicantPhone" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Telefon raqam">
+                    </div>
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Manzil</label>
+                    <textarea id="applicantAddress" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent" rows="2" placeholder="Yashash manzili"></textarea>
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Qo'shimcha hujjatlar</label>
+                    <div class="file-upload-area" id="fileUploadArea">
+                        <i class="fas fa-cloud-upload-alt text-4xl text-gray-400 mb-4"></i>
+                        <p class="text-gray-600 mb-2">Hujjatlarni yuklang (ixtiyoriy)</p>
+                        <p class="text-sm text-gray-500">Tibbiy ma'lumotnoma, guvohnoma va boshqa hujjatlar</p>
+                        <input type="file" id="applicationFiles" class="hidden" multiple accept=".pdf,.jpg,.jpeg,.png,.doc,.docx">
+                        <button type="button" onclick="document.getElementById('applicationFiles').click()" class="mt-4 bg-blue-100 text-blue-600 px-4 py-2 rounded-lg hover:bg-blue-200 transition-all">
+                            Fayllarni tanlash
+                        </button>
+                    </div>
+                    <div id="uploadedFiles" class="mt-4 space-y-2"></div>
+                </div>
+                
+                <div class="bg-yellow-50 border border-yellow-200 rounded-xl p-4">
+                    <div class="flex items-start space-x-3">
+                        <i class="fas fa-info-circle text-yellow-600 mt-1"></i>
+                        <div class="text-sm text-yellow-800">
+                            <p class="font-medium mb-1">Muhim eslatma:</p>
+                            <p>Arizangiz moderatorlar tomonidan ko'rib chiqiladi. Tasdiqlangandan so'ng kampaniya sifatida e'lon qilinadi. Bu jarayon 2-3 ish kuni davom etishi mumkin.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="flex space-x-4 mt-8">
+                <button id="cancelApplication" class="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-800 py-4 rounded-xl font-medium transition-all">
+                    Bekor qilish
+                </button>
+                <button id="submitApplication" class="flex-1 btn-primary text-white py-4 rounded-xl font-medium">
+                    Ariza yuborish
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- About Modal -->
+    <div id="aboutModal" class="modal">
+        <div class="modal-content bg-white rounded-2xl shadow-2xl p-8 max-w-2xl w-full mx-4 max-h-[90vh] overflow-y-auto">
+            <div class="text-center mb-6">
+                <div class="bg-blue-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-info-circle text-blue-600 text-3xl"></i>
+                </div>
+                <h3 class="text-3xl font-bold text-gray-800">Biz Haqimizda</h3>
+            </div>
+            
+            <div class="space-y-6 text-gray-700">
+                <div>
+                    <h4 class="text-xl font-bold text-gray-800 mb-3">E-Ehson Platformasi</h4>
+                    <p class="leading-relaxed">E-Ehson - bu Oʻzbekistondagi eng katta xayriya platformasi boʻlib, minglab odamlarni yordam ber
