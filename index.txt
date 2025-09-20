@@ -1,0 +1,1811 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Ehson - Xayriya Platformasi</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .gradient-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .gradient-success {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+        }
+        
+        .gradient-warning {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+        }
+        
+        .card-hover {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 30px rgba(102, 126, 234, 0.4);
+        }
+        
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .btn-primary:hover::before {
+            left: 100%;
+        }
+        
+        .progress-bar {
+            background: linear-gradient(90deg, #10b981, #059669);
+            border-radius: 9999px;
+            transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .progress-bar::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            background-image: linear-gradient(
+                -45deg,
+                rgba(255, 255, 255, .2) 25%,
+                transparent 25%,
+                transparent 50%,
+                rgba(255, 255, 255, .2) 50%,
+                rgba(255, 255, 255, .2) 75%,
+                transparent 75%,
+                transparent
+            );
+            background-size: 50px 50px;
+            animation: move 2s linear infinite;
+        }
+        
+        @keyframes move {
+            0% {
+                background-position: 0 0;
+            }
+            100% {
+                background-position: 50px 50px;
+            }
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .modal.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 1;
+        }
+        
+        .modal-content {
+            transform: scale(0.7);
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        
+        .modal.show .modal-content {
+            transform: scale(1);
+        }
+        
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1100;
+            transform: translateX(400px);
+            transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+        
+        .notification.show {
+            transform: translateX(0);
+        }
+        
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            z-index: 1000;
+        }
+        
+        @keyframes confetti-fall {
+            0% {
+                transform: translateY(-100vh) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+        
+        .hero-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="white" opacity="0.1"/><circle cx="75" cy="75" r="1" fill="white" opacity="0.1"/><circle cx="50" cy="10" r="1" fill="white" opacity="0.1"/><circle cx="10" cy="90" r="1" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+        }
+        
+        .stats-counter {
+            font-variant-numeric: tabular-nums;
+        }
+        
+        .category-filter {
+            transition: all 0.3s ease;
+        }
+        
+        .category-filter.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .loading-spinner {
+            border: 3px solid #f3f4f6;
+            border-top: 3px solid #667eea;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .pulse-animation {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        
+        .mobile-menu {
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .mobile-menu.show {
+            transform: translateX(0);
+        }
+        
+        .card-input {
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>') no-repeat right 12px center;
+            background-size: 20px;
+            padding-right: 40px;
+        }
+        
+        .otp-input {
+            width: 50px;
+            height: 50px;
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        
+        .payment-card {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3730a3 100%);
+            color: white;
+            border-radius: 16px;
+            padding: 24px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .payment-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+        }
+        
+        .card-chip {
+            width: 40px;
+            height: 30px;
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+            border-radius: 6px;
+            position: relative;
+        }
+        
+        .card-chip::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 20px;
+            height: 15px;
+            background: repeating-linear-gradient(
+                90deg,
+                transparent,
+                transparent 2px,
+                rgba(0,0,0,0.1) 2px,
+                rgba(0,0,0,0.1) 4px
+            );
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="gradient-primary text-white shadow-2xl sticky top-0 z-50">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center space-x-3">
+                    <div class="bg-white bg-opacity-20 p-2 rounded-lg">
+                        <i class="fas fa-heart text-2xl"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-2xl font-bold">E-Ehson</h1>
+                        <p class="text-sm opacity-90">Xayriya Platformasi</p>
+                    </div>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-6">
+                    <a href="#campaigns" class="hover:text-blue-200 transition-colors">Kampaniyalar</a>
+                    <a href="#about" class="hover:text-blue-200 transition-colors">Biz haqimizda</a>
+                    <a href="#contact" class="hover:text-blue-200 transition-colors">Aloqa</a>
+                    <a href="#history" class="hover:text-blue-200 transition-colors">Tarix</a>
+                </div>
+                
+                <!-- User Menu -->
+                <div class="flex items-center space-x-4">
+                    <div id="guestMenu" class="flex items-center space-x-3">
+                        <button id="loginBtn" class="bg-white bg-opacity-20 hover:bg-opacity-30 px-4 py-2 rounded-lg transition-all">
+                            <i class="fas fa-sign-in-alt mr-2"></i>Kirish
+                        </button>
+                        <button id="signupBtn" class="bg-white text-purple-600 hover:bg-gray-100 px-4 py-2 rounded-lg font-medium transition-all">
+                            <i class="fas fa-user-plus mr-2"></i>Ro'yxatdan o'tish
+                        </button>
+                    </div>
+                    
+                    <div id="userMenu" class="hidden flex items-center space-x-4">
+                        <div class="relative">
+                            <button id="profileDropdown" class="flex items-center space-x-2 bg-white bg-opacity-20 px-4 py-2 rounded-lg hover:bg-opacity-30 transition-all">
+                                <div class="w-8 h-8 bg-white bg-opacity-30 rounded-full flex items-center justify-center">
+                                    <i class="fas fa-user text-sm"></i>
+                                </div>
+                                <span id="userName">Foydalanuvchi</span>
+                                <i class="fas fa-chevron-down text-sm"></i>
+                            </button>
+                            
+                            <div id="dropdownMenu" class="hidden absolute right-0 mt-2 w-64 bg-white rounded-xl shadow-2xl py-2 z-50">
+                                <div class="px-4 py-3 border-b border-gray-100">
+                                    <p class="font-medium text-gray-800" id="userNameFull">Test Foydalanuvchi</p>
+                                    <p class="text-sm text-gray-600" id="userPhone">+998 90 123 45 67</p>
+                                </div>
+                                <a href="#" id="profileLink" class="flex items-center px-4 py-3 text-gray-700 hover:bg-gray-50">
+                                    <i class="fas fa-user mr-3 text-blue-500"></i>Profil
+                                </a>
+                                <a href="#" id="cardsLink" class="flex items-center px-4 py-3 text-gray-700 hover:bg-gray-50">
+                                    <i class="fas fa-credit-card mr-3 text-green-500"></i>Kartalarim
+                                </a>
+                                <a href="#" id="historyLink" class="flex items-center px-4 py-3 text-gray-700 hover:bg-gray-50">
+                                    <i class="fas fa-history mr-3 text-purple-500"></i>Xayriya tarixi
+                                </a>
+                                <a href="#" id="settingsLink" class="flex items-center px-4 py-3 text-gray-700 hover:bg-gray-50">
+                                    <i class="fas fa-cog mr-3 text-gray-500"></i>Sozlamalar
+                                </a>
+                                <div class="border-t border-gray-100 mt-2">
+                                    <button id="logoutBtn" class="flex items-center w-full px-4 py-3 text-red-600 hover:bg-red-50">
+                                        <i class="fas fa-sign-out-alt mr-3"></i>Chiqish
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button id="menuBtn" class="md:hidden">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobileMenu" class="mobile-menu fixed top-0 right-0 h-full w-80 bg-white shadow-2xl z-50 md:hidden">
+        <div class="p-6">
+            <div class="flex justify-between items-center mb-8">
+                <h3 class="text-xl font-bold text-gray-800">Menyu</h3>
+                <button id="closeMobileMenu" class="text-gray-500 hover:text-gray-700">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+            
+            <div class="space-y-4">
+                <a href="#campaigns" class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-100">
+                    <i class="fas fa-bullhorn text-blue-500"></i>
+                    <span>Kampaniyalar</span>
+                </a>
+                <a href="#about" class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-100">
+                    <i class="fas fa-info-circle text-green-500"></i>
+                    <span>Biz haqimizda</span>
+                </a>
+                <a href="#contact" class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-100">
+                    <i class="fas fa-phone text-purple-500"></i>
+                    <span>Aloqa</span>
+                </a>
+                <a href="#history" class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-100">
+                    <i class="fas fa-history text-orange-500"></i>
+                    <span>Tarix</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content bg-white rounded-2xl shadow-2xl p-8 max-w-md w-full mx-4">
+            <div class="text-center mb-6">
+                <div class="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-sign-in-alt text-blue-600 text-2xl"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-gray-800">Tizimga Kirish</h3>
+                <p class="text-gray-600 mt-2">Telefon raqamingizni kiriting</p>
+            </div>
+            
+            <div id="loginStep1" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Telefon raqam</label>
+                    <input type="tel" id="loginPhone" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="+998 90 123 45 67">
+                </div>
+                
+                <button id="sendOtpBtn" class="w-full btn-primary text-white py-3 rounded-xl font-medium">
+                    <span id="sendOtpText">SMS kod yuborish</span>
+                    <div id="sendOtpLoader" class="loading-spinner mx-auto hidden"></div>
+                </button>
+            </div>
+            
+            <div id="loginStep2" class="hidden space-y-4">
+                <div class="text-center mb-4">
+                    <p class="text-gray-600">SMS kod yuborildi:</p>
+                    <p class="font-bold text-lg" id="sentPhoneNumber"></p>
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Tasdiqlash kodi</label>
+                    <div class="flex justify-center space-x-2">
+                        <input type="text" maxlength="1" class="otp-input border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                        <input type="text" maxlength="1" class="otp-input border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                        <input type="text" maxlength="1" class="otp-input border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                        <input type="text" maxlength="1" class="otp-input border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                    </div>
+                </div>
+                
+                <button id="verifyOtpBtn" class="w-full btn-primary text-white py-3 rounded-xl font-medium">
+                    Tasdiqlash
+                </button>
+                
+                <div class="text-center">
+                    <button id="resendOtpBtn" class="text-blue-600 hover:text-blue-700 text-sm">
+                        Qayta yuborish (<span id="resendTimer">60</span>s)
+                    </button>
+                </div>
+            </div>
+            
+            <div class="text-center mt-6">
+                <button id="closeLoginModal" class="text-gray-500 hover:text-gray-700">Bekor qilish</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Signup Modal -->
+    <div id="signupModal" class="modal">
+        <div class="modal-content bg-white rounded-2xl shadow-2xl p-8 max-w-md w-full mx-4">
+            <div class="text-center mb-6">
+                <div class="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-user-plus text-green-600 text-2xl"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-gray-800">Ro'yxatdan O'tish</h3>
+                <p class="text-gray-600 mt-2">Yangi hisob yarating</p>
+            </div>
+            
+            <div class="space-y-4">
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Ism</label>
+                        <input type="text" id="signupFirstName" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Ismingiz">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Familiya</label>
+                        <input type="text" id="signupLastName" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Familiyangiz">
+                    </div>
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Telefon raqam</label>
+                    <input type="tel" id="signupPhone" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="+998 90 123 45 67">
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Email (ixtiyoriy)</label>
+                    <input type="email" id="signupEmail" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="email@example.com">
+                </div>
+                
+                <div class="flex items-center">
+                    <input type="checkbox" id="agreeTerms" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500">
+                    <label for="agreeTerms" class="ml-2 text-sm text-gray-700">
+                        <a href="#" class="text-blue-600 hover:text-blue-700">Foydalanish shartlari</a>ga roziman
+                    </label>
+                </div>
+                
+                <button id="createAccountBtn" class="w-full btn-primary text-white py-3 rounded-xl font-medium">
+                    Hisob yaratish
+                </button>
+            </div>
+            
+            <div class="text-center mt-6">
+                <p class="text-gray-600">Hisobingiz bormi? 
+                    <button id="switchToLogin" class="text-blue-600 hover:text-blue-700 font-medium">Kirish</button>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cards Management Modal -->
+    <div id="cardsModal" class="modal">
+        <div class="modal-content bg-white rounded-2xl shadow-2xl p-8 max-w-2xl w-full mx-4 max-h-[90vh] overflow-y-auto">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-2xl font-bold text-gray-800">Kartalarim</h3>
+                <button id="closeCardsModal" class="text-gray-500 hover:text-gray-700">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+            
+            <div id="cardsContainer" class="space-y-4 mb-6">
+                <!-- Cards will be populated here -->
+            </div>
+            
+            <button id="addCardBtn" class="w-full border-2 border-dashed border-gray-300 hover:border-blue-500 py-8 rounded-xl text-gray-500 hover:text-blue-500 transition-all">
+                <i class="fas fa-plus text-2xl mb-2"></i>
+                <p class="font-medium">Yangi karta qo'shish</p>
+            </button>
+        </div>
+    </div>
+
+    <!-- Add Card Modal -->
+    <div id="addCardModal" class="modal">
+        <div class="modal-content bg-white rounded-2xl shadow-2xl p-8 max-w-md w-full mx-4">
+            <div class="text-center mb-6">
+                <div class="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-credit-card text-blue-600 text-2xl"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-gray-800">Karta Qo'shish</h3>
+                <p class="text-gray-600 mt-2">Yangi to'lov kartasini qo'shing</p>
+            </div>
+            
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Karta raqami</label>
+                    <input type="text" id="cardNumber" class="card-input w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="1234 5678 9012 3456" maxlength="19">
+                </div>
+                
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Amal qilish muddati</label>
+                        <input type="text" id="cardExpiry" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="MM/YY" maxlength="5">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">CVV</label>
+                        <input type="text" id="cardCvv" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="123" maxlength="3">
+                    </div>
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Karta egasining ismi</label>
+                    <input type="text" id="cardHolder" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="JOHN DOE">
+                </div>
+                
+                <div class="flex items-center">
+                    <input type="checkbox" id="saveCard" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500" checked>
+                    <label for="saveCard" class="ml-2 text-sm text-gray-700">Kartani saqlash</label>
+                </div>
+                
+                <button id="saveCardBtn" class="w-full btn-primary text-white py-3 rounded-xl font-medium">
+                    Kartani saqlash
+                </button>
+            </div>
+            
+            <div class="text-center mt-6">
+                <button id="closeAddCardModal" class="text-gray-500 hover:text-gray-700">Bekor qilish</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero-bg text-white py-20 relative">
+        <div class="container mx-auto px-4 text-center relative z-10">
+            <h2 class="text-5xl md:text-6xl font-bold mb-6">Yaxshilik qiling,<br>Dunyoni o'zgartiring</h2>
+            <p class="text-xl md:text-2xl mb-8 opacity-90 max-w-3xl mx-auto">E-Ehson orqali minglab odamlarga yordam bering va jamiyatda ijobiy o'zgarishlar yarating</p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <button id="startDonatingBtn" class="bg-white text-purple-600 px-8 py-4 rounded-lg font-bold text-lg hover:bg-gray-100 transition-all transform hover:scale-105">
+                    <i class="fas fa-heart mr-2"></i>Xayriya qilishni boshlash
+                </button>
+                <button id="createCampaignBtn" class="border-2 border-white text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-white hover:text-purple-600 transition-all">
+                    <i class="fas fa-plus mr-2"></i>Kampaniya yaratish
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="text-center">
+                    <div class="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-bullhorn text-blue-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-3xl font-bold text-gray-800 stats-counter" id="totalCampaigns">0</h3>
+                    <p class="text-gray-600 mt-2">Faol Kampaniyalar</p>
+                </div>
+                <div class="text-center">
+                    <div class="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-coins text-green-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-3xl font-bold text-gray-800 stats-counter" id="totalRaised">0</h3>
+                    <p class="text-gray-600 mt-2">Jami Yig'ilgan</p>
+                </div>
+                <div class="text-center">
+                    <div class="bg-purple-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-users text-purple-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-3xl font-bold text-gray-800 stats-counter" id="totalDonors">0</h3>
+                    <p class="text-gray-600 mt-2">Xayriyachilar</p>
+                </div>
+                <div class="text-center">
+                    <div class="bg-orange-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-globe text-orange-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-3xl font-bold text-gray-800 stats-counter" id="totalCountries">12</h3>
+                    <p class="text-gray-600 mt-2">Mamlakatlar</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Campaigns Section -->
+    <section id="campaigns" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold text-gray-800 mb-4">Faol Kampaniyalar</h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">Turli sohalarda yordam kerak bo'lgan kampaniyalarni tanlang va o'z hissangizni qo'shing</p>
+            </div>
+
+            <!-- Category Filters -->
+            <div class="flex flex-wrap justify-center gap-4 mb-12">
+                <button class="category-filter active px-6 py-3 rounded-full font-medium" data-category="all">
+                    <i class="fas fa-th-large mr-2"></i>Barchasi
+                </button>
+                <button class="category-filter px-6 py-3 rounded-full font-medium bg-white hover:bg-gray-100" data-category="health">
+                    <i class="fas fa-heartbeat mr-2"></i>Sog'liqni saqlash
+                </button>
+                <button class="category-filter px-6 py-3 rounded-full font-medium bg-white hover:bg-gray-100" data-category="education">
+                    <i class="fas fa-graduation-cap mr-2"></i>Ta'lim
+                </button>
+                <button class="category-filter px-6 py-3 rounded-full font-medium bg-white hover:bg-gray-100" data-category="children">
+                    <i class="fas fa-child mr-2"></i>Bolalar
+                </button>
+                <button class="category-filter px-6 py-3 rounded-full font-medium bg-white hover:bg-gray-100" data-category="emergency">
+                    <i class="fas fa-exclamation-triangle mr-2"></i>Favqulodda
+                </button>
+            </div>
+
+            <!-- Campaigns Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="campaignsGrid">
+                <!-- Campaigns will be populated by JavaScript -->
+            </div>
+
+            <!-- Load More Button -->
+            <div class="text-center mt-12">
+                <button id="loadMoreBtn" class="btn-primary text-white px-8 py-4 rounded-lg font-medium">
+                    <i class="fas fa-plus mr-2"></i>Ko'proq yuklash
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Success Stories Section -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold text-gray-800 mb-4">Muvaffaqiyat Hikoyalari</h2>
+                <p class="text-xl text-gray-600">Sizning yordamingiz bilan amalga oshgan loyihalar</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-gradient-to-br from-green-50 to-green-100 p-8 rounded-2xl">
+                    <div class="text-4xl mb-4">🏥</div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Shifoxona Jihozlari</h3>
+                    <p class="text-gray-600 mb-4">500 ta oilaga tibbiy yordam ko'rsatish uchun zamonaviy asboblar sotib olindi.</p>
+                    <div class="text-green-600 font-bold">✓ Maqsadga erishildi</div>
+                </div>
+                
+                <div class="bg-gradient-to-br from-blue-50 to-blue-100 p-8 rounded-2xl">
+                    <div class="text-4xl mb-4">📚</div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Maktab Kutubxonasi</h3>
+                    <p class="text-gray-600 mb-4">1000 ta kitob va 50 ta kompyuter bilan jihozlangan kutubxona ochildi.</p>
+                    <div class="text-blue-600 font-bold">✓ Maqsadga erishildi</div>
+                </div>
+                
+                <div class="bg-gradient-to-br from-purple-50 to-purple-100 p-8 rounded-2xl">
+                    <div class="text-4xl mb-4">🏠</div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Yetimlar Uyi</h3>
+                    <p class="text-gray-600 mb-4">50 ta yetim bola uchun yangi uy qurildi va jihozlandi.</p>
+                    <div class="text-purple-600 font-bold">✓ Maqsadga erishildi</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Donation Modal -->
+    <div id="donationModal" class="modal">
+        <div class="modal-content bg-white rounded-2xl shadow-2xl p-8 max-w-lg w-full mx-4">
+            <div class="text-center mb-6">
+                <div class="bg-gradient-success w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-heart text-white text-3xl"></i>
+                </div>
+                <h3 class="text-3xl font-bold text-gray-800" id="modalTitle">Xayriya Qilish</h3>
+                <p class="text-gray-600 mt-2" id="modalDescription">Kampaniyaga yordam bering</p>
+            </div>
+            
+            <div class="space-y-6">
+                <!-- Quick Amount Buttons -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-3">Tez tanlash</label>
+                    <div class="grid grid-cols-3 gap-3">
+                        <button class="donation-amount bg-gray-100 hover:bg-blue-100 hover:text-blue-600 py-4 rounded-xl font-medium transition-all" data-amount="50000">
+                            50,000<br><span class="text-xs opacity-70">so'm</span>
+                        </button>
+                        <button class="donation-amount bg-gray-100 hover:bg-blue-100 hover:text-blue-600 py-4 rounded-xl font-medium transition-all" data-amount="100000">
+                            100,000<br><span class="text-xs opacity-70">so'm</span>
+                        </button>
+                        <button class="donation-amount bg-gray-100 hover:bg-blue-100 hover:text-blue-600 py-4 rounded-xl font-medium transition-all" data-amount="250000">
+                            250,000<br><span class="text-xs opacity-70">so'm</span>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Custom Amount -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Boshqa miqdor</label>
+                    <div class="relative">
+                        <input type="number" id="customAmount" class="w-full px-4 py-4 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent text-lg" placeholder="Miqdorni kiriting">
+                        <span class="absolute right-4 top-4 text-gray-500">so'm</span>
+                    </div>
+                </div>
+                
+                <!-- Payment Method Selection -->
+                <div id="paymentMethodSection" class="hidden">
+                    <label class="block text-sm font-medium text-gray-700 mb-3">To'lov usuli</label>
+                    <div id="savedCards" class="space-y-2 mb-4">
+                        <!-- Saved cards will be populated here -->
+                    </div>
+                    <button id="useNewCard" class="w-full border-2 border-dashed border-gray-300 hover:border-blue-500 py-3 rounded-xl text-gray-500 hover:text-blue-500 transition-all">
+                        <i class="fas fa-plus mr-2"></i>Yangi karta ishlatish
+                    </button>
+                </div>
+                
+                <!-- Comment -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Izoh (ixtiyoriy)</label>
+                    <textarea id="donationComment" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent" rows="3" placeholder="Xayriya haqida izoh yozing..."></textarea>
+                </div>
+                
+                <!-- Anonymous Option -->
+                <div class="flex items-center">
+                    <input type="checkbox" id="anonymousDonation" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500">
+                    <label for="anonymousDonation" class="ml-2 text-sm text-gray-700">Anonim xayriya qilish</label>
+                </div>
+            </div>
+            
+            <div class="flex space-x-4 mt-8">
+                <button id="cancelDonation" class="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-800 py-4 rounded-xl font-medium transition-all">
+                    Bekor qilish
+                </button>
+                <button id="confirmDonation" class="flex-1 btn-primary text-white py-4 rounded-xl font-medium relative">
+                    <span id="donationBtnText">Xayriya qilish</span>
+                    <div id="donationLoader" class="loading-spinner mx-auto hidden"></div>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Create Campaign Modal -->
+    <div id="createModal" class="modal">
+        <div class="modal-content bg-white rounded-2xl shadow-2xl p-8 max-w-2xl w-full mx-4 max-h-[90vh] overflow-y-auto">
+            <h3 class="text-3xl font-bold text-gray-800 mb-6 text-center">Yangi Kampaniya Yaratish</h3>
+            
+            <div class="space-y-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Kampaniya nomi *</label>
+                        <input type="text" id="campaignTitle" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Kampaniya nomini kiriting">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Kategoriya *</label>
+                        <select id="campaignCategory" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                            <option value="">Kategoriyani tanlang</option>
+                            <option value="health">Sog'liqni saqlash</option>
+                            <option value="education">Ta'lim</option>
+                            <option value="children">Bolalar</option>
+                            <option value="emergency">Favqulodda</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Batafsil tavsif *</label>
+                    <textarea id="campaignDescription" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent" rows="4" placeholder="Kampaniya haqida batafsil ma'lumot bering..."></textarea>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Maqsad miqdori (so'm) *</label>
+                        <input type="number" id="campaignGoal" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="1000000">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Muddat (kun)</label>
+                        <input type="number" id="campaignDuration" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="30" value="30">
+                    </div>
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Tashkilotchi ma'lumotlari</label>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <input type="text" id="organizerName" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Ism familiya">
+                        <input type="tel" id="organizerPhone" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Telefon raqam">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="flex space-x-4 mt-8">
+                <button id="cancelCreate" class="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-800 py-4 rounded-xl font-medium transition-all">
+                    Bekor qilish
+                </button>
+                <button id="confirmCreate" class="flex-1 btn-primary text-white py-4 rounded-xl font-medium">
+                    Kampaniya yaratish
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification -->
+    <div id="notification" class="notification bg-white rounded-xl shadow-2xl p-6 max-w-sm border-l-4">
+        <div class="flex items-start space-x-4">
+            <div id="notificationIcon" class="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0">
+                <i class="fas fa-check text-white"></i>
+            </div>
+            <div class="flex-1">
+                <p id="notificationTitle" class="font-bold text-gray-800 text-lg"></p>
+                <p id="notificationMessage" class="text-gray-600 mt-1"></p>
+            </div>
+            <button id="closeNotification" class="text-gray-400 hover:text-gray-600">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="gradient-primary text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center space-x-3 mb-4">
+                        <div class="bg-white bg-opacity-20 p-2 rounded-lg">
+                            <i class="fas fa-heart text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold">E-Ehson</h3>
+                            <p class="text-sm opacity-90">Xayriya Platformasi</p>
+                        </div>
+                    </div>
+                    <p class="opacity-90">Yaxshilik qiling, dunyoni o'zgartiring. Har bir xayriya muhim!</p>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold mb-4">Tez havolalar</h4>
+                    <ul class="space-y-2 opacity-90">
+                        <li><a href="#campaigns" class="hover:text-blue-200">Kampaniyalar</a></li>
+                        <li><a href="#" class="hover:text-blue-200">Biz haqimizda</a></li>
+                        <li><a href="#" class="hover:text-blue-200">Yordam</a></li>
+                        <li><a href="#" class="hover:text-blue-200">Aloqa</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold mb-4">Kategoriyalar</h4>
+                    <ul class="space-y-2 opacity-90">
+                        <li><a href="#" class="hover:text-blue-200">Sog'liqni saqlash</a></li>
+                        <li><a href="#" class="hover:text-blue-200">Ta'lim</a></li>
+                        <li><a href="#" class="hover:text-blue-200">Bolalar</a></li>
+                        <li><a href="#" class="hover:text-blue-200">Favqulodda</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold mb-4">Biz bilan bog'laning</h4>
+                    <div class="space-y-3 opacity-90">
+                        <p><i class="fas fa-phone mr-2"></i>+998 90 123 45 67</p>
+                        <p><i class="fas fa-envelope mr-2"></i>info@e-ehson.uz</p>
+                        <div class="flex space-x-4 mt-4">
+                            <a href="#" class="bg-white bg-opacity-20 p-2 rounded-lg hover:bg-opacity-30 transition-all">
+                                <i class="fab fa-telegram"></i>
+                            </a>
+                            <a href="#" class="bg-white bg-opacity-20 p-2 rounded-lg hover:bg-opacity-30 transition-all">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="#" class="bg-white bg-opacity-20 p-2 rounded-lg hover:bg-opacity-30 transition-all">
+                                <i class="fab fa-facebook"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-white border-opacity-20 mt-8 pt-8 text-center opacity-90">
+                <p>&copy; 2024 E-Ehson. Barcha huquqlar himoyalangan.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Application State
+        const state = {
+            isLoggedIn: false,
+            user: null,
+            campaigns: [
+                {
+                    id: 1,
+                    title: "Bolalar kasalxonasiga tibbiy asboblar",
+                    description: "Respublika bolalar kasalxonasiga zamonaviy tibbiy asboblar va jihozlar sotib olish uchun yordam kerak.",
+                    category: "health",
+                    goal: 15000000,
+                    raised: 8750000,
+                    donors: 234,
+                    daysLeft: 15,
+                    image: "🏥",
+                    organizer: "Toshkent Bolalar Kasalxonasi",
+                    urgent: true
+                },
+                {
+                    id: 2,
+                    title: "Qishloq maktabiga kompyuter sinfi",
+                    description: "Farg'ona viloyati qishloq maktabiga zamonaviy kompyuter sinfi tashkil etish loyihasi.",
+                    category: "education",
+                    goal: 8000000,
+                    raised: 3200000,
+                    donors: 89,
+                    daysLeft: 22,
+                    image: "💻",
+                    organizer: "Ta'lim Jamg'armasi"
+                },
+                {
+                    id: 3,
+                    title: "Yetim bolalar uchun kiyim-kechak",
+                    description: "Bolalar uyidagi 150 ta yetim bola uchun qishki kiyim-kechak va oyoq kiyimlar.",
+                    category: "children",
+                    goal: 5000000,
+                    raised: 4200000,
+                    donors: 156,
+                    daysLeft: 8,
+                    image: "👶",
+                    organizer: "Mehr Bolalar Uyi"
+                },
+                {
+                    id: 4,
+                    title: "Suv toshqini zarardidalari uchun yordam",
+                    description: "Sirdaryo viloyatida suv toshqinidan zarar ko'rgan oilalarga favqulodda yordam.",
+                    category: "emergency",
+                    goal: 20000000,
+                    raised: 12500000,
+                    donors: 445,
+                    daysLeft: 5,
+                    image: "🌊",
+                    organizer: "Favqulodda Vaziyatlar Vazirligi",
+                    urgent: true
+                },
+                {
+                    id: 5,
+                    title: "Nogironlar uchun reabilitatsiya markazi",
+                    description: "Harakati cheklangan kishilar uchun zamonaviy reabilitatsiya markazi qurilishi.",
+                    category: "health",
+                    goal: 25000000,
+                    raised: 7800000,
+                    donors: 178,
+                    daysLeft: 45,
+                    image: "♿",
+                    organizer: "Umid Jamg'armasi"
+                },
+                {
+                    id: 6,
+                    title: "Qishloq kutubxonasini yangilash",
+                    description: "Namangan viloyati qishlog'ida kutubxonani yangi kitoblar va jihozlar bilan ta'minlash.",
+                    category: "education",
+                    goal: 3000000,
+                    raised: 1850000,
+                    donors: 67,
+                    daysLeft: 18,
+                    image: "📚",
+                    organizer: "Kitob Sevgilar Jamiyati"
+                }
+            ],
+            selectedCampaign: null,
+            currentCategory: 'all',
+            savedCards: [],
+            selectedCard: null
+        };
+
+        // Utility Functions
+        function formatCurrency(amount) {
+            return new Intl.NumberFormat('uz-UZ').format(amount) + " so'm";
+        }
+
+        function formatNumber(num) {
+            return new Intl.NumberFormat('uz-UZ').format(num);
+        }
+
+        function formatCardNumber(number) {
+            return number.replace(/\s/g, '').replace(/(.{4})/g, '$1 ').trim();
+        }
+
+        function maskCardNumber(number) {
+            const cleaned = number.replace(/\s/g, '');
+            return '**** **** **** ' + cleaned.slice(-4);
+        }
+
+        function getCardType(number) {
+            const cleaned = number.replace(/\s/g, '');
+            if (cleaned.startsWith('4')) return 'visa';
+            if (cleaned.startsWith('5')) return 'mastercard';
+            if (cleaned.startsWith('8600')) return 'uzcard';
+            if (cleaned.startsWith('9860')) return 'humo';
+            return 'unknown';
+        }
+
+        function animateCounter(element, target, duration = 2000) {
+            const start = 0;
+            const increment = target / (duration / 16);
+            let current = start;
+            
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    current = target;
+                    clearInterval(timer);
+                }
+                
+                if (element.id === 'totalRaised') {
+                    element.textContent = formatCurrency(Math.floor(current));
+                } else {
+                    element.textContent = formatNumber(Math.floor(current));
+                }
+            }, 16);
+        }
+
+        function showNotification(title, message, type = 'success') {
+            const notification = document.getElementById('notification');
+            const icon = document.getElementById('notificationIcon');
+            const titleEl = document.getElementById('notificationTitle');
+            const messageEl = document.getElementById('notificationMessage');
+
+            titleEl.textContent = title;
+            messageEl.textContent = message;
+
+            if (type === 'success') {
+                icon.className = 'w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 bg-green-500';
+                icon.innerHTML = '<i class="fas fa-check text-white"></i>';
+                notification.className = 'notification bg-white rounded-xl shadow-2xl p-6 max-w-sm border-l-4 border-green-500';
+            } else if (type === 'error') {
+                icon.className = 'w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 bg-red-500';
+                icon.innerHTML = '<i class="fas fa-times text-white"></i>';
+                notification.className = 'notification bg-white rounded-xl shadow-2xl p-6 max-w-sm border-l-4 border-red-500';
+            } else if (type === 'info') {
+                icon.className = 'w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 bg-blue-500';
+                icon.innerHTML = '<i class="fas fa-info text-white"></i>';
+                notification.className = 'notification bg-white rounded-xl shadow-2xl p-6 max-w-sm border-l-4 border-blue-500';
+            }
+
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 5000);
+        }
+
+        function createConfetti() {
+            const colors = ['#f59e0b', '#10b981', '#3b82f6', '#8b5cf6', '#ef4444', '#06b6d4', '#84cc16'];
+            
+            for (let i = 0; i < 100; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti';
+                    confetti.style.left = Math.random() * 100 + 'vw';
+                    confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                    confetti.style.animation = `confetti-fall ${2 + Math.random() * 3}s linear infinite`;
+                    confetti.style.animationDelay = Math.random() * 2 + 's';
+                    
+                    if (Math.random() > 0.5) {
+                        confetti.style.borderRadius = '50%';
+                    }
+                    
+                    document.body.appendChild(confetti);
+
+                    setTimeout(() => {
+                        confetti.remove();
+                    }, 5000);
+                }, i * 30);
+            }
+        }
+
+        // Authentication Functions
+        function updateAuthUI() {
+            const guestMenu = document.getElementById('guestMenu');
+            const userMenu = document.getElementById('userMenu');
+            
+            if (state.isLoggedIn && state.user) {
+                guestMenu.classList.add('hidden');
+                userMenu.classList.remove('hidden');
+                document.getElementById('userName').textContent = state.user.firstName;
+                document.getElementById('userNameFull').textContent = `${state.user.firstName} ${state.user.lastName}`;
+                document.getElementById('userPhone').textContent = state.user.phone;
+            } else {
+                guestMenu.classList.remove('hidden');
+                userMenu.classList.add('hidden');
+            }
+        }
+
+        function login(userData) {
+            state.isLoggedIn = true;
+            state.user = userData;
+            updateAuthUI();
+            showNotification('Xush kelibsiz!', 'Tizimga muvaffaqiyatli kirdingiz');
+        }
+
+        function logout() {
+            state.isLoggedIn = false;
+            state.user = null;
+            state.savedCards = [];
+            updateAuthUI();
+            showNotification('Xayr!', 'Tizimdan muvaffaqiyatli chiqdingiz');
+        }
+
+        function sendOTP(phone) {
+            // Simulate OTP sending
+            return new Promise((resolve) => {
+                setTimeout(() => {
+                    const otp = '1234'; // In real app, this would be sent via SMS
+                    console.log(`OTP for ${phone}: ${otp}`);
+                    resolve(otp);
+                }, 2000);
+            });
+        }
+
+        function verifyOTP(phone, otp) {
+            // Simulate OTP verification
+            return otp === '1234';
+        }
+
+        // Card Management Functions
+        function saveCard(cardData) {
+            const card = {
+                id: Date.now(),
+                number: cardData.number,
+                holder: cardData.holder,
+                expiry: cardData.expiry,
+                type: getCardType(cardData.number),
+                isDefault: state.savedCards.length === 0
+            };
+            
+            state.savedCards.push(card);
+            showNotification('Muvaffaqiyat!', 'Karta muvaffaqiyatli saqlandi');
+            renderSavedCards();
+        }
+
+        function renderSavedCards() {
+            const container = document.getElementById('cardsContainer');
+            container.innerHTML = '';
+            
+            state.savedCards.forEach(card => {
+                const cardElement = document.createElement('div');
+                cardElement.className = 'payment-card relative cursor-pointer hover:scale-105 transition-transform';
+                cardElement.innerHTML = `
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="card-chip"></div>
+                        <div class="text-right">
+                            <div class="text-sm opacity-75">${card.type.toUpperCase()}</div>
+                            ${card.isDefault ? '<div class="text-xs bg-white bg-opacity-20 px-2 py-1 rounded-full mt-1">Asosiy</div>' : ''}
+                        </div>
+                    </div>
+                    
+                    <div class="text-2xl font-mono mb-4 tracking-wider">
+                        ${maskCardNumber(card.number)}
+                    </div>
+                    
+                    <div class="flex justify-between items-end">
+                        <div>
+                            <div class="text-xs opacity-75 mb-1">KARTA EGASI</div>
+                            <div class="font-medium">${card.holder}</div>
+                        </div>
+                        <div class="text-right">
+                            <div class="text-xs opacity-75 mb-1">AMAL QILISH</div>
+                            <div class="font-medium">${card.expiry}</div>
+                        </div>
+                    </div>
+                    
+                    <button class="absolute top-4 right-4 text-white hover:text-red-300 opacity-0 hover:opacity-100 transition-opacity" onclick="removeCard(${card.id})">
+                        <i class="fas fa-trash text-sm"></i>
+                    </button>
+                `;
+                
+                cardElement.addEventListener('click', () => {
+                    selectCard(card.id);
+                });
+                
+                container.appendChild(cardElement);
+            });
+        }
+
+        function selectCard(cardId) {
+            state.selectedCard = state.savedCards.find(c => c.id === cardId);
+            renderPaymentMethods();
+        }
+
+        function removeCard(cardId) {
+            state.savedCards = state.savedCards.filter(c => c.id !== cardId);
+            renderSavedCards();
+            showNotification('Karta o\'chirildi', 'Karta muvaffaqiyatli o\'chirildi');
+        }
+
+        function renderPaymentMethods() {
+            const container = document.getElementById('savedCards');
+            container.innerHTML = '';
+            
+            state.savedCards.forEach(card => {
+                const cardElement = document.createElement('div');
+                cardElement.className = `payment-method-card p-4 border-2 rounded-xl cursor-pointer transition-all ${
+                    state.selectedCard?.id === card.id ? 'border-blue-500 bg-blue-50' : 'border-gray-200 hover:border-gray-300'
+                }`;
+                
+                cardElement.innerHTML = `
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-10 h-8 bg-gradient-to-r from-blue-600 to-purple-600 rounded flex items-center justify-center text-white text-xs font-bold">
+                                ${card.type.toUpperCase().slice(0, 2)}
+                            </div>
+                            <div>
+                                <div class="font-medium">${maskCardNumber(card.number)}</div>
+                                <div class="text-sm text-gray-600">${card.holder}</div>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            ${card.isDefault ? '<div class="text-xs bg-blue-100 text-blue-600 px-2 py-1 rounded-full">Asosiy</div>' : ''}
+                        </div>
+                    </div>
+                `;
+                
+                cardElement.addEventListener('click', () => {
+                    document.querySelectorAll('.payment-method-card').forEach(el => {
+                        el.classList.remove('border-blue-500', 'bg-blue-50');
+                        el.classList.add('border-gray-200');
+                    });
+                    cardElement.classList.add('border-blue-500', 'bg-blue-50');
+                    cardElement.classList.remove('border-gray-200');
+                    state.selectedCard = card;
+                });
+                
+                container.appendChild(cardElement);
+            });
+        }
+
+        // Campaign Functions
+        function getCategoryIcon(category) {
+            const icons = {
+                health: '🏥',
+                education: '📚',
+                children: '👶',
+                emergency: '🚨',
+                all: '🌟'
+            };
+            return icons[category] || '🌟';
+        }
+
+        function renderCampaigns(campaigns = state.campaigns) {
+            const grid = document.getElementById('campaignsGrid');
+            grid.innerHTML = '';
+
+            campaigns.forEach(campaign => {
+                const progress = Math.min((campaign.raised / campaign.goal) * 100, 100);
+                const isUrgent = campaign.urgent || campaign.daysLeft <= 7;
+                
+                const card = document.createElement('div');
+                card.className = 'bg-white rounded-2xl shadow-lg overflow-hidden card-hover relative';
+                
+                card.innerHTML = `
+                    ${isUrgent ? '<div class="absolute top-4 right-4 bg-red-500 text-white px-3 py-1 rounded-full text-xs font-bold pulse-animation">SHOSHILINCH</div>' : ''}
+                    
+                    <div class="p-8">
+                        <div class="text-center mb-6">
+                            <div class="text-6xl mb-4">${campaign.image}</div>
+                            <h3 class="text-2xl font-bold text-gray-800 mb-3">${campaign.title}</h3>
+                            <p class="text-gray-600 leading-relaxed">${campaign.description}</p>
+                        </div>
+                        
+                        <div class="mb-6">
+                            <div class="flex justify-between text-sm text-gray-600 mb-3">
+                                <span class="font-medium">Yig'ilgan: ${formatCurrency(campaign.raised)}</span>
+                                <span class="font-bold text-lg">${Math.round(progress)}%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-4 overflow-hidden">
+                                <div class="progress-bar h-4 rounded-full" style="width: ${progress}%"></div>
+                            </div>
+                            <div class="flex justify-between text-sm text-gray-600 mt-3">
+                                <span>Maqsad: ${formatCurrency(campaign.goal)}</span>
+                                <span class="font-medium">${campaign.daysLeft} kun qoldi</span>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between mb-6 text-sm text-gray-600">
+                            <div class="flex items-center space-x-2">
+                                <i class="fas fa-users text-blue-500"></i>
+                                <span>${campaign.donors} xayriyachi</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <i class="fas fa-building text-green-500"></i>
+                                <span class="text-xs">${campaign.organizer}</span>
+                            </div>
+                        </div>
+                        
+                        <button class="donate-btn w-full btn-primary text-white py-4 rounded-xl font-bold text-lg" data-campaign-id="${campaign.id}">
+                            <i class="fas fa-heart mr-2"></i>Yordam berish
+                        </button>
+                    </div>
+                `;
+                
+                grid.appendChild(card);
+            });
+
+            document.querySelectorAll('.donate-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const campaignId = parseInt(e.target.closest('.donate-btn').dataset.campaignId);
+                    
+                    if (!state.isLoggedIn) {
+                        showNotification('Kirish kerak', 'Xayriya qilish uchun tizimga kiring', 'info');
+                        document.getElementById('loginModal').classList.add('show');
+                        return;
+                    }
+                    
+                    openDonationModal(campaignId);
+                });
+            });
+        }
+
+        function filterCampaigns(category) {
+            state.currentCategory = category;
+            
+            document.querySelectorAll('.category-filter').forEach(btn => {
+                btn.classList.remove('active');
+                btn.classList.add('bg-white', 'hover:bg-gray-100');
+            });
+            
+            const activeBtn = document.querySelector(`[data-category="${category}"]`);
+            activeBtn.classList.add('active');
+            activeBtn.classList.remove('bg-white', 'hover:bg-gray-100');
+            
+            const filteredCampaigns = category === 'all' 
+                ? state.campaigns 
+                : state.campaigns.filter(c => c.category === category);
+            
+            renderCampaigns(filteredCampaigns);
+        }
+
+        function openDonationModal(campaignId) {
+            const campaign = state.campaigns.find(c => c.id === campaignId);
+            if (!campaign) return;
+
+            state.selectedCampaign = campaign;
+            document.getElementById('modalTitle').textContent = campaign.title;
+            document.getElementById('modalDescription').textContent = campaign.description;
+            
+            // Show payment method section if user has saved cards
+            if (state.savedCards.length > 0) {
+                document.getElementById('paymentMethodSection').classList.remove('hidden');
+                renderPaymentMethods();
+            } else {
+                document.getElementById('paymentMethodSection').classList.add('hidden');
+            }
+            
+            document.getElementById('donationModal').classList.add('show');
+        }
+
+        function closeDonationModal() {
+            document.getElementById('donationModal').classList.remove('show');
+            resetDonationForm();
+        }
+
+        function resetDonationForm() {
+            document.getElementById('customAmount').value = '';
+            document.getElementById('donationComment').value = '';
+            document.getElementById('anonymousDonation').checked = false;
+            state.selectedCard = null;
+            
+            document.querySelectorAll('.donation-amount').forEach(btn => {
+                btn.classList.remove('bg-blue-500', 'text-white');
+                btn.classList.add('bg-gray-100');
+            });
+            
+            document.querySelectorAll('.payment-method-card').forEach(el => {
+                el.classList.remove('border-blue-500', 'bg-blue-50');
+                el.classList.add('border-gray-200');
+            });
+        }
+
+        function processDonation() {
+            const customAmount = document.getElementById('customAmount').value;
+            const selectedBtn = document.querySelector('.donation-amount.bg-blue-500');
+            const amount = customAmount || (selectedBtn ? selectedBtn.dataset.amount : null);
+
+            if (!amount || amount <= 0) {
+                showNotification('Xato', 'Iltimos, xayriya miqdorini kiriting', 'error');
+                return;
+            }
+
+            if (state.savedCards.length > 0 && !state.selectedCard) {
+                showNotification('Xato', 'Iltimos, to\'lov kartasini tanlang', 'error');
+                return;
+            }
+
+            const btn = document.getElementById('confirmDonation');
+            const btnText = document.getElementById('donationBtnText');
+            const loader = document.getElementById('donationLoader');
+            
+            btn.disabled = true;
+            btnText.classList.add('hidden');
+            loader.classList.remove('hidden');
+
+            setTimeout(() => {
+                const campaign = state.selectedCampaign;
+                campaign.raised += parseInt(amount);
+                campaign.donors += 1;
+
+                updateStats();
+                renderCampaigns(state.currentCategory === 'all' ? state.campaigns : state.campaigns.filter(c => c.category === state.currentCategory));
+                closeDonationModal();
+
+                btn.disabled = false;
+                btnText.classList.remove('hidden');
+                loader.classList.add('hidden');
+
+                showNotification('Rahmat!', `${formatCurrency(amount)} xayriya muvaffaqiyatli amalga oshirildi!`);
+                createConfetti();
+            }, 2000);
+        }
+
+        function updateStats() {
+            const totalRaised = state.campaigns.reduce((sum, c) => sum + c.raised, 0);
+            const totalDonors = state.campaigns.reduce((sum, c) => sum + c.donors, 0);
+            
+            animateCounter(document.getElementById('totalCampaigns'), state.campaigns.length);
+            animateCounter(document.getElementById('totalRaised'), totalRaised);
+            animateCounter(document.getElementById('totalDonors'), totalDonors);
+        }
+
+        function openCreateModal() {
+            if (!state.isLoggedIn) {
+                showNotification('Kirish kerak', 'Kampaniya yaratish uchun tizimga kiring', 'info');
+                document.getElementById('loginModal').classList.add('show');
+                return;
+            }
+            document.getElementById('createModal').classList.add('show');
+        }
+
+        function closeCreateModal() {
+            document.getElementById('createModal').classList.remove('show');
+            resetCreateForm();
+        }
+
+        function resetCreateForm() {
+            document.getElementById('campaignTitle').value = '';
+            document.getElementById('campaignCategory').value = '';
+            document.getElementById('campaignDescription').value = '';
+            document.getElementById('campaignGoal').value = '';
+            document.getElementById('campaignDuration').value = '30';
+            document.getElementById('organizerName').value = '';
+            document.getElementById('organizerPhone').value = '';
+        }
+
+        function createCampaign() {
+            const title = document.getElementById('campaignTitle').value.trim();
+            const category = document.getElementById('campaignCategory').value;
+            const description = document.getElementById('campaignDescription').value.trim();
+            const goal = parseInt(document.getElementById('campaignGoal').value);
+            const duration = parseInt(document.getElementById('campaignDuration').value) || 30;
+            const organizerName = document.getElementById('organizerName').value.trim();
+            const organizerPhone = document.getElementById('organizerPhone').value.trim();
+
+            if (!title || !category || !description || !goal || goal <= 0) {
+                showNotification('Xato', 'Iltimos, barcha majburiy maydonlarni to\'ldiring', 'error');
+                return;
+            }
+
+            if (!organizerName || !organizerPhone) {
+                showNotification('Xato', 'Iltimos, tashkilotchi ma\'lumotlarini kiriting', 'error');
+                return;
+            }
+
+            const newCampaign = {
+                id: Date.now(),
+                title,
+                description,
+                category,
+                goal,
+                raised: 0,
+                donors: 0,
+                daysLeft: duration,
+                image: getCategoryIcon(category),
+                organizer: organizerName,
+                urgent: false
+            };
+
+            state.campaigns.unshift(newCampaign);
+            updateStats();
+            renderCampaigns(state.currentCategory === 'all' ? state.campaigns : state.campaigns.filter(c => c.category === state.currentCategory));
+            closeCreateModal();
+            showNotification('Muvaffaqiyat!', 'Yangi kampaniya muvaffaqiyatli yaratildi va ko\'rib chiqish uchun yuborildi');
+        }
+
+        // Event Listeners
+        document.addEventListener('DOMContentLoaded', () => {
+            renderCampaigns();
+            updateStats();
+            updateAuthUI();
+
+            // Mobile menu
+            document.getElementById('menuBtn').addEventListener('click', () => {
+                document.getElementById('mobileMenu').classList.add('show');
+            });
+
+            document.getElementById('closeMobileMenu').addEventListener('click', () => {
+                document.getElementById('mobileMenu').classList.remove('show');
+            });
+
+            // Profile dropdown
+            document.getElementById('profileDropdown').addEventListener('click', () => {
+                const dropdown = document.getElementById('dropdownMenu');
+                dropdown.classList.toggle('hidden');
+            });
+
+            // Close dropdown when clicking outside
+            document.addEventListener('click', (e) => {
+                const dropdown = document.getElementById('dropdownMenu');
+                const button = document.getElementById('profileDropdown');
+                if (!dropdown.contains(e.target) && !button.contains(e.target)) {
+                    dropdown.classList.add('hidden');
+                }
+            });
+
+            // Auth buttons
+            document.getElementById('loginBtn').addEventListener('click', () => {
+                document.getElementById('loginModal').classList.add('show');
+            });
+
+            document.getElementById('signupBtn').addEventListener('click', () => {
+                document.getElementById('signupModal').classList.add('show');
+            });
+
+            document.getElementById('logoutBtn').addEventListener('click', logout);
+
+            // Login modal
+            document.getElementById('closeLoginModal').addEventListener('click', () => {
+                document.getElementById('loginModal').classList.remove('show');
+            });
+
+            document.getElementById('sendOtpBtn').addEventListener('click', async () => {
+                const phone = document.getElementById('loginPhone').value.trim();
+                if (!phone) {
+                    showNotification('Xato', 'Telefon raqamni kiriting', 'error');
+                    return;
+                }
+
+                const btn = document.getElementById('sendOtpBtn');
+                const btnText = document.getElementById('sendOtpText');
+                const loader = document.getElementById('sendOtpLoader');
+
+                btn.disabled = true;
+                btnText.classList.add('hidden');
+                loader.classList.remove('hidden');
+
+                try {
+                    await sendOTP(phone);
+                    document.getElementById('loginStep1').classList.add('hidden');
+                    document.getElementById('loginStep2').classList.remove('hidden');
+                    document.getElementById('sentPhoneNumber').textContent = phone;
+                    
+                    // Start countdown
+                    let countdown = 60;
+                    const timer = setInterval(() => {
+                        countdown--;
+                        document.getElementById('resendTimer').textContent = countdown;
+                        if (countdown <= 0) {
+                            clearInterval(timer);
+                            document.getElementById('resendOtpBtn').disabled = false;
+                        }
+                    }, 1000);
+                } finally {
+                    btn.disabled = false;
+                    btnText.classList.remove('hidden');
+                    loader.classList.add('hidden');
+                }
+            });
+
+            document.getElementById('verifyOtpBtn').addEventListener('click', () => {
+                const otpInputs = document.querySelectorAll('.otp-input');
+                const otp = Array.from(otpInputs).map(input => input.value).join('');
+                const phone = document.getElementById('loginPhone').value.trim();
+
+                if (otp.length !== 4) {
+                    showNotification('Xato', 'To\'liq kodni kiriting', 'error');
+                    return;
+                }
+
+                if (verifyOTP(phone, otp)) {
+                    const userData = {
+                        firstName: 'Test',
+                        lastName: 'Foydalanuvchi',
+                        phone: phone,
+                        email: 'test@example.com'
+                    };
+                    login(userData);
+                    document.getElementById('loginModal').classList.remove('show');
+                    
+                    // Reset login form
+                    document.getElementById('loginStep1').classList.remove('hidden');
+                    document.getElementById('loginStep2').classList.add('hidden');
+                    document.getElementById('loginPhone').value = '';
+                    otpInputs.forEach(input => input.value = '');
+                } else {
+                    showNotification('Xato', 'Noto\'g\'ri kod', 'error');
+                }
+            });
+
+            // OTP input navigation
+            document.querySelectorAll('.otp-input').forEach((input, index) => {
+                input.addEventListener('input', (e) => {
+                    if (e.target.value && index < 3) {
+                        document.querySelectorAll('.otp-input')[index + 1].focus();
+                    }
+                });
+                
+                input.addEventListener('keydown', (e) => {
+                    if (e.key === 'Backspace' && !e.target.value && index > 0) {
+                        document.querySelectorAll('.otp-input')[index - 1].focus();
+                    }
+                });
+            });
+
+            // Signup modal
+            document.getElementById('switchToLogin').addEventListener('click', () => {
+                document.getElementById('signupModal').classList.remove('show');
+                document.getElementById('loginModal').classList.add('show');
+            });
+
+            document.getElementById('createAccountBtn').addEventListener('click', () => {
+                const firstName = document.getElementById('signupFirstName').value.trim();
+                const lastName = document.getElementById('signupLastName').value.trim();
+                const phone = document.getElementById('signupPhone').value.trim();
+                const email = document.getElementById('signupEmail').value.trim();
+                const agreeTerms = document.getElementById('agreeTerms').checked;
+
+                if (!firstName || !lastName || !phone) {
+                    showNotification('Xato', 'Barcha majburiy maydonlarni to\'ldiring', 'error');
+                    return;
+                }
+
+                if (!agreeTerms) {
+                    showNotification('Xato', 'Foydalanish shartlariga rozilik bering', 'error');
+                    return;
+                }
+
+                const userData = { firstName, lastName, phone, email };
+                login(userData);
+                document.getElementById('signupModal').classList.remove('show');
+                
+                // Reset signup form
+                document.getElementById('signupFirstName').value = '';
+                document.getElementById('signupLastName').value = '';
+                document.getElementById('signupPhone').value = '';
+                document.getElementById('signupEmail').value = '';
+                document.getElementById('agreeTerms').checked = false;
+            });
+
+            // Cards management
+            document.getElementById('cardsLink').addEventListener('click', (e) => {
+                e.preventDefault();
+                document.getElementById('dropdownMenu').classList.add('hidden');
+                document.getElementById('cardsModal').classList.add('show');
+                renderSavedCards();
+            });
+
+            document.getElementById('closeCardsModal').addEventListener('click', () => {
+                document.getElementById('cardsModal').classList.remove('show');
+            });
+
+            document.getElementById('addCardBtn').addEventListener('click', () => {
+                document.getElementById('addCardModal').classList.add('show');
+            });
+
+            document.getElementById('closeAddCardModal').addEventListener('click', () => {
+                document.getElementById('addCardModal').classList.remove('show');
+            });
+
+            // Card input formatting
+            document.getElementById('cardNumber').addEventListener('input', (e) => {
+                let value = e.target.value.replace(/\s/g, '').replace(/[^0-9]/g, '');
+                value = value.substring(0, 16);
+                value = value.replace(/(.{4})/g, '$1 ').trim();
+                e.target.value = value;
+            });
+
+            document.getElementById('cardExpiry').addEventListener('input', (e) => {
+                let value = e.target.value.replace(/[^0-9]/g, '');
+                if (value.length >= 2) {
+                    value = value.substring(0, 2) + '/' + value.substring(2, 4);
+                }
+                e.target.value = value;
+            });
+
+            document.getElementById('cardCvv').addEventListener('input', (e) => {
+                e.target.value = e.target.value.replace(/[^0-9]/g, '').substring(0, 3);
+            });
+
+            document.getElementById('saveCardBtn').addEventListener('click', () => {
+                const number = document.getElementById('cardNumber').value.trim();
+                const expiry = document.getElementById('cardExpiry').value.trim();
+                const cvv = document.getElementById('cardCvv').value.trim();
+                const holder = document.getElementById('cardHolder').value.trim();
+
+                if (!number || !expiry || !cvv || !holder) {
+                    showNotification('Xato', 'Barcha maydonlarni to\'ldiring', 'error');
+                    return;
+                }
+
+                if (number.replace(/\s/g, '').length !== 16) {
+                    showNotification('Xato', 'Karta raqami 16 ta raqamdan iborat bo\'lishi kerak', 'error');
+                    return;
+                }
+
+                saveCard({ number, expiry, cvv, holder });
+                document.getElementById('addCardModal').classList.remove('show');
+                
+                // Reset form
+                document.getElementById('cardNumber').value = '';
+                document.getElementById('cardExpiry').value = '';
+                document.getElementById('cardCvv').value = '';
+                document.getElementById('cardHolder').value = '';
+            });
+
+            // Donation modal
+            document.querySelectorAll('.donation-amount').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    document.querySelectorAll('.donation-amount').forEach(b => {
+                        b.classList.remove('bg-blue-500', 'text-white');
+                        b.classList.add('bg-gray-100');
+                    });
+                    e.target.classList.remove('bg-gray-100');
+                    e.target.classList.add('bg-blue-500', 'text-white');
+                    document.getElementById('customAmount').value = '';
+                });
+            });
+
+            document.getElementById('customAmount').addEventListener('input', () => {
+                document.querySelectorAll('.donation-amount').forEach(btn => {
+                    btn.classList.remove('bg-blue-500', 'text-white');
+                    btn.classList.add('bg-gray-100');
+                });
+            });
+
+            document.getElementById('useNewCard').addEventListener('click', () => {
+                document.getElementById('addCardModal').classList.add('show');
+            });
+
+            document.getElementById('cancelDonation').addEventListener('click', closeDonationModal);
+            document.getElementById('confirmDonation').addEventListener('click', processDonation);
+
+            // Category filters
+            document.querySelectorAll('.category-filter').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const category = e.target.dataset.category;
+                    filterCampaigns(category);
+                });
+            });
+
+            // Campaign creation
+            document.getElementById('createCampaignBtn').addEventListener('click', openCreateModal);
+            document.getElementById('startDonatingBtn').addEventListener('click', () => {
+                document.getElementById('campaigns').scrollIntoView({ behavior: 'smooth' });
+            });
+            document.getElementById('cancelCreate').addEventListener('click', closeCreateModal);
+            document.getElementById('confirmCreate').addEventListener('click', createCampaign);
+
+            // Notification close
+            document.getElementById('closeNotification').addEventListener('click', () => {
+                document.getElementById('notification').classList.remove('show');
+            });
+
+            // Close modals when clicking outside
+            document.querySelectorAll('.modal').forEach(modal => {
+                modal.addEventListener('click', (e) => {
+                    if (e.target === modal) {
+                        modal.classList.remove('show');
+                    }
+                });
+            });
+
+            // Load more campaigns
+            document.getElementById('loadMoreBtn').addEventListener('click', () => {
+                showNotification('Ma\'lumot', 'Barcha kampaniyalar yuklandi', 'info');
+            });
+        });
+
+        // Global function for removing cards (called from HTML)
+        window.removeCard = removeCard;
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'981ca61f2531142b',t:'MTc1ODMyMjI5OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
