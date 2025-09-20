@@ -1,0 +1,3091 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Ehson - Xayriya Platformasi</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .gradient-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .gradient-success {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+        }
+        
+        .card-hover {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 30px rgba(102, 126, 234, 0.4);
+        }
+        
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .btn-primary:hover::before {
+            left: 100%;
+        }
+        
+        .progress-bar {
+            background: linear-gradient(90deg, #10b981, #059669);
+            border-radius: 9999px;
+            transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .progress-bar::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            background-image: linear-gradient(
+                -45deg,
+                rgba(255, 255, 255, .2) 25%,
+                transparent 25%,
+                transparent 50%,
+                rgba(255, 255, 255, .2) 50%,
+                rgba(255, 255, 255, .2) 75%,
+                transparent 75%,
+                transparent
+            );
+            background-size: 50px 50px;
+            animation: move 2s linear infinite;
+        }
+        
+        @keyframes move {
+            0% {
+                background-position: 0 0;
+            }
+            100% {
+                background-position: 50px 50px;
+            }
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .modal.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 1;
+        }
+        
+        .modal-content {
+            transform: scale(0.7);
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        
+        .modal.show .modal-content {
+            transform: scale(1);
+        }
+        
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1100;
+            transform: translateX(400px);
+            transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+        
+        .notification.show {
+            transform: translateX(0);
+        }
+        
+        .hero-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="white" opacity="0.1"/><circle cx="75" cy="75" r="1" fill="white" opacity="0.1"/><circle cx="50" cy="10" r="1" fill="white" opacity="0.1"/><circle cx="10" cy="90" r="1" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+        }
+        
+        .stats-counter {
+            font-variant-numeric: tabular-nums;
+        }
+        
+        .category-filter {
+            transition: all 0.3s ease;
+        }
+        
+        .category-filter.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .loading-spinner {
+            border: 3px solid #f3f4f6;
+            border-top: 3px solid #667eea;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .mobile-menu {
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .mobile-menu.show {
+            transform: translateX(0);
+        }
+        
+        .payment-card {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3730a3 100%);
+            color: white;
+            border-radius: 16px;
+            padding: 24px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .payment-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+        }
+        
+        .card-chip {
+            width: 40px;
+            height: 30px;
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+            border-radius: 6px;
+            position: relative;
+        }
+        
+        .card-chip::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 20px;
+            height: 15px;
+            background: repeating-linear-gradient(
+                90deg,
+                transparent,
+                transparent 2px,
+                rgba(0,0,0,0.1) 2px,
+                rgba(0,0,0,0.1) 4px
+            );
+        }
+
+        .file-upload-area {
+            border: 2px dashed #d1d5db;
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .file-upload-area:hover {
+            border-color: #3b82f6;
+            background-color: #f8fafc;
+        }
+
+        .file-upload-area.dragover {
+            border-color: #3b82f6;
+            background-color: #eff6ff;
+        }
+
+        .uploaded-file {
+            background: #f3f4f6;
+            border-radius: 8px;
+            padding: 12px;
+            margin: 8px 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .bank-card {
+            background: linear-gradient(135deg, #1e40af 0%, #3730a3 100%);
+            border-radius: 16px;
+            padding: 20px;
+            color: white;
+            margin: 10px 0;
+        }
+
+        .qr-code {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .payment-method-card {
+            transition: all 0.3s ease;
+        }
+
+        .payment-method-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        .donation-amount {
+            transition: all 0.3s ease;
+        }
+
+        .donation-amount:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        .donation-amount.selected {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .chart-container {
+            position: relative;
+            height: 300px;
+            margin: 20px 0;
+        }
+
+        .chart-bar {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .chart-bar:hover {
+            transform: scaleY(1.05);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .faq-item {
+            transition: all 0.3s ease;
+        }
+
+        .faq-item.active .faq-content {
+            max-height: 200px;
+            opacity: 1;
+            padding-top: 12px;
+        }
+
+        .faq-content {
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .success-story {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            border-radius: 16px;
+            padding: 24px;
+            transition: all 0.3s ease;
+        }
+
+        .success-story:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+
+        .language-selector {
+            position: relative;
+        }
+
+        .language-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            min-width: 150px;
+            z-index: 1000;
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            pointer-events: none;
+        }
+
+        .language-dropdown.show {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: all;
+        }
+
+        .social-link {
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+
+        .campaign-card {
+            transition: all 0.3s ease;
+        }
+
+        .campaign-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+        }
+
+        .search-container {
+            position: relative;
+        }
+
+        .search-results {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            max-height: 300px;
+            overflow-y: auto;
+            z-index: 100;
+            display: none;
+        }
+
+        .search-results.show {
+            display: block;
+        }
+
+        .search-result-item {
+            padding: 12px 16px;
+            border-bottom: 1px solid #f3f4f6;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+
+        .search-result-item:hover {
+            background: #f8fafc;
+        }
+
+        .search-result-item:last-child {
+            border-bottom: none;
+        }
+
+        .admin-sidebar {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3730a3 100%);
+            color: white;
+            width: 280px;
+            height: 100vh;
+            position: fixed;
+            left: 0;
+            top: 0;
+            z-index: 1000;
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+            overflow-y: auto;
+        }
+
+        .admin-sidebar.show {
+            transform: translateX(0);
+        }
+
+        .admin-content {
+            margin-left: 0;
+            transition: margin-left 0.3s ease;
+            min-height: 100vh;
+            background: #f8fafc;
+        }
+
+        .admin-content.shifted {
+            margin-left: 280px;
+        }
+
+        .admin-nav-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 20px;
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-left: 3px solid transparent;
+        }
+
+        .admin-nav-item:hover,
+        .admin-nav-item.active {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border-left-color: #fbbf24;
+        }
+
+        .admin-card {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .admin-card:hover {
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .status-badge {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .status-active {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .status-pending {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .status-rejected {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .data-table th {
+            background: #f8fafc;
+            padding: 16px;
+            text-align: left;
+            font-weight: 600;
+            color: #374151;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .data-table td {
+            padding: 16px;
+            border-bottom: 1px solid #f3f4f6;
+        }
+
+        .data-table tr:hover {
+            background: #f8fafc;
+        }
+
+        .admin-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            display: none;
+        }
+
+        .admin-overlay.show {
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .admin-content.shifted {
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Admin Panel Overlay -->
+    <div id="adminOverlay" class="admin-overlay"></div>
+
+    <!-- Admin Sidebar -->
+    <div id="adminSidebar" class="admin-sidebar">
+        <div class="p-6 border-b border-white border-opacity-20">
+            <div class="flex items-center space-x-3">
+                <div class="bg-yellow-500 p-2 rounded-lg">
+                    <i class="fas fa-crown text-white text-xl"></i>
+                </div>
+                <div>
+                    <h2 class="text-xl font-bold">Admin Panel</h2>
+                    <p class="text-sm opacity-75">E-Ehson Boshqaruvi</p>
+                </div>
+            </div>
+        </div>
+        
+        <nav class="py-4">
+            <a href="#" class="admin-nav-item active" data-section="dashboard">
+                <i class="fas fa-tachometer-alt mr-3"></i>
+                Dashboard
+            </a>
+            <a href="#" class="admin-nav-item" data-section="campaigns">
+                <i class="fas fa-bullhorn mr-3"></i>
+                Kampaniyalar
+            </a>
+            <a href="#" class="admin-nav-item" data-section="users">
+                <i class="fas fa-users mr-3"></i>
+                Foydalanuvchilar
+            </a>
+            <a href="#" class="admin-nav-item" data-section="applications">
+                <i class="fas fa-file-alt mr-3"></i>
+                Arizalar
+            </a>
+            <a href="#" class="admin-nav-item" data-section="payments">
+                <i class="fas fa-credit-card mr-3"></i>
+                To'lovlar
+            </a>
+            <a href="#" class="admin-nav-item" data-section="settings">
+                <i class="fas fa-cog mr-3"></i>
+                Sozlamalar
+            </a>
+        </nav>
+        
+        <div class="absolute bottom-0 left-0 right-0 p-6 border-t border-white border-opacity-20">
+            <button id="closeAdminPanel" class="w-full bg-white bg-opacity-20 hover:bg-opacity-30 text-white py-2 px-4 rounded-lg transition-all">
+                <i class="fas fa-times mr-2"></i>Yopish
+            </button>
+        </div>
+    </div>
+
+    <!-- Admin Content -->
+    <div id="adminContent" class="admin-content hidden">
+        <!-- Admin Dashboard -->
+        <div id="adminDashboard" class="admin-section p-8">
+            <div class="mb-8">
+                <h1 class="text-3xl font-bold text-gray-800 mb-2">Dashboard</h1>
+                <p class="text-gray-600">Platformaning umumiy ko'rsatkichlari</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                <div class="admin-card">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-gray-600 text-sm">Jami Kampaniyalar</p>
+                            <p class="text-3xl font-bold text-blue-600" id="adminTotalCampaigns">0</p>
+                        </div>
+                        <div class="bg-blue-100 p-3 rounded-full">
+                            <i class="fas fa-bullhorn text-blue-600 text-xl"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="admin-card">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-gray-600 text-sm">Jami Yig'ilgan</p>
+                            <p class="text-3xl font-bold text-green-600" id="adminTotalRaised">0</p>
+                        </div>
+                        <div class="bg-green-100 p-3 rounded-full">
+                            <i class="fas fa-coins text-green-600 text-xl"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="admin-card">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-gray-600 text-sm">Foydalanuvchilar</p>
+                            <p class="text-3xl font-bold text-purple-600" id="adminTotalUsers">0</p>
+                        </div>
+                        <div class="bg-purple-100 p-3 rounded-full">
+                            <i class="fas fa-users text-purple-600 text-xl"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="admin-card">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-gray-600 text-sm">Kutilayotgan Arizalar</p>
+                            <p class="text-3xl font-bold text-orange-600" id="adminPendingApplications">0</p>
+                        </div>
+                        <div class="bg-orange-100 p-3 rounded-full">
+                            <i class="fas fa-clock text-orange-600 text-xl"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div class="admin-card">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">So'nggi Kampaniyalar</h3>
+                    <div id="recentCampaigns" class="space-y-4">
+                        <!-- Recent campaigns will be populated here -->
+                    </div>
+                </div>
+                
+                <div class="admin-card">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">So'nggi To'lovlar</h3>
+                    <div id="recentPayments" class="space-y-4">
+                        <!-- Recent payments will be populated here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Admin Campaigns -->
+        <div id="adminCampaigns" class="admin-section hidden p-8">
+            <div class="flex justify-between items-center mb-8">
+                <div>
+                    <h1 class="text-3xl font-bold text-gray-800 mb-2">Kampaniyalar Boshqaruvi</h1>
+                    <p class="text-gray-600">Barcha kampaniyalarni ko'rish va boshqarish</p>
+                </div>
+                <button id="addCampaignBtn" class="btn-primary text-white px-6 py-3 rounded-lg">
+                    <i class="fas fa-plus mr-2"></i>Yangi Kampaniya
+                </button>
+            </div>
+            
+            <div class="admin-card">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nomi</th>
+                            <th>Kategoriya</th>
+                            <th>Maqsad</th>
+                            <th>Yig'ilgan</th>
+                            <th>Holat</th>
+                            <th>Amallar</th>
+                        </tr>
+                    </thead>
+                    <tbody id="campaignsTableBody">
+                        <!-- Campaigns will be populated here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Admin Users -->
+        <div id="adminUsers" class="admin-section hidden p-8">
+            <div class="mb-8">
+                <h1 class="text-3xl font-bold text-gray-800 mb-2">Foydalanuvchilar</h1>
+                <p class="text-gray-600">Ro'yxatdan o'tgan foydalanuvchilar</p>
+            </div>
+            
+            <div class="admin-card">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Ism Familiya</th>
+                            <th>Telefon</th>
+                            <th>Email</th>
+                            <th>Ro'yxatdan o'tgan</th>
+                            <th>Holat</th>
+                            <th>Amallar</th>
+                        </tr>
+                    </thead>
+                    <tbody id="usersTableBody">
+                        <!-- Users will be populated here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Admin Applications -->
+        <div id="adminApplications" class="admin-section hidden p-8">
+            <div class="mb-8">
+                <h1 class="text-3xl font-bold text-gray-800 mb-2">Arizalar Moderatsiyasi</h1>
+                <p class="text-gray-600">Yangi arizalarni ko'rib chiqish va tasdiqlash</p>
+            </div>
+            
+            <div class="admin-card">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Ariza nomi</th>
+                            <th>Kategoriya</th>
+                            <th>Miqdor</th>
+                            <th>Ariza beruvchi</th>
+                            <th>Sana</th>
+                            <th>Holat</th>
+                            <th>Amallar</th>
+                        </tr>
+                    </thead>
+                    <tbody id="applicationsTableBody">
+                        <!-- Applications will be populated here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Admin Payments -->
+        <div id="adminPayments" class="admin-section hidden p-8">
+            <div class="mb-8">
+                <h1 class="text-3xl font-bold text-gray-800 mb-2">To'lovlar Nazorati</h1>
+                <p class="text-gray-600">Barcha to'lovlar tarixi va statistika</p>
+            </div>
+            
+            <div class="admin-card">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Kampaniya</th>
+                            <th>Xayriyachi</th>
+                            <th>Miqdor</th>
+                            <th>To'lov usuli</th>
+                            <th>Sana</th>
+                            <th>Holat</th>
+                            <th>Amallar</th>
+                        </tr>
+                    </thead>
+                    <tbody id="paymentsTableBody">
+                        <!-- Payments will be populated here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Admin Settings -->
+        <div id="adminSettings" class="admin-section hidden p-8">
+            <div class="mb-8">
+                <h1 class="text-3xl font-bold text-gray-800 mb-2">Tizim Sozlamalari</h1>
+                <p class="text-gray-600">Platformaning umumiy sozlamalari</p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div class="admin-card">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">Umumiy Sozlamalar</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Platform nomi</label>
+                            <input type="text" class="w-full px-4 py-3 border border-gray-300 rounded-xl" value="E-Ehson">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Minimal xayriya miqdori</label>
+                            <input type="number" class="w-full px-4 py-3 border border-gray-300 rounded-xl" value="10000">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Maksimal xayriya miqdori</label>
+                            <input type="number" class="w-full px-4 py-3 border border-gray-300 rounded-xl" value="10000000">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="admin-card">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">Bildirishnoma Sozlamalari</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-700">Email bildirishnomalar</span>
+                            <label class="relative inline-flex items-center cursor-pointer">
+                                <input type="checkbox" class="sr-only peer" checked>
+                                <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+                            </label>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-700">SMS bildirishnomalar</span>
+                            <label class="relative inline-flex items-center cursor-pointer">
+                                <input type="checkbox" class="sr-only peer" checked>
+                                <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-8">
+                <button class="btn-primary text-white px-8 py-3 rounded-lg">
+                    <i class="fas fa-save mr-2"></i>Sozlamalarni Saqlash
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="gradient-primary text-white shadow-2xl sticky top-0 z-50">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center space-x-3">
+                    <div class="bg-white bg-opacity-20 p-2 rounded-lg">
+                        <i class="fas fa-heart text-2xl"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-2xl font-bold">E-Ehson</h1>
+                        <p class="text-sm opacity-90">Xayriya Platformasi</p>
+                    </div>
+                </div>
+                
+                <!-- Search Bar -->
+                <div class="hidden md:flex flex-1 max-w-md mx-8">
+                    <div class="search-container w-full relative">
+                        <input type="text" id="searchInput" class="w-full px-4 py-2 rounded-lg text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50" placeholder="Kampaniya qidirish...">
+                        <i class="fas fa-search absolute right-3 top-3 text-gray-500"></i>
+                        <div id="searchResults" class="search-results"></div>
+                    </div>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-6">
+                    <a href="#campaigns" class="hover:text-blue-200 transition-colors">Kampaniyalar</a>
+                    <a href="#" class="hover:text-blue-200 transition-colors" id="aboutLink">Biz haqimizda</a>
+                    <a href="#" class="hover:text-blue-200 transition-colors" id="contactLink">Aloqa</a>
+                    <a href="#" class="hover:text-blue-200 transition-colors" id="helpLink">Yordam</a>
+                </div>
+                
+                <!-- Language Selector -->
+                <div class="language-selector hidden md:block">
+                    <button id="languageBtn" class="bg-white bg-opacity-20 hover:bg-opacity-30 px-3 py-2 rounded-lg transition-all flex items-center space-x-2">
+                        <span id="currentLanguage">O'Z</span>
+                        <i class="fas fa-chevron-down text-sm"></i>
+                    </button>
+                    <div id="languageDropdown" class="language-dropdown">
+                        <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-50" data-lang="uz">🇺🇿 O'zbek</a>
+                        <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-50" data-lang="ru">🇷🇺 Русский</a>
+                        <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-50" data-lang="en">🇺🇸 English</a>
+                    </div>
+                </div>
+                
+                <!-- User Menu -->
+                <div class="flex items-center space-x-4">
+                    <div id="guestMenu" class="flex items-center space-x-3">
+                        <button id="loginBtn" class="bg-white bg-opacity-20 hover:bg-opacity-30 px-4 py-2 rounded-lg transition-all">
+                            <i class="fas fa-sign-in-alt mr-2"></i>Kirish
+                        </button>
+                        <button id="signupBtn" class="bg-white text-purple-600 hover:bg-gray-100 px-4 py-2 rounded-lg font-medium transition-all">
+                            <i class="fas fa-user-plus mr-2"></i>Ro'yxatdan o'tish
+                        </button>
+                    </div>
+                    
+                    <div id="userMenu" class="hidden flex items-center space-x-4">
+                        <div class="relative">
+                            <button id="profileDropdown" class="flex items-center space-x-2 bg-white bg-opacity-20 px-4 py-2 rounded-lg hover:bg-opacity-30 transition-all">
+                                <div class="w-8 h-8 bg-white bg-opacity-30 rounded-full flex items-center justify-center">
+                                    <i class="fas fa-user text-sm"></i>
+                                </div>
+                                <span id="userName">Foydalanuvchi</span>
+                                <i class="fas fa-chevron-down text-sm"></i>
+                            </button>
+                            
+                            <div id="dropdownMenu" class="hidden absolute right-0 mt-2 w-64 bg-white rounded-xl shadow-2xl py-2 z-50">
+                                <div class="px-4 py-3 border-b border-gray-100">
+                                    <p class="font-medium text-gray-800" id="userNameFull">Test Foydalanuvchi</p>
+                                    <p class="text-sm text-gray-600" id="userPhone">+998 90 123 45 67</p>
+                                </div>
+                                <a href="#" id="profileLink" class="flex items-center px-4 py-3 text-gray-700 hover:bg-gray-50">
+                                    <i class="fas fa-user mr-3 text-blue-500"></i>Profil
+                                </a>
+                                <a href="#" id="cardsLink" class="flex items-center px-4 py-3 text-gray-700 hover:bg-gray-50">
+                                    <i class="fas fa-credit-card mr-3 text-green-500"></i>Kartalarim
+                                </a>
+                                <a href="#" id="historyLink" class="flex items-center px-4 py-3 text-gray-700 hover:bg-gray-50">
+                                    <i class="fas fa-history mr-3 text-purple-500"></i>Xayriya tarixi
+                                </a>
+                                <a href="#" id="settingsLink" class="flex items-center px-4 py-3 text-gray-700 hover:bg-gray-50">
+                                    <i class="fas fa-cog mr-3 text-gray-500"></i>Sozlamalar
+                                </a>
+                                <a href="#" id="applyCharityLink" class="flex items-center px-4 py-3 text-gray-700 hover:bg-gray-50">
+                                    <i class="fas fa-file-alt mr-3 text-orange-500"></i>Xayriya uchun ariza
+                                </a>
+                                <a href="#" id="adminPanelLink" class="hidden flex items-center px-4 py-3 text-gray-700 hover:bg-gray-50">
+                                    <i class="fas fa-crown mr-3 text-yellow-500"></i>Admin Panel
+                                </a>
+                                <div class="border-t border-gray-100 mt-2">
+                                    <button id="logoutBtn" class="flex items-center w-full px-4 py-3 text-red-600 hover:bg-red-50">
+                                        <i class="fas fa-sign-out-alt mr-3"></i>Chiqish
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button id="menuBtn" class="md:hidden">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobileMenu" class="mobile-menu fixed top-0 right-0 h-full w-80 bg-white shadow-2xl z-50 md:hidden">
+        <div class="p-6">
+            <div class="flex justify-between items-center mb-8">
+                <h3 class="text-xl font-bold text-gray-800">Menyu</h3>
+                <button id="closeMobileMenu" class="text-gray-500 hover:text-gray-700">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+            
+            <!-- Mobile Search -->
+            <div class="mb-6">
+                <div class="search-container relative">
+                    <input type="text" id="mobileSearchInput" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Kampaniya qidirish...">
+                    <i class="fas fa-search absolute right-3 top-4 text-gray-500"></i>
+                    <div id="mobileSearchResults" class="search-results"></div>
+                </div>
+            </div>
+            
+            <div class="space-y-4">
+                <a href="#campaigns" class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-100">
+                    <i class="fas fa-bullhorn text-blue-500"></i>
+                    <span>Kampaniyalar</span>
+                </a>
+                <a href="#" class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-100" id="mobileAboutLink">
+                    <i class="fas fa-info-circle text-green-500"></i>
+                    <span>Biz haqimizda</span>
+                </a>
+                <a href="#" class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-100" id="mobileContactLink">
+                    <i class="fas fa-phone text-purple-500"></i>
+                    <span>Aloqa</span>
+                </a>
+                <a href="#" class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-100" id="mobileHelpLink">
+                    <i class="fas fa-question-circle text-orange-500"></i>
+                    <span>Yordam</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content bg-white rounded-2xl shadow-2xl p-8 max-w-md w-full mx-4">
+            <div class="text-center mb-6">
+                <div class="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-sign-in-alt text-blue-600 text-2xl"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-gray-800">Tizimga Kirish</h3>
+                <p class="text-gray-600 mt-2">Telefon raqamingizni kiriting</p>
+            </div>
+            
+            <div id="loginStep1" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Telefon raqam</label>
+                    <input type="tel" id="loginPhone" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="+998 90 123 45 67">
+                </div>
+                
+                <button id="sendOtpBtn" class="w-full btn-primary text-white py-3 rounded-xl font-medium">
+                    <span id="sendOtpText">SMS kod yuborish</span>
+                    <div id="sendOtpLoader" class="loading-spinner mx-auto hidden"></div>
+                </button>
+            </div>
+            
+            <div id="loginStep2" class="hidden space-y-4">
+                <div class="text-center mb-4">
+                    <p class="text-gray-600">SMS kod yuborildi:</p>
+                    <p class="font-bold text-lg" id="sentPhoneNumber"></p>
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Tasdiqlash kodi</label>
+                    <input type="text" id="otpCode" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent text-center text-2xl font-bold" placeholder="1234" maxlength="4">
+                </div>
+                
+                <button id="verifyOtpBtn" class="w-full btn-primary text-white py-3 rounded-xl font-medium">
+                    Tasdiqlash
+                </button>
+                
+                <div class="text-center">
+                    <button id="resendOtpBtn" class="text-blue-600 hover:text-blue-700 text-sm disabled:opacity-50" disabled>
+                        Qayta yuborish (<span id="resendTimer">60</span>s)
+                    </button>
+                </div>
+            </div>
+            
+            <div class="text-center mt-6">
+                <button id="closeLoginModal" class="text-gray-500 hover:text-gray-700">Bekor qilish</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Signup Modal -->
+    <div id="signupModal" class="modal">
+        <div class="modal-content bg-white rounded-2xl shadow-2xl p-8 max-w-md w-full mx-4">
+            <div class="text-center mb-6">
+                <div class="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-user-plus text-green-600 text-2xl"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-gray-800">Ro'yxatdan O'tish</h3>
+                <p class="text-gray-600 mt-2">Yangi hisob yarating</p>
+            </div>
+            
+            <div class="space-y-4">
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Ism</label>
+                        <input type="text" id="signupFirstName" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Ismingiz">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Familiya</label>
+                        <input type="text" id="signupLastName" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Familiyangiz">
+                    </div>
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Telefon raqam</label>
+                    <input type="tel" id="signupPhone" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="+998 90 123 45 67">
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Email (ixtiyoriy)</label>
+                    <input type="email" id="signupEmail" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="email@example.com">
+                </div>
+                
+                <div class="flex items-center">
+                    <input type="checkbox" id="agreeTerms" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500">
+                    <label for="agreeTerms" class="ml-2 text-sm text-gray-700">
+                        <a href="#" class="text-blue-600 hover:text-blue-700">Foydalanish shartlari</a>ga roziman
+                    </label>
+                </div>
+                
+                <button id="createAccountBtn" class="w-full btn-primary text-white py-3 rounded-xl font-medium">
+                    Hisob yaratish
+                </button>
+            </div>
+            
+            <div class="text-center mt-6">
+                <p class="text-gray-600">Hisobingiz bormi? 
+                    <button id="switchToLogin" class="text-blue-600 hover:text-blue-700 font-medium">Kirish</button>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Charity Application Modal -->
+    <div id="charityApplicationModal" class="modal">
+        <div class="modal-content bg-white rounded-2xl shadow-2xl p-8 max-w-2xl w-full mx-4 max-h-[90vh] overflow-y-auto">
+            <div class="text-center mb-6">
+                <div class="bg-orange-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-file-alt text-orange-600 text-2xl"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-gray-800">Xayriya Uchun Ariza</h3>
+                <p class="text-gray-600 mt-2">Yordam olish uchun ariza yuboring</p>
+            </div>
+            
+            <form id="charityApplicationForm" class="space-y-6">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Ariza nomi *</label>
+                    <input type="text" id="applicationTitle" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Masalan: Onam uchun operatsiya" required>
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Kategoriya *</label>
+                    <select id="applicationCategory" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent" required>
+                        <option value="">Kategoriyani tanlang</option>
+                        <option value="health">Sog'liqni saqlash</option>
+                        <option value="education">Ta'lim</option>
+                        <option value="children">Bolalar</option>
+                        <option value="emergency">Favqulodda vaziyat</option>
+                        <option value="family">Oilaviy muammolar</option>
+                        <option value="disability">Nogironlik</option>
+                    </select>
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Kerakli miqdor (so'm) *</label>
+                    <input type="number" id="applicationAmount" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="5000000" min="10000" required>
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Batafsil tavsif *</label>
+                    <textarea id="applicationDescription" rows="5" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none" placeholder="Vaziyatingizni batafsil yozing..." required></textarea>
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Rasm yuklash *</label>
+                    <div id="imageUploadArea" class="file-upload-area">
+                        <div class="text-center">
+                            <i class="fas fa-cloud-upload-alt text-4xl text-gray-400 mb-4"></i>
+                            <p class="text-gray-600 mb-2">Rasmni bu yerga sudrab olib keling yoki</p>
+                            <button type="button" id="selectImageBtn" class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-all">
+                                Fayl tanlash
+                            </button>
+                            <input type="file" id="applicationImage" accept="image/*" class="hidden" required>
+                            <p class="text-sm text-gray-500 mt-2">JPG, PNG yoki GIF (maksimal 5MB)</p>
+                        </div>
+                    </div>
+                    <div id="uploadedImages" class="mt-4 space-y-2"></div>
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Telefon raqam *</label>
+                    <input type="tel" id="applicationPhone" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="+998 90 123 45 67" required>
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Email (ixtiyoriy)</label>
+                    <input type="email" id="applicationEmail" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="email@example.com">
+                </div>
+                
+                <div class="flex items-start space-x-3">
+                    <input type="checkbox" id="agreeApplicationTerms" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 mt-1" required>
+                    <label for="agreeApplicationTerms" class="text-sm text-gray-700">
+                        Men taqdim etgan ma'lumotlar to'g'ri ekanligini tasdiqlayaman va 
+                        <a href="#" class="text-blue-600 hover:text-blue-700">moderatsiya qoidalari</a>ga roziman
+                    </label>
+                </div>
+                
+                <div class="flex space-x-4">
+                    <button type="submit" id="submitApplicationBtn" class="flex-1 btn-primary text-white py-3 rounded-xl font-medium">
+                        <i class="fas fa-paper-plane mr-2"></i>Ariza yuborish
+                    </button>
+                    <button type="button" id="closeApplicationModal" class="px-6 py-3 border border-gray-300 rounded-xl text-gray-600 hover:bg-gray-50 transition-all">
+                        Bekor qilish
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Donation Modal -->
+    <div id="donationModal" class="modal">
+        <div class="modal-content bg-white rounded-2xl shadow-2xl p-8 max-w-md w-full mx-4">
+            <div class="text-center mb-6">
+                <div class="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-heart text-green-600 text-2xl"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-gray-800" id="donationCampaignTitle">Xayriya qilish</h3>
+                <p class="text-gray-600 mt-2">Yaxshilik qiling, dunyoni o'zgartiring</p>
+            </div>
+            
+            <div class="space-y-6">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-3">Xayriya miqdori</label>
+                    <div class="grid grid-cols-3 gap-3 mb-4">
+                        <button class="donation-amount bg-gray-100 hover:bg-gray-200 text-gray-800 py-3 rounded-lg font-medium transition-all" data-amount="50000">50,000</button>
+                        <button class="donation-amount bg-gray-100 hover:bg-gray-200 text-gray-800 py-3 rounded-lg font-medium transition-all" data-amount="100000">100,000</button>
+                        <button class="donation-amount bg-gray-100 hover:bg-gray-200 text-gray-800 py-3 rounded-lg font-medium transition-all" data-amount="250000">250,000</button>
+                        <button class="donation-amount bg-gray-100 hover:bg-gray-200 text-gray-800 py-3 rounded-lg font-medium transition-all" data-amount="500000">500,000</button>
+                        <button class="donation-amount bg-gray-100 hover:bg-gray-200 text-gray-800 py-3 rounded-lg font-medium transition-all" data-amount="1000000">1,000,000</button>
+                        <button class="donation-amount bg-gray-100 hover:bg-gray-200 text-gray-800 py-3 rounded-lg font-medium transition-all" data-amount="custom">Boshqa</button>
+                    </div>
+                    <input type="number" id="customDonationAmount" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Miqdorni kiriting" min="10000">
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-3">To'lov usuli</label>
+                    <div class="space-y-3">
+                        <div class="payment-method-card border border-gray-300 rounded-xl p-4 cursor-pointer hover:border-blue-500" data-method="card">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
+                                    <i class="fas fa-credit-card text-blue-600"></i>
+                                </div>
+                                <div>
+                                    <p class="font-medium text-gray-800">Bank kartasi</p>
+                                    <p class="text-sm text-gray-600">Visa, MasterCard, UzCard</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="payment-method-card border border-gray-300 rounded-xl p-4 cursor-pointer hover:border-blue-500" data-method="bank">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
+                                    <i class="fas fa-university text-green-600"></i>
+                                </div>
+                                <div>
+                                    <p class="font-medium text-gray-800">Bank o'tkazmasi</p>
+                                    <p class="text-sm text-gray-600">To'g'ridan-to'g'ri bank orqali</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="payment-method-card border border-gray-300 rounded-xl p-4 cursor-pointer hover:border-blue-500" data-method="payme">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center">
+                                    <i class="fas fa-mobile-alt text-purple-600"></i>
+                                </div>
+                                <div>
+                                    <p class="font-medium text-gray-800">Payme / Click</p>
+                                    <p class="text-sm text-gray-600">Mobil to'lov tizimlari</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="flex space-x-4">
+                    <button id="proceedDonationBtn" class="flex-1 btn-primary text-white py-3 rounded-xl font-medium">
+                        <i class="fas fa-heart mr-2"></i>Xayriya qilish
+                    </button>
+                    <button id="closeDonationModal" class="px-6 py-3 border border-gray-300 rounded-xl text-gray-600 hover:bg-gray-50 transition-all">
+                        Bekor qilish
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification -->
+    <div id="notification" class="notification bg-white rounded-xl shadow-2xl p-6 max-w-sm border-l-4">
+        <div class="flex items-start space-x-4">
+            <div id="notificationIcon" class="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0">
+                <i class="fas fa-check text-white"></i>
+            </div>
+            <div class="flex-1">
+                <p id="notificationTitle" class="font-bold text-gray-800 text-lg"></p>
+                <p id="notificationMessage" class="text-gray-600 mt-1"></p>
+            </div>
+            <button id="closeNotification" class="text-gray-400 hover:text-gray-600">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Main Content (Hidden when admin panel is active) -->
+    <div id="mainContent">
+        <!-- Hero Section -->
+        <section class="hero-bg text-white py-20 relative">
+            <div class="container mx-auto px-4 text-center relative z-10">
+                <h2 class="text-5xl md:text-6xl font-bold mb-6">Yaxshilik qiling,<br>Dunyoni o'zgartiring</h2>
+                <p class="text-xl md:text-2xl mb-8 opacity-90 max-w-3xl mx-auto">E-Ehson orqali minglab odamlarga yordam bering va jamiyatda ijobiy o'zgarishlar yarating</p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <button id="startDonatingBtn" class="bg-white text-purple-600 px-8 py-4 rounded-lg font-bold text-lg hover:bg-gray-100 transition-all transform hover:scale-105">
+                        <i class="fas fa-heart mr-2"></i>Xayriya qilishni boshlash
+                    </button>
+                    <button id="applyForCharityBtn" class="border-2 border-white text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-white hover:text-purple-600 transition-all">
+                        <i class="fas fa-file-alt mr-2"></i>Xayriya uchun ariza
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats Section -->
+        <section class="py-16 bg-white">
+            <div class="container mx-auto px-4">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                    <div class="text-center">
+                        <div class="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-bullhorn text-blue-600 text-2xl"></i>
+                        </div>
+                        <h3 class="text-3xl font-bold text-gray-800 stats-counter" id="totalCampaigns">0</h3>
+                        <p class="text-gray-600 mt-2">Faol Kampaniyalar</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-coins text-green-600 text-2xl"></i>
+                        </div>
+                        <h3 class="text-3xl font-bold text-gray-800 stats-counter" id="totalRaised">0</h3>
+                        <p class="text-gray-600 mt-2">Jami Yig'ilgan</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="bg-purple-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-users text-purple-600 text-2xl"></i>
+                        </div>
+                        <h3 class="text-3xl font-bold text-gray-800 stats-counter" id="totalDonors">0</h3>
+                        <p class="text-gray-600 mt-2">Xayriyachilar</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="bg-orange-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-hands-helping text-orange-600 text-2xl"></i>
+                        </div>
+                        <h3 class="text-3xl font-bold text-gray-800 stats-counter" id="totalHelped">0</h3>
+                        <p class="text-gray-600 mt-2">Yordam Olganlar</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Categories Section -->
+        <section class="py-16 bg-gray-50">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-12">
+                    <h2 class="text-4xl font-bold text-gray-800 mb-4">Xayriya Kategoriyalari</h2>
+                    <p class="text-xl text-gray-600">Turli sohalarda yordam bering</p>
+                </div>
+                
+                <div class="flex flex-wrap justify-center gap-4 mb-8">
+                    <button class="category-filter active px-6 py-3 rounded-full bg-white text-gray-700 font-medium shadow-md" data-category="all">
+                        Barchasi
+                    </button>
+                    <button class="category-filter px-6 py-3 rounded-full bg-white text-gray-700 font-medium shadow-md" data-category="health">
+                        Sog'liqni saqlash
+                    </button>
+                    <button class="category-filter px-6 py-3 rounded-full bg-white text-gray-700 font-medium shadow-md" data-category="education">
+                        Ta'lim
+                    </button>
+                    <button class="category-filter px-6 py-3 rounded-full bg-white text-gray-700 font-medium shadow-md" data-category="children">
+                        Bolalar
+                    </button>
+                    <button class="category-filter px-6 py-3 rounded-full bg-white text-gray-700 font-medium shadow-md" data-category="emergency">
+                        Favqulodda vaziyat
+                    </button>
+                    <button class="category-filter px-6 py-3 rounded-full bg-white text-gray-700 font-medium shadow-md" data-category="family">
+                        Oilaviy muammolar
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Campaigns Section -->
+        <section id="campaigns" class="py-16 bg-white">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-12">
+                    <h2 class="text-4xl font-bold text-gray-800 mb-4">Faol Kampaniyalar</h2>
+                    <p class="text-xl text-gray-600">Yordam kutayotgan odamlarga qo'l uzating</p>
+                </div>
+                
+                <div id="campaignsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Campaigns will be populated here -->
+                </div>
+                
+                <div class="text-center mt-12">
+                    <button id="loadMoreCampaigns" class="btn-primary text-white px-8 py-4 rounded-lg font-medium">
+                        Ko'proq ko'rish
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Success Stories Section -->
+        <section class="py-16 bg-gray-50">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-12">
+                    <h2 class="text-4xl font-bold text-gray-800 mb-4">Muvaffaqiyat Hikoyalari</h2>
+                    <p class="text-xl text-gray-600">Sizning yordamingiz bilan amalga oshgan hikoyalar</p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="success-story">
+                        <div class="mb-4">
+                            <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-heart text-green-600 text-2xl"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-800 mb-2">Anvar's Operatsiyasi</h3>
+                            <p class="text-gray-600">7 yoshli Anvarning yurak operatsiyasi uchun 50 million so'm yig'ildi va operatsiya muvaffaqiyatli o'tkazildi.</p>
+                        </div>
+                        <div class="flex items-center justify-between text-sm text-gray-500">
+                            <span>234 xayriyachi</span>
+                            <span>50,000,000 so'm</span>
+                        </div>
+                    </div>
+                    
+                    <div class="success-story">
+                        <div class="mb-4">
+                            <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-graduation-cap text-blue-600 text-2xl"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-800 mb-2">Maktab Qurilishi</h3>
+                            <p class="text-gray-600">Qashqadaryo viloyatida yangi maktab qurilishi uchun 200 million so'm yig'ildi va qurilish boshlandi.</p>
+                        </div>
+                        <div class="flex items-center justify-between text-sm text-gray-500">
+                            <span>567 xayriyachi</span>
+                            <span>200,000,000 so'm</span>
+                        </div>
+                    </div>
+                    
+                    <div class="success-story">
+                        <div class="mb-4">
+                            <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-home text-purple-600 text-2xl"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-800 mb-2">Oila Uchun Uy</h3>
+                            <p class="text-gray-600">5 bolali oila uchun yangi uy qurilishi uchun 80 million so'm yig'ildi va uy tayyorlandi.</p>
+                        </div>
+                        <div class="flex items-center justify-between text-sm text-gray-500">
+                            <span>189 xayriyachi</span>
+                            <span>80,000,000 so'm</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- How It Works Section -->
+        <section class="py-16 bg-white">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-12">
+                    <h2 class="text-4xl font-bold text-gray-800 mb-4">Qanday Ishlaydi?</h2>
+                    <p class="text-xl text-gray-600">Xayriya qilish juda oson</p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="text-center">
+                        <div class="bg-blue-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
+                            <span class="text-2xl font-bold text-blue-600">1</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-4">Kampaniya Tanlang</h3>
+                        <p class="text-gray-600">Yordam bermoqchi bo'lgan kampaniyani tanlang va batafsil ma'lumot bilan tanishing</p>
+                    </div>
+                    
+                    <div class="text-center">
+                        <div class="bg-green-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
+                            <span class="text-2xl font-bold text-green-600">2</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-4">Miqdor Belgilang</h3>
+                        <p class="text-gray-600">Xayriya qilmoqchi bo'lgan miqdorni kiriting va to'lov usulini tanlang</p>
+                    </div>
+                    
+                    <div class="text-center">
+                        <div class="bg-purple-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
+                            <span class="text-2xl font-bold text-purple-600">3</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-4">Yordam Bering</h3>
+                        <p class="text-gray-600">To'lovni amalga oshiring va birovning hayotini yaxshilashga hissa qo'shing</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="bg-gray-800 text-white py-12">
+            <div class="container mx-auto px-4">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                    <div>
+                        <div class="flex items-center space-x-3 mb-6">
+                            <div class="bg-blue-600 p-2 rounded-lg">
+                                <i class="fas fa-heart text-xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold">E-Ehson</h3>
+                                <p class="text-sm opacity-75">Xayriya Platformasi</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-300 mb-4">Yaxshilik qiling, dunyoni o'zgartiring. Har bir xayriya birovning hayotini yaxshilaydi.</p>
+                        <div class="flex space-x-4">
+                            <a href="https://instagram.com/jasurbek.official.uz" target="_blank" rel="noopener noreferrer" class="social-link bg-pink-600 p-2 rounded-lg hover:bg-pink-700">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="https://www.facebook.com/share/16cBwAiXi2/" target="_blank" rel="noopener noreferrer" class="social-link bg-blue-600 p-2 rounded-lg hover:bg-blue-700">
+                                <i class="fab fa-facebook"></i>
+                            </a>
+                            <a href="https://t.me/vscoderr" target="_blank" rel="noopener noreferrer" class="social-link bg-blue-500 p-2 rounded-lg hover:bg-blue-600">
+                                <i class="fab fa-telegram"></i>
+                            </a>
+                            <a href="https://www.youtube.com/@Jasurbek_Jolanboyev" target="_blank" rel="noopener noreferrer" class="social-link bg-red-600 p-2 rounded-lg hover:bg-red-700">
+                                <i class="fab fa-youtube"></i>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h4 class="text-lg font-bold mb-4">Tezkor Havolalar</h4>
+                        <ul class="space-y-2">
+                            <li><a href="#campaigns" class="text-gray-300 hover:text-white transition-colors">Kampaniyalar</a></li>
+                            <li><a href="#" id="footerAboutLink" class="text-gray-300 hover:text-white transition-colors">Biz haqimizda</a></li>
+                            <li><a href="#" id="footerContactLink" class="text-gray-300 hover:text-white transition-colors">Aloqa</a></li>
+                            <li><a href="#" id="footerHelpLink" class="text-gray-300 hover:text-white transition-colors">Yordam</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h4 class="text-lg font-bold mb-4">Xizmatlar</h4>
+                        <ul class="space-y-2">
+                            <li><a href="#" class="text-gray-300 hover:text-white transition-colors">Xayriya qilish</a></li>
+                            <li><a href="#" class="text-gray-300 hover:text-white transition-colors">Kampaniya yaratish</a></li>
+                            <li><a href="#" class="text-gray-300 hover:text-white transition-colors">Yordam olish</a></li>
+                            <li><a href="#" class="text-gray-300 hover:text-white transition-colors">Hisobot</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h4 class="text-lg font-bold mb-4">Bog'lanish</h4>
+                        <ul class="space-y-2">
+                            <li class="flex items-center space-x-2">
+                                <i class="fas fa-phone text-blue-400"></i>
+                                <a href="tel:+998958883851" class="text-gray-300 hover:text-white transition-colors">+998 95 888 38 51</a>
+                            </li>
+                            <li class="flex items-center space-x-2">
+                                <i class="fas fa-envelope text-green-400"></i>
+                                <a href="mailto:ehsonapp@gmail.com" class="text-gray-300 hover:text-white transition-colors">ehsonapp@gmail.com</a>
+                            </li>
+                            <li class="flex items-center space-x-2">
+                                <i class="fas fa-map-marker-alt text-red-400"></i>
+                                <span class="text-gray-300">Toshkent, O'zbekiston</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="border-t border-gray-700 mt-8 pt-8 text-center">
+                    <p class="text-gray-400">&copy; 2024 E-Ehson. Barcha huquqlar himoyalangan.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Global variables
+        let currentUser = null;
+        let campaigns = [];
+        let users = [];
+        let applications = [];
+        let payments = [];
+        let userCards = [];
+        let donationHistory = [];
+        let currentLanguage = 'uz';
+        let isAdminMode = false;
+        let selectedDonationAmount = 0;
+        let selectedPaymentMethod = '';
+        let currentDonationCampaign = null;
+
+        // Sample data
+        const sampleCampaigns = [
+            {
+                id: 1,
+                title: "7 yoshli Anvar uchun yurak operatsiyasi",
+                description: "Anvar tug'ma yurak kasalligi bilan og'riydi va operatsiya qilish zarur. Oilasi moliyaviy qiyinchilikda.",
+                category: "health",
+                targetAmount: 50000000,
+                raisedAmount: 35000000,
+                donorsCount: 234,
+                daysLeft: 15,
+                image: "https://via.placeholder.com/400x250/3b82f6/ffffff?text=Yurak+Operatsiyasi",
+                status: "active",
+                createdAt: new Date('2024-01-15'),
+                organizer: "Anvar oilasi"
+            },
+            {
+                id: 2,
+                title: "Qashqadaryo viloyatida maktab qurilishi",
+                description: "200 nafar bolaga ta'lim berish uchun yangi maktab qurilishi kerak. Hozirgi maktab juda eski.",
+                category: "education",
+                targetAmount: 200000000,
+                raisedAmount: 120000000,
+                donorsCount: 567,
+                daysLeft: 45,
+                image: "https://via.placeholder.com/400x250/10b981/ffffff?text=Maktab+Qurilishi",
+                status: "active",
+                createdAt: new Date('2024-01-10'),
+                organizer: "Qashqadaryo ta'lim boshqarmasi"
+            },
+            {
+                id: 3,
+                title: "5 bolali oila uchun uy qurilishi",
+                description: "Katta oila ijaraga pul topa olmaydi va o'z uyiga muhtoj. Bolalar sog'lom muhitda o'sishi kerak.",
+                category: "family",
+                targetAmount: 80000000,
+                raisedAmount: 45000000,
+                donorsCount: 189,
+                daysLeft: 30,
+                image: "https://via.placeholder.com/400x250/8b5cf6/ffffff?text=Oila+Uchun+Uy",
+                status: "active",
+                createdAt: new Date('2024-01-20'),
+                organizer: "Mahalla fuqarolar yig'ini"
+            },
+            {
+                id: 4,
+                title: "Nogironligi bor bolalar uchun reabilitatsiya markazi",
+                description: "Maxsus ehtiyojli bolalar uchun zamonaviy reabilitatsiya markazi ochish kerak.",
+                category: "disability",
+                targetAmount: 150000000,
+                raisedAmount: 75000000,
+                donorsCount: 345,
+                daysLeft: 60,
+                image: "https://via.placeholder.com/400x250/f59e0b/ffffff?text=Reabilitatsiya+Markazi",
+                status: "active",
+                createdAt: new Date('2024-01-05'),
+                organizer: "Nogironlar jamiyati"
+            },
+            {
+                id: 5,
+                title: "Yetim bolalar uchun ovqat ta'minoti",
+                description: "Bolalar uyidagi 50 nafar yetim bolaga bir yillik ovqat ta'minoti kerak.",
+                category: "children",
+                targetAmount: 30000000,
+                raisedAmount: 18000000,
+                donorsCount: 156,
+                daysLeft: 20,
+                image: "https://via.placeholder.com/400x250/ef4444/ffffff?text=Yetim+Bolalar",
+                status: "active",
+                createdAt: new Date('2024-01-25'),
+                organizer: "Bolalar uyi"
+            },
+            {
+                id: 6,
+                title: "Suv toshqini zararini bartaraf etish",
+                description: "Toshqin natijasida zarar ko'rgan oilalarga yordam kerak. 20 ta uy vayron bo'lgan.",
+                category: "emergency",
+                targetAmount: 100000000,
+                raisedAmount: 60000000,
+                donorsCount: 278,
+                daysLeft: 10,
+                image: "https://via.placeholder.com/400x250/06b6d4/ffffff?text=Toshqin+Zararini+Bartaraf+Etish",
+                status: "active",
+                createdAt: new Date('2024-02-01'),
+                organizer: "Favqulodda vaziyatlar vazirligi"
+            }
+        ];
+
+        const sampleUsers = [
+            {
+                id: 1,
+                firstName: "Jasurbek",
+                lastName: "Jo'lanboyev",
+                phone: "+998958883851",
+                email: "jasurbek@example.com",
+                registeredAt: new Date('2024-01-01'),
+                status: "active",
+                isAdmin: true
+            },
+            {
+                id: 2,
+                firstName: "Aziza",
+                lastName: "Karimova",
+                phone: "+998901234567",
+                email: "aziza@example.com",
+                registeredAt: new Date('2024-01-15'),
+                status: "active",
+                isAdmin: false
+            },
+            {
+                id: 3,
+                firstName: "Bobur",
+                lastName: "Toshmatov",
+                phone: "+998907654321",
+                email: "bobur@example.com",
+                registeredAt: new Date('2024-01-20'),
+                status: "active",
+                isAdmin: false
+            }
+        ];
+
+        const sampleApplications = [
+            {
+                id: 1,
+                title: "Onaning operatsiyasi uchun yordam",
+                category: "health",
+                amount: 25000000,
+                applicantName: "Dilshod Rahimov",
+                applicantPhone: "+998901111111",
+                description: "Onamning jiddiy operatsiyasi kerak, moliyaviy imkoniyat yo'q",
+                status: "pending",
+                submittedAt: new Date('2024-02-05')
+            },
+            {
+                id: 2,
+                title: "Maktab ta'miri uchun yordam",
+                category: "education",
+                amount: 15000000,
+                applicantName: "Maktab direktori",
+                applicantPhone: "+998902222222",
+                description: "Maktab binosi jiddiy ta'mirga muhtoj",
+                status: "approved",
+                submittedAt: new Date('2024-02-01')
+            }
+        ];
+
+        const samplePayments = [
+            {
+                id: 1,
+                campaignId: 1,
+                campaignTitle: "7 yoshli Anvar uchun yurak operatsiyasi",
+                donorName: "Aziza Karimova",
+                amount: 500000,
+                paymentMethod: "card",
+                status: "completed",
+                paidAt: new Date('2024-02-10')
+            },
+            {
+                id: 2,
+                campaignId: 2,
+                campaignTitle: "Qashqadaryo viloyatida maktab qurilishi",
+                donorName: "Bobur Toshmatov",
+                amount: 1000000,
+                paymentMethod: "bank",
+                status: "completed",
+                paidAt: new Date('2024-02-09')
+            }
+        ];
+
+        // Data persistence functions
+        function saveToLocalStorage() {
+            try {
+                localStorage.setItem('ehson_campaigns', JSON.stringify(campaigns));
+                localStorage.setItem('ehson_users', JSON.stringify(users));
+                localStorage.setItem('ehson_applications', JSON.stringify(applications));
+                localStorage.setItem('ehson_payments', JSON.stringify(payments));
+                localStorage.setItem('ehson_currentUser', JSON.stringify(currentUser));
+            } catch (error) {
+                console.error('Error saving to localStorage:', error);
+            }
+        }
+
+        function loadFromLocalStorage() {
+            try {
+                const savedCampaigns = localStorage.getItem('ehson_campaigns');
+                const savedUsers = localStorage.getItem('ehson_users');
+                const savedApplications = localStorage.getItem('ehson_applications');
+                const savedPayments = localStorage.getItem('ehson_payments');
+                const savedCurrentUser = localStorage.getItem('ehson_currentUser');
+
+                if (savedCampaigns) {
+                    campaigns = JSON.parse(savedCampaigns).map(c => ({
+                        ...c,
+                        createdAt: new Date(c.createdAt)
+                    }));
+                } else {
+                    campaigns = [...sampleCampaigns];
+                }
+
+                if (savedUsers) {
+                    users = JSON.parse(savedUsers).map(u => ({
+                        ...u,
+                        registeredAt: new Date(u.registeredAt)
+                    }));
+                } else {
+                    users = [...sampleUsers];
+                }
+
+                if (savedApplications) {
+                    applications = JSON.parse(savedApplications).map(a => ({
+                        ...a,
+                        submittedAt: new Date(a.submittedAt)
+                    }));
+                } else {
+                    applications = [...sampleApplications];
+                }
+
+                if (savedPayments) {
+                    payments = JSON.parse(savedPayments).map(p => ({
+                        ...p,
+                        paidAt: new Date(p.paidAt)
+                    }));
+                } else {
+                    payments = [...samplePayments];
+                }
+
+                if (savedCurrentUser) {
+                    currentUser = JSON.parse(savedCurrentUser);
+                    if (currentUser && currentUser.registeredAt) {
+                        currentUser.registeredAt = new Date(currentUser.registeredAt);
+                    }
+                }
+            } catch (error) {
+                console.error('Error loading from localStorage:', error);
+                // Initialize with sample data if loading fails
+                campaigns = [...sampleCampaigns];
+                users = [...sampleUsers];
+                applications = [...sampleApplications];
+                payments = [...samplePayments];
+            }
+        }
+
+        // Initialize data
+        loadFromLocalStorage();
+
+        // DOM Elements
+        const elements = {
+            // Modals
+            loginModal: document.getElementById('loginModal'),
+            signupModal: document.getElementById('signupModal'),
+            
+            // Navigation
+            guestMenu: document.getElementById('guestMenu'),
+            userMenu: document.getElementById('userMenu'),
+            profileDropdown: document.getElementById('profileDropdown'),
+            dropdownMenu: document.getElementById('dropdownMenu'),
+            
+            // Admin
+            adminSidebar: document.getElementById('adminSidebar'),
+            adminContent: document.getElementById('adminContent'),
+            adminOverlay: document.getElementById('adminOverlay'),
+            mainContent: document.getElementById('mainContent'),
+            
+            // Buttons
+            loginBtn: document.getElementById('loginBtn'),
+            signupBtn: document.getElementById('signupBtn'),
+            sendOtpBtn: document.getElementById('sendOtpBtn'),
+            verifyOtpBtn: document.getElementById('verifyOtpBtn'),
+            createAccountBtn: document.getElementById('createAccountBtn'),
+            
+            // Forms
+            loginPhone: document.getElementById('loginPhone'),
+            otpCode: document.getElementById('otpCode'),
+            signupFirstName: document.getElementById('signupFirstName'),
+            signupLastName: document.getElementById('signupLastName'),
+            signupPhone: document.getElementById('signupPhone'),
+            signupEmail: document.getElementById('signupEmail'),
+            
+            // Content
+            campaignsGrid: document.getElementById('campaignsGrid'),
+            totalCampaigns: document.getElementById('totalCampaigns'),
+            totalRaised: document.getElementById('totalRaised'),
+            totalDonors: document.getElementById('totalDonors'),
+            totalHelped: document.getElementById('totalHelped'),
+            
+            // Search
+            searchInput: document.getElementById('searchInput'),
+            searchResults: document.getElementById('searchResults'),
+            mobileSearchInput: document.getElementById('mobileSearchInput'),
+            mobileSearchResults: document.getElementById('mobileSearchResults'),
+            
+            // Mobile menu
+            menuBtn: document.getElementById('menuBtn'),
+            mobileMenu: document.getElementById('mobileMenu'),
+            closeMobileMenu: document.getElementById('closeMobileMenu'),
+            
+            // Language
+            languageBtn: document.getElementById('languageBtn'),
+            languageDropdown: document.getElementById('languageDropdown'),
+            
+            // Notification
+            notification: document.getElementById('notification'),
+            notificationIcon: document.getElementById('notificationIcon'),
+            notificationTitle: document.getElementById('notificationTitle'),
+            notificationMessage: document.getElementById('notificationMessage'),
+            closeNotification: document.getElementById('closeNotification')
+        };
+
+        // Utility Functions
+        function formatNumber(num) {
+            return new Intl.NumberFormat('uz-UZ').format(num);
+        }
+
+        function formatCurrency(amount) {
+            return formatNumber(amount) + ' so\'m';
+        }
+
+        function showNotification(title, message, type = 'success') {
+            const iconClasses = {
+                success: 'fas fa-check bg-green-500',
+                error: 'fas fa-times bg-red-500',
+                info: 'fas fa-info bg-blue-500',
+                warning: 'fas fa-exclamation bg-yellow-500'
+            };
+
+            const borderColors = {
+                success: 'border-green-500',
+                error: 'border-red-500',
+                info: 'border-blue-500',
+                warning: 'border-yellow-500'
+            };
+
+            elements.notificationIcon.className = `w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 ${iconClasses[type]}`;
+            elements.notificationTitle.textContent = title;
+            elements.notificationMessage.textContent = message;
+            elements.notification.className = `notification bg-white rounded-xl shadow-2xl p-6 max-w-sm border-l-4 ${borderColors[type]} show`;
+
+            setTimeout(() => {
+                elements.notification.classList.remove('show');
+            }, 5000);
+        }
+
+        function showModal(modal) {
+            modal.classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function hideModal(modal) {
+            modal.classList.remove('show');
+            document.body.style.overflow = '';
+        }
+
+        function hideAllModals() {
+            document.querySelectorAll('.modal').forEach(modal => {
+                hideModal(modal);
+            });
+        }
+
+        // Authentication Functions
+        function login(phone, otp) {
+            // Simulate OTP verification
+            if (otp === '1234') {
+                const user = users.find(u => u.phone === phone) || {
+                    id: Date.now(),
+                    firstName: 'Test',
+                    lastName: 'Foydalanuvchi',
+                    phone: phone,
+                    email: '',
+                    registeredAt: new Date(),
+                    status: 'active',
+                    isAdmin: phone === '+998958883851'
+                };
+
+                if (!users.find(u => u.phone === phone)) {
+                    users.push(user);
+                }
+
+                currentUser = user;
+                updateUserInterface();
+                hideAllModals();
+                showNotification('Muvaffaqiyat!', 'Tizimga muvaffaqiyatli kirdingiz');
+                return true;
+            }
+            return false;
+        }
+
+        function logout() {
+            currentUser = null;
+            isAdminMode = false;
+            updateUserInterface();
+            saveToLocalStorage();
+            showNotification('Chiqish', 'Tizimdan muvaffaqiyatli chiqdingiz', 'info');
+        }
+
+        // Charity Application Functions
+        function submitCharityApplication(applicationData) {
+            const newApplication = {
+                id: applications.length + 1,
+                title: applicationData.title,
+                category: applicationData.category,
+                amount: parseInt(applicationData.amount),
+                description: applicationData.description,
+                applicantName: `${currentUser.firstName} ${currentUser.lastName}`,
+                applicantPhone: applicationData.phone,
+                applicantEmail: applicationData.email,
+                applicantId: currentUser.id,
+                image: applicationData.image,
+                status: 'pending',
+                submittedAt: new Date(),
+                moderatorComment: null,
+                processedAt: null
+            };
+
+            applications.push(newApplication);
+            saveToLocalStorage();
+
+            // Notify user
+            showNotification('Ariza yuborildi!', 'Arizangiz moderatsiyaga yuborildi. Natija haqida xabar beramiz.', 'success');
+
+            // Simulate SMS notification
+            setTimeout(() => {
+                showNotification('SMS xabarnoma', `Hurmatli ${currentUser.firstName}, arizangiz qabul qilindi. ID: #${newApplication.id}`, 'info');
+            }, 2000);
+
+            return newApplication;
+        }
+
+        function processApplication(applicationId, action, comment = '') {
+            const application = applications.find(a => a.id === applicationId);
+            if (!application) return false;
+
+            application.status = action; // 'approved' or 'rejected'
+            application.moderatorComment = comment;
+            application.processedAt = new Date();
+
+            if (action === 'approved') {
+                // Create campaign from approved application
+                const newCampaign = {
+                    id: campaigns.length + 1,
+                    title: application.title,
+                    description: application.description,
+                    category: application.category,
+                    targetAmount: application.amount,
+                    raisedAmount: 0,
+                    donorsCount: 0,
+                    daysLeft: 30,
+                    image: application.image || `https://via.placeholder.com/400x250/3b82f6/ffffff?text=${encodeURIComponent(application.title)}`,
+                    status: 'active',
+                    createdAt: new Date(),
+                    organizer: application.applicantName,
+                    organizerId: application.applicantId
+                };
+                
+                campaigns.push(newCampaign);
+                renderCampaigns();
+                updateStats();
+            }
+
+            saveToLocalStorage();
+
+            // Notify applicant
+            const applicant = users.find(u => u.id === application.applicantId);
+            if (applicant) {
+                const statusText = action === 'approved' ? 'tasdiqlandi' : 'rad etildi';
+                const message = `Arizangiz ${statusText}. ${comment ? 'Izoh: ' + comment : ''}`;
+                
+                // Simulate SMS and web notification
+                setTimeout(() => {
+                    if (currentUser && currentUser.id === applicant.id) {
+                        showNotification(
+                            `Ariza ${statusText}`, 
+                            message, 
+                            action === 'approved' ? 'success' : 'warning'
+                        );
+                    }
+                }, 1000);
+            }
+
+            return true;
+        }
+
+        // Donation Functions
+        function openDonationModal(campaignId) {
+            const campaign = campaigns.find(c => c.id === campaignId);
+            if (!campaign) return;
+
+            currentDonationCampaign = campaign;
+            document.getElementById('donationCampaignTitle').textContent = campaign.title;
+            showModal(document.getElementById('donationModal'));
+        }
+
+        function processDonation(amount, paymentMethod) {
+            if (!currentUser) {
+                showNotification('Xatolik', 'Xayriya qilish uchun tizimga kiring', 'error');
+                return false;
+            }
+
+            if (!currentDonationCampaign || !amount || !paymentMethod) {
+                showNotification('Xatolik', 'Barcha maydonlarni to\'ldiring', 'error');
+                return false;
+            }
+
+            // Create payment record
+            const newPayment = {
+                id: payments.length + 1,
+                campaignId: currentDonationCampaign.id,
+                campaignTitle: currentDonationCampaign.title,
+                donorName: `${currentUser.firstName} ${currentUser.lastName}`,
+                donorId: currentUser.id,
+                amount: amount,
+                paymentMethod: paymentMethod,
+                status: 'completed',
+                paidAt: new Date()
+            };
+
+            payments.push(newPayment);
+
+            // Update campaign
+            currentDonationCampaign.raisedAmount += amount;
+            currentDonationCampaign.donorsCount += 1;
+
+            saveToLocalStorage();
+            renderCampaigns();
+            updateStats();
+            hideAllModals();
+
+            showNotification('Rahmat!', `${formatCurrency(amount)} xayriya muvaffaqiyatli amalga oshirildi`, 'success');
+
+            // Reset donation state
+            selectedDonationAmount = 0;
+            selectedPaymentMethod = '';
+            currentDonationCampaign = null;
+
+            return true;
+        }
+
+        function updateUserInterface() {
+            if (currentUser) {
+                elements.guestMenu.classList.add('hidden');
+                elements.userMenu.classList.remove('hidden');
+                document.getElementById('userName').textContent = currentUser.firstName;
+                document.getElementById('userNameFull').textContent = `${currentUser.firstName} ${currentUser.lastName}`;
+                document.getElementById('userPhone').textContent = currentUser.phone;
+
+                // Show admin panel link for admin users
+                const adminPanelLink = document.getElementById('adminPanelLink');
+                if (currentUser.isAdmin) {
+                    adminPanelLink.classList.remove('hidden');
+                } else {
+                    adminPanelLink.classList.add('hidden');
+                }
+            } else {
+                elements.guestMenu.classList.remove('hidden');
+                elements.userMenu.classList.add('hidden');
+            }
+
+            // Update admin mode
+            if (isAdminMode) {
+                elements.mainContent.classList.add('hidden');
+                elements.adminContent.classList.remove('hidden');
+                elements.adminSidebar.classList.add('show');
+                elements.adminOverlay.classList.add('show');
+                elements.adminContent.classList.add('shifted');
+            } else {
+                elements.mainContent.classList.remove('hidden');
+                elements.adminContent.classList.add('hidden');
+                elements.adminSidebar.classList.remove('show');
+                elements.adminOverlay.classList.remove('show');
+                elements.adminContent.classList.remove('shifted');
+            }
+        }
+
+        // Campaign Functions
+        function renderCampaigns(campaignsToRender = campaigns) {
+            const grid = elements.campaignsGrid;
+            grid.innerHTML = '';
+
+            campaignsToRender.forEach(campaign => {
+                const progressPercentage = Math.min((campaign.raisedAmount / campaign.targetAmount) * 100, 100);
+                
+                const campaignCard = document.createElement('div');
+                campaignCard.className = 'campaign-card bg-white rounded-2xl shadow-lg overflow-hidden';
+                campaignCard.innerHTML = `
+                    <div class="relative">
+                        <img src="${campaign.image}" alt="${campaign.title}" class="w-full h-48 object-cover">
+                        <div class="absolute top-4 left-4">
+                            <span class="bg-white bg-opacity-90 text-gray-800 px-3 py-1 rounded-full text-sm font-medium">
+                                ${getCategoryName(campaign.category)}
+                            </span>
+                        </div>
+                        <div class="absolute top-4 right-4">
+                            <span class="bg-red-500 text-white px-3 py-1 rounded-full text-sm font-medium">
+                                ${campaign.daysLeft} kun qoldi
+                            </span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-3 line-clamp-2">${campaign.title}</h3>
+                        <p class="text-gray-600 mb-4 line-clamp-3">${campaign.description}</p>
+                        
+                        <div class="mb-4">
+                            <div class="flex justify-between text-sm text-gray-600 mb-2">
+                                <span>Yig'ilgan: ${formatCurrency(campaign.raisedAmount)}</span>
+                                <span>${progressPercentage.toFixed(1)}%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-3">
+                                <div class="progress-bar h-3 rounded-full" style="width: ${progressPercentage}%"></div>
+                            </div>
+                            <div class="flex justify-between text-sm text-gray-500 mt-2">
+                                <span>Maqsad: ${formatCurrency(campaign.targetAmount)}</span>
+                                <span>${campaign.donorsCount} xayriyachi</span>
+                            </div>
+                        </div>
+                        
+                        <div class="flex space-x-3">
+                            <button class="flex-1 btn-primary text-white py-3 rounded-xl font-medium" onclick="openDonationModal(${campaign.id})">
+                                <i class="fas fa-heart mr-2"></i>Yordam berish
+                            </button>
+                            <button class="px-4 py-3 border border-gray-300 rounded-xl text-gray-600 hover:bg-gray-50 transition-all" onclick="viewCampaignDetails(${campaign.id})">
+                                <i class="fas fa-info-circle"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(campaignCard);
+            });
+        }
+
+        function getCategoryName(category) {
+            const categories = {
+                health: 'Sog\'liqni saqlash',
+                education: 'Ta\'lim',
+                children: 'Bolalar',
+                emergency: 'Favqulodda vaziyat',
+                family: 'Oilaviy muammolar',
+                disability: 'Nogironlik'
+            };
+            return categories[category] || category;
+        }
+
+        function filterCampaigns(category) {
+            const filtered = category === 'all' ? campaigns : campaigns.filter(c => c.category === category);
+            renderCampaigns(filtered);
+        }
+
+        function searchCampaigns(query) {
+            if (!query.trim()) return [];
+            
+            return campaigns.filter(campaign => 
+                campaign.title.toLowerCase().includes(query.toLowerCase()) ||
+                campaign.description.toLowerCase().includes(query.toLowerCase()) ||
+                getCategoryName(campaign.category).toLowerCase().includes(query.toLowerCase())
+            );
+        }
+
+        function updateStats() {
+            const totalRaised = campaigns.reduce((sum, c) => sum + c.raisedAmount, 0);
+            const totalDonors = campaigns.reduce((sum, c) => sum + c.donorsCount, 0);
+            const totalHelped = campaigns.filter(c => c.raisedAmount >= c.targetAmount).length;
+
+            // Animate counters
+            animateCounter(elements.totalCampaigns, campaigns.length);
+            animateCounter(elements.totalRaised, totalRaised, true);
+            animateCounter(elements.totalDonors, totalDonors);
+            animateCounter(elements.totalHelped, totalHelped);
+        }
+
+        function animateCounter(element, target, isCurrency = false) {
+            const start = 0;
+            const duration = 2000;
+            const startTime = performance.now();
+
+            function update(currentTime) {
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                const current = Math.floor(start + (target - start) * progress);
+                
+                if (isCurrency) {
+                    element.textContent = formatCurrency(current);
+                } else {
+                    element.textContent = formatNumber(current);
+                }
+
+                if (progress < 1) {
+                    requestAnimationFrame(update);
+                }
+            }
+
+            requestAnimationFrame(update);
+        }
+
+        // Admin Functions
+        function toggleAdminPanel() {
+            if (!currentUser || !currentUser.isAdmin) {
+                showNotification('Xatolik', 'Admin paneliga kirish uchun ruxsat yo\'q', 'error');
+                return;
+            }
+
+            isAdminMode = !isAdminMode;
+            updateUserInterface();
+            
+            if (isAdminMode) {
+                loadAdminData();
+                showNotification('Admin Panel', 'Admin paneliga xush kelibsiz', 'info');
+            }
+        }
+
+        function loadAdminData() {
+            // Update admin stats
+            document.getElementById('adminTotalCampaigns').textContent = campaigns.length;
+            document.getElementById('adminTotalRaised').textContent = formatCurrency(campaigns.reduce((sum, c) => sum + c.raisedAmount, 0));
+            document.getElementById('adminTotalUsers').textContent = users.length;
+            document.getElementById('adminPendingApplications').textContent = applications.filter(a => a.status === 'pending').length;
+
+            // Load admin tables
+            loadAdminCampaigns();
+            loadAdminUsers();
+            loadAdminApplications();
+            loadAdminPayments();
+            loadRecentData();
+        }
+
+        function loadAdminCampaigns() {
+            const tbody = document.getElementById('campaignsTableBody');
+            tbody.innerHTML = '';
+
+            campaigns.forEach(campaign => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td class="font-mono text-sm">#${campaign.id}</td>
+                    <td class="font-medium">${campaign.title}</td>
+                    <td>${getCategoryName(campaign.category)}</td>
+                    <td>${formatCurrency(campaign.targetAmount)}</td>
+                    <td>${formatCurrency(campaign.raisedAmount)}</td>
+                    <td><span class="status-badge status-${campaign.status}">${campaign.status}</span></td>
+                    <td>
+                        <div class="flex space-x-2">
+                            <button class="text-blue-600 hover:text-blue-800" onclick="editCampaign(${campaign.id})">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="text-red-600 hover:text-red-800" onclick="deleteCampaign(${campaign.id})">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+
+        function loadAdminUsers() {
+            const tbody = document.getElementById('usersTableBody');
+            tbody.innerHTML = '';
+
+            users.forEach(user => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td class="font-mono text-sm">#${user.id}</td>
+                    <td class="font-medium">${user.firstName} ${user.lastName}</td>
+                    <td>${user.phone}</td>
+                    <td>${user.email || '-'}</td>
+                    <td>${user.registeredAt.toLocaleDateString('uz-UZ')}</td>
+                    <td><span class="status-badge status-${user.status}">${user.status}</span></td>
+                    <td>
+                        <div class="flex space-x-2">
+                            <button class="text-blue-600 hover:text-blue-800" onclick="viewUser(${user.id})">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                            <button class="text-red-600 hover:text-red-800" onclick="blockUser(${user.id})">
+                                <i class="fas fa-ban"></i>
+                            </button>
+                        </div>
+                    </td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+
+        function loadAdminApplications() {
+            const tbody = document.getElementById('applicationsTableBody');
+            tbody.innerHTML = '';
+
+            applications.forEach(app => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td class="font-mono text-sm">#${app.id}</td>
+                    <td class="font-medium">${app.title}</td>
+                    <td>${getCategoryName(app.category)}</td>
+                    <td>${formatCurrency(app.amount)}</td>
+                    <td>${app.applicantName}</td>
+                    <td>${app.submittedAt.toLocaleDateString('uz-UZ')}</td>
+                    <td><span class="status-badge status-${app.status}">${app.status}</span></td>
+                    <td>
+                        <div class="flex space-x-2">
+                            ${app.status === 'pending' ? `
+                                <button class="text-green-600 hover:text-green-800" onclick="approveApplication(${app.id})">
+                                    <i class="fas fa-check"></i>
+                                </button>
+                                <button class="text-red-600 hover:text-red-800" onclick="rejectApplication(${app.id})">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            ` : ''}
+                            <button class="text-blue-600 hover:text-blue-800" onclick="viewApplication(${app.id})">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                    </td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+
+        function loadAdminPayments() {
+            const tbody = document.getElementById('paymentsTableBody');
+            tbody.innerHTML = '';
+
+            payments.forEach(payment => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td class="font-mono text-sm">#${payment.id}</td>
+                    <td class="font-medium">${payment.campaignTitle}</td>
+                    <td>${payment.donorName}</td>
+                    <td>${formatCurrency(payment.amount)}</td>
+                    <td class="capitalize">${payment.paymentMethod}</td>
+                    <td>${payment.paidAt.toLocaleDateString('uz-UZ')}</td>
+                    <td><span class="status-badge status-${payment.status === 'completed' ? 'active' : payment.status}">${payment.status}</span></td>
+                    <td>
+                        <button class="text-blue-600 hover:text-blue-800" onclick="viewPayment(${payment.id})">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+
+        function loadRecentData() {
+            // Recent campaigns
+            const recentCampaigns = campaigns.slice(-5).reverse();
+            const recentCampaignsContainer = document.getElementById('recentCampaigns');
+            recentCampaignsContainer.innerHTML = '';
+
+            recentCampaigns.forEach(campaign => {
+                const item = document.createElement('div');
+                item.className = 'flex items-center justify-between p-3 bg-gray-50 rounded-lg';
+                item.innerHTML = `
+                    <div>
+                        <p class="font-medium text-gray-800">${campaign.title}</p>
+                        <p class="text-sm text-gray-600">${formatCurrency(campaign.raisedAmount)} / ${formatCurrency(campaign.targetAmount)}</p>
+                    </div>
+                    <span class="status-badge status-${campaign.status}">${campaign.status}</span>
+                `;
+                recentCampaignsContainer.appendChild(item);
+            });
+
+            // Recent payments
+            const recentPayments = payments.slice(-5).reverse();
+            const recentPaymentsContainer = document.getElementById('recentPayments');
+            recentPaymentsContainer.innerHTML = '';
+
+            recentPayments.forEach(payment => {
+                const item = document.createElement('div');
+                item.className = 'flex items-center justify-between p-3 bg-gray-50 rounded-lg';
+                item.innerHTML = `
+                    <div>
+                        <p class="font-medium text-gray-800">${payment.donorName}</p>
+                        <p class="text-sm text-gray-600">${formatCurrency(payment.amount)}</p>
+                    </div>
+                    <span class="text-sm text-gray-500">${payment.paidAt.toLocaleDateString('uz-UZ')}</span>
+                `;
+                recentPaymentsContainer.appendChild(item);
+            });
+        }
+
+        function showAdminSection(sectionName) {
+            // Hide all admin sections
+            document.querySelectorAll('.admin-section').forEach(section => {
+                section.classList.add('hidden');
+            });
+
+            // Show selected section
+            document.getElementById(`admin${sectionName.charAt(0).toUpperCase() + sectionName.slice(1)}`).classList.remove('hidden');
+
+            // Update navigation
+            document.querySelectorAll('.admin-nav-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            document.querySelector(`[data-section="${sectionName}"]`).classList.add('active');
+        }
+
+        function approveApplication(id) {
+            const comment = prompt('Tasdiqlash izohi (ixtiyoriy):');
+            if (processApplication(id, 'approved', comment || '')) {
+                loadAdminData();
+                showNotification('Tasdiqlandi', 'Ariza tasdiqlandi va kampaniya yaratildi');
+            }
+        }
+
+        function rejectApplication(id) {
+            const comment = prompt('Rad etish sababi:');
+            if (comment && processApplication(id, 'rejected', comment)) {
+                loadAdminData();
+                showNotification('Rad etildi', 'Ariza rad etildi', 'warning');
+            } else if (!comment) {
+                showNotification('Xatolik', 'Rad etish sababi kiritilishi shart', 'error');
+            }
+        }
+
+        function viewApplication(id) {
+            const app = applications.find(a => a.id === id);
+            if (app) {
+                const details = `
+Ariza ID: #${app.id}
+Nomi: ${app.title}
+Kategoriya: ${getCategoryName(app.category)}
+Miqdor: ${formatCurrency(app.amount)}
+Ariza beruvchi: ${app.applicantName}
+Telefon: ${app.applicantPhone}
+Email: ${app.applicantEmail || 'Kiritilmagan'}
+Tavsif: ${app.description}
+Holat: ${app.status}
+Yuborilgan: ${app.submittedAt.toLocaleDateString('uz-UZ')}
+${app.moderatorComment ? 'Moderator izohi: ' + app.moderatorComment : ''}
+                `;
+                alert(details);
+            }
+        }
+
+        function viewPayment(id) {
+            const payment = payments.find(p => p.id === id);
+            if (payment) {
+                const details = `
+To'lov ID: #${payment.id}
+Kampaniya: ${payment.campaignTitle}
+Xayriyachi: ${payment.donorName}
+Miqdor: ${formatCurrency(payment.amount)}
+To'lov usuli: ${payment.paymentMethod}
+Holat: ${payment.status}
+Sana: ${payment.paidAt.toLocaleDateString('uz-UZ')}
+                `;
+                alert(details);
+            }
+        }
+
+        function viewUser(id) {
+            const user = users.find(u => u.id === id);
+            if (user) {
+                const userPayments = payments.filter(p => p.donorId === user.id);
+                const totalDonated = userPayments.reduce((sum, p) => sum + p.amount, 0);
+                
+                const details = `
+Foydalanuvchi ID: #${user.id}
+Ism: ${user.firstName} ${user.lastName}
+Telefon: ${user.phone}
+Email: ${user.email || 'Kiritilmagan'}
+Ro'yxatdan o'tgan: ${user.registeredAt.toLocaleDateString('uz-UZ')}
+Holat: ${user.status}
+Admin: ${user.isAdmin ? 'Ha' : 'Yo\'q'}
+Jami xayriya: ${formatCurrency(totalDonated)}
+Xayriya soni: ${userPayments.length}
+                `;
+                alert(details);
+            }
+        }
+
+        function blockUser(id) {
+            const user = users.find(u => u.id === id);
+            if (user && confirm(`${user.firstName} ${user.lastName}ni bloklashni xohlaysizmi?`)) {
+                user.status = user.status === 'blocked' ? 'active' : 'blocked';
+                saveToLocalStorage();
+                loadAdminData();
+                showNotification('O\'zgartirildi', `Foydalanuvchi ${user.status === 'blocked' ? 'bloklandi' : 'blokdan chiqarildi'}`, 'info');
+            }
+        }
+
+        // Event Listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize
+            renderCampaigns();
+            updateStats();
+            updateUserInterface();
+
+            // Login Modal Events
+            elements.loginBtn?.addEventListener('click', () => showModal(elements.loginModal));
+            document.getElementById('closeLoginModal')?.addEventListener('click', () => hideModal(elements.loginModal));
+
+            // Signup Modal Events
+            elements.signupBtn?.addEventListener('click', () => showModal(elements.signupModal));
+            document.getElementById('closeSignupModal')?.addEventListener('click', () => hideModal(elements.signupModal));
+
+            // Switch between login and signup
+            document.getElementById('switchToLogin')?.addEventListener('click', () => {
+                hideModal(elements.signupModal);
+                showModal(elements.loginModal);
+            });
+
+            // OTP sending
+            elements.sendOtpBtn?.addEventListener('click', function() {
+                const phone = elements.loginPhone.value.trim();
+                if (!phone) {
+                    showNotification('Xatolik', 'Telefon raqamni kiriting', 'error');
+                    return;
+                }
+
+                // Show loading
+                document.getElementById('sendOtpText').classList.add('hidden');
+                document.getElementById('sendOtpLoader').classList.remove('hidden');
+
+                // Simulate OTP sending
+                setTimeout(() => {
+                    document.getElementById('loginStep1').classList.add('hidden');
+                    document.getElementById('loginStep2').classList.remove('hidden');
+                    document.getElementById('sentPhoneNumber').textContent = phone;
+                    
+                    // Start resend timer
+                    let timer = 60;
+                    const resendBtn = document.getElementById('resendOtpBtn');
+                    const timerSpan = document.getElementById('resendTimer');
+                    
+                    const countdown = setInterval(() => {
+                        timer--;
+                        timerSpan.textContent = timer;
+                        
+                        if (timer <= 0) {
+                            clearInterval(countdown);
+                            resendBtn.disabled = false;
+                            resendBtn.innerHTML = 'Qayta yuborish';
+                        }
+                    }, 1000);
+
+                    showNotification('SMS yuborildi', 'Tasdiqlash kodi: 1234', 'info');
+                }, 2000);
+            });
+
+            // OTP verification
+            elements.verifyOtpBtn?.addEventListener('click', function() {
+                const phone = elements.loginPhone.value.trim();
+                const otp = elements.otpCode.value.trim();
+                
+                if (login(phone, otp)) {
+                    // Reset login form
+                    document.getElementById('loginStep1').classList.remove('hidden');
+                    document.getElementById('loginStep2').classList.add('hidden');
+                    document.getElementById('sendOtpText').classList.remove('hidden');
+                    document.getElementById('sendOtpLoader').classList.add('hidden');
+                    elements.loginPhone.value = '';
+                    elements.otpCode.value = '';
+                } else {
+                    showNotification('Xatolik', 'Noto\'g\'ri tasdiqlash kodi', 'error');
+                }
+            });
+
+            // Account creation
+            elements.createAccountBtn?.addEventListener('click', function() {
+                const firstName = elements.signupFirstName.value.trim();
+                const lastName = elements.signupLastName.value.trim();
+                const phone = elements.signupPhone.value.trim();
+                const email = elements.signupEmail.value.trim();
+                const agreeTerms = document.getElementById('agreeTerms').checked;
+
+                if (!firstName || !lastName || !phone) {
+                    showNotification('Xatolik', 'Barcha majburiy maydonlarni to\'ldiring', 'error');
+                    return;
+                }
+
+                if (!agreeTerms) {
+                    showNotification('Xatolik', 'Foydalanish shartlariga rozilik bering', 'error');
+                    return;
+                }
+
+                // Check if user already exists
+                if (users.find(u => u.phone === phone)) {
+                    showNotification('Xatolik', 'Bu telefon raqam allaqachon ro\'yxatdan o\'tgan', 'error');
+                    return;
+                }
+
+                // Create new user
+                const newUser = {
+                    id: Date.now(),
+                    firstName,
+                    lastName,
+                    phone,
+                    email,
+                    registeredAt: new Date(),
+                    status: 'active',
+                    isAdmin: phone === '+998958883851'
+                };
+
+                users.push(newUser);
+                currentUser = newUser;
+                updateUserInterface();
+                hideAllModals();
+                showNotification('Muvaffaqiyat!', 'Hisob muvaffaqiyatli yaratildi');
+
+                // Clear form
+                elements.signupFirstName.value = '';
+                elements.signupLastName.value = '';
+                elements.signupPhone.value = '';
+                elements.signupEmail.value = '';
+                document.getElementById('agreeTerms').checked = false;
+            });
+
+            // Profile dropdown
+            elements.profileDropdown?.addEventListener('click', function() {
+                elements.dropdownMenu.classList.toggle('hidden');
+            });
+
+            // Close dropdown when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!elements.profileDropdown?.contains(e.target)) {
+                    elements.dropdownMenu?.classList.add('hidden');
+                }
+            });
+
+            // Logout
+            document.getElementById('logoutBtn')?.addEventListener('click', logout);
+
+            // Admin panel toggle
+            document.getElementById('adminPanelLink')?.addEventListener('click', function(e) {
+                e.preventDefault();
+                toggleAdminPanel();
+            });
+
+            // Close admin panel
+            document.getElementById('closeAdminPanel')?.addEventListener('click', function() {
+                isAdminMode = false;
+                updateUserInterface();
+            });
+
+            // Admin overlay click
+            elements.adminOverlay?.addEventListener('click', function() {
+                isAdminMode = false;
+                updateUserInterface();
+            });
+
+            // Admin navigation
+            document.querySelectorAll('.admin-nav-item').forEach(item => {
+                item.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const section = this.dataset.section;
+                    showAdminSection(section);
+                });
+            });
+
+            // Category filters
+            document.querySelectorAll('.category-filter').forEach(filter => {
+                filter.addEventListener('click', function() {
+                    document.querySelectorAll('.category-filter').forEach(f => f.classList.remove('active'));
+                    this.classList.add('active');
+                    filterCampaigns(this.dataset.category);
+                });
+            });
+
+            // Search functionality
+            let searchTimeout;
+            function handleSearch(input, resultsContainer) {
+                clearTimeout(searchTimeout);
+                searchTimeout = setTimeout(() => {
+                    const query = input.value.trim();
+                    if (query.length < 2) {
+                        resultsContainer.classList.remove('show');
+                        return;
+                    }
+
+                    const results = searchCampaigns(query);
+                    resultsContainer.innerHTML = '';
+
+                    if (results.length === 0) {
+                        resultsContainer.innerHTML = '<div class="search-result-item">Hech narsa topilmadi</div>';
+                    } else {
+                        results.slice(0, 5).forEach(campaign => {
+                            const item = document.createElement('div');
+                            item.className = 'search-result-item';
+                            item.innerHTML = `
+                                <div class="font-medium">${campaign.title}</div>
+                                <div class="text-sm text-gray-500">${getCategoryName(campaign.category)}</div>
+                            `;
+                            item.addEventListener('click', () => {
+                                document.getElementById('campaigns').scrollIntoView({ behavior: 'smooth' });
+                                resultsContainer.classList.remove('show');
+                                input.value = '';
+                            });
+                            resultsContainer.appendChild(item);
+                        });
+                    }
+
+                    resultsContainer.classList.add('show');
+                }, 300);
+            }
+
+            elements.searchInput?.addEventListener('input', function() {
+                handleSearch(this, elements.searchResults);
+            });
+
+            elements.mobileSearchInput?.addEventListener('input', function() {
+                handleSearch(this, elements.mobileSearchResults);
+            });
+
+            // Close search results when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!elements.searchInput?.contains(e.target)) {
+                    elements.searchResults?.classList.remove('show');
+                }
+                if (!elements.mobileSearchInput?.contains(e.target)) {
+                    elements.mobileSearchResults?.classList.remove('show');
+                }
+            });
+
+            // Mobile menu
+            elements.menuBtn?.addEventListener('click', function() {
+                elements.mobileMenu.classList.add('show');
+            });
+
+            elements.closeMobileMenu?.addEventListener('click', function() {
+                elements.mobileMenu.classList.remove('show');
+            });
+
+            // Language selector
+            elements.languageBtn?.addEventListener('click', function() {
+                elements.languageDropdown.classList.toggle('show');
+            });
+
+            document.querySelectorAll('[data-lang]').forEach(item => {
+                item.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const lang = this.dataset.lang;
+                    currentLanguage = lang;
+                    document.getElementById('currentLanguage').textContent = this.textContent.split(' ')[1];
+                    elements.languageDropdown.classList.remove('show');
+                    showNotification('Til o\'zgartirildi', `Til ${this.textContent}ga o'zgartirildi`, 'info');
+                });
+            });
+
+            // Close language dropdown when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!elements.languageBtn?.contains(e.target)) {
+                    elements.languageDropdown?.classList.remove('show');
+                }
+            });
+
+            // Close notification
+            elements.closeNotification?.addEventListener('click', function() {
+                elements.notification.classList.remove('show');
+            });
+
+            // Modal info links
+            document.getElementById('aboutLink')?.addEventListener('click', function(e) {
+                e.preventDefault();
+                showNotification('Biz haqimizda', 'E-Ehson - O\'zbekistondagi eng katta xayriya platformasi', 'info');
+            });
+
+            document.getElementById('contactLink')?.addEventListener('click', function(e) {
+                e.preventDefault();
+                showNotification('Aloqa', 'Telefon: +998 95 888 38 51\nEmail: ehsonapp@gmail.com', 'info');
+            });
+
+            document.getElementById('helpLink')?.addEventListener('click', function(e) {
+                e.preventDefault();
+                showNotification('Yordam', 'Savollaringiz bo\'lsa, biz bilan bog\'laning', 'info');
+            });
+
+            // Footer links
+            document.getElementById('footerAboutLink')?.addEventListener('click', function(e) {
+                e.preventDefault();
+                showNotification('Biz haqimizda', 'E-Ehson - O\'zbekistondagi eng katta xayriya platformasi', 'info');
+            });
+
+            document.getElementById('footerContactLink')?.addEventListener('click', function(e) {
+                e.preventDefault();
+                showNotification('Aloqa', 'Telefon: +998 95 888 38 51\nEmail: ehsonapp@gmail.com', 'info');
+            });
+
+            document.getElementById('footerHelpLink')?.addEventListener('click', function(e) {
+                e.preventDefault();
+                showNotification('Yordam', 'Savollaringiz bo\'lsa, biz bilan bog\'laning', 'info');
+            });
+
+            // Mobile menu links
+            document.getElementById('mobileAboutLink')?.addEventListener('click', function(e) {
+                e.preventDefault();
+                elements.mobileMenu.classList.remove('show');
+                showNotification('Biz haqimizda', 'E-Ehson - O\'zbekistondagi eng katta xayriya platformasi', 'info');
+            });
+
+            document.getElementById('mobileContactLink')?.addEventListener('click', function(e) {
+                e.preventDefault();
+                elements.mobileMenu.classList.remove('show');
+                showNotification('Aloqa', 'Telefon: +998 95 888 38 51\nEmail: ehsonapp@gmail.com', 'info');
+            });
+
+            document.getElementById('mobileHelpLink')?.addEventListener('click', function(e) {
+                e.preventDefault();
+                elements.mobileMenu.classList.remove('show');
+                showNotification('Yordam', 'Savollaringiz bo\'lsa, biz bilan bog\'laning', 'info');
+            });
+
+            // Hero buttons
+            document.getElementById('startDonatingBtn')?.addEventListener('click', function() {
+                document.getElementById('campaigns').scrollIntoView({ behavior: 'smooth' });
+            });
+
+            document.getElementById('applyForCharityBtn')?.addEventListener('click', function() {
+                if (!currentUser) {
+                    showModal(elements.loginModal);
+                    showNotification('Kirish talab qilinadi', 'Ariza berish uchun tizimga kiring', 'info');
+                } else {
+                    showModal(document.getElementById('charityApplicationModal'));
+                }
+            });
+
+            // Charity application modal events
+            document.getElementById('closeApplicationModal')?.addEventListener('click', function() {
+                hideModal(document.getElementById('charityApplicationModal'));
+            });
+
+            document.getElementById('selectImageBtn')?.addEventListener('click', function() {
+                document.getElementById('applicationImage').click();
+            });
+
+            // File upload handling
+            const imageUploadArea = document.getElementById('imageUploadArea');
+            const applicationImage = document.getElementById('applicationImage');
+            const uploadedImages = document.getElementById('uploadedImages');
+
+            applicationImage?.addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    if (file.size > 5 * 1024 * 1024) {
+                        showNotification('Xatolik', 'Fayl hajmi 5MB dan oshmasligi kerak', 'error');
+                        return;
+                    }
+
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        const imagePreview = document.createElement('div');
+                        imagePreview.className = 'uploaded-file';
+                        imagePreview.innerHTML = `
+                            <div class="flex items-center space-x-3">
+                                <img src="${e.target.result}" alt="Preview" class="w-16 h-16 object-cover rounded-lg">
+                                <div class="flex-1">
+                                    <p class="font-medium text-gray-800">${file.name}</p>
+                                    <p class="text-sm text-gray-600">${(file.size / 1024 / 1024).toFixed(2)} MB</p>
+                                </div>
+                                <button type="button" class="text-red-600 hover:text-red-800" onclick="this.parentElement.parentElement.remove()">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                        `;
+                        uploadedImages.innerHTML = '';
+                        uploadedImages.appendChild(imagePreview);
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+
+            // Drag and drop for file upload
+            imageUploadArea?.addEventListener('dragover', function(e) {
+                e.preventDefault();
+                this.classList.add('dragover');
+            });
+
+            imageUploadArea?.addEventListener('dragleave', function(e) {
+                e.preventDefault();
+                this.classList.remove('dragover');
+            });
+
+            imageUploadArea?.addEventListener('drop', function(e) {
+                e.preventDefault();
+                this.classList.remove('dragover');
+                
+                const files = e.dataTransfer.files;
+                if (files.length > 0) {
+                    applicationImage.files = files;
+                    applicationImage.dispatchEvent(new Event('change'));
+                }
+            });
+
+            // Charity application form submission
+            document.getElementById('charityApplicationForm')?.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                if (!currentUser) {
+                    showNotification('Xatolik', 'Tizimga kiring', 'error');
+                    return;
+                }
+
+                const formData = {
+                    title: document.getElementById('applicationTitle').value.trim(),
+                    category: document.getElementById('applicationCategory').value,
+                    amount: document.getElementById('applicationAmount').value,
+                    description: document.getElementById('applicationDescription').value.trim(),
+                    phone: document.getElementById('applicationPhone').value.trim(),
+                    email: document.getElementById('applicationEmail').value.trim(),
+                    image: null
+                };
+
+                // Get uploaded image
+                const imageFile = document.getElementById('applicationImage').files[0];
+                if (imageFile) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        formData.image = e.target.result;
+                        submitCharityApplication(formData);
+                        hideModal(document.getElementById('charityApplicationModal'));
+                        
+                        // Reset form
+                        document.getElementById('charityApplicationForm').reset();
+                        uploadedImages.innerHTML = '';
+                    };
+                    reader.readAsDataURL(imageFile);
+                } else {
+                    showNotification('Xatolik', 'Rasm yuklash majburiy', 'error');
+                }
+            });
+
+            // Donation modal events
+            document.getElementById('closeDonationModal')?.addEventListener('click', function() {
+                hideModal(document.getElementById('donationModal'));
+            });
+
+            // Donation amount selection
+            document.querySelectorAll('.donation-amount').forEach(button => {
+                button.addEventListener('click', function() {
+                    document.querySelectorAll('.donation-amount').forEach(b => b.classList.remove('selected'));
+                    this.classList.add('selected');
+                    
+                    const amount = this.dataset.amount;
+                    if (amount === 'custom') {
+                        document.getElementById('customDonationAmount').focus();
+                        selectedDonationAmount = 0;
+                    } else {
+                        selectedDonationAmount = parseInt(amount);
+                        document.getElementById('customDonationAmount').value = '';
+                    }
+                });
+            });
+
+            // Custom donation amount
+            document.getElementById('customDonationAmount')?.addEventListener('input', function() {
+                selectedDonationAmount = parseInt(this.value) || 0;
+                document.querySelectorAll('.donation-amount').forEach(b => b.classList.remove('selected'));
+            });
+
+            // Payment method selection
+            document.querySelectorAll('.payment-method-card').forEach(card => {
+                card.addEventListener('click', function() {
+                    document.querySelectorAll('.payment-method-card').forEach(c => {
+                        c.classList.remove('border-blue-500', 'bg-blue-50');
+                        c.classList.add('border-gray-300');
+                    });
+                    
+                    this.classList.remove('border-gray-300');
+                    this.classList.add('border-blue-500', 'bg-blue-50');
+                    selectedPaymentMethod = this.dataset.method;
+                });
+            });
+
+            // Process donation
+            document.getElementById('proceedDonationBtn')?.addEventListener('click', function() {
+                const amount = selectedDonationAmount || parseInt(document.getElementById('customDonationAmount').value) || 0;
+                
+                if (amount < 10000) {
+                    showNotification('Xatolik', 'Minimal xayriya miqdori 10,000 so\'m', 'error');
+                    return;
+                }
+
+                if (!selectedPaymentMethod) {
+                    showNotification('Xatolik', 'To\'lov usulini tanlang', 'error');
+                    return;
+                }
+
+                processDonation(amount, selectedPaymentMethod);
+            });
+
+            // Apply for charity link in user menu
+            document.getElementById('applyCharityLink')?.addEventListener('click', function(e) {
+                e.preventDefault();
+                elements.dropdownMenu.classList.add('hidden');
+                
+                if (!currentUser) {
+                    showModal(elements.loginModal);
+                    showNotification('Kirish talab qilinadi', 'Ariza berish uchun tizimga kiring', 'info');
+                } else {
+                    showModal(document.getElementById('charityApplicationModal'));
+                }
+            });
+
+            // Auto-fill phone number in application form
+            if (currentUser && document.getElementById('applicationPhone')) {
+                document.getElementById('applicationPhone').value = currentUser.phone;
+                document.getElementById('applicationEmail').value = currentUser.email || '';
+            }
+
+            // Update login function to save data
+            const originalLogin = login;
+            login = function(phone, otp) {
+                const result = originalLogin(phone, otp);
+                if (result) {
+                    saveToLocalStorage();
+                }
+                return result;
+            };
+
+            // Update create account to save data
+            const originalCreateAccount = elements.createAccountBtn;
+            if (originalCreateAccount) {
+                originalCreateAccount.addEventListener('click', function() {
+                    // The existing create account logic will run first
+                    setTimeout(() => {
+                        if (currentUser) {
+                            saveToLocalStorage();
+                        }
+                    }, 100);
+                });
+            }
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'981f7073621995ea',t:'MTc1ODM1MTU1Ny4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
