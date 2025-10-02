@@ -3,2205 +3,1169 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>E-Ehson Global - Professional Xayriya Platformasi</title>
+    <title>E-Ehson Professional - Xayriya Platformasi</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: {
-                            50: '#f0f9ff',
-                            500: '#3b82f6',
-                            600: '#2563eb',
-                            700: '#1d4ed8'
-                        }
-                    }
-                }
-            }
-        }
-    </script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    
     <style>
         body {
             box-sizing: border-box;
         }
         
-        * {
-            font-family: 'Inter', sans-serif;
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         }
         
-        :root {
-            --primary-green: #10b981;
-            --primary-blue: #3b82f6;
-            --primary-yellow: #f59e0b;
-            --accent-teal: #14b8a6;
-            --accent-indigo: #6366f1;
-            --accent-orange: #f97316;
-            --accent-emerald: #059669;
-            --accent-sky: #0ea5e9;
-            --accent-amber: #d97706;
-            --accent-purple: #8b5cf6;
-            --accent-pink: #ec4899;
-            --accent-red: #ef4444;
+        .gradient-bg-2 {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
         }
         
-        /* Advanced Animations */
-        @keyframes globalSync {
-            0% { transform: scale(1) rotate(0deg); opacity: 1; }
-            50% { transform: scale(1.1) rotate(180deg); opacity: 0.8; }
-            100% { transform: scale(1) rotate(360deg); opacity: 1; }
+        .card-hover {
+            transition: all 0.4s ease;
         }
         
-        @keyframes morphingGradient {
-            0% { background-position: 0% 50%; }
-            25% { background-position: 100% 50%; }
-            50% { background-position: 100% 100%; }
-            75% { background-position: 50% 100%; }
-            100% { background-position: 0% 50%; }
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
         }
         
-        @keyframes neonPulse {
-            from { text-shadow: 0 0 5px currentColor, 0 0 10px currentColor, 0 0 15px currentColor; }
-            to { text-shadow: 0 0 10px currentColor, 0 0 20px currentColor, 0 0 30px currentColor; }
+        .progress-bar {
+            background: linear-gradient(90deg, #4f46e5 0%, #06b6d4 100%);
         }
         
-        @keyframes particleFloat {
-            0% { transform: translateY(100vh) translateX(0) rotate(0deg); opacity: 0; }
-            10% { opacity: 1; }
-            90% { opacity: 1; }
-            100% { transform: translateY(-100px) translateX(100px) rotate(360deg); opacity: 0; }
+        .animate-pulse-slow {
+            animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
         }
         
-        @keyframes shimmer {
-            0% { transform: translateX(-100%); }
-            100% { transform: translateX(100%); }
+        .live-indicator {
+            animation: pulse 2s infinite;
         }
         
-        @keyframes slideInRight {
-            from { transform: translateX(100px); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
+        .social-icon {
+            transition: all 0.3s ease;
         }
         
-        @keyframes slideInLeft {
-            from { transform: translateX(-100px); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
+        .social-icon:hover {
+            transform: translateY(-3px) scale(1.1);
+        }
+        
+        .category-card {
+            background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
         }
         
         @keyframes fadeInUp {
-            from { transform: translateY(50px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-        
-        @keyframes bounceIn {
-            0% { transform: scale(0.3); opacity: 0; }
-            50% { transform: scale(1.05); }
-            70% { transform: scale(0.9); }
-            100% { transform: scale(1); opacity: 1; }
-        }
-        
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
-        }
-        
-        @keyframes wiggle {
-            0%, 7% { transform: rotateZ(0); }
-            15% { transform: rotateZ(-15deg); }
-            20% { transform: rotateZ(10deg); }
-            25% { transform: rotateZ(-10deg); }
-            30% { transform: rotateZ(6deg); }
-            35% { transform: rotateZ(-4deg); }
-            40%, 100% { transform: rotateZ(0); }
-        }
-        
-        @keyframes scroll-left {
-            0% { transform: translateX(100%); }
-            100% { transform: translateX(-100%); }
-        }
-        
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-        }
-        
-        @keyframes heartbeat {
-            0% { transform: scale(1); }
-            14% { transform: scale(1.3); }
-            28% { transform: scale(1); }
-            42% { transform: scale(1.3); }
-            70% { transform: scale(1); }
-        }
-        
-        @keyframes typewriter {
-            from { width: 0; }
-            to { width: 100%; }
-        }
-        
-        @keyframes blink {
-            from, to { border-color: transparent; }
-            50% { border-color: white; }
-        }
-        
-        /* Morphing Gradients */
-        .morphing-gradient {
-            background: linear-gradient(45deg, var(--primary-green), var(--primary-blue), var(--primary-yellow), var(--accent-teal));
-            background-size: 400% 400%;
-            animation: morphingGradient 8s ease-in-out infinite;
-        }
-        
-        .morphing-gradient-alt {
-            background: linear-gradient(135deg, var(--accent-purple), var(--accent-pink), var(--accent-orange), var(--accent-red));
-            background-size: 400% 400%;
-            animation: morphingGradient 10s ease-in-out infinite reverse;
-        }
-        
-        /* Neon Effects */
-        .neon-glow {
-            text-shadow: 0 0 5px currentColor, 0 0 10px currentColor, 0 0 15px currentColor;
-            animation: neonPulse 2s ease-in-out infinite alternate;
-        }
-        
-        .neon-border {
-            border: 2px solid;
-            border-image: linear-gradient(45deg, var(--primary-blue), var(--accent-purple), var(--primary-green)) 1;
-            box-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
-        }
-        
-        /* Particle System */
-        .particle-container {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            pointer-events: none;
-        }
-        
-        .particle {
-            position: absolute;
-            width: 4px;
-            height: 4px;
-            background: rgba(255, 255, 255, 0.6);
-            border-radius: 50%;
-            animation: particleFloat 15s infinite linear;
-        }
-        
-        /* Glass Morphism */
-        .glass-morphism {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-        }
-        
-        .glass-morphism-dark {
-            background: rgba(0, 0, 0, 0.1);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .glass-morphism-strong {
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(30px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
-        }
-        
-        /* Elastic Animations */
-        .elastic-hover {
-            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-        }
-        
-        .elastic-hover:hover {
-            transform: scale(1.05) translateY(-5px);
-        }
-        
-        .elastic-bounce {
-            animation: bounceIn 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-        }
-        
-        /* 3D Transforms */
-        .card-3d {
-            transform-style: preserve-3d;
-            transition: transform 0.6s;
-        }
-        
-        .card-3d:hover {
-            transform: rotateY(10deg) rotateX(5deg) scale(1.02);
-        }
-        
-        .card-3d-flip {
-            transform-style: preserve-3d;
-            transition: transform 0.8s;
-        }
-        
-        .card-3d-flip:hover {
-            transform: rotateY(180deg);
-        }
-        
-        /* Advanced Button Styles */
-        .btn-primary {
-            background: linear-gradient(135deg, var(--primary-green) 0%, var(--primary-blue) 50%, var(--accent-teal) 100%);
-            position: relative;
-            overflow: hidden;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        
-        .btn-primary::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            transition: left 0.6s;
-        }
-        
-        .btn-primary:hover::before {
-            left: 100%;
-        }
-        
-        .btn-primary:hover {
-            transform: translateY(-3px) scale(1.02);
-            box-shadow: 0 20px 40px rgba(16, 185, 129, 0.4);
-        }
-        
-        .btn-secondary {
-            background: linear-gradient(135deg, var(--primary-yellow) 0%, var(--accent-orange) 100%);
-            transition: all 0.4s ease;
-        }
-        
-        .btn-secondary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 15px 30px rgba(245, 158, 11, 0.4);
-        }
-        
-        .btn-admin {
-            background: linear-gradient(135deg, var(--accent-purple) 0%, var(--accent-pink) 50%, var(--accent-indigo) 100%);
-            transition: all 0.4s ease;
-        }
-        
-        .btn-admin:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 15px 30px rgba(139, 92, 246, 0.4);
-        }
-        
-        .btn-danger {
-            background: linear-gradient(135deg, var(--accent-red) 0%, var(--accent-pink) 100%);
-            transition: all 0.4s ease;
-        }
-        
-        .btn-danger:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 15px 30px rgba(239, 68, 68, 0.4);
-        }
-        
-        .btn-success {
-            background: linear-gradient(135deg, var(--primary-green) 0%, var(--accent-emerald) 100%);
-            transition: all 0.4s ease;
-        }
-        
-        .btn-success:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 15px 30px rgba(16, 185, 129, 0.4);
-        }
-        
-        .btn-info {
-            background: linear-gradient(135deg, var(--accent-sky) 0%, var(--primary-blue) 100%);
-            transition: all 0.4s ease;
-        }
-        
-        .btn-info:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 15px 30px rgba(14, 165, 233, 0.4);
-        }
-        
-        .btn-warning {
-            background: linear-gradient(135deg, var(--accent-amber) 0%, var(--primary-yellow) 100%);
-            transition: all 0.4s ease;
-        }
-        
-        .btn-warning:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 15px 30px rgba(217, 119, 6, 0.4);
-        }
-        
-        /* Modal Animations */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-            opacity: 0;
-            transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        
-        .modal.show {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 1;
-        }
-        
-        .modal-content {
-            transform: scale(0.8) translateY(50px);
-            transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-        }
-        
-        .modal.show .modal-content {
-            transform: scale(1) translateY(0);
-        }
-        
-        /* Progress Bars */
-        .progress-bar {
-            background: linear-gradient(90deg, var(--primary-green), var(--accent-teal), var(--primary-blue));
-            border-radius: 9999px;
-            position: relative;
-            overflow: hidden;
-            transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        
-        .progress-bar::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-            animation: shimmer 2s infinite;
-        }
-        
-        /* Campaign Cards */
-        .campaign-card {
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .campaign-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
-            transform: translateX(-100%);
-            transition: transform 0.8s;
-        }
-        
-        .campaign-card:hover::before {
-            transform: translateX(100%);
-        }
-        
-        .campaign-card:hover {
-            transform: translateY(-15px) scale(1.03);
-            box-shadow: 0 30px 60px rgba(0,0,0,0.2);
-        }
-        
-        /* Notification System */
-        .notification {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 1100;
-            transform: translateX(400px);
-            transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-        }
-        
-        .notification.show {
-            transform: translateX(0);
-        }
-        
-        /* Loading Animations */
-        .loading-spinner {
-            border: 3px solid rgba(255, 255, 255, 0.3);
-            border-top: 3px solid var(--primary-blue);
-            border-radius: 50%;
-            width: 24px;
-            height: 24px;
-            animation: spin 1s linear infinite;
-        }
-        
-        /* Admin Panel Styles */
-        .admin-sidebar {
-            position: fixed;
-            left: -300px;
-            top: 0;
-            width: 300px;
-            height: 100vh;
-            background: linear-gradient(180deg, #1f2937 0%, #111827 100%);
-            z-index: 2000;
-            transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            overflow-y: auto;
-        }
-        
-        .admin-sidebar.show {
-            left: 0;
-        }
-        
-        .admin-content {
-            margin-left: 0;
-            transition: margin-left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        
-        .admin-content.shifted {
-            margin-left: 300px;
-        }
-        
-        .admin-card {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 16px;
-            transition: all 0.3s ease;
-        }
-        
-        .admin-card:hover {
-            background: rgba(255, 255, 255, 0.08);
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
-        }
-        
-        /* Payment Modal Styles */
-        .payment-method {
-            border: 2px solid transparent;
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-        
-        .payment-method:hover {
-            border-color: var(--primary-blue);
-            transform: translateY(-2px);
-        }
-        
-        .payment-method.selected {
-            border-color: var(--primary-green);
-            background: rgba(16, 185, 129, 0.1);
-        }
-        
-        /* Statistics Cards */
-        .stat-card {
-            background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255,255,255,0.2);
-            transition: all 0.3s ease;
-        }
-        
-        .stat-card:hover {
-            transform: translateY(-5px) scale(1.02);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-        }
-        
-        /* Activity Feed */
-        .activity-item {
-            transition: all 0.3s ease;
-            border-left: 3px solid transparent;
-        }
-        
-        .activity-item:hover {
-            border-left-color: var(--primary-blue);
-            background: rgba(59, 130, 246, 0.05);
-            transform: translateX(5px);
-        }
-        
-        /* Ticker Animation */
-        .ticker-content {
-            animation: scroll-left 30s linear infinite;
-        }
-        
-        /* Language Switcher */
-        .language-switcher {
-            position: relative;
-        }
-        
-        .language-dropdown {
-            position: absolute;
-            top: 100%;
-            right: 0;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            min-width: 150px;
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(-10px);
-            transition: all 0.3s ease;
-        }
-        
-        .language-dropdown.show {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-        }
-        
-        .language-option {
-            display: flex;
-            align-items: center;
-            padding: 12px 16px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            color: #374151;
-        }
-        
-        .language-option:hover {
-            background: rgba(59, 130, 246, 0.1);
-        }
-        
-        .language-option.active {
-            background: rgba(16, 185, 129, 0.1);
-            color: #059669;
-        }
-        
-        .flag-icon {
-            width: 20px;
-            height: 15px;
-            margin-right: 8px;
-            border-radius: 2px;
-        }
-        
-        /* Category Filter Styles */
-        .category-filter.active {
-            background: linear-gradient(135deg, var(--primary-blue), var(--accent-indigo));
-            color: white;
-            transform: scale(1.05);
-        }
-        
-        /* Admin Section Styles */
-        .admin-section {
-            display: none;
-        }
-        
-        .admin-section.active {
-            display: block;
-            animation: fadeInUp 0.5s ease;
-        }
-        
-        .admin-nav-item.active {
-            background: rgba(255, 255, 255, 0.1);
-            border-left: 4px solid var(--primary-blue);
-        }
-        
-        /* Table Styles */
-        .admin-table {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(20px);
-            border-radius: 12px;
-            overflow: hidden;
-        }
-        
-        .admin-table th {
-            background: rgba(255, 255, 255, 0.1);
-            color: white;
-            font-weight: 600;
-            padding: 16px;
-            text-align: left;
-        }
-        
-        .admin-table td {
-            padding: 16px;
-            color: rgba(255, 255, 255, 0.9);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .admin-table tr:hover {
-            background: rgba(255, 255, 255, 0.05);
-        }
-        
-        /* Social Links */
-        .social-links {
-            display: flex;
-            gap: 12px;
-        }
-        
-        .social-link {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
-            text-decoration: none;
-        }
-        
-        .social-link.linkedin {
-            background: #0077b5;
-        }
-        
-        .social-link.telegram {
-            background: #0088cc;
-        }
-        
-        .social-link.instagram {
-            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
-        }
-        
-        .social-link.facebook {
-            background: #1877f2;
-        }
-        
-        .social-link.youtube {
-            background: #ff0000;
-        }
-        
-        .social-link.twitter {
-            background: #1da1f2;
-        }
-        
-        .social-link:hover {
-            transform: translateY(-3px) scale(1.1);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-        }
-        
-        /* File Upload Area */
-        .file-upload-area {
-            border: 2px dashed rgba(255, 255, 255, 0.3);
-            border-radius: 12px;
-            padding: 40px 20px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .file-upload-area:hover {
-            border-color: var(--primary-blue);
-            background: rgba(59, 130, 246, 0.05);
-        }
-        
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .admin-sidebar {
-                width: 100%;
-                left: -100%;
-            }
-            
-            .admin-content.shifted {
-                margin-left: 0;
-            }
-            
-            .particle {
-                display: none;
-            }
-            
-            .neon-glow {
-                animation: none;
-                text-shadow: none;
-            }
-        }
-        
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        
-        ::-webkit-scrollbar-track {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 4px;
-        }
-        
-        ::-webkit-scrollbar-thumb {
-            background: linear-gradient(135deg, var(--primary-blue), var(--accent-indigo));
-            border-radius: 4px;
-        }
-        
-        ::-webkit-scrollbar-thumb:hover {
-            background: linear-gradient(135deg, var(--accent-indigo), var(--primary-blue));
-        }
-        
-        /* Special Effects */
-        .wiggle {
-            animation: wiggle 2s ease-in-out infinite;
-        }
-        
-        .fade-in {
-            animation: fadeInUp 0.8s ease-out;
-        }
-        
-        .slide-in-left {
-            animation: slideInLeft 0.8s ease-out;
-        }
-        
-        .slide-in-right {
-            animation: slideInRight 0.8s ease-out;
-        }
-        
-        /* Gradient Text */
-        .gradient-text {
-            background: linear-gradient(135deg, var(--primary-blue), var(--accent-purple), var(--primary-green));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        /* Floating Elements */
-        .floating {
-            animation: float 3s ease-in-out infinite;
-        }
-        
-        /* Glow Effects */
-        .glow-on-hover {
-            transition: all 0.3s ease;
-        }
-        
-        .glow-on-hover:hover {
-            box-shadow: 0 0 30px rgba(59, 130, 246, 0.6);
-        }
-        
-        /* Campaign Badge Styles */
-        .campaign-badge {
-            position: absolute;
-            top: 12px;
-            right: 12px;
-            padding: 4px 8px;
-            border-radius: 12px;
-            font-size: 10px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        
-        .badge-urgent {
-            background: linear-gradient(135deg, #ef4444, #dc2626);
-            color: white;
-            animation: pulse 2s infinite;
-        }
-        
-        .badge-featured {
-            background: linear-gradient(135deg, #f59e0b, #d97706);
-            color: white;
-        }
-        
-        .badge-active {
-            background: linear-gradient(135deg, #10b981, #059669);
-            color: white;
-        }
-        
-        .badge-completed {
-            background: linear-gradient(135deg, #6b7280, #4b5563);
-            color: white;
-        }
-        
-        .badge-verified {
-            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
-            color: white;
-        }
-        
-        /* Live Activity Styles */
-        .live-activity {
-            background: rgba(16, 185, 129, 0.1);
-            border-left: 3px solid #10b981;
-            padding: 8px 12px;
-            border-radius: 6px;
-            margin-top: 8px;
-            font-size: 12px;
-            color: #059669;
-        }
-        
-        /* Rating Stars */
-        .rating-stars {
-            display: flex;
-            align-items: center;
-            gap: 2px;
-        }
-        
-        .star {
-            color: #fbbf24;
-            font-size: 14px;
-        }
-        
-        .star.empty {
-            color: #d1d5db;
-        }
-        
-        /* Advertisement Styles */
-        .advertisement-banner {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 16px;
-            padding: 24px;
-            color: white;
-            text-align: center;
-            margin-bottom: 24px;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .advertisement-banner::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            animation: shimmer 3s infinite;
-        }
-        
-        .ad-close {
-            position: absolute;
-            top: 8px;
-            right: 8px;
-            background: rgba(255, 255, 255, 0.2);
-            border: none;
-            color: white;
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 12px;
-        }
-        
-        .ad-close:hover {
-            background: rgba(255, 255, 255, 0.3);
-        }
-        
-        /* Chat Widget */
-        .chat-widget {
-            position: fixed;
-            bottom: 100px;
-            right: 20px;
-            width: 350px;
-            height: 500px;
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
-            z-index: 1000;
-            transform: translateY(100%);
-            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        
-        .chat-widget.show {
-            transform: translateY(0);
-        }
-        
-        .chat-toggle {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, var(--primary-blue), var(--accent-indigo));
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 24px;
-            cursor: pointer;
-            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.4);
-            z-index: 1001;
-            transition: all 0.3s ease;
-        }
-        
-        .chat-toggle:hover {
-            transform: scale(1.1);
-            box-shadow: 0 15px 40px rgba(59, 130, 246, 0.6);
-        }
-        
-        /* Search Styles */
-        .search-container {
-            position: relative;
-        }
-        
-        .search-results {
-            position: absolute;
-            top: 100%;
-            left: 0;
-            right: 0;
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            max-height: 400px;
-            overflow-y: auto;
-            z-index: 100;
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(-10px);
-            transition: all 0.3s ease;
-        }
-        
-        .search-results.show {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-        }
-        
-        .search-result-item {
-            padding: 12px 16px;
-            border-bottom: 1px solid #f3f4f6;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-        
-        .search-result-item:hover {
-            background: #f9fafb;
-        }
-        
-        /* Donation Progress */
-        .donation-progress {
-            position: relative;
-            background: #e5e7eb;
-            border-radius: 9999px;
-            height: 8px;
-            overflow: hidden;
-        }
-        
-        .donation-progress-bar {
-            height: 100%;
-            background: linear-gradient(90deg, var(--primary-green), var(--accent-teal));
-            border-radius: 9999px;
-            transition: width 1s ease;
-            position: relative;
-        }
-        
-        .donation-progress-bar::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-            animation: shimmer 2s infinite;
-        }
-        
-        /* Testimonial Styles */
-        .testimonial-card {
-            background: white;
-            border-radius: 20px;
-            padding: 30px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-            position: relative;
-        }
-        
-        .testimonial-card::before {
-            content: '"';
-            position: absolute;
-            top: -10px;
-            left: 20px;
-            font-size: 60px;
-            color: var(--primary-blue);
-            font-family: serif;
-        }
-        
-        .testimonial-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-        }
-        
-        /* FAQ Styles */
-        .faq-item {
-            border: 1px solid #e5e7eb;
-            border-radius: 12px;
-            margin-bottom: 16px;
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
-        
-        .faq-question {
-            padding: 20px;
-            background: #f9fafb;
-            cursor: pointer;
-            display: flex;
-            justify-content: between;
-            align-items: center;
-            transition: all 0.3s ease;
-        }
-        
-        .faq-question:hover {
-            background: #f3f4f6;
-        }
-        
-        .faq-answer {
-            padding: 0 20px;
-            max-height: 0;
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
-        
-        .faq-item.active .faq-answer {
-            padding: 20px;
-            max-height: 200px;
-        }
-        
-        .faq-icon {
-            transition: transform 0.3s ease;
-        }
-        
-        .faq-item.active .faq-icon {
-            transform: rotate(180deg);
-        }
-        
-        /* Newsletter Styles */
-        .newsletter-section {
-            background: linear-gradient(135deg, var(--primary-blue), var(--accent-purple));
-            border-radius: 20px;
-            padding: 40px;
-            text-align: center;
-            color: white;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .newsletter-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
-            animation: shimmer 3s infinite;
-        }
-        
-        /* Success Stories */
-        .success-story {
-            background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
-            border-radius: 16px;
-            padding: 24px;
-            border-left: 4px solid var(--primary-blue);
-            transition: all 0.3s ease;
-        }
-        
-        .success-story:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(59, 130, 246, 0.2);
-        }
-        
-        /* Impact Counter */
-        .impact-counter {
-            font-size: 3rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, var(--primary-blue), var(--accent-purple));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        /* Volunteer Section */
-        .volunteer-card {
-            background: linear-gradient(135deg, #fef3c7, #fde68a);
-            border-radius: 16px;
-            padding: 24px;
-            text-align: center;
-            transition: all 0.3s ease;
-        }
-        
-        .volunteer-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(245, 158, 11, 0.3);
-        }
-        
-        /* Emergency Alert */
-        .emergency-alert {
-            background: linear-gradient(135deg, #fef2f2, #fee2e2);
-            border: 2px solid #fca5a5;
-            border-radius: 12px;
-            padding: 16px;
-            margin-bottom: 20px;
-            animation: pulse 2s infinite;
-        }
-        
-        /* Partnership Logos */
-        .partner-logo {
-            width: 120px;
-            height: 80px;
-            background: white;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-            filter: grayscale(100%);
-        }
-        
-        .partner-logo:hover {
-            filter: grayscale(0%);
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-        }
-        
-        /* Mobile Menu */
-        .mobile-menu {
-            position: fixed;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100vh;
-            background: linear-gradient(135deg, var(--primary-blue), var(--accent-purple));
-            z-index: 2000;
-            transition: left 0.4s ease;
-            padding: 20px;
-        }
-        
-        .mobile-menu.show {
-            left: 0;
-        }
-        
-        /* Typewriter Effect */
-        .typewriter {
-            overflow: hidden;
-            border-right: 2px solid white;
-            white-space: nowrap;
-            animation: typewriter 4s steps(40, end), blink 0.75s step-end infinite;
-        }
-        
-        /* Heartbeat Animation */
-        .heartbeat {
-            animation: heartbeat 1.5s ease-in-out infinite;
-        }
-        
-        /* Donation Thermometer */
-        .donation-thermometer {
-            width: 40px;
-            height: 200px;
-            background: #e5e7eb;
-            border-radius: 20px;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .thermometer-fill {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(0deg, #ef4444, #f59e0b, #10b981);
-            border-radius: 20px;
-            transition: height 1s ease;
-        }
-        
-        /* Confetti Animation */
-        .confetti {
-            position: fixed;
-            width: 10px;
-            height: 10px;
-            background: var(--primary-blue);
-            animation: confetti-fall 3s linear infinite;
-            z-index: 1000;
-        }
-        
-        @keyframes confetti-fall {
-            0% {
-                transform: translateY(-100vh) rotate(0deg);
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(100vh) rotate(720deg);
+            from {
                 opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
             }
         }
         
-        /* Milestone Celebration */
-        .milestone-celebration {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: linear-gradient(135deg, var(--primary-green), var(--accent-teal));
-            color: white;
-            padding: 40px;
-            border-radius: 20px;
-            text-align: center;
-            z-index: 2000;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-            animation: bounceIn 0.8s ease;
+        .fade-in-up {
+            animation: fadeInUp 0.6s ease-out;
         }
         
-        /* Loading States */
-        .skeleton {
-            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
-            background-size: 200% 100%;
-            animation: loading 1.5s infinite;
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
         
-        @keyframes loading {
-            0% {
-                background-position: 200% 0;
-            }
-            100% {
-                background-position: -200% 0;
-            }
+        .text-shadow {
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
         
-        /* Dark Mode Support */
-        @media (prefers-color-scheme: dark) {
-            .auto-dark {
-                background: #1f2937;
-                color: white;
-            }
+        .admin-badge {
+            background: linear-gradient(45deg, #FF6B6B, #4ECDC4);
+            animation: pulse 2s infinite;
         }
         
-        /* Print Styles */
-        @media print {
-            .no-print {
-                display: none !important;
+        .telegram-btn {
+            background: linear-gradient(45deg, #0088cc, #00a0e6);
+            transition: all 0.3s ease;
+        }
+        
+        .telegram-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 136, 204, 0.3);
+        }
+        
+        /* Mobile optimizations for Flutter WebView */
+        @media (max-width: 768px) {
+            .mobile-padding {
+                padding: 1rem;
             }
             
-            .print-only {
-                display: block !important;
+            .mobile-text {
+                font-size: 0.9rem;
+            }
+            
+            .mobile-button {
+                padding: 0.75rem 1.5rem;
+                font-size: 0.9rem;
+            }
+            
+            .mobile-card {
+                margin-bottom: 1rem;
             }
         }
         
-        /* High Contrast Mode */
-        @media (prefers-contrast: high) {
-            .high-contrast {
-                border: 2px solid black;
-                background: white;
-                color: black;
-            }
+        /* Touch-friendly buttons for mobile */
+        .touch-button {
+            min-height: 44px;
+            min-width: 44px;
         }
         
-        /* Reduced Motion */
-        @media (prefers-reduced-motion: reduce) {
-            * {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
-            }
+        /* WebView specific styles */
+        .webview-safe {
+            padding-bottom: env(safe-area-inset-bottom);
         }
     </style>
 </head>
 <body class="bg-gray-50">
-    <!-- Global Loading Overlay -->
-    <div id="globalLoading" class="fixed inset-0 bg-black bg-opacity-80 backdrop-blur-lg z-50 flex items-center justify-center" style="display: none;">
-        <div class="text-center text-white">
-            <div class="w-16 h-16 border-4 border-white border-opacity-30 border-t-blue-500 rounded-full animate-spin mx-auto mb-4"></div>
-            <h3 class="text-xl font-bold mb-2">Yuklanmoqda...</h3>
-            <p class="text-gray-300">Tizim ma'lumotlari sinxronlanmoqda</p>
-            <div class="mt-4">
-                <div class="w-64 bg-gray-700 rounded-full h-2 mx-auto">
-                    <div id="loadingProgress" class="bg-blue-500 h-2 rounded-full transition-all duration-300" style="width: 0%"></div>
+    <!-- Admin Status Bar -->
+    <div class="bg-gradient-to-r from-blue-500 to-purple-500 text-white py-2">
+        <div class="max-w-7xl mx-auto px-4 flex justify-between items-center mobile-padding">
+            <div class="flex items-center space-x-3">
+                <div class="live-indicator w-3 h-3 rounded-full bg-green-400"></div>
+                <span class="text-sm font-medium mobile-text">📱 Admin Boshqaruvi</span>
+                <span class="text-xs opacity-75">Telegram: @serinaqu</span>
+            </div>
+            <div class="flex items-center space-x-4">
+                <span class="text-sm mobile-text">Til:</span>
+                <select id="languageSelector" onchange="changeLanguage()" class="bg-white bg-opacity-20 text-white text-sm px-2 py-1 rounded mobile-text">
+                    <option value="uz">🇺🇿 O'zbek</option>
+                    <option value="en">🇺🇸 English</option>
+                    <option value="ru">🇷🇺 Русский</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <!-- Platform Info -->
+    <div class="bg-gray-800 text-white py-2">
+        <div class="max-w-7xl mx-auto px-4 flex justify-between items-center mobile-padding">
+            <div class="flex items-center space-x-4">
+                <div class="admin-badge text-white px-3 py-1 rounded-full text-xs font-bold">
+                    👨‍💼 ADMIN PANEL
                 </div>
-                <p class="text-sm text-gray-400 mt-2">Iltimos kuting...</p>
+                <span class="text-sm mobile-text">Professional Xayriya Platformasi</span>
+            </div>
+            <div class="text-sm mobile-text">
+                <span data-translate="version">Versiya</span>: Professional 2024
             </div>
         </div>
     </div>
 
-    <!-- Connection Status -->
-    <div id="connectionStatus" class="fixed top-20 right-4 z-50 px-3 py-2 rounded-lg text-sm font-medium bg-green-500 text-white transition-all duration-300">
-        <i class="fas fa-wifi mr-2"></i>Ulangan
-    </div>
-
-    <!-- Online Users Counter -->
-    <div id="onlineUsers" class="fixed bottom-20 right-4 z-50 bg-gradient-to-r from-blue-500 to-indigo-600 text-white px-4 py-3 rounded-full shadow-lg glow-on-hover">
-        <i class="fas fa-users mr-2"></i>
-        <span id="onlineCount">1,247</span> foydalanuvchi onlayn
-    </div>
-
-    <!-- Live Activity Feed -->
-    <div id="activityFeed" class="fixed bottom-80 right-4 z-50 w-80 max-h-96 bg-white rounded-xl shadow-2xl overflow-hidden transform translate-x-full transition-transform duration-500">
-        <div class="p-4 bg-gradient-to-r from-blue-500 to-indigo-600 text-white">
-            <h4 class="font-bold flex items-center">
-                <i class="fas fa-broadcast-tower mr-2"></i>
-                Jonli Faoliyat
-            </h4>
-            <p class="text-xs opacity-90">Real vaqtda yangilanishlar</p>
-        </div>
-        <div id="activityList" class="max-h-80 overflow-y-auto">
-            <!-- Activity items will be added here -->
-        </div>
-    </div>
-
-    <!-- Activity Feed Toggle Button -->
-    <button id="toggleActivityFeed" class="fixed bottom-60 right-4 z-50 bg-blue-500 text-white p-3 rounded-full shadow-lg hover:bg-blue-600 transition-all">
-        <i class="fas fa-chart-line"></i>
-    </button>
-
-    <!-- Global Stats Ticker -->
-    <div class="fixed bottom-0 left-0 right-0 bg-gradient-to-r from-green-500 via-blue-500 to-yellow-500 text-white py-2 z-40 overflow-hidden">
-        <div class="ticker-content flex">
-            <div class="flex items-center space-x-8 whitespace-nowrap">
-                <span><i class="fas fa-heart mr-2"></i>Jami xayriya: <span id="tickerTotalRaised">$2,500,000</span></span>
-                <span><i class="fas fa-users mr-2"></i>Faol xayriyachilar: <span id="tickerActiveDonors">15,678</span></span>
-                <span><i class="fas fa-bullhorn mr-2"></i>Faol kampaniyalar: <span id="tickerActiveCampaigns">1,247</span></span>
-                <span><i class="fas fa-globe mr-2"></i>47 mamlakat</span>
-                <span><i class="fas fa-clock mr-2"></i>24/7 xizmat</span>
-                <span><i class="fas fa-shield-alt mr-2"></i>100% xavfsiz</span>
-                <span><i class="fas fa-check-circle mr-2"></i>Tasdiqlangan kampaniyalar</span>
-                <span><i class="fas fa-handshake mr-2"></i>Hamkorlik dasturi</span>
-            </div>
-        </div>
-    </div>
-
-    <!-- Notification Container -->
-    <div id="notificationContainer" class="fixed top-4 right-4 z-50 space-y-2">
-        <!-- Notifications will appear here -->
-    </div>
-
-    <!-- Emergency Alert Banner -->
-    <div id="emergencyAlert" class="emergency-alert" style="display: none;">
-        <div class="container mx-auto px-6">
-            <div class="flex items-center justify-between">
-                <div class="flex items-center">
-                    <i class="fas fa-exclamation-triangle text-red-600 text-xl mr-3"></i>
+    <!-- Navigation -->
+    <nav class="bg-white shadow-xl sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 mobile-padding">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-3">
+                    <div class="text-3xl">❤️</div>
                     <div>
-                        <h4 class="font-bold text-red-800">Shoshilinch Yordam Kerak!</h4>
-                        <p class="text-red-700 text-sm">Favqulodda vaziyat - darhol yordam talab qilinadi</p>
+                        <h1 class="text-xl font-bold text-gray-800">E-Ehson Professional</h1>
+                        <p class="text-xs text-gray-500">Xayriya Platformasi</p>
                     </div>
                 </div>
-                <button id="closeEmergencyAlert" class="text-red-600 hover:text-red-800">
-                    <i class="fas fa-times"></i>
-                </button>
+                
+                <div class="hidden md:flex space-x-8">
+                    <a href="#home" class="nav-link text-blue-600 font-semibold" data-translate="nav_home">Bosh sahifa</a>
+                    <a href="#campaigns" class="nav-link text-gray-600 hover:text-blue-600" data-translate="nav_campaigns">E'lonlar</a>
+                    <a href="#about" class="nav-link text-gray-600 hover:text-blue-600" data-translate="nav_about">Biz haqimizda</a>
+                    <a href="#faq" class="nav-link text-gray-600 hover:text-blue-600" data-translate="nav_faq">FAQ</a>
+                    <a href="#contact" class="nav-link text-gray-600 hover:text-blue-600" data-translate="nav_contact">Aloqa</a>
+                </div>
+                
+                <div class="flex items-center space-x-3">
+                    <button onclick="createAdminMessage('add_campaign')" class="telegram-btn text-white px-4 py-2 rounded-lg transition-all duration-300 transform hover:scale-105 mobile-button touch-button" data-translate="add_announcement">
+                        📢 E'lon Qo'yish
+                    </button>
+                </div>
             </div>
         </div>
-    </div>
+    </nav>
 
-    <!-- Mobile Menu -->
-    <div id="mobileMenu" class="mobile-menu">
-        <div class="flex justify-between items-center mb-8">
-            <h2 class="text-2xl font-bold text-white">Menu</h2>
-            <button id="closeMobileMenu" class="text-white text-2xl">
-                <i class="fas fa-times"></i>
-            </button>
+    <!-- Hero Section -->
+    <section id="home" class="gradient-bg text-white py-24 relative overflow-hidden">
+        <div class="absolute inset-0 bg-black opacity-20"></div>
+        <div class="max-w-7xl mx-auto px-4 text-center relative z-10 mobile-padding">
+            <div class="fade-in-up">
+                <h1 class="text-4xl md:text-6xl font-bold mb-6 text-shadow" data-translate="hero_title">Yaxshilik Qiling</h1>
+                <p class="text-lg md:text-xl mb-8 max-w-3xl mx-auto text-shadow mobile-text" data-translate="hero_subtitle">Professional xayriya platformasi orqali yaxshi ishlarni qo'llab-quvvatlang va jamiyatga hissa qo'shing</p>
+                
+                <!-- Admin Features -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+                    <div class="glass-effect rounded-xl p-6 transform hover:scale-105 transition-all duration-300 mobile-card">
+                        <div class="text-3xl mb-3">👨‍💼</div>
+                        <div class="text-lg font-bold mb-2">Admin Nazorati</div>
+                        <div class="text-sm opacity-90 mobile-text">Telegram orqali boshqaruv</div>
+                    </div>
+                    <div class="glass-effect rounded-xl p-6 transform hover:scale-105 transition-all duration-300 mobile-card">
+                        <div class="text-3xl mb-3">💰</div>
+                        <div class="text-lg font-bold mb-2">To'lov Nazorati</div>
+                        <div class="text-sm opacity-90 mobile-text">Kod orqali yangilanish</div>
+                    </div>
+                    <div class="glass-effect rounded-xl p-6 transform hover:scale-105 transition-all duration-300 mobile-card">
+                        <div class="text-3xl mb-3">📱</div>
+                        <div class="text-lg font-bold mb-2">Mobil Mos</div>
+                        <div class="text-sm opacity-90 mobile-text">Flutter WebView</div>
+                    </div>
+                </div>
+                
+                <!-- Enhanced Stats -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
+                    <div class="glass-effect rounded-xl p-6 transform hover:scale-105 transition-all duration-300 mobile-card">
+                        <div class="text-3xl md:text-4xl font-bold mb-2" id="totalDonations">2.5M</div>
+                        <div class="text-sm opacity-90 mobile-text" data-translate="total_donations">Jami Xayriya</div>
+                        <div class="text-xs opacity-75 mt-1">💰 so'm</div>
+                    </div>
+                    <div class="glass-effect rounded-xl p-6 transform hover:scale-105 transition-all duration-300 mobile-card">
+                        <div class="text-3xl md:text-4xl font-bold mb-2" id="totalUsers">1,234</div>
+                        <div class="text-sm opacity-90 mobile-text" data-translate="total_users">Xayriyachilar</div>
+                        <div class="text-xs opacity-75 mt-1">👥 kishi</div>
+                    </div>
+                    <div class="glass-effect rounded-xl p-6 transform hover:scale-105 transition-all duration-300 mobile-card">
+                        <div class="text-3xl md:text-4xl font-bold mb-2" id="activeCampaigns">15</div>
+                        <div class="text-sm opacity-90 mobile-text" data-translate="active_campaigns">Faol E'lonlar</div>
+                        <div class="text-xs opacity-75 mt-1">📢 ta</div>
+                    </div>
+                    <div class="glass-effect rounded-xl p-6 transform hover:scale-105 transition-all duration-300 mobile-card">
+                        <div class="text-3xl md:text-4xl font-bold mb-2" id="completedCampaigns">89</div>
+                        <div class="text-sm opacity-90 mobile-text" data-translate="completed_campaigns">Tugallangan</div>
+                        <div class="text-xs opacity-75 mt-1">✅ ta</div>
+                    </div>
+                </div>
+                
+                <div class="flex flex-col sm:flex-row gap-6 justify-center">
+                    <button onclick="scrollToCampaigns()" class="bg-white text-blue-600 px-8 py-4 rounded-xl font-bold hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 shadow-lg mobile-button touch-button" data-translate="donate_now">
+                        💝 Xayriya Qilish
+                    </button>
+                    <button onclick="createAdminMessage('add_campaign')" class="border-2 border-white text-white px-8 py-4 rounded-xl font-bold hover:bg-white hover:text-blue-600 transition-all duration-300 transform hover:scale-105 mobile-button touch-button" data-translate="create_campaign">
+                        📢 E'lon Berish
+                    </button>
+                </div>
+            </div>
         </div>
-        <nav class="space-y-4">
-            <a href="#home" class="block text-white text-lg py-3 border-b border-white border-opacity-20">Bosh sahifa</a>
-            <a href="#campaigns" class="block text-white text-lg py-3 border-b border-white border-opacity-20">Kampaniyalar</a>
-            <a href="#about" class="block text-white text-lg py-3 border-b border-white border-opacity-20">Biz haqimizda</a>
-            <a href="#volunteer" class="block text-white text-lg py-3 border-b border-white border-opacity-20">Ko'ngillilik</a>
-            <a href="#success-stories" class="block text-white text-lg py-3 border-b border-white border-opacity-20">Muvaffaqiyat hikoyalari</a>
-            <a href="#contact" class="block text-white text-lg py-3 border-b border-white border-opacity-20">Aloqa</a>
-        </nav>
-    </div>
+    </section>
 
-    <!-- Header -->
-    <header class="morphing-gradient text-white relative overflow-hidden">
-        <!-- Particle System -->
-        <div class="particle-container">
-            <div class="particle" style="left: 10%; animation-delay: 0s;"></div>
-            <div class="particle" style="left: 20%; animation-delay: 2s;"></div>
-            <div class="particle" style="left: 30%; animation-delay: 4s;"></div>
-            <div class="particle" style="left: 40%; animation-delay: 6s;"></div>
-            <div class="particle" style="left: 50%; animation-delay: 8s;"></div>
-            <div class="particle" style="left: 60%; animation-delay: 10s;"></div>
-            <div class="particle" style="left: 70%; animation-delay: 12s;"></div>
-            <div class="particle" style="left: 80%; animation-delay: 14s;"></div>
-            <div class="particle" style="left: 90%; animation-delay: 16s;"></div>
+    <!-- Admin Activity -->
+    <section class="py-6 bg-gradient-to-r from-green-400 to-blue-500 text-white">
+        <div class="max-w-7xl mx-auto px-4 mobile-padding">
+            <div class="flex items-center justify-center space-x-4">
+                <div class="flex items-center space-x-2">
+                    <div class="w-3 h-3 bg-white rounded-full live-indicator"></div>
+                    <span class="text-sm font-medium mobile-text" data-translate="admin_activity">Admin Faoliyati</span>
+                    <span class="text-xs bg-white bg-opacity-20 px-2 py-1 rounded">👨‍💼 Live</span>
+                </div>
+                <div id="adminActivity" class="text-sm font-medium mobile-text">
+                    <span data-translate="admin_text">Admin tomonidan boshqarilmoqda...</span>
+                </div>
+            </div>
         </div>
+    </section>
 
-        <!-- Navigation -->
-        <nav class="glass-morphism relative z-10">
-            <div class="container mx-auto px-6 py-4">
-                <div class="flex items-center justify-between">
-                    <!-- Logo -->
-                    <div class="flex items-center space-x-3">
-                        <div class="w-12 h-12 bg-white bg-opacity-20 rounded-xl flex items-center justify-center heartbeat">
-                            <i class="fas fa-heart text-2xl neon-glow"></i>
-                        </div>
+    <!-- Categories Section -->
+    <section class="py-16 gradient-bg-2">
+        <div class="max-w-7xl mx-auto px-4 mobile-padding">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-4 text-shadow" data-translate="categories_title">Xayriya Yo'nalishlari</h2>
+                <p class="text-white text-lg opacity-90 mobile-text" data-translate="categories_subtitle">Har bir yo'nalishda yordam berishingiz mumkin</p>
+                <div class="text-sm text-white opacity-75 mt-2 mobile-text">👨‍💼 Admin tomonidan boshqariladi</div>
+            </div>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-4">
+                <div onclick="filterCampaigns('tibbiyot')" class="category-card rounded-xl p-4 text-center cursor-pointer transform hover:scale-105 transition-all duration-300 touch-button">
+                    <div class="text-3xl mb-2">🏥</div>
+                    <div class="text-white text-sm font-medium mobile-text" data-translate="category_medical">Tibbiy Yordam</div>
+                </div>
+                <div onclick="filterCampaigns('nogironlik')" class="category-card rounded-xl p-4 text-center cursor-pointer transform hover:scale-105 transition-all duration-300 touch-button">
+                    <div class="text-3xl mb-2">♿</div>
+                    <div class="text-white text-sm font-medium mobile-text" data-translate="category_disability">Nogironlik</div>
+                </div>
+                <div onclick="filterCampaigns('talim')" class="category-card rounded-xl p-4 text-center cursor-pointer transform hover:scale-105 transition-all duration-300 touch-button">
+                    <div class="text-3xl mb-2">📚</div>
+                    <div class="text-white text-sm font-medium mobile-text" data-translate="category_education">Ta'lim</div>
+                </div>
+                <div onclick="filterCampaigns('uy-joy')" class="category-card rounded-xl p-4 text-center cursor-pointer transform hover:scale-105 transition-all duration-300 touch-button">
+                    <div class="text-3xl mb-2">🏠</div>
+                    <div class="text-white text-sm font-medium mobile-text" data-translate="category_housing">Uy-Joy</div>
+                </div>
+                <div onclick="filterCampaigns('hayvonlar')" class="category-card rounded-xl p-4 text-center cursor-pointer transform hover:scale-105 transition-all duration-300 touch-button">
+                    <div class="text-3xl mb-2">🐾</div>
+                    <div class="text-white text-sm font-medium mobile-text" data-translate="category_animals">Hayvonlar</div>
+                </div>
+                <div onclick="filterCampaigns('ijtimoiy')" class="category-card rounded-xl p-4 text-center cursor-pointer transform hover:scale-105 transition-all duration-300 touch-button">
+                    <div class="text-3xl mb-2">🤝</div>
+                    <div class="text-white text-sm font-medium mobile-text" data-translate="category_social">Ijtimoiy</div>
+                </div>
+                <div onclick="filterCampaigns('ayollar')" class="category-card rounded-xl p-4 text-center cursor-pointer transform hover:scale-105 transition-all duration-300 touch-button">
+                    <div class="text-3xl mb-2">👩</div>
+                    <div class="text-white text-sm font-medium mobile-text" data-translate="category_women">Ayollar Uchun</div>
+                </div>
+                <div onclick="filterCampaigns('yetimlar')" class="category-card rounded-xl p-4 text-center cursor-pointer transform hover:scale-105 transition-all duration-300 touch-button">
+                    <div class="text-3xl mb-2">👶</div>
+                    <div class="text-white text-sm font-medium mobile-text" data-translate="category_orphans">Yetimlar</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Campaigns Section -->
+    <section id="campaigns" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 mobile-padding">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-6" data-translate="campaigns_title">Faol E'lonlar</h2>
+                <p class="text-gray-600 max-w-3xl mx-auto text-lg mobile-text" data-translate="campaigns_subtitle">Har bir xayriya kimgadir umid va yordam beradi. Siz ham bu yaxshi ishning bir qismi bo'ling.</p>
+                <div class="text-sm text-gray-500 mt-2 mobile-text">👨‍💼 Admin tomonidan boshqariladi</div>
+            </div>
+            
+            <!-- Filter Buttons -->
+            <div class="flex flex-wrap justify-center gap-3 mb-12">
+                <button onclick="filterCampaigns('all')" class="filter-btn bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-full font-medium shadow-lg transform hover:scale-105 transition-all duration-300 mobile-button touch-button" data-translate="filter_all">
+                    Barchasi
+                </button>
+                <button onclick="filterCampaigns('tibbiyot')" class="filter-btn bg-white text-gray-700 px-4 py-3 rounded-full font-medium hover:bg-gray-100 shadow-md transition-all duration-300 mobile-button touch-button">
+                    🏥 <span data-translate="category_medical" class="mobile-text">Tibbiy</span>
+                </button>
+                <button onclick="filterCampaigns('nogironlik')" class="filter-btn bg-white text-gray-700 px-4 py-3 rounded-full font-medium hover:bg-gray-100 shadow-md transition-all duration-300 mobile-button touch-button">
+                    ♿ <span data-translate="category_disability" class="mobile-text">Nogironlik</span>
+                </button>
+                <button onclick="filterCampaigns('talim')" class="filter-btn bg-white text-gray-700 px-4 py-3 rounded-full font-medium hover:bg-gray-100 shadow-md transition-all duration-300 mobile-button touch-button">
+                    📚 <span data-translate="category_education" class="mobile-text">Ta'lim</span>
+                </button>
+                <button onclick="filterCampaigns('uy-joy')" class="filter-btn bg-white text-gray-700 px-4 py-3 rounded-full font-medium hover:bg-gray-100 shadow-md transition-all duration-300 mobile-button touch-button">
+                    🏠 <span data-translate="category_housing" class="mobile-text">Uy-Joy</span>
+                </button>
+            </div>
+            
+            <!-- Campaigns Grid -->
+            <div id="campaignsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Campaigns will be loaded here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 mobile-padding">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-6" data-translate="about_title">Biz Haqimizda</h2>
+                <p class="text-gray-600 max-w-4xl mx-auto text-lg mobile-text" data-translate="about_subtitle">E-Ehson Professional - bu zamonaviy xayriya platformasi bo'lib, odamlar o'rtasida yaxshilik va yordam ko'rsatish uchun yaratilgan.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16">
+                <div class="text-center group mobile-card">
+                    <div class="text-6xl mb-6 transform group-hover:scale-110 transition-transform duration-300">🎯</div>
+                    <h3 class="text-2xl font-bold mb-4" data-translate="mission_title">Maqsadimiz</h3>
+                    <p class="text-gray-600 text-lg mobile-text" data-translate="mission_text">Har bir inson o'z hissasini qo'shib, jamiyatni yaxshilashga yordam berish</p>
+                </div>
+                <div class="text-center group mobile-card">
+                    <div class="text-6xl mb-6 transform group-hover:scale-110 transition-transform duration-300">👨‍💼</div>
+                    <h3 class="text-2xl font-bold mb-4">Admin Nazorati</h3>
+                    <p class="text-gray-600 text-lg mobile-text">Telegram orqali professional boshqaruv va nazorat</p>
+                </div>
+                <div class="text-center group mobile-card">
+                    <div class="text-6xl mb-6 transform group-hover:scale-110 transition-transform duration-300">🌍</div>
+                    <h3 class="text-2xl font-bold mb-4" data-translate="impact_title">Ta'sir</h3>
+                    <p class="text-gray-600 text-lg mobile-text" data-translate="impact_text">Minglab odamlarning hayotini yaxshilashga hissa qo'shamiz</p>
+                </div>
+            </div>
+
+            <!-- CEO Section -->
+            <div class="bg-gradient-to-r from-blue-50 to-purple-50 rounded-2xl p-8 text-center mobile-card">
+                <div class="text-6xl mb-4">👨‍💼</div>
+                <h3 class="text-2xl font-bold text-gray-800 mb-2">Jasurbek Jo'lanboyev G'ayrat o'g'li</h3>
+                <p class="text-blue-600 font-semibold mb-4">CEO & Founder</p>
+                <p class="text-gray-600 max-w-2xl mx-auto mobile-text" data-translate="ceo_message">"Bizning maqsadimiz - har bir inson o'z imkoniyatlari doirasida yaxshilik qilishi va jamiyatga hissa qo'shishi uchun professional platforma yaratish."</p>
+                <div class="mt-4 text-sm text-gray-500 mobile-text">📱 Telegram: @serinaqu</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="py-20 bg-gray-50">
+        <div class="max-w-4xl mx-auto px-4 mobile-padding">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-6" data-translate="faq_title">Tez-tez So'raladigan Savollar</h2>
+                <p class="text-gray-600 text-lg mobile-text" data-translate="faq_subtitle">Platformamiz haqida eng ko'p so'raladigan savollar va javoblar</p>
+            </div>
+            
+            <div class="space-y-6">
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden mobile-card">
+                    <button onclick="toggleFAQ(1)" class="w-full px-6 py-6 text-left flex justify-between items-center hover:bg-gray-50 transition-colors touch-button">
+                        <span class="font-semibold text-lg mobile-text" data-translate="faq_q1">Platformada xayriya qilish qanday amalga oshiriladi?</span>
+                        <i class="fas fa-chevron-down transform transition-transform duration-300" id="faq-icon-1"></i>
+                    </button>
+                    <div id="faq-answer-1" class="hidden px-6 pb-6">
+                        <p class="text-gray-600 mobile-text" data-translate="faq_a1">Xayriya qilish tugmasini bosganingizda, siz admin Telegram akkauntiga yo'naltirilasiz. U yerda barcha ma'lumotlar va to'lov yo'llari ko'rsatiladi.</p>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden mobile-card">
+                    <button onclick="toggleFAQ(2)" class="w-full px-6 py-6 text-left flex justify-between items-center hover:bg-gray-50 transition-colors touch-button">
+                        <span class="font-semibold text-lg mobile-text">E'lon qanday qo'yiladi?</span>
+                        <i class="fas fa-chevron-down transform transition-transform duration-300" id="faq-icon-2"></i>
+                    </button>
+                    <div id="faq-answer-2" class="hidden px-6 pb-6">
+                        <p class="text-gray-600 mobile-text">E'lon qo'yish tugmasini bosganingizda, admin Telegram ga yo'naltirilasiz. Admin sizning e'loningizni ko'rib chiqadi va kerakli to'lovdan keyin saytga joylashtiradi.</p>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden mobile-card">
+                    <button onclick="toggleFAQ(3)" class="w-full px-6 py-6 text-left flex justify-between items-center hover:bg-gray-50 transition-colors touch-button">
+                        <span class="font-semibold text-lg mobile-text">To'lov qanday nazorat qilinadi?</span>
+                        <i class="fas fa-chevron-down transform transition-transform duration-3000" id="faq-icon-3"></i>
+                    </button>
+                    <div id="faq-answer-3" class="hidden px-6 pb-6">
+                        <p class="text-gray-600 mobile-text">Barcha to'lovlar admin tomonidan nazorat qilinadi. To'lov tasdiqlangandan keyin, admin maxsus kod orqali saytdagi summalarni yangilaydi.</p>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden mobile-card">
+                    <button onclick="toggleFAQ(4)" class="w-full px-6 py-6 text-left flex justify-between items-center hover:bg-gray-50 transition-colors touch-button">
+                        <span class="font-semibold text-lg mobile-text">Mobil ilovada qanday ishlaydi?</span>
+                        <i class="fas fa-chevron-down transform transition-transform duration-300" id="faq-icon-4"></i>
+                    </button>
+                    <div id="faq-answer-4" class="hidden px-6 pb-6">
+                        <p class="text-gray-600 mobile-text">Sayt Flutter WebView orqali mobil ilovada to'liq ishlaydi. Barcha funksiyalar mobil qurilmalarga optimallashtirilgan.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-white">
+        <div class="max-w-6xl mx-auto px-4 mobile-padding">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-6" data-translate="contact_title">Biz Bilan Bog'laning</h2>
+                <p class="text-gray-600 text-lg mb-8 mobile-text" data-translate="contact_subtitle">Savollaringiz bormi? Admin bilan bevosita bog'laning!</p>
+                <div class="text-sm text-gray-500 mobile-text">👨‍💼 24/7 Admin Qo'llab-quvvatlash</div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+                <div class="text-center group mobile-card">
+                    <div class="w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-4 transform group-hover:scale-110 transition-all duration-300">
+                        <i class="fas fa-envelope text-white text-xl"></i>
+                    </div>
+                    <h3 class="font-bold mb-2 mobile-text" data-translate="contact_email">Email</h3>
+                    <p class="text-gray-600 mobile-text">info@eehson.uz</p>
+                </div>
+                <div class="text-center group mobile-card">
+                    <div class="w-16 h-16 bg-gradient-to-r from-green-500 to-blue-500 rounded-full flex items-center justify-center mx-auto mb-4 transform group-hover:scale-110 transition-all duration-300">
+                        <i class="fab fa-telegram text-white text-xl"></i>
+                    </div>
+                    <h3 class="font-bold mb-2 mobile-text">Admin Telegram</h3>
+                    <a href="https://t.me/serinaqu" target="_blank" class="text-blue-600 hover:text-blue-800 mobile-text">@serinaqu</a>
+                </div>
+                <div class="text-center group mobile-card">
+                    <div class="w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center mx-auto mb-4 transform group-hover:scale-110 transition-all duration-300">
+                        <i class="fas fa-phone text-white text-xl"></i>
+                    </div>
+                    <h3 class="font-bold mb-2 mobile-text" data-translate="contact_phone">Telefon</h3>
+                    <p class="text-gray-600 mobile-text">+998 90 123 45 67</p>
+                </div>
+                <div class="text-center group mobile-card">
+                    <div class="w-16 h-16 bg-gradient-to-r from-red-500 to-orange-500 rounded-full flex items-center justify-center mx-auto mb-4 transform group-hover:scale-110 transition-all duration-300">
+                        <i class="fas fa-user-tie text-white text-xl"></i>
+                    </div>
+                    <h3 class="font-bold mb-2 mobile-text">Admin Status</h3>
+                    <p class="text-gray-600 mobile-text" id="adminStatusFooter">Online</p>
+                </div>
+            </div>
+
+            <!-- Social Media -->
+            <div class="text-center">
+                <h3 class="text-2xl font-bold text-gray-800 mb-8 mobile-text" data-translate="social_title">Ijtimoiy Tarmoqlar</h3>
+                <div class="flex justify-center space-x-6 flex-wrap gap-4">
+                    <a href="https://linkedin.com" target="_blank" class="social-icon w-14 h-14 bg-blue-600 rounded-full flex items-center justify-center text-white text-xl hover:bg-blue-700 touch-button">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a href="https://instagram.com" target="_blank" class="social-icon w-14 h-14 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center text-white text-xl touch-button">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://youtube.com" target="_blank" class="social-icon w-14 h-14 bg-red-600 rounded-full flex items-center justify-center text-white text-xl hover:bg-red-700 touch-button">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                    <a href="https://t.me/serinaqu" target="_blank" class="social-icon w-14 h-14 bg-blue-500 rounded-full flex items-center justify-center text-white text-xl hover:bg-blue-600 touch-button">
+                        <i class="fab fa-telegram"></i>
+                    </a>
+                    <a href="https://facebook.com" target="_blank" class="social-icon w-14 h-14 bg-blue-800 rounded-full flex items-center justify-center text-white text-xl hover:bg-blue-900 touch-button">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-16 webview-safe">
+        <div class="max-w-7xl mx-auto px-4 mobile-padding">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+                <div class="mobile-card">
+                    <div class="flex items-center space-x-3 mb-6">
+                        <div class="text-3xl">❤️</div>
                         <div>
-                            <h1 class="text-2xl font-bold neon-glow">E-Ehson Global</h1>
-                            <p class="text-sm opacity-90">Professional Xayriya Platformasi</p>
+                            <h3 class="text-xl font-bold">E-Ehson Professional</h3>
+                            <p class="text-sm text-gray-400">Xayriya Platformasi</p>
                         </div>
                     </div>
-
-                    <!-- Search Bar -->
-                    <div class="hidden md:block flex-1 max-w-md mx-8">
-                        <div class="search-container">
-                            <div class="relative">
-                                <input type="text" id="globalSearch" class="w-full px-4 py-2 pl-10 bg-white bg-opacity-10 border border-white border-opacity-20 rounded-lg text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Kampaniya qidirish...">
-                                <i class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-300"></i>
-                            </div>
-                            <div id="searchResults" class="search-results">
-                                <!-- Search results will appear here -->
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Navigation Links -->
-                    <div class="hidden lg:flex items-center space-x-8">
-                        <a href="#home" class="hover:text-yellow-300 transition-colors">Bosh sahifa</a>
-                        <a href="#campaigns" class="hover:text-yellow-300 transition-colors">Kampaniyalar</a>
-                        <a href="#about" class="hover:text-yellow-300 transition-colors">Biz haqimizda</a>
-                        <a href="#volunteer" class="hover:text-yellow-300 transition-colors">Ko'ngillilik</a>
-                        <a href="#contact" class="hover:text-yellow-300 transition-colors">Aloqa</a>
-                    </div>
-
-                    <!-- User Menu -->
-                    <div class="flex items-center space-x-4">
-                        <!-- Language Switcher -->
-                        <div class="language-switcher">
-                            <button id="languageBtn" class="flex items-center space-x-2 px-3 py-2 rounded-lg bg-white bg-opacity-10 hover:bg-opacity-20 transition-all">
-                                <img id="currentFlag" src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMTUiIHZpZXdCb3g9IjAgMCAyMCAxNSIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjIwIiBoZWlnaHQ9IjE1IiBmaWxsPSIjMDA5OUNDIi8+CjxyZWN0IHk9IjUiIHdpZHRoPSIyMCIgaGVpZ2h0PSI1IiBmaWxsPSIjRkZGRkZGIi8+CjxyZWN0IHk9IjEwIiB3aWR0aD0iMjAiIGhlaWdodD0iNSIgZmlsbD0iIzAwOTk0NCIvPgo8L3N2Zz4K" alt="UZ" class="flag-icon">
-                                <span id="currentLang" class="text-sm font-medium hidden md:block">O'zbek</span>
-                                <i class="fas fa-chevron-down text-xs"></i>
-                            </button>
-                            <div id="languageDropdown" class="language-dropdown">
-                                <div class="language-option active" data-lang="uz">
-                                    <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMTUiIHZpZXdCb3g9IjAgMCAyMCAxNSIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjIwIiBoZWlnaHQ9IjE1IiBmaWxsPSIjMDA5OUNDIi8+CjxyZWN0IHk9IjUiIHdpZHRoPSIyMCIgaGVpZ2h0PSI1IiBmaWxsPSIjRkZGRkZGIi8+CjxyZWN0IHk9IjEwIiB3aWR0aD0iMjAiIGhlaWdodD0iNSIgZmlsbD0iIzAwOTk0NCIvPgo8L3N2Zz4K" alt="UZ" class="flag-icon">
-                                    <span>O'zbek</span>
-                                </div>
-                                <div class="language-option" data-lang="ru">
-                                    <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMTUiIHZpZXdCb3g9IjAgMCAyMCAxNSIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjIwIiBoZWlnaHQ9IjUiIGZpbGw9IiNGRkZGRkYiLz4KPHJlY3QgeT0iNSIgd2lkdGg9IjIwIiBoZWlnaHQ9IjUiIGZpbGw9IiMwMDUyQTUiLz4KPHJlY3QgeT0iMTAiIHdpZHRoPSIyMCIgaGVpZ2h0PSI1IiBmaWxsPSIjREEwMDAwIi8+Cjwvc3ZnPgo=" alt="RU" class="flag-icon">
-                                    <span>Русский</span>
-                                </div>
-                                <div class="language-option" data-lang="en">
-                                    <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMTUiIHZpZXdCb3g9IjAgMCAyMCAxNSIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjIwIiBoZWlnaHQ9IjE1IiBmaWxsPSIjMDEyMTY5Ii8+CjxwYXRoIGQ9Ik0wIDBoMjB2MUgweiIgZmlsbD0iI0ZGRiIvPgo8cGF0aCBkPSJNMCAyaDIwdjFIMHoiIGZpbGw9IiNGRkYiLz4KPHBhdGggZD0iTTAgNGgyMHYxSDB6IiBmaWxsPSIjRkZGIi8+CjxwYXRoIGQ9Ik0wIDZoMjB2MUgweiIgZmlsbD0iI0ZGRiIvPgo8cGF0aCBkPSJNMCA4aDIwdjFIMHoiIGZpbGw9IiNGRkYiLz4KPHBhdGggZD0iTTAgMTBoMjB2MUgweiIgZmlsbD0iI0ZGRiIvPgo8cGF0aCBkPSJNMCAxMmgyMHYxSDB6IiBmaWxsPSIjRkZGIi8+CjxwYXRoIGQ9Ik0wIDE0aDIwdjFIMHoiIGZpbGw9IiNGRkYiLz4KPHJlY3Qgd2lkdGg9IjgiIGhlaWdodD0iOCIgZmlsbD0iIzAxMjE2OSIvPgo8L3N2Zz4K" alt="EN" class="flag-icon">
-                                    <span>English</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Mobile Menu Toggle -->
-                        <button id="mobileMenuToggle" class="lg:hidden text-white text-xl">
-                            <i class="fas fa-bars"></i>
-                        </button>
-
-                        <!-- Guest Menu -->
-                        <div id="guestMenu" class="hidden md:flex items-center space-x-3">
-                            <button id="loginBtn" class="px-4 py-2 bg-white bg-opacity-10 rounded-lg hover:bg-opacity-20 transition-all">
-                                <i class="fas fa-sign-in-alt mr-2"></i>Kirish
-                            </button>
-                            <button id="signupBtn" class="px-4 py-2 bg-white bg-opacity-20 rounded-lg hover:bg-opacity-30 transition-all">
-                                <i class="fas fa-user-plus mr-2"></i>Ro'yxat
-                            </button>
-                        </div>
-
-                        <!-- User Menu (Hidden by default) -->
-                        <div id="userMenu" class="hidden relative">
-                            <button id="profileDropdown" class="flex items-center space-x-3 px-4 py-2 bg-white bg-opacity-10 rounded-lg hover:bg-opacity-20 transition-all">
-                                <div class="w-8 h-8 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
-                                    <i class="fas fa-user text-sm"></i>
-                                </div>
-                                <span id="userName" class="font-medium hidden md:block">Foydalanuvchi</span>
-                                <i class="fas fa-chevron-down text-xs"></i>
-                            </button>
-                            
-                            <div id="dropdownMenu" class="hidden absolute right-0 mt-2 w-64 glass-morphism rounded-xl shadow-2xl py-2">
-                                <div class="px-4 py-3 border-b border-white border-opacity-20">
-                                    <p class="font-medium text-white" id="userNameFull">Foydalanuvchi</p>
-                                    <p class="text-sm text-gray-300" id="userPhone">+998 90 123 45 67</p>
-                                </div>
-                                <a href="#" class="flex items-center px-4 py-3 text-white hover:bg-white hover:bg-opacity-10 transition-all">
-                                    <i class="fas fa-user mr-3"></i>Profil
-                                </a>
-                                <a href="#" class="flex items-center px-4 py-3 text-white hover:bg-white hover:bg-opacity-10 transition-all">
-                                    <i class="fas fa-heart mr-3"></i>Mening xayriyalarim
-                                </a>
-                                <a href="#" id="applyCharityLink" class="flex items-center px-4 py-3 text-white hover:bg-white hover:bg-opacity-10 transition-all">
-                                    <i class="fas fa-file-alt mr-3"></i>Xayriya uchun ariza
-                                </a>
-                                <a href="#" class="flex items-center px-4 py-3 text-white hover:bg-white hover:bg-opacity-10 transition-all">
-                                    <i class="fas fa-cog mr-3"></i>Sozlamalar
-                                </a>
-                                <a href="#" class="flex items-center px-4 py-3 text-white hover:bg-white hover:bg-opacity-10 transition-all">
-                                    <i class="fas fa-bell mr-3"></i>Bildirishnomalar
-                                </a>
-                                <div id="adminPanelLink" class="hidden">
-                                    <a href="#" class="flex items-center px-4 py-3 text-yellow-300 hover:bg-white hover:bg-opacity-10 transition-all">
-                                        <i class="fas fa-crown mr-3"></i>Admin Panel
-                                    </a>
-                                </div>
-                                <div class="border-t border-white border-opacity-20 mt-2">
-                                    <button id="logoutBtn" class="flex items-center w-full px-4 py-3 text-red-300 hover:bg-white hover:bg-opacity-10 transition-all">
-                                        <i class="fas fa-sign-out-alt mr-3"></i>Chiqish
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <p class="text-gray-400 mb-4 mobile-text" data-translate="footer_description">Professional xayriya platformasi - yaxshilik uchun birlashamiz</p>
+                    <p class="text-sm text-gray-500 mobile-text">CEO: Jasurbek Jo'lanboyev G'ayrat o'g'li</p>
+                    <div class="mt-4 text-xs text-gray-600 mobile-text">👨‍💼 Admin: @serinaqu</div>
+                </div>
+                
+                <div class="mobile-card">
+                    <h4 class="font-bold mb-6 text-lg mobile-text" data-translate="footer_links">Tezkor Havolalar</h4>
+                    <ul class="space-y-3 text-gray-400">
+                        <li><a href="#home" class="hover:text-white transition-colors mobile-text" data-translate="nav_home">Bosh sahifa</a></li>
+                        <li><a href="#campaigns" class="hover:text-white transition-colors mobile-text" data-translate="nav_campaigns">E'lonlar</a></li>
+                        <li><a href="#about" class="hover:text-white transition-colors mobile-text" data-translate="nav_about">Biz haqimizda</a></li>
+                        <li><a href="#faq" class="hover:text-white transition-colors mobile-text" data-translate="nav_faq">FAQ</a></li>
+                        <li><a href="#contact" class="hover:text-white transition-colors mobile-text" data-translate="nav_contact">Aloqa</a></li>
+                    </ul>
+                </div>
+                
+                <div class="mobile-card">
+                    <h4 class="font-bold mb-6 text-lg mobile-text">Admin Panel</h4>
+                    <ul class="space-y-3 text-gray-400 text-sm mobile-text">
+                        <li>👨‍💼 Telegram Boshqaruv</li>
+                        <li>💰 To'lov Nazorati</li>
+                        <li>📢 E'lon Boshqaruv</li>
+                        <li>📱 Mobil Qo'llab-quvvatlash</li>
+                        <li>🔄 Real-time Yangilanish</li>
+                    </ul>
+                </div>
+                
+                <div class="mobile-card">
+                    <h4 class="font-bold mb-6 text-lg mobile-text" data-translate="footer_categories">Kategoriyalar</h4>
+                    <ul class="space-y-3 text-gray-400 text-sm mobile-text">
+                        <li><span data-translate="category_medical">Tibbiy Yordam</span></li>
+                        <li><span data-translate="category_education">Ta'lim</span></li>
+                        <li><span data-translate="category_housing">Uy-Joy</span></li>
+                        <li><span data-translate="category_social">Ijtimoiy Yordam</span></li>
+                        <li><span data-translate="category_animals">Hayvonlar</span></li>
+                    </ul>
                 </div>
             </div>
-        </nav>
-
-        <!-- Hero Section -->
-        <div class="relative z-10 py-20">
-            <div class="container mx-auto px-6 text-center">
-                <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 neon-glow gradient-text typewriter">
-                    Dunyoni O'zgartiring
-                </h1>
-                <p class="text-lg md:text-xl lg:text-2xl mb-8 opacity-90 fade-in">
-                    Professional xayriya platformasi orqali yaxshi ishlarni qo'llab-quvvatlang
-                </p>
-                
-                <!-- Global Statistics -->
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mb-12">
-                    <div class="stat-card p-4 md:p-6 rounded-2xl text-center elastic-bounce">
-                        <div class="impact-counter text-2xl md:text-3xl font-bold mb-2" id="heroTotalRaised">$2.5M+</div>
-                        <div class="text-xs md:text-sm opacity-80">Jami Xayriya</div>
-                    </div>
-                    <div class="stat-card p-4 md:p-6 rounded-2xl text-center elastic-bounce" style="animation-delay: 0.1s;">
-                        <div class="impact-counter text-2xl md:text-3xl font-bold mb-2" id="heroActiveDonors">15,678</div>
-                        <div class="text-xs md:text-sm opacity-80">Faol Donorlar</div>
-                    </div>
-                    <div class="stat-card p-4 md:p-6 rounded-2xl text-center elastic-bounce" style="animation-delay: 0.2s;">
-                        <div class="impact-counter text-2xl md:text-3xl font-bold mb-2" id="heroActiveCampaigns">1,247</div>
-                        <div class="text-xs md:text-sm opacity-80">Kampaniyalar</div>
-                    </div>
-                    <div class="stat-card p-4 md:p-6 rounded-2xl text-center elastic-bounce" style="animation-delay: 0.3s;">
-                        <div class="impact-counter text-2xl md:text-3xl font-bold mb-2">47</div>
-                        <div class="text-xs md:text-sm opacity-80">Mamlakatlar</div>
-                    </div>
-                </div>
-
-                <!-- Action Buttons -->
-                <div class="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-6">
-                    <button id="startDonatingBtn" class="btn-primary text-white px-6 md:px-8 py-3 md:py-4 rounded-xl font-bold text-base md:text-lg elastic-hover">
-                        <i class="fas fa-heart mr-2 md:mr-3 heartbeat"></i>Xayriya Qilishni Boshlash
-                    </button>
-                    <button id="createCampaignBtn" class="btn-secondary text-white px-6 md:px-8 py-3 md:py-4 rounded-xl font-bold text-base md:text-lg elastic-hover">
-                        <i class="fas fa-bullhorn mr-2 md:mr-3"></i>Kampaniya Yaratish
-                    </button>
-                    <button id="viewGlobalStatsBtn" class="btn-admin text-white px-6 md:px-8 py-3 md:py-4 rounded-xl font-bold text-base md:text-lg elastic-hover">
-                        <i class="fas fa-chart-line mr-2 md:mr-3"></i>Global Statistika
-                    </button>
-                </div>
-
-                <!-- Quick Actions -->
-                <div class="mt-12 flex flex-wrap justify-center gap-4">
-                    <button id="emergencyHelpBtn" class="btn-danger text-white px-4 py-2 rounded-lg font-medium text-sm">
-                        <i class="fas fa-exclamation-triangle mr-2"></i>Shoshilinch Yordam
-                    </button>
-                    <button id="volunteerBtn" class="btn-warning text-white px-4 py-2 rounded-lg font-medium text-sm">
-                        <i class="fas fa-hands-helping mr-2"></i>Ko'ngilli Bo'lish
-                    </button>
-                    <button id="partnershipBtn" class="btn-info text-white px-4 py-2 rounded-lg font-medium text-sm">
-                        <i class="fas fa-handshake mr-2"></i>Hamkorlik
-                    </button>
-                </div>
+            
+            <div class="border-t border-gray-700 pt-8 text-center">
+                <p class="text-gray-400 mb-4 mobile-text">&copy; 2024 E-Ehson Professional. <span data-translate="rights_reserved">Barcha huquqlar himoyalangan.</span></p>
+                <p class="text-sm text-gray-500 mobile-text" data-translate="copyright_text">Jasurbek Jo'lanboyev G'ayrat o'g'li tomonidan yaratilgan. Professional Platform.</p>
+                <div class="mt-2 text-xs text-gray-600 mobile-text">👨‍💼 Admin: @serinaqu • 📱 Flutter WebView Ready • 💰 Telegram Payment</div>
             </div>
         </div>
-    </header>
+    </footer>
 
-    <!-- Main Content -->
-    <main id="mainContent">
-        <!-- Advertisement Section -->
-        <section class="py-8 bg-gradient-to-r from-purple-600 to-pink-600">
-            <div class="container mx-auto px-6">
-                <div id="advertisementContainer">
-                    <!-- Advertisements will be loaded here -->
-                </div>
-            </div>
-        </section>
+    <script>
+        // ========================================
+        // TRANSLATIONS
+        // ========================================
+        const translations = {
+            uz: {
+                version: "Versiya",
+                nav_home: "Bosh sahifa",
+                nav_campaigns: "E'lonlar",
+                nav_about: "Biz haqimizda",
+                nav_faq: "FAQ",
+                nav_contact: "Aloqa",
+                add_announcement: "E'lon Qo'yish",
+                hero_title: "Yaxshilik Qiling",
+                hero_subtitle: "Professional xayriya platformasi orqali yaxshi ishlarni qo'llab-quvvatlang va jamiyatga hissa qo'shing",
+                total_donations: "Jami Xayriya",
+                total_users: "Xayriyachilar",
+                active_campaigns: "Faol E'lonlar",
+                completed_campaigns: "Tugallangan",
+                donate_now: "Xayriya Qilish",
+                create_campaign: "E'lon Berish",
+                admin_activity: "Admin Faoliyati",
+                admin_text: "Admin tomonidan boshqarilmoqda...",
+                categories_title: "Xayriya Yo'nalishlari",
+                categories_subtitle: "Har bir yo'nalishda yordam berishingiz mumkin",
+                category_medical: "Tibbiy Yordam",
+                category_disability: "Nogironlik",
+                category_education: "Ta'lim",
+                category_housing: "Uy-Joy",
+                category_animals: "Hayvonlar",
+                category_social: "Ijtimoiy",
+                category_women: "Ayollar Uchun",
+                category_orphans: "Yetimlar",
+                campaigns_title: "Faol E'lonlar",
+                campaigns_subtitle: "Har bir xayriya kimgadir umid va yordam beradi. Siz ham bu yaxshi ishning bir qismi bo'ling.",
+                filter_all: "Barchasi",
+                about_title: "Biz Haqimizda",
+                about_subtitle: "E-Ehson Professional - bu zamonaviy xayriya platformasi bo'lib, odamlar o'rtasida yaxshilik va yordam ko'rsatish uchun yaratilgan.",
+                mission_title: "Maqsadimiz",
+                mission_text: "Har bir inson o'z hissasini qo'shib, jamiyatni yaxshilashga yordam berish",
+                impact_title: "Ta'sir",
+                impact_text: "Minglab odamlarning hayotini yaxshilashga hissa qo'shamiz",
+                ceo_message: "Bizning maqsadimiz - har bir inson o'z imkoniyatlari doirasida yaxshilik qilishi va jamiyatga hissa qo'shishi uchun professional platforma yaratish.",
+                faq_title: "Tez-tez So'raladigan Savollar",
+                faq_subtitle: "Platformamiz haqida eng ko'p so'raladigan savollar va javoblar",
+                faq_q1: "Platformada xayriya qilish qanday amalga oshiriladi?",
+                faq_a1: "Xayriya qilish tugmasini bosganingizda, siz admin Telegram akkauntiga yo'naltirilasiz. U yerda barcha ma'lumotlar va to'lov yo'llari ko'rsatiladi.",
+                contact_title: "Biz Bilan Bog'laning",
+                contact_subtitle: "Savollaringiz bormi? Admin bilan bevosita bog'laning!",
+                contact_email: "Email",
+                contact_phone: "Telefon",
+                social_title: "Ijtimoiy Tarmoqlar",
+                footer_description: "Professional xayriya platformasi - yaxshilik uchun birlashamiz",
+                footer_links: "Tezkor Havolalar",
+                footer_categories: "Kategoriyalar",
+                rights_reserved: "Barcha huquqlar himoyalangan.",
+                copyright_text: "Jasurbek Jo'lanboyev G'ayrat o'g'li tomonidan yaratilgan. Professional Platform."
+            },
+            en: {
+                version: "Version",
+                nav_home: "Home",
+                nav_campaigns: "Announcements",
+                nav_about: "About Us",
+                nav_faq: "FAQ",
+                nav_contact: "Contact",
+                add_announcement: "Add Announcement",
+                hero_title: "Do Good",
+                hero_subtitle: "Support good causes through our professional charity platform and contribute to society",
+                total_donations: "Total Donations",
+                total_users: "Donors",
+                active_campaigns: "Active Announcements",
+                completed_campaigns: "Completed",
+                donate_now: "Donate Now",
+                create_campaign: "Create Announcement",
+                admin_activity: "Admin Activity",
+                admin_text: "Managed by admin...",
+                categories_title: "Charity Categories",
+                categories_subtitle: "You can help in every direction",
+                category_medical: "Medical Aid",
+                category_disability: "Disability",
+                category_education: "Education",
+                category_housing: "Housing",
+                category_animals: "Animals",
+                category_social: "Social",
+                category_women: "For Women",
+                category_orphans: "Orphans",
+                campaigns_title: "Active Announcements",
+                campaigns_subtitle: "Every donation brings hope and help to someone. Be part of this good work.",
+                filter_all: "All",
+                about_title: "About Us",
+                about_subtitle: "E-Ehson Professional is a modern charity platform created to promote kindness and assistance among people.",
+                mission_title: "Our Mission",
+                mission_text: "Help every person contribute and improve society",
+                impact_title: "Impact",
+                impact_text: "We contribute to improving the lives of thousands of people",
+                ceo_message: "Our goal is to create a professional platform for every person to do good within their capabilities and contribute to society.",
+                faq_title: "Frequently Asked Questions",
+                faq_subtitle: "Most frequently asked questions about our platform",
+                faq_q1: "How is donation made on the platform?",
+                faq_a1: "When you click the donate button, you will be directed to the admin Telegram account. All information and payment methods are shown there.",
+                contact_title: "Contact Us",
+                contact_subtitle: "Have questions? Contact admin directly!",
+                contact_email: "Email",
+                contact_phone: "Phone",
+                social_title: "Social Networks",
+                footer_description: "Professional charity platform - unite for good",
+                footer_links: "Quick Links",
+                footer_categories: "Categories",
+                rights_reserved: "All rights reserved.",
+                copyright_text: "Created by Jasurbek Jo'lanboyev G'ayrat o'g'li. Professional Platform."
+            },
+            ru: {
+                version: "Версия",
+                nav_home: "Главная",
+                nav_campaigns: "Объявления",
+                nav_about: "О нас",
+                nav_faq: "FAQ",
+                nav_contact: "Контакты",
+                add_announcement: "Добавить Объявление",
+                hero_title: "Делайте Добро",
+                hero_subtitle: "Поддерживайте добрые дела через нашу профессиональную благотворительную платформу",
+                total_donations: "Всего Пожертвований",
+                total_users: "Жертвователи",
+                active_campaigns: "Активные Объявления",
+                completed_campaigns: "Завершенные",
+                donate_now: "Пожертвовать",
+                create_campaign: "Создать Объявление",
+                admin_activity: "Активность Админа",
+                admin_text: "Управляется админом...",
+                categories_title: "Категории Благотворительности",
+                categories_subtitle: "Вы можете помочь в любом направлении",
+                category_medical: "Медицинская Помощь",
+                category_disability: "Инвалидность",
+                category_education: "Образование",
+                category_housing: "Жилье",
+                category_animals: "Животные",
+                category_social: "Социальная",
+                category_women: "Для Женщин",
+                category_orphans: "Сироты",
+                campaigns_title: "Активные Объявления",
+                campaigns_subtitle: "Каждое пожертвование приносит кому-то надежду и помощь. Станьте частью этого доброго дела.",
+                filter_all: "Все",
+                about_title: "О Нас",
+                about_subtitle: "E-Ehson Professional - это современная благотворительная платформа, созданная для продвижения доброты между людьми.",
+                mission_title: "Наша Миссия",
+                mission_text: "Помочь каждому человеку внести свой вклад и улучшить общество",
+                impact_title: "Влияние",
+                impact_text: "Мы способствуем улучшению жизни тысяч людей",
+                ceo_message: "Наша цель - создать профессиональную платформу для каждого человека, чтобы делать добро и вносить вклад в общество.",
+                faq_title: "Часто Задаваемые Вопросы",
+                faq_subtitle: "Наиболее часто задаваемые вопросы о нашей платформе",
+                faq_q1: "Как осуществляется пожертвование на платформе?",
+                faq_a1: "При нажатии кнопки пожертвования вы будете перенаправлены в Telegram админа. Там показаны все данные и способы оплаты.",
+                contact_title: "Свяжитесь с Нами",
+                contact_subtitle: "Есть вопросы? Свяжитесь с админом напрямую!",
+                contact_email: "Email",
+                contact_phone: "Телефон",
+                social_title: "Социальные Сети",
+                footer_description: "Профессиональная благотворительная платформа - объединимся для добра",
+                footer_links: "Быстрые Ссылки",
+                footer_categories: "Категории",
+                rights_reserved: "Все права защищены.",
+                copyright_text: "Создано Жасурбеком Жоланбоевым Гайрат угли. Профессиональная Платформа."
+            }
+        };
 
-        <!-- Campaign Categories -->
-        <section class="py-12 md:py-16 bg-white">
-            <div class="container mx-auto px-6">
-                <div class="text-center mb-8 md:mb-12">
-                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Kampaniya Kategoriyalari</h2>
-                    <p class="text-lg md:text-xl text-gray-600">Qiziqtirgan sohani tanlang</p>
-                </div>
-                
-                <div class="flex flex-wrap justify-center gap-3 md:gap-4 mb-8 md:mb-12">
-                    <button class="category-filter active px-4 md:px-6 py-2 md:py-3 rounded-full bg-gray-100 text-gray-700 font-medium transition-all text-sm md:text-base" data-category="all">
-                        <i class="fas fa-globe mr-2"></i>Barchasi
-                    </button>
-                    <button class="category-filter px-4 md:px-6 py-2 md:py-3 rounded-full bg-gray-100 text-gray-700 font-medium transition-all text-sm md:text-base" data-category="health">
-                        <i class="fas fa-heartbeat mr-2"></i>Sog'liq
-                    </button>
-                    <button class="category-filter px-4 md:px-6 py-2 md:py-3 rounded-full bg-gray-100 text-gray-700 font-medium transition-all text-sm md:text-base" data-category="education">
-                        <i class="fas fa-graduation-cap mr-2"></i>Ta'lim
-                    </button>
-                    <button class="category-filter px-4 md:px-6 py-2 md:py-3 rounded-full bg-gray-100 text-gray-700 font-medium transition-all text-sm md:text-base" data-category="emergency">
-                        <i class="fas fa-exclamation-triangle mr-2"></i>Favqulodda
-                    </button>
-                    <button class="category-filter px-4 md:px-6 py-2 md:py-3 rounded-full bg-gray-100 text-gray-700 font-medium transition-all text-sm md:text-base" data-category="children">
-                        <i class="fas fa-child mr-2"></i>Bolalar
-                    </button>
-                    <button class="category-filter px-4 md:px-6 py-2 md:py-3 rounded-full bg-gray-100 text-gray-700 font-medium transition-all text-sm md:text-base" data-category="elderly">
-                        <i class="fas fa-user-friends mr-2"></i>Keksalar
-                    </button>
-                    <button class="category-filter px-4 md:px-6 py-2 md:py-3 rounded-full bg-gray-100 text-gray-700 font-medium transition-all text-sm md:text-base" data-category="environment">
-                        <i class="fas fa-leaf mr-2"></i>Atrof-muhit
-                    </button>
-                    <button class="category-filter px-4 md:px-6 py-2 md:py-3 rounded-full bg-gray-100 text-gray-700 font-medium transition-all text-sm md:text-base" data-category="housing">
-                        <i class="fas fa-home mr-2"></i>Uy-joy
-                    </button>
-                </div>
-            </div>
-        </section>
+        // ========================================
+        // DATA MANAGEMENT
+        // ========================================
+        
+        let campaigns = [];
+        let currentFilter = 'all';
+        let currentLanguage = 'uz';
 
-        <!-- Active Campaigns -->
-        <section id="campaigns" class="py-12 md:py-16 bg-gray-50">
-            <div class="container mx-auto px-6">
-                <div class="text-center mb-8 md:mb-12">
-                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Faol Kampaniyalar</h2>
-                    <p class="text-lg md:text-xl text-gray-600">Hozirda yordam kerak bo'lgan kampaniyalar</p>
-                </div>
-                
-                <div id="globalCampaignsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-                    <!-- Campaigns will be loaded here -->
-                </div>
-                
-                <div class="text-center mt-8 md:mt-12">
-                    <button id="loadMoreCampaigns" class="btn-primary text-white px-6 md:px-8 py-3 rounded-lg font-medium">
-                        <i class="fas fa-plus mr-2"></i>Ko'proq Yuklash
-                    </button>
-                </div>
-            </div>
-        </section>
+        // Sample campaigns data (Admin managed)
+        function loadCampaigns() {
+            campaigns = [
+                {
+                    id: 'admin_1',
+                    title: "Anvar's Yurak Operatsiyasi",
+                    category: "tibbiyot",
+                    description: "7 yoshli Anvarning yurak operatsiyasi uchun yordam kerak. Admin tomonidan tasdiqlangan e'lon.",
+                    targetAmount: 50000000,
+                    currentAmount: 35000000,
+                    donors: 234,
+                    daysLeft: 15,
+                    image: "🏥",
+                    urgent: true,
+                    adminCode: "ADM001",
+                    adminFee: 5 // 5% admin fee
+                },
+                {
+                    id: 'admin_2',
+                    title: "Nogironlik Aravachasi",
+                    category: "nogironlik",
+                    description: "Harakat qilish imkoniyati cheklangan Dilshod uchun elektr aravachasi. Admin nazoratida.",
+                    targetAmount: 15000000,
+                    currentAmount: 8500000,
+                    donors: 89,
+                    daysLeft: 25,
+                    image: "♿",
+                    urgent: false,
+                    adminCode: "ADM002",
+                    adminFee: 3
+                },
+                {
+                    id: 'admin_3',
+                    title: "Qashqadaryo Maktabi Qurilishi",
+                    category: "talim",
+                    description: "200 nafar bola uchun yangi maktab qurilishi. Admin tomonidan tekshirilgan loyiha.",
+                    targetAmount: 200000000,
+                    currentAmount: 150000000,
+                    donors: 567,
+                    daysLeft: 45,
+                    image: "📚",
+                    urgent: false,
+                    adminCode: "ADM003",
+                    adminFee: 7
+                },
+                {
+                    id: 'admin_4',
+                    title: "Katta Oila Uchun Uy",
+                    category: "uy-joy",
+                    description: "5 bolali oila uchun yangi uy qurilishi. Admin tomonidan tasdiqlangan.",
+                    targetAmount: 80000000,
+                    currentAmount: 45000000,
+                    donors: 189,
+                    daysLeft: 30,
+                    image: "🏠",
+                    urgent: false,
+                    adminCode: "ADM004",
+                    adminFee: 4
+                },
+                {
+                    id: 'admin_5',
+                    title: "Boshpanasiz Itlar Uchun",
+                    category: "hayvonlar",
+                    description: "Ko'chada yashovchi itlar uchun boshpana. Admin nazoratida amalga oshiriladi.",
+                    targetAmount: 30000000,
+                    currentAmount: 12000000,
+                    donors: 78,
+                    daysLeft: 20,
+                    image: "🐾",
+                    urgent: true,
+                    adminCode: "ADM005",
+                    adminFee: 6
+                }
+            ];
+            
+            displayCampaigns();
+        }
 
-        <!-- Success Stories -->
-        <section id="success-stories" class="py-12 md:py-16 bg-white">
-            <div class="container mx-auto px-6">
-                <div class="text-center mb-8 md:mb-12">
-                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Muvaffaqiyat Hikoyalari</h2>
-                    <p class="text-lg md:text-xl text-gray-600">Sizning yordamingiz bilan amalga oshgan ishlar</p>
-                </div>
-                
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-                    <div class="success-story">
-                        <div class="flex items-center mb-4">
-                            <div class="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center mr-4">
-                                <i class="fas fa-heart text-white"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-gray-800">Anvar's Yurak Operatsiyasi</h4>
-                                <p class="text-sm text-gray-600">Muvaffaqiyatli yakunlandi</p>
-                            </div>
-                        </div>
-                        <p class="text-gray-700 mb-4">7 yoshli Anvarning yurak operatsiyasi muvaffaqiyatli o'tkazildi. 234 xayriyachi yordamida 50 million so'm yig'ildi.</p>
-                        <div class="flex items-center justify-between">
-                            <span class="text-green-600 font-bold">100% muvaffaqiyat</span>
-                            <span class="text-sm text-gray-500">2 oy oldin</span>
-                        </div>
-                    </div>
-                    
-                    <div class="success-story">
-                        <div class="flex items-center mb-4">
-                            <div class="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center mr-4">
-                                <i class="fas fa-graduation-cap text-white"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-gray-800">Qashqadaryo Maktabi</h4>
-                                <p class="text-sm text-gray-600">Qurilish yakunlandi</p>
-                            </div>
-                        </div>
-                        <p class="text-gray-700 mb-4">200 nafar bola uchun yangi maktab qurildi. 567 xayriyachi ishtirokida 200 million so'm yig'ildi.</p>
-                        <div class="flex items-center justify-between">
-                            <span class="text-green-600 font-bold">100% muvaffaqiyat</span>
-                            <span class="text-sm text-gray-500">1 oy oldin</span>
-                        </div>
-                    </div>
-                    
-                    <div class="success-story">
-                        <div class="flex items-center mb-4">
-                            <div class="w-12 h-12 bg-yellow-500 rounded-full flex items-center justify-center mr-4">
-                                <i class="fas fa-home text-white"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-gray-800">5 Bolali Oila Uyi</h4>
-                                <p class="text-sm text-gray-600">Qurilish tugallandi</p>
-                            </div>
-                        </div>
-                        <p class="text-gray-700 mb-4">Katta oila uchun yangi uy qurildi. 189 xayriyachi yordamida 80 million so'm yig'ildi.</p>
-                        <div class="flex items-center justify-between">
-                            <span class="text-green-600 font-bold">100% muvaffaqiyat</span>
-                            <span class="text-sm text-gray-500">3 hafta oldin</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="text-center mt-8 md:mt-12">
-                    <button id="viewAllStoriesBtn" class="btn-success text-white px-6 md:px-8 py-3 rounded-lg font-medium">
-                        <i class="fas fa-book-open mr-2"></i>Barcha Hikoyalarni Ko'rish
-                    </button>
-                </div>
-            </div>
-        </section>
+        // Display campaigns
+        function displayCampaigns() {
+            const grid = document.getElementById('campaignsGrid');
+            let filteredCampaigns = campaigns;
+            
+            if (currentFilter !== 'all') {
+                filteredCampaigns = campaigns.filter(campaign => campaign.category === currentFilter);
+            }
+            
+            grid.innerHTML = filteredCampaigns.map(campaign => createCampaignCard(campaign)).join('');
+        }
 
-        <!-- Volunteer Section -->
-        <section id="volunteer" class="py-12 md:py-16 bg-gradient-to-r from-yellow-400 to-orange-500">
-            <div class="container mx-auto px-6">
-                <div class="text-center mb-8 md:mb-12">
-                    <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Ko'ngilli Bo'ling</h2>
-                    <p class="text-lg md:text-xl text-white opacity-90">Vaqtingiz va ko'nikmalaringiz bilan yordam bering</p>
-                </div>
-                
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
-                    <div class="volunteer-card">
-                        <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-4">
-                            <i class="fas fa-hands-helping text-yellow-600 text-2xl"></i>
-                        </div>
-                        <h4 class="font-bold text-gray-800 mb-2">Yordam Berish</h4>
-                        <p class="text-gray-700 text-sm mb-4">Kampaniyalarni targ'ib qilish va yordam yig'ishda ishtirok eting</p>
-                        <button class="btn-warning text-white px-4 py-2 rounded-lg font-medium text-sm w-full">
-                            Ko'ngilli Bo'lish
-                        </button>
-                    </div>
-                    
-                    <div class="volunteer-card">
-                        <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-4">
-                            <i class="fas fa-camera text-yellow-600 text-2xl"></i>
-                        </div>
-                        <h4 class="font-bold text-gray-800 mb-2">Media Yaratish</h4>
-                        <p class="text-gray-700 text-sm mb-4">Foto, video va dizayn ishlarida yordam bering</p>
-                        <button class="btn-warning text-white px-4 py-2 rounded-lg font-medium text-sm w-full">
-                            Ishtirok Etish
-                        </button>
-                    </div>
-                    
-                    <div class="volunteer-card">
-                        <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-4">
-                            <i class="fas fa-language text-yellow-600 text-2xl"></i>
-                        </div>
-                        <h4 class="font-bold text-gray-800 mb-2">Tarjimon</h4>
-                        <p class="text-gray-700 text-sm mb-4">Turli tillarda tarjima qilish va yordam berish</p>
-                        <button class="btn-warning text-white px-4 py-2 rounded-lg font-medium text-sm w-full">
-                            Tarjimon Bo'lish
-                        </button>
-                    </div>
-                    
-                    <div class="volunteer-card">
-                        <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-4">
-                            <i class="fas fa-code text-yellow-600 text-2xl"></i>
-                        </div>
-                        <h4 class="font-bold text-gray-800 mb-2">Texnik Yordam</h4>
-                        <p class="text-gray-700 text-sm mb-4">Veb-sayt va texnik masalalarda yordam berish</p>
-                        <button class="btn-warning text-white px-4 py-2 rounded-lg font-medium text-sm w-full">
-                            Texnik Yordam
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Testimonials -->
-        <section class="py-12 md:py-16 bg-gray-50">
-            <div class="container mx-auto px-6">
-                <div class="text-center mb-8 md:mb-12">
-                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Foydalanuvchi Fikrlari</h2>
-                    <p class="text-lg md:text-xl text-gray-600">Bizning platformamiz haqida nima deyishadi</p>
-                </div>
-                
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-                    <div class="testimonial-card">
-                        <div class="flex items-center mb-4">
-                            <div class="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center mr-4">
-                                <i class="fas fa-user text-white"></i>
-                            </div>
+        // Create campaign card HTML
+        function createCampaignCard(campaign) {
+            const progress = (campaign.currentAmount / campaign.targetAmount * 100).toFixed(1);
+            const urgentBadge = campaign.urgent ? '<span class="absolute top-4 right-4 bg-red-500 text-white text-xs px-3 py-1 rounded-full font-medium">Shoshilinch</span>' : '';
+            
+            return `
+                <div class="bg-white rounded-2xl shadow-xl overflow-hidden card-hover relative mobile-card">
+                    ${urgentBadge}
+                    <div class="p-6 md:p-8">
+                        <div class="flex items-center mb-6">
+                            <div class="text-4xl md:text-5xl mr-4">${campaign.image}</div>
                             <div>
-                                <h5 class="font-bold text-gray-800">Aziza Abdullayeva</h5>
-                                <div class="rating-stars">
-                                    <i class="fas fa-star star"></i>
-                                    <i class="fas fa-star star"></i>
-                                    <i class="fas fa-star star"></i>
-                                    <i class="fas fa-star star"></i>
-                                    <i class="fas fa-star star"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <p class="text-gray-700">Bu platforma orqali ko'plab yaxshi ishlarga yordam berdim. Juda oson va ishonchli. Har bir so'mning qayerga ketganini ko'rish mumkin.</p>
-                    </div>
-                    
-                    <div class="testimonial-card">
-                        <div class="flex items-center mb-4">
-                            <div class="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center mr-4">
-                                <i class="fas fa-user text-white"></i>
-                            </div>
-                            <div>
-                                <h5 class="font-bold text-gray-800">Bekzod Tursunov</h5>
-                                <div class="rating-stars">
-                                    <i class="fas fa-star star"></i>
-                                    <i class="fas fa-star star"></i>
-                                    <i class="fas fa-star star"></i>
-                                    <i class="fas fa-star star"></i>
-                                    <i class="fas fa-star star"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <p class="text-gray-700">Professional xizmat va shaffoflik. Mening xayriyam haqiqatan ham muhtoj odamlarga yetib bordi. Rahmat!</p>
-                    </div>
-                    
-                    <div class="testimonial-card">
-                        <div class="flex items-center mb-4">
-                            <div class="w-12 h-12 bg-purple-500 rounded-full flex items-center justify-center mr-4">
-                                <i class="fas fa-user text-white"></i>
-                            </div>
-                            <div>
-                                <h5 class="font-bold text-gray-800">Malika Saidova</h5>
-                                <div class="rating-stars">
-                                    <i class="fas fa-star star"></i>
-                                    <i class="fas fa-star star"></i>
-                                    <i class="fas fa-star star"></i>
-                                    <i class="fas fa-star star"></i>
-                                    <i class="fas fa-star star"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <p class="text-gray-700">Eng yaxshi xayriya platformasi! Faqat bir necha daqiqada xayriya qilish mumkin. Barcha jarayonlar aniq va tushunarli.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Partnership Section -->
-        <section class="py-12 md:py-16 bg-white">
-            <div class="container mx-auto px-6">
-                <div class="text-center mb-8 md:mb-12">
-                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Bizning Hamkorlarimiz</h2>
-                    <p class="text-lg md:text-xl text-gray-600">Ishonchli tashkilotlar bilan hamkorlik</p>
-                </div>
-                
-                <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6 md:gap-8">
-                    <div class="partner-logo">
-                        <i class="fas fa-university text-3xl text-gray-400"></i>
-                    </div>
-                    <div class="partner-logo">
-                        <i class="fas fa-hospital text-3xl text-gray-400"></i>
-                    </div>
-                    <div class="partner-logo">
-                        <i class="fas fa-school text-3xl text-gray-400"></i>
-                    </div>
-                    <div class="partner-logo">
-                        <i class="fas fa-building text-3xl text-gray-400"></i>
-                    </div>
-                    <div class="partner-logo">
-                        <i class="fas fa-handshake text-3xl text-gray-400"></i>
-                    </div>
-                    <div class="partner-logo">
-                        <i class="fas fa-globe text-3xl text-gray-400"></i>
-                    </div>
-                </div>
-                
-                <div class="text-center mt-8 md:mt-12">
-                    <button id="becomePartnerBtn" class="btn-info text-white px-6 md:px-8 py-3 rounded-lg font-medium">
-                        <i class="fas fa-handshake mr-2"></i>Hamkor Bo'lish
-                    </button>
-                </div>
-            </div>
-        </section>
-
-        <!-- FAQ Section -->
-        <section class="py-12 md:py-16 bg-gray-50">
-            <div class="container mx-auto px-6">
-                <div class="text-center mb-8 md:mb-12">
-                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Tez-tez So'raladigan Savollar</h2>
-                    <p class="text-lg md:text-xl text-gray-600">Eng ko'p so'raladigan savollar va javoblar</p>
-                </div>
-                
-                <div class="max-w-3xl mx-auto">
-                    <div class="faq-item">
-                        <div class="faq-question">
-                            <h4 class="font-bold text-gray-800 flex-1">Xayriya qilish qanchalik xavfsiz?</h4>
-                            <i class="fas fa-chevron-down faq-icon text-gray-600"></i>
-                        </div>
-                        <div class="faq-answer">
-                            <p class="text-gray-700">Bizning platformamiz eng yuqori xavfsizlik standartlariga ega. Barcha to'lovlar SSL shifrlash bilan himoyalangan va ishonchli to'lov tizimlari orqali amalga oshiriladi.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="faq-item">
-                        <div class="faq-question">
-                            <h4 class="font-bold text-gray-800 flex-1">Xayriyam qayerga ketganini qanday bilaman?</h4>
-                            <i class="fas fa-chevron-down faq-icon text-gray-600"></i>
-                        </div>
-                        <div class="faq-answer">
-                            <p class="text-gray-700">Har bir xayriya to'liq shaffoflik bilan kuzatiladi. Siz o'z profilingizda barcha xayriyalaringiz va ularning qanday ishlatilganini ko'rishingiz mumkin.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="faq-item">
-                        <div class="faq-question">
-                            <h4 class="font-bold text-gray-800 flex-1">Kampaniya yaratish uchun haq to'lanmi?</h4>
-                            <i class="fas fa-chevron-down faq-icon text-gray-600"></i>
-                        </div>
-                        <div class="faq-answer">
-                            <p class="text-gray-700">Yo'q, kampaniya yaratish mutlaqo bepul. Biz faqat muvaffaqiyatli yig'ilgan mablag'dan kichik foiz olamiz (5%), bu platformani ishlab turishga sarflanadi.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="faq-item">
-                        <div class="faq-question">
-                            <h4 class="font-bold text-gray-800 flex-1">Qanday to'lov usullari mavjud?</h4>
-                            <i class="fas fa-chevron-down faq-icon text-gray-600"></i>
-                        </div>
-                        <div class="faq-answer">
-                            <p class="text-gray-700">Click, Payme, UzCard, Humo va boshqa barcha mashhur to'lov tizimlarini qo'llab-quvvatlaymiz. Shuningdek, bank o'tkazmasi ham mumkin.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Newsletter Section -->
-        <section class="py-12 md:py-16">
-            <div class="container mx-auto px-6">
-                <div class="newsletter-section">
-                    <h2 class="text-2xl md:text-3xl font-bold mb-4">Yangiliklar va Kampaniyalardan Xabardor Bo'ling</h2>
-                    <p class="text-lg mb-6 opacity-90">Eng muhim yangiliklar va yangi kampaniyalar haqida birinchi bo'lib bilib oling</p>
-                    
-                    <form id="newsletterForm" class="flex flex-col md:flex-row gap-4 max-w-md mx-auto">
-                        <input type="email" class="flex-1 px-4 py-3 rounded-lg text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-white" placeholder="Email manzilingiz" required>
-                        <button type="submit" class="btn-success text-white px-6 py-3 rounded-lg font-medium">
-                            <i class="fas fa-paper-plane mr-2"></i>Obuna Bo'lish
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </section>
-
-        <!-- About Section -->
-        <section id="about" class="py-12 md:py-16 bg-white">
-            <div class="container mx-auto px-6">
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center">
-                    <div class="fade-in">
-                        <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-6">E-Ehson Global Haqida</h2>
-                        <p class="text-lg text-gray-600 mb-6">
-                            Biz dunyodagi eng katta va ishonchli xayriya platformalaridan biriyiz. 
-                            Bizning maqsadimiz - har bir inson o'z hissasini qo'shib, dunyoni 
-                            yaxshiroq joyga aylantirish imkoniyatini berish.
-                        </p>
-                        <div class="space-y-4">
-                            <div class="flex items-center">
-                                <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mr-4">
-                                    <i class="fas fa-shield-alt text-green-600 text-xl"></i>
-                                </div>
-                                <div>
-                                    <h4 class="font-bold text-gray-800">100% Xavfsiz</h4>
-                                    <p class="text-gray-600">Barcha to'lovlar himoyalangan</p>
-                                </div>
-                            </div>
-                            <div class="flex items-center">
-                                <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mr-4">
-                                    <i class="fas fa-eye text-blue-600 text-xl"></i>
-                                </div>
-                                <div>
-                                    <h4 class="font-bold text-gray-800">Shaffoflik</h4>
-                                    <p class="text-gray-600">Har bir so'm qayerga ketganini ko'ring</p>
-                                </div>
-                            </div>
-                            <div class="flex items-center">
-                                <div class="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center mr-4">
-                                    <i class="fas fa-clock text-yellow-600 text-xl"></i>
-                                </div>
-                                <div>
-                                    <h4 class="font-bold text-gray-800">24/7 Qo'llab-quvvatlash</h4>
-                                    <p class="text-gray-600">Har doim sizning xizmatingizdamiz</p>
-                                </div>
-                            </div>
-                            <div class="flex items-center">
-                                <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mr-4">
-                                    <i class="fas fa-globe text-purple-600 text-xl"></i>
-                                </div>
-                                <div>
-                                    <h4 class="font-bold text-gray-800">Global Tarmoq</h4>
-                                    <p class="text-gray-600">47 mamlakatda faoliyat</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="slide-in-right">
-                        <div class="bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl p-6 md:p-8 text-white">
-                            <h3 class="text-xl md:text-2xl font-bold mb-6">Bizning Yutuqlarimiz</h3>
-                            <div class="grid grid-cols-2 gap-4 md:gap-6">
-                                <div class="text-center">
-                                    <div class="text-2xl md:text-3xl font-bold mb-2" id="aboutTotalRaised">2.5M+</div>
-                                    <div class="text-xs md:text-sm opacity-90">Dollar Yig'ildi</div>
-                                </div>
-                                <div class="text-center">
-                                    <div class="text-2xl md:text-3xl font-bold mb-2" id="aboutActiveDonors">15K+</div>
-                                    <div class="text-xs md:text-sm opacity-90">Faol Donorlar</div>
-                                </div>
-                                <div class="text-center">
-                                    <div class="text-2xl md:text-3xl font-bold mb-2" id="aboutActiveCampaigns">1.2K+</div>
-                                    <div class="text-xs md:text-sm opacity-90">Kampaniyalar</div>
-                                </div>
-                                <div class="text-center">
-                                    <div class="text-2xl md:text-3xl font-bold mb-2">47</div>
-                                    <div class="text-xs md:text-sm opacity-90">Mamlakatlar</div>
-                                </div>
-                            </div>
-                            
-                            <div class="mt-6 pt-6 border-t border-white border-opacity-20">
-                                <h4 class="font-bold mb-3">Bizning Missiyamiz</h4>
-                                <p class="text-sm opacity-90">Har bir inson o'z imkoniyatlari doirasida yaxshi ishlar qilishi va muhtoj odamlarga yordam berishi uchun qulay va ishonchli platforma yaratish.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Contact Section -->
-        <section id="contact" class="py-12 md:py-16 bg-gray-50">
-            <div class="container mx-auto px-6">
-                <div class="text-center mb-8 md:mb-12">
-                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Biz Bilan Bog'laning</h2>
-                    <p class="text-lg md:text-xl text-gray-600">Savollaringiz bormi? Biz sizga yordam berishga tayyormiz</p>
-                </div>
-                
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12">
-                    <!-- Contact Form -->
-                    <div class="bg-white rounded-2xl shadow-lg p-6 md:p-8">
-                        <h3 class="text-xl md:text-2xl font-bold text-gray-800 mb-6">Xabar Yuborish</h3>
-                        <form id="contactForm" class="space-y-6">
-                            <div>
-                                <label class="block text-gray-700 font-medium mb-2">Ism</label>
-                                <input type="text" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Ismingiz" required>
-                            </div>
-                            <div>
-                                <label class="block text-gray-700 font-medium mb-2">Email</label>
-                                <input type="email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="email@example.com" required>
-                            </div>
-                            <div>
-                                <label class="block text-gray-700 font-medium mb-2">Telefon</label>
-                                <input type="tel" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="+998 90 123 45 67">
-                            </div>
-                            <div>
-                                <label class="block text-gray-700 font-medium mb-2">Mavzu</label>
-                                <select class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
-                                    <option value="">Mavzuni tanlang</option>
-                                    <option value="general">Umumiy savol</option>
-                                    <option value="donation">Xayriya haqida</option>
-                                    <option value="campaign">Kampaniya yaratish</option>
-                                    <option value="technical">Texnik yordam</option>
-                                    <option value="partnership">Hamkorlik</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label class="block text-gray-700 font-medium mb-2">Xabar</label>
-                                <textarea class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 h-32" placeholder="Xabaringizni yozing..." required></textarea>
-                            </div>
-                            <button type="submit" class="w-full btn-primary text-white py-3 rounded-lg font-medium">
-                                <i class="fas fa-paper-plane mr-2"></i>Xabar Yuborish
-                            </button>
-                        </form>
-                    </div>
-                    
-                    <!-- Contact Information -->
-                    <div class="space-y-6 md:space-y-8">
-                        <div class="bg-white rounded-2xl shadow-lg p-6 md:p-8">
-                            <h3 class="text-xl md:text-2xl font-bold text-gray-800 mb-6">Aloqa Ma'lumotlari</h3>
-                            <div class="space-y-4">
-                                <div class="flex items-center">
-                                    <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mr-4">
-                                        <i class="fas fa-phone text-blue-600"></i>
-                                    </div>
-                                    <div>
-                                        <h4 class="font-bold text-gray-800">Telefon</h4>
-                                        <p class="text-gray-600">+998 95 888 38 51</p>
-                                    </div>
-                                </div>
-                                <div class="flex items-center">
-                                    <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mr-4">
-                                        <i class="fas fa-envelope text-green-600"></i>
-                                    </div>
-                                    <div>
-                                        <h4 class="font-bold text-gray-800">Email</h4>
-                                        <p class="text-gray-600">jasurbekjolanboyev349@gmail.com</p>
-                                    </div>
-                                </div>
-                                <div class="flex items-center">
-                                    <div class="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center mr-4">
-                                        <i class="fas fa-map-marker-alt text-yellow-600"></i>
-                                    </div>
-                                    <div>
-                                        <h4 class="font-bold text-gray-800">Manzil</h4>
-                                        <p class="text-gray-600">Toshkent, O'zbekiston</p>
-                                    </div>
-                                </div>
-                                <div class="flex items-center">
-                                    <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mr-4">
-                                        <i class="fas fa-clock text-purple-600"></i>
-                                    </div>
-                                    <div>
-                                        <h4 class="font-bold text-gray-800">Ish Vaqti</h4>
-                                        <p class="text-gray-600">24/7 - Har doim</p>
-                                    </div>
+                                <h3 class="text-xl md:text-2xl font-bold text-gray-800 mb-2">${campaign.title}</h3>
+                                <div class="flex items-center space-x-2">
+                                    <span class="text-sm text-gray-500 bg-gray-100 px-3 py-1 rounded-full font-medium mobile-text">${getCategoryName(campaign.category)}</span>
+                                    <span class="text-xs text-blue-600 bg-blue-100 px-2 py-1 rounded-full">👨‍💼 Admin</span>
                                 </div>
                             </div>
                         </div>
                         
-                        <!-- Social Media -->
-                        <div class="bg-white rounded-2xl shadow-lg p-6 md:p-8">
-                            <h3 class="text-xl md:text-2xl font-bold text-gray-800 mb-6">Ijtimoiy Tarmoqlar</h3>
-                            <div class="social-links">
-                                <a href="#" class="social-link linkedin" target="_blank" rel="noopener noreferrer">
-                                    <i class="fab fa-linkedin-in text-white"></i>
-                                </a>
-                                <a href="#" class="social-link telegram" target="_blank" rel="noopener noreferrer">
-                                    <i class="fab fa-telegram-plane text-white"></i>
-                                </a>
-                                <a href="#" class="social-link instagram" target="_blank" rel="noopener noreferrer">
-                                    <i class="fab fa-instagram text-white"></i>
-                                </a>
-                                <a href="#" class="social-link facebook" target="_blank" rel="noopener noreferrer">
-                                    <i class="fab fa-facebook-f text-white"></i>
-                                </a>
-                                <a href="#" class="social-link youtube" target="_blank" rel="noopener noreferrer">
-                                    <i class="fab fa-youtube text-white"></i>
-                                </a>
-                                <a href="#" class="social-link twitter" target="_blank" rel="noopener noreferrer">
-                                    <i class="fab fa-twitter text-white"></i>
-                                </a>
+                        <p class="text-gray-600 mb-6 text-base md:text-lg leading-relaxed mobile-text">${campaign.description}</p>
+                        
+                        <div class="mb-6">
+                            <div class="flex justify-between text-sm mb-3">
+                                <span class="font-semibold text-gray-700 mobile-text">Yig'ildi: ${formatCurrency(campaign.currentAmount)}</span>
+                                <span class="text-blue-600 font-bold text-lg">${progress}%</span>
                             </div>
-                            <p class="text-gray-600 mt-4 text-sm">Bizni ijtimoiy tarmoqlarda kuzatib boring va eng so'nggi yangiliklar bilan tanishing</p>
+                            <div class="w-full bg-gray-200 rounded-full h-4">
+                                <div class="progress-bar h-4 rounded-full transition-all duration-500" style="width: ${progress}%"></div>
+                            </div>
+                            <div class="flex justify-between text-sm mt-3 text-gray-500">
+                                <span class="mobile-text">Maqsad: ${formatCurrency(campaign.targetAmount)}</span>
+                                <span class="mobile-text">${campaign.daysLeft} kun qoldi</span>
+                            </div>
                         </div>
                         
-                        <!-- Quick Links -->
-                        <div class="bg-white rounded-2xl shadow-lg p-6 md:p-8">
-                            <h3 class="text-xl md:text-2xl font-bold text-gray-800 mb-6">Tezkor Havolalar</h3>
-                            <div class="grid grid-cols-2 gap-4">
-                                <button class="btn-info text-white px-4 py-2 rounded-lg font-medium text-sm">
-                                    <i class="fas fa-question-circle mr-2"></i>Yordam
-                                </button>
-                                <button class="btn-warning text-white px-4 py-2 rounded-lg font-medium text-sm">
-                                    <i class="fas fa-file-alt mr-2"></i>Qo'llanma
-                                </button>
-                                <button class="btn-success text-white px-4 py-2 rounded-lg font-medium text-sm">
-                                    <i class="fas fa-shield-alt mr-2"></i>Xavfsizlik
-                                </button>
-                                <button class="btn-danger text-white px-4 py-2 rounded-lg font-medium text-sm">
-                                    <i class="fas fa-exclamation-triangle mr-2"></i>Shikoyat
-                                </button>
+                        <div class="flex justify-between items-center mb-4">
+                            <div class="flex items-center space-x-2">
+                                <span class="text-sm text-gray-500 font-medium mobile-text">${campaign.donors} xayriyachi</span>
+                                <div class="w-2 h-2 bg-green-500 rounded-full animate-pulse" title="Admin nazorati"></div>
                             </div>
+                            <button onclick="donateToAdmin('${campaign.id}')" class="telegram-btn text-white px-6 py-3 rounded-xl hover:from-green-700 hover:to-blue-700 transition-all duration-300 transform hover:scale-105 font-semibold shadow-lg mobile-button touch-button">
+                                💝 Yordam Berish
+                            </button>
+                        </div>
+                        
+                        <div class="text-xs text-gray-400 flex items-center justify-between mobile-text">
+                            <span>👨‍💼 Admin Kodi: ${campaign.adminCode}</span>
+                            <span>Komissiya: ${campaign.adminFee}%</span>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
-    </main>
+            `;
+        }
 
-    <!-- Chat Widget -->
-    <div id="chatWidget" class="chat-widget">
-        <div class="bg-gradient-to-r from-blue-500 to-indigo-600 text-white p-4 rounded-t-2xl">
-            <div class="flex items-center justify-between">
-                <div class="flex items-center">
-                    <div class="w-10 h-10 bg-white bg-opacity-20 rounded-full flex items-center justify-center mr-3">
-                        <i class="fas fa-headset"></i>
-                    </div>
-                    <div>
-                        <h4 class="font-bold">Yordam Xizmati</h4>
-                        <p class="text-xs opacity-90">Onlayn</p>
-                    </div>
+        // ========================================
+        // ADMIN TELEGRAM FUNCTIONS
+        // ========================================
+
+        // Donate to admin function
+        function donateToAdmin(campaignId) {
+            const campaign = campaigns.find(c => c.id === campaignId);
+            if (!campaign) return;
+            
+            // Create detailed Telegram message for admin
+            const adminMessage = `🎯 *YANGI XAYRIYA SO'ROVI*
+
+📋 *E'lon Ma'lumotlari:*
+• Nomi: ${campaign.title}
+• Kategoriya: ${getCategoryName(campaign.category)}
+• Admin Kodi: ${campaign.adminCode}
+
+💰 *Moliyaviy Ma'lumotlar:*
+• Maqsad: ${formatCurrency(campaign.targetAmount)}
+• Hozirgi: ${formatCurrency(campaign.currentAmount)}
+• Foiz: ${(campaign.currentAmount / campaign.targetAmount * 100).toFixed(1)}%
+• Admin komissiyasi: ${campaign.adminFee}%
+
+👥 *Statistika:*
+• Xayriyachilar: ${campaign.donors} kishi
+• Qolgan vaqt: ${campaign.daysLeft} kun
+• Holati: ${campaign.urgent ? 'Shoshilinch' : 'Oddiy'}
+
+📝 *Tavsif:*
+${campaign.description}
+
+🔗 *Havola:*
+${window.location.href}
+
+⚡ *Harakatlar:*
+1. Xayriyachi bilan bog'laning
+2. To'lov ma'lumotlarini yuboring
+3. To'lov tasdiqlangandan keyin kod orqali yangilang
+4. Kerak bo'lsa e'lonni olib tashlang
+
+*E-Ehson Professional Admin Panel*
+👨‍💼 @serinaqu`;
+
+            // Open Telegram with admin message
+            const telegramUrl = `https://t.me/serinaqu?text=${encodeURIComponent(adminMessage)}`;
+            window.open(telegramUrl, '_blank', 'noopener,noreferrer');
+            
+            showNotification('👨‍💼 Admin bilan bog\'lanish uchun Telegram ochildi!', 'success');
+        }
+
+        // Create admin message for adding campaign
+        function createAdminMessage(type) {
+            let message = '';
+            
+            if (type === 'add_campaign') {
+                message = `📢 *YANGI E'LON QO'YISH SO'ROVI*
+
+👋 Assalomu alaykum! Yangi e'lon qo'yishni xohlayman.
+
+📋 *Kerakli Ma'lumotlar:*
+• E'lon nomi: [kiriting]
+• Kategoriya: [tanlang: tibbiyot/nogironlik/talim/uy-joy/hayvonlar/ijtimoiy/ayollar/yetimlar]
+• Maqsad summasi: [so'mda]
+• Tugash sanasi: [sana]
+• Batafsil tavsif: [kiriting]
+
+💰 *To'lov Ma'lumotlari:*
+• E'lon joylash narxi: [admin belgilaydi]
+• Komissiya foizi: [admin belgilaydi]
+• To'lov usuli: [admin ko'rsatadi]
+
+📱 *Aloqa Ma'lumotlari:*
+• Ism: [kiriting]
+• Telefon: [kiriting]
+• Qo'shimcha ma'lumot: [kiriting]
+
+🔄 *Jarayon:*
+1. Admin e'lonni ko'rib chiqadi
+2. To'lov ma'lumotlari yuboriladi
+3. To'lov tasdiqlangandan keyin e'lon joylanadi
+4. Admin kod orqali ma'lumotlarni yangilaydi
+
+*E-Ehson Professional*
+👨‍💼 Admin Panel`;
+            }
+            
+            const telegramUrl = `https://t.me/serinaqu?text=${encodeURIComponent(message)}`;
+            window.open(telegramUrl, '_blank', 'noopener,noreferrer');
+            
+            showNotification('👨‍💼 Admin bilan bog\'lanish uchun Telegram ochildi!', 'success');
+        }
+
+        // ========================================
+        // UTILITY FUNCTIONS
+        // ========================================
+
+        // Filter campaigns
+        function filterCampaigns(category) {
+            currentFilter = category;
+            
+            // Update filter buttons
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('bg-gradient-to-r', 'from-blue-600', 'to-purple-600', 'text-white');
+                btn.classList.add('bg-white', 'text-gray-700');
+            });
+            
+            if (event && event.target) {
+                const button = event.target.closest('.filter-btn');
+                if (button) {
+                    button.classList.remove('bg-white', 'text-gray-700');
+                    button.classList.add('bg-gradient-to-r', 'from-blue-600', 'to-purple-600', 'text-white');
+                }
+            }
+            
+            displayCampaigns();
+        }
+
+        // Get category name
+        function getCategoryName(category) {
+            const names = {
+                'tibbiyot': 'Tibbiy Yordam',
+                'nogironlik': 'Nogironlik',
+                'talim': 'Ta\'lim',
+                'uy-joy': 'Uy-Joy',
+                'hayvonlar': 'Hayvonlar',
+                'ijtimoiy': 'Ijtimoiy',
+                'ayollar': 'Ayollar Uchun',
+                'yetimlar': 'Yetimlar'
+            };
+            return names[category] || category;
+        }
+
+        // Format currency
+        function formatCurrency(amount) {
+            if (amount >= 1000000) {
+                return (amount / 1000000).toFixed(1) + 'M so\'m';
+            } else if (amount >= 1000) {
+                return (amount / 1000).toFixed(0) + 'K so\'m';
+            }
+            return amount.toLocaleString() + ' so\'m';
+        }
+
+        // Language functions
+        function changeLanguage() {
+            const selector = document.getElementById('languageSelector');
+            currentLanguage = selector.value;
+            localStorage.setItem('selectedLanguage', currentLanguage);
+            updatePageLanguage();
+        }
+
+        function updatePageLanguage() {
+            const elements = document.querySelectorAll('[data-translate]');
+            elements.forEach(element => {
+                const key = element.getAttribute('data-translate');
+                if (translations[currentLanguage] && translations[currentLanguage][key]) {
+                    element.textContent = translations[currentLanguage][key];
+                }
+            });
+        }
+
+        // FAQ Toggle
+        function toggleFAQ(id) {
+            const answer = document.getElementById(`faq-answer-${id}`);
+            const icon = document.getElementById(`faq-icon-${id}`);
+            
+            if (answer.classList.contains('hidden')) {
+                answer.classList.remove('hidden');
+                icon.style.transform = 'rotate(180deg)';
+            } else {
+                answer.classList.add('hidden');
+                icon.style.transform = 'rotate(0deg)';
+            }
+        }
+
+        // Show notification
+        function showNotification(message, type = 'info') {
+            const colors = {
+                success: 'bg-green-500',
+                error: 'bg-red-500',
+                info: 'bg-blue-500'
+            };
+            
+            const notification = document.createElement('div');
+            notification.className = `fixed top-4 right-4 ${colors[type]} text-white px-6 py-4 rounded-xl shadow-2xl z-50 transform translate-x-full transition-all duration-300 font-medium mobile-padding`;
+            notification.innerHTML = `
+                <div class="flex items-center space-x-2">
+                    <span class="mobile-text">${message}</span>
+                    <div class="w-2 h-2 bg-white rounded-full animate-pulse"></div>
                 </div>
-                <button id="closeChatWidget" class="text-white hover:text-gray-300">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-        </div>
-        
-        <div class="flex-1 p-4 bg-gray-50 overflow-y-auto" style="height: 350px;">
-            <div id="chatMessages" class="space-y-3">
-                <div class="flex">
-                    <div class="bg-blue-500 text-white p-3 rounded-lg rounded-bl-none max-w-xs">
-                        <p class="text-sm">Salom! Sizga qanday yordam bera olaman?</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="p-4 bg-white rounded-b-2xl border-t">
-            <form id="chatForm" class="flex space-x-2">
-                <input type="text" id="chatInput" class="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Xabar yozing...">
-                <button type="submit" class="btn-primary text<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'98464a06e2dca9d3',t:'MTc1ODc1ODkyOS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.classList.remove('translate-x-full');
+            }, 100);
+            
+            setTimeout(() => {
+                notification.classList.add('translate-x-full');
+                setTimeout(() => {
+                    if (document.body.contains(notification)) {
+                        document.body.removeChild(notification);
+                    }
+                }, 300);
+            }, 4000);
+        }
+
+        // Smooth scroll to campaigns
+        function scrollToCampaigns() {
+            document.getElementById('campaigns').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Start admin activity simulation
+        function startAdminActivity() {
+            const activities = [
+                "👨‍💼 Admin: Yangi e'lon tasdiqlandi",
+                "💰 To'lov: 150,000 so'm xayriya tasdiqlandi",
+                "📊 Yangilanish: Kampaniya summasi yangilandi",
+                "✅ Tugallandi: E'lon muvaffaqiyatli yakunlandi",
+                "🔄 Nazorat: Admin tomonidan tekshirildi"
+            ];
+            
+            setInterval(() => {
+                const randomActivity = activities[Math.floor(Math.random() * activities.length)];
+                const timeAgo = Math.floor(Math.random() * 30) + 1;
+                document.getElementById('adminActivity').innerHTML = `<span class="mobile-text">${randomActivity} • ${timeAgo} daqiqa oldin</span>`;
+            }, 8000);
+        }
+
+        // ========================================
+        // INITIALIZATION
+        // ========================================
+
+        // Initialize app
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load saved language
+            const savedLanguage = localStorage.getItem('selectedLanguage');
+            if (savedLanguage) {
+                currentLanguage = savedLanguage;
+                document.getElementById('languageSelector').value = currentLanguage;
+                updatePageLanguage();
+            }
+            
+            // Load campaigns and start activities
+            loadCampaigns();
+            startAdminActivity();
+            
+            // Show welcome notification
+            setTimeout(() => {
+                showNotification('👨‍💼 Admin boshqaruvidagi professional platforma!', 'success');
+            }, 1000);
+        });
+
+        // Smooth scroll for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Mobile menu toggle (if needed for smaller screens)
+        function toggleMobileMenu() {
+            // Implementation for mobile menu if needed
+        }
+
+        // WebView specific functions for Flutter
+        function notifyFlutterApp(action, data) {
+            // This function can be used to communicate with Flutter app
+            if (window.flutter_inappwebview) {
+                window.flutter_inappwebview.callHandler('onWebViewAction', {
+                    action: action,
+                    data: data
+                });
+            }
+        }
+
+        // Admin status check
+        setInterval(() => {
+            document.getElementById('adminStatusFooter').textContent = 'Online';
+        }, 10000);
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'98868803b7dd4eff',t:'MTc1OTQzMjU1Ni4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

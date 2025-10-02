@@ -1,0 +1,2207 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Ehson Global - Professional Xayriya Platformasi</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            box-sizing: border-box;
+        }
+        
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        :root {
+            --primary-green: #10b981;
+            --primary-blue: #3b82f6;
+            --primary-yellow: #f59e0b;
+            --accent-teal: #14b8a6;
+            --accent-indigo: #6366f1;
+            --accent-orange: #f97316;
+            --accent-emerald: #059669;
+            --accent-sky: #0ea5e9;
+            --accent-amber: #d97706;
+            --accent-purple: #8b5cf6;
+            --accent-pink: #ec4899;
+            --accent-red: #ef4444;
+        }
+        
+        /* Advanced Animations */
+        @keyframes globalSync {
+            0% { transform: scale(1) rotate(0deg); opacity: 1; }
+            50% { transform: scale(1.1) rotate(180deg); opacity: 0.8; }
+            100% { transform: scale(1) rotate(360deg); opacity: 1; }
+        }
+        
+        @keyframes morphingGradient {
+            0% { background-position: 0% 50%; }
+            25% { background-position: 100% 50%; }
+            50% { background-position: 100% 100%; }
+            75% { background-position: 50% 100%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        @keyframes neonPulse {
+            from { text-shadow: 0 0 5px currentColor, 0 0 10px currentColor, 0 0 15px currentColor; }
+            to { text-shadow: 0 0 10px currentColor, 0 0 20px currentColor, 0 0 30px currentColor; }
+        }
+        
+        @keyframes particleFloat {
+            0% { transform: translateY(100vh) translateX(0) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100px) translateX(100px) rotate(360deg); opacity: 0; }
+        }
+        
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        
+        @keyframes slideInRight {
+            from { transform: translateX(100px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        @keyframes slideInLeft {
+            from { transform: translateX(-100px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        @keyframes fadeInUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        @keyframes bounceIn {
+            0% { transform: scale(0.3); opacity: 0; }
+            50% { transform: scale(1.05); }
+            70% { transform: scale(0.9); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        @keyframes wiggle {
+            0%, 7% { transform: rotateZ(0); }
+            15% { transform: rotateZ(-15deg); }
+            20% { transform: rotateZ(10deg); }
+            25% { transform: rotateZ(-10deg); }
+            30% { transform: rotateZ(6deg); }
+            35% { transform: rotateZ(-4deg); }
+            40%, 100% { transform: rotateZ(0); }
+        }
+        
+        @keyframes scroll-left {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            14% { transform: scale(1.3); }
+            28% { transform: scale(1); }
+            42% { transform: scale(1.3); }
+            70% { transform: scale(1); }
+        }
+        
+        @keyframes typewriter {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+        
+        @keyframes blink {
+            from, to { border-color: transparent; }
+            50% { border-color: white; }
+        }
+        
+        /* Morphing Gradients */
+        .morphing-gradient {
+            background: linear-gradient(45deg, var(--primary-green), var(--primary-blue), var(--primary-yellow), var(--accent-teal));
+            background-size: 400% 400%;
+            animation: morphingGradient 8s ease-in-out infinite;
+        }
+        
+        .morphing-gradient-alt {
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-pink), var(--accent-orange), var(--accent-red));
+            background-size: 400% 400%;
+            animation: morphingGradient 10s ease-in-out infinite reverse;
+        }
+        
+        /* Neon Effects */
+        .neon-glow {
+            text-shadow: 0 0 5px currentColor, 0 0 10px currentColor, 0 0 15px currentColor;
+            animation: neonPulse 2s ease-in-out infinite alternate;
+        }
+        
+        .neon-border {
+            border: 2px solid;
+            border-image: linear-gradient(45deg, var(--primary-blue), var(--accent-purple), var(--primary-green)) 1;
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
+        }
+        
+        /* Particle System */
+        .particle-container {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+        }
+        
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 50%;
+            animation: particleFloat 15s infinite linear;
+        }
+        
+        /* Glass Morphism */
+        .glass-morphism {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+        
+        .glass-morphism-dark {
+            background: rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .glass-morphism-strong {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(30px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        /* Elastic Animations */
+        .elastic-hover {
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+        
+        .elastic-hover:hover {
+            transform: scale(1.05) translateY(-5px);
+        }
+        
+        .elastic-bounce {
+            animation: bounceIn 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+        
+        /* 3D Transforms */
+        .card-3d {
+            transform-style: preserve-3d;
+            transition: transform 0.6s;
+        }
+        
+        .card-3d:hover {
+            transform: rotateY(10deg) rotateX(5deg) scale(1.02);
+        }
+        
+        .card-3d-flip {
+            transform-style: preserve-3d;
+            transition: transform 0.8s;
+        }
+        
+        .card-3d-flip:hover {
+            transform: rotateY(180deg);
+        }
+        
+        /* Advanced Button Styles */
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-green) 0%, var(--primary-blue) 50%, var(--accent-teal) 100%);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.6s;
+        }
+        
+        .btn-primary:hover::before {
+            left: 100%;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(16, 185, 129, 0.4);
+        }
+        
+        .btn-secondary {
+            background: linear-gradient(135deg, var(--primary-yellow) 0%, var(--accent-orange) 100%);
+            transition: all 0.4s ease;
+        }
+        
+        .btn-secondary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 30px rgba(245, 158, 11, 0.4);
+        }
+        
+        .btn-admin {
+            background: linear-gradient(135deg, var(--accent-purple) 0%, var(--accent-pink) 50%, var(--accent-indigo) 100%);
+            transition: all 0.4s ease;
+        }
+        
+        .btn-admin:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 30px rgba(139, 92, 246, 0.4);
+        }
+        
+        .btn-danger {
+            background: linear-gradient(135deg, var(--accent-red) 0%, var(--accent-pink) 100%);
+            transition: all 0.4s ease;
+        }
+        
+        .btn-danger:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 30px rgba(239, 68, 68, 0.4);
+        }
+        
+        .btn-success {
+            background: linear-gradient(135deg, var(--primary-green) 0%, var(--accent-emerald) 100%);
+            transition: all 0.4s ease;
+        }
+        
+        .btn-success:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 30px rgba(16, 185, 129, 0.4);
+        }
+        
+        .btn-info {
+            background: linear-gradient(135deg, var(--accent-sky) 0%, var(--primary-blue) 100%);
+            transition: all 0.4s ease;
+        }
+        
+        .btn-info:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 30px rgba(14, 165, 233, 0.4);
+        }
+        
+        .btn-warning {
+            background: linear-gradient(135deg, var(--accent-amber) 0%, var(--primary-yellow) 100%);
+            transition: all 0.4s ease;
+        }
+        
+        .btn-warning:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 30px rgba(217, 119, 6, 0.4);
+        }
+        
+        /* Modal Animations */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .modal.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 1;
+        }
+        
+        .modal-content {
+            transform: scale(0.8) translateY(50px);
+            transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        
+        .modal.show .modal-content {
+            transform: scale(1) translateY(0);
+        }
+        
+        /* Progress Bars */
+        .progress-bar {
+            background: linear-gradient(90deg, var(--primary-green), var(--accent-teal), var(--primary-blue));
+            border-radius: 9999px;
+            position: relative;
+            overflow: hidden;
+            transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .progress-bar::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            animation: shimmer 2s infinite;
+        }
+        
+        /* Campaign Cards */
+        .campaign-card {
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .campaign-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.8s;
+        }
+        
+        .campaign-card:hover::before {
+            transform: translateX(100%);
+        }
+        
+        .campaign-card:hover {
+            transform: translateY(-15px) scale(1.03);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.2);
+        }
+        
+        /* Notification System */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1100;
+            transform: translateX(400px);
+            transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+        
+        .notification.show {
+            transform: translateX(0);
+        }
+        
+        /* Loading Animations */
+        .loading-spinner {
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-top: 3px solid var(--primary-blue);
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            animation: spin 1s linear infinite;
+        }
+        
+        /* Admin Panel Styles */
+        .admin-sidebar {
+            position: fixed;
+            left: -300px;
+            top: 0;
+            width: 300px;
+            height: 100vh;
+            background: linear-gradient(180deg, #1f2937 0%, #111827 100%);
+            z-index: 2000;
+            transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow-y: auto;
+        }
+        
+        .admin-sidebar.show {
+            left: 0;
+        }
+        
+        .admin-content {
+            margin-left: 0;
+            transition: margin-left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .admin-content.shifted {
+            margin-left: 300px;
+        }
+        
+        .admin-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            transition: all 0.3s ease;
+        }
+        
+        .admin-card:hover {
+            background: rgba(255, 255, 255, 0.08);
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Payment Modal Styles */
+        .payment-method {
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .payment-method:hover {
+            border-color: var(--primary-blue);
+            transform: translateY(-2px);
+        }
+        
+        .payment-method.selected {
+            border-color: var(--primary-green);
+            background: rgba(16, 185, 129, 0.1);
+        }
+        
+        /* Statistics Cards */
+        .stat-card {
+            background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        
+        /* Activity Feed */
+        .activity-item {
+            transition: all 0.3s ease;
+            border-left: 3px solid transparent;
+        }
+        
+        .activity-item:hover {
+            border-left-color: var(--primary-blue);
+            background: rgba(59, 130, 246, 0.05);
+            transform: translateX(5px);
+        }
+        
+        /* Ticker Animation */
+        .ticker-content {
+            animation: scroll-left 30s linear infinite;
+        }
+        
+        /* Language Switcher */
+        .language-switcher {
+            position: relative;
+        }
+        
+        .language-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            min-width: 150px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+        }
+        
+        .language-dropdown.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        
+        .language-option {
+            display: flex;
+            align-items: center;
+            padding: 12px 16px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: #374151;
+        }
+        
+        .language-option:hover {
+            background: rgba(59, 130, 246, 0.1);
+        }
+        
+        .language-option.active {
+            background: rgba(16, 185, 129, 0.1);
+            color: #059669;
+        }
+        
+        .flag-icon {
+            width: 20px;
+            height: 15px;
+            margin-right: 8px;
+            border-radius: 2px;
+        }
+        
+        /* Category Filter Styles */
+        .category-filter.active {
+            background: linear-gradient(135deg, var(--primary-blue), var(--accent-indigo));
+            color: white;
+            transform: scale(1.05);
+        }
+        
+        /* Admin Section Styles */
+        .admin-section {
+            display: none;
+        }
+        
+        .admin-section.active {
+            display: block;
+            animation: fadeInUp 0.5s ease;
+        }
+        
+        .admin-nav-item.active {
+            background: rgba(255, 255, 255, 0.1);
+            border-left: 4px solid var(--primary-blue);
+        }
+        
+        /* Table Styles */
+        .admin-table {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        
+        .admin-table th {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-weight: 600;
+            padding: 16px;
+            text-align: left;
+        }
+        
+        .admin-table td {
+            padding: 16px;
+            color: rgba(255, 255, 255, 0.9);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .admin-table tr:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+        
+        /* Social Links */
+        .social-links {
+            display: flex;
+            gap: 12px;
+        }
+        
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        
+        .social-link.linkedin {
+            background: #0077b5;
+        }
+        
+        .social-link.telegram {
+            background: #0088cc;
+        }
+        
+        .social-link.instagram {
+            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+        }
+        
+        .social-link.facebook {
+            background: #1877f2;
+        }
+        
+        .social-link.youtube {
+            background: #ff0000;
+        }
+        
+        .social-link.twitter {
+            background: #1da1f2;
+        }
+        
+        .social-link:hover {
+            transform: translateY(-3px) scale(1.1);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* File Upload Area */
+        .file-upload-area {
+            border: 2px dashed rgba(255, 255, 255, 0.3);
+            border-radius: 12px;
+            padding: 40px 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .file-upload-area:hover {
+            border-color: var(--primary-blue);
+            background: rgba(59, 130, 246, 0.05);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .admin-sidebar {
+                width: 100%;
+                left: -100%;
+            }
+            
+            .admin-content.shifted {
+                margin-left: 0;
+            }
+            
+            .particle {
+                display: none;
+            }
+            
+            .neon-glow {
+                animation: none;
+                text-shadow: none;
+            }
+        }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, var(--primary-blue), var(--accent-indigo));
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, var(--accent-indigo), var(--primary-blue));
+        }
+        
+        /* Special Effects */
+        .wiggle {
+            animation: wiggle 2s ease-in-out infinite;
+        }
+        
+        .fade-in {
+            animation: fadeInUp 0.8s ease-out;
+        }
+        
+        .slide-in-left {
+            animation: slideInLeft 0.8s ease-out;
+        }
+        
+        .slide-in-right {
+            animation: slideInRight 0.8s ease-out;
+        }
+        
+        /* Gradient Text */
+        .gradient-text {
+            background: linear-gradient(135deg, var(--primary-blue), var(--accent-purple), var(--primary-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        /* Floating Elements */
+        .floating {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        /* Glow Effects */
+        .glow-on-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .glow-on-hover:hover {
+            box-shadow: 0 0 30px rgba(59, 130, 246, 0.6);
+        }
+        
+        /* Campaign Badge Styles */
+        .campaign-badge {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .badge-urgent {
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+            color: white;
+            animation: pulse 2s infinite;
+        }
+        
+        .badge-featured {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            color: white;
+        }
+        
+        .badge-active {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+        }
+        
+        .badge-completed {
+            background: linear-gradient(135deg, #6b7280, #4b5563);
+            color: white;
+        }
+        
+        .badge-verified {
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            color: white;
+        }
+        
+        /* Live Activity Styles */
+        .live-activity {
+            background: rgba(16, 185, 129, 0.1);
+            border-left: 3px solid #10b981;
+            padding: 8px 12px;
+            border-radius: 6px;
+            margin-top: 8px;
+            font-size: 12px;
+            color: #059669;
+        }
+        
+        /* Rating Stars */
+        .rating-stars {
+            display: flex;
+            align-items: center;
+            gap: 2px;
+        }
+        
+        .star {
+            color: #fbbf24;
+            font-size: 14px;
+        }
+        
+        .star.empty {
+            color: #d1d5db;
+        }
+        
+        /* Advertisement Styles */
+        .advertisement-banner {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 16px;
+            padding: 24px;
+            color: white;
+            text-align: center;
+            margin-bottom: 24px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .advertisement-banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            animation: shimmer 3s infinite;
+        }
+        
+        .ad-close {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+        }
+        
+        .ad-close:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+        
+        /* Chat Widget */
+        .chat-widget {
+            position: fixed;
+            bottom: 100px;
+            right: 20px;
+            width: 350px;
+            height: 500px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            transform: translateY(100%);
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .chat-widget.show {
+            transform: translateY(0);
+        }
+        
+        .chat-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary-blue), var(--accent-indigo));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.4);
+            z-index: 1001;
+            transition: all 0.3s ease;
+        }
+        
+        .chat-toggle:hover {
+            transform: scale(1.1);
+            box-shadow: 0 15px 40px rgba(59, 130, 246, 0.6);
+        }
+        
+        /* Search Styles */
+        .search-container {
+            position: relative;
+        }
+        
+        .search-results {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            max-height: 400px;
+            overflow-y: auto;
+            z-index: 100;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+        }
+        
+        .search-results.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        
+        .search-result-item {
+            padding: 12px 16px;
+            border-bottom: 1px solid #f3f4f6;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .search-result-item:hover {
+            background: #f9fafb;
+        }
+        
+        /* Donation Progress */
+        .donation-progress {
+            position: relative;
+            background: #e5e7eb;
+            border-radius: 9999px;
+            height: 8px;
+            overflow: hidden;
+        }
+        
+        .donation-progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-green), var(--accent-teal));
+            border-radius: 9999px;
+            transition: width 1s ease;
+            position: relative;
+        }
+        
+        .donation-progress-bar::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            animation: shimmer 2s infinite;
+        }
+        
+        /* Testimonial Styles */
+        .testimonial-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            font-size: 60px;
+            color: var(--primary-blue);
+            font-family: serif;
+        }
+        
+        .testimonial-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        /* FAQ Styles */
+        .faq-item {
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            margin-bottom: 16px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .faq-question {
+            padding: 20px;
+            background: #f9fafb;
+            cursor: pointer;
+            display: flex;
+            justify-content: between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+        
+        .faq-question:hover {
+            background: #f3f4f6;
+        }
+        
+        .faq-answer {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .faq-item.active .faq-answer {
+            padding: 20px;
+            max-height: 200px;
+        }
+        
+        .faq-icon {
+            transition: transform 0.3s ease;
+        }
+        
+        .faq-item.active .faq-icon {
+            transform: rotate(180deg);
+        }
+        
+        /* Newsletter Styles */
+        .newsletter-section {
+            background: linear-gradient(135deg, var(--primary-blue), var(--accent-purple));
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .newsletter-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            animation: shimmer 3s infinite;
+        }
+        
+        /* Success Stories */
+        .success-story {
+            background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
+            border-radius: 16px;
+            padding: 24px;
+            border-left: 4px solid var(--primary-blue);
+            transition: all 0.3s ease;
+        }
+        
+        .success-story:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(59, 130, 246, 0.2);
+        }
+        
+        /* Impact Counter */
+        .impact-counter {
+            font-size: 3rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary-blue), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        /* Volunteer Section */
+        .volunteer-card {
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            border-radius: 16px;
+            padding: 24px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .volunteer-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(245, 158, 11, 0.3);
+        }
+        
+        /* Emergency Alert */
+        .emergency-alert {
+            background: linear-gradient(135deg, #fef2f2, #fee2e2);
+            border: 2px solid #fca5a5;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 20px;
+            animation: pulse 2s infinite;
+        }
+        
+        /* Partnership Logos */
+        .partner-logo {
+            width: 120px;
+            height: 80px;
+            background: white;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            filter: grayscale(100%);
+        }
+        
+        .partner-logo:hover {
+            filter: grayscale(0%);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        /* Mobile Menu */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100vh;
+            background: linear-gradient(135deg, var(--primary-blue), var(--accent-purple));
+            z-index: 2000;
+            transition: left 0.4s ease;
+            padding: 20px;
+        }
+        
+        .mobile-menu.show {
+            left: 0;
+        }
+        
+        /* Typewriter Effect */
+        .typewriter {
+            overflow: hidden;
+            border-right: 2px solid white;
+            white-space: nowrap;
+            animation: typewriter 4s steps(40, end), blink 0.75s step-end infinite;
+        }
+        
+        /* Heartbeat Animation */
+        .heartbeat {
+            animation: heartbeat 1.5s ease-in-out infinite;
+        }
+        
+        /* Donation Thermometer */
+        .donation-thermometer {
+            width: 40px;
+            height: 200px;
+            background: #e5e7eb;
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .thermometer-fill {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(0deg, #ef4444, #f59e0b, #10b981);
+            border-radius: 20px;
+            transition: height 1s ease;
+        }
+        
+        /* Confetti Animation */
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background: var(--primary-blue);
+            animation: confetti-fall 3s linear infinite;
+            z-index: 1000;
+        }
+        
+        @keyframes confetti-fall {
+            0% {
+                transform: translateY(-100vh) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+        
+        /* Milestone Celebration */
+        .milestone-celebration {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: linear-gradient(135deg, var(--primary-green), var(--accent-teal));
+            color: white;
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            z-index: 2000;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            animation: bounceIn 0.8s ease;
+        }
+        
+        /* Loading States */
+        .skeleton {
+            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+            background-size: 200% 100%;
+            animation: loading 1.5s infinite;
+        }
+        
+        @keyframes loading {
+            0% {
+                background-position: 200% 0;
+            }
+            100% {
+                background-position: -200% 0;
+            }
+        }
+        
+        /* Dark Mode Support */
+        @media (prefers-color-scheme: dark) {
+            .auto-dark {
+                background: #1f2937;
+                color: white;
+            }
+        }
+        
+        /* Print Styles */
+        @media print {
+            .no-print {
+                display: none !important;
+            }
+            
+            .print-only {
+                display: block !important;
+            }
+        }
+        
+        /* High Contrast Mode */
+        @media (prefers-contrast: high) {
+            .high-contrast {
+                border: 2px solid black;
+                background: white;
+                color: black;
+            }
+        }
+        
+        /* Reduced Motion */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Global Loading Overlay -->
+    <div id="globalLoading" class="fixed inset-0 bg-black bg-opacity-80 backdrop-blur-lg z-50 flex items-center justify-center" style="display: none;">
+        <div class="text-center text-white">
+            <div class="w-16 h-16 border-4 border-white border-opacity-30 border-t-blue-500 rounded-full animate-spin mx-auto mb-4"></div>
+            <h3 class="text-xl font-bold mb-2">Yuklanmoqda...</h3>
+            <p class="text-gray-300">Tizim ma'lumotlari sinxronlanmoqda</p>
+            <div class="mt-4">
+                <div class="w-64 bg-gray-700 rounded-full h-2 mx-auto">
+                    <div id="loadingProgress" class="bg-blue-500 h-2 rounded-full transition-all duration-300" style="width: 0%"></div>
+                </div>
+                <p class="text-sm text-gray-400 mt-2">Iltimos kuting...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Connection Status -->
+    <div id="connectionStatus" class="fixed top-20 right-4 z-50 px-3 py-2 rounded-lg text-sm font-medium bg-green-500 text-white transition-all duration-300">
+        <i class="fas fa-wifi mr-2"></i>Ulangan
+    </div>
+
+    <!-- Online Users Counter -->
+    <div id="onlineUsers" class="fixed bottom-20 right-4 z-50 bg-gradient-to-r from-blue-500 to-indigo-600 text-white px-4 py-3 rounded-full shadow-lg glow-on-hover">
+        <i class="fas fa-users mr-2"></i>
+        <span id="onlineCount">1,247</span> foydalanuvchi onlayn
+    </div>
+
+    <!-- Live Activity Feed -->
+    <div id="activityFeed" class="fixed bottom-80 right-4 z-50 w-80 max-h-96 bg-white rounded-xl shadow-2xl overflow-hidden transform translate-x-full transition-transform duration-500">
+        <div class="p-4 bg-gradient-to-r from-blue-500 to-indigo-600 text-white">
+            <h4 class="font-bold flex items-center">
+                <i class="fas fa-broadcast-tower mr-2"></i>
+                Jonli Faoliyat
+            </h4>
+            <p class="text-xs opacity-90">Real vaqtda yangilanishlar</p>
+        </div>
+        <div id="activityList" class="max-h-80 overflow-y-auto">
+            <!-- Activity items will be added here -->
+        </div>
+    </div>
+
+    <!-- Activity Feed Toggle Button -->
+    <button id="toggleActivityFeed" class="fixed bottom-60 right-4 z-50 bg-blue-500 text-white p-3 rounded-full shadow-lg hover:bg-blue-600 transition-all">
+        <i class="fas fa-chart-line"></i>
+    </button>
+
+    <!-- Global Stats Ticker -->
+    <div class="fixed bottom-0 left-0 right-0 bg-gradient-to-r from-green-500 via-blue-500 to-yellow-500 text-white py-2 z-40 overflow-hidden">
+        <div class="ticker-content flex">
+            <div class="flex items-center space-x-8 whitespace-nowrap">
+                <span><i class="fas fa-heart mr-2"></i>Jami xayriya: <span id="tickerTotalRaised">$2,500,000</span></span>
+                <span><i class="fas fa-users mr-2"></i>Faol xayriyachilar: <span id="tickerActiveDonors">15,678</span></span>
+                <span><i class="fas fa-bullhorn mr-2"></i>Faol kampaniyalar: <span id="tickerActiveCampaigns">1,247</span></span>
+                <span><i class="fas fa-globe mr-2"></i>47 mamlakat</span>
+                <span><i class="fas fa-clock mr-2"></i>24/7 xizmat</span>
+                <span><i class="fas fa-shield-alt mr-2"></i>100% xavfsiz</span>
+                <span><i class="fas fa-check-circle mr-2"></i>Tasdiqlangan kampaniyalar</span>
+                <span><i class="fas fa-handshake mr-2"></i>Hamkorlik dasturi</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification Container -->
+    <div id="notificationContainer" class="fixed top-4 right-4 z-50 space-y-2">
+        <!-- Notifications will appear here -->
+    </div>
+
+    <!-- Emergency Alert Banner -->
+    <div id="emergencyAlert" class="emergency-alert" style="display: none;">
+        <div class="container mx-auto px-6">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center">
+                    <i class="fas fa-exclamation-triangle text-red-600 text-xl mr-3"></i>
+                    <div>
+                        <h4 class="font-bold text-red-800">Shoshilinch Yordam Kerak!</h4>
+                        <p class="text-red-700 text-sm">Favqulodda vaziyat - darhol yordam talab qilinadi</p>
+                    </div>
+                </div>
+                <button id="closeEmergencyAlert" class="text-red-600 hover:text-red-800">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobileMenu" class="mobile-menu">
+        <div class="flex justify-between items-center mb-8">
+            <h2 class="text-2xl font-bold text-white">Menu</h2>
+            <button id="closeMobileMenu" class="text-white text-2xl">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <nav class="space-y-4">
+            <a href="#home" class="block text-white text-lg py-3 border-b border-white border-opacity-20">Bosh sahifa</a>
+            <a href="#campaigns" class="block text-white text-lg py-3 border-b border-white border-opacity-20">Kampaniyalar</a>
+            <a href="#about" class="block text-white text-lg py-3 border-b border-white border-opacity-20">Biz haqimizda</a>
+            <a href="#volunteer" class="block text-white text-lg py-3 border-b border-white border-opacity-20">Ko'ngillilik</a>
+            <a href="#success-stories" class="block text-white text-lg py-3 border-b border-white border-opacity-20">Muvaffaqiyat hikoyalari</a>
+            <a href="#contact" class="block text-white text-lg py-3 border-b border-white border-opacity-20">Aloqa</a>
+        </nav>
+    </div>
+
+    <!-- Header -->
+    <header class="morphing-gradient text-white relative overflow-hidden">
+        <!-- Particle System -->
+        <div class="particle-container">
+            <div class="particle" style="left: 10%; animation-delay: 0s;"></div>
+            <div class="particle" style="left: 20%; animation-delay: 2s;"></div>
+            <div class="particle" style="left: 30%; animation-delay: 4s;"></div>
+            <div class="particle" style="left: 40%; animation-delay: 6s;"></div>
+            <div class="particle" style="left: 50%; animation-delay: 8s;"></div>
+            <div class="particle" style="left: 60%; animation-delay: 10s;"></div>
+            <div class="particle" style="left: 70%; animation-delay: 12s;"></div>
+            <div class="particle" style="left: 80%; animation-delay: 14s;"></div>
+            <div class="particle" style="left: 90%; animation-delay: 16s;"></div>
+        </div>
+
+        <!-- Navigation -->
+        <nav class="glass-morphism relative z-10">
+            <div class="container mx-auto px-6 py-4">
+                <div class="flex items-center justify-between">
+                    <!-- Logo -->
+                    <div class="flex items-center space-x-3">
+                        <div class="w-12 h-12 bg-white bg-opacity-20 rounded-xl flex items-center justify-center heartbeat">
+                            <i class="fas fa-heart text-2xl neon-glow"></i>
+                        </div>
+                        <div>
+                            <h1 class="text-2xl font-bold neon-glow">E-Ehson Global</h1>
+                            <p class="text-sm opacity-90">Professional Xayriya Platformasi</p>
+                        </div>
+                    </div>
+
+                    <!-- Search Bar -->
+                    <div class="hidden md:block flex-1 max-w-md mx-8">
+                        <div class="search-container">
+                            <div class="relative">
+                                <input type="text" id="globalSearch" class="w-full px-4 py-2 pl-10 bg-white bg-opacity-10 border border-white border-opacity-20 rounded-lg text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Kampaniya qidirish...">
+                                <i class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-300"></i>
+                            </div>
+                            <div id="searchResults" class="search-results">
+                                <!-- Search results will appear here -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Navigation Links -->
+                    <div class="hidden lg:flex items-center space-x-8">
+                        <a href="#home" class="hover:text-yellow-300 transition-colors">Bosh sahifa</a>
+                        <a href="#campaigns" class="hover:text-yellow-300 transition-colors">Kampaniyalar</a>
+                        <a href="#about" class="hover:text-yellow-300 transition-colors">Biz haqimizda</a>
+                        <a href="#volunteer" class="hover:text-yellow-300 transition-colors">Ko'ngillilik</a>
+                        <a href="#contact" class="hover:text-yellow-300 transition-colors">Aloqa</a>
+                    </div>
+
+                    <!-- User Menu -->
+                    <div class="flex items-center space-x-4">
+                        <!-- Language Switcher -->
+                        <div class="language-switcher">
+                            <button id="languageBtn" class="flex items-center space-x-2 px-3 py-2 rounded-lg bg-white bg-opacity-10 hover:bg-opacity-20 transition-all">
+                                <img id="currentFlag" src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMTUiIHZpZXdCb3g9IjAgMCAyMCAxNSIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjIwIiBoZWlnaHQ9IjE1IiBmaWxsPSIjMDA5OUNDIi8+CjxyZWN0IHk9IjUiIHdpZHRoPSIyMCIgaGVpZ2h0PSI1IiBmaWxsPSIjRkZGRkZGIi8+CjxyZWN0IHk9IjEwIiB3aWR0aD0iMjAiIGhlaWdodD0iNSIgZmlsbD0iIzAwOTk0NCIvPgo8L3N2Zz4K" alt="UZ" class="flag-icon">
+                                <span id="currentLang" class="text-sm font-medium hidden md:block">O'zbek</span>
+                                <i class="fas fa-chevron-down text-xs"></i>
+                            </button>
+                            <div id="languageDropdown" class="language-dropdown">
+                                <div class="language-option active" data-lang="uz">
+                                    <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMTUiIHZpZXdCb3g9IjAgMCAyMCAxNSIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjIwIiBoZWlnaHQ9IjE1IiBmaWxsPSIjMDA5OUNDIi8+CjxyZWN0IHk9IjUiIHdpZHRoPSIyMCIgaGVpZ2h0PSI1IiBmaWxsPSIjRkZGRkZGIi8+CjxyZWN0IHk9IjEwIiB3aWR0aD0iMjAiIGhlaWdodD0iNSIgZmlsbD0iIzAwOTk0NCIvPgo8L3N2Zz4K" alt="UZ" class="flag-icon">
+                                    <span>O'zbek</span>
+                                </div>
+                                <div class="language-option" data-lang="ru">
+                                    <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMTUiIHZpZXdCb3g9IjAgMCAyMCAxNSIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjIwIiBoZWlnaHQ9IjUiIGZpbGw9IiNGRkZGRkYiLz4KPHJlY3QgeT0iNSIgd2lkdGg9IjIwIiBoZWlnaHQ9IjUiIGZpbGw9IiMwMDUyQTUiLz4KPHJlY3QgeT0iMTAiIHdpZHRoPSIyMCIgaGVpZ2h0PSI1IiBmaWxsPSIjREEwMDAwIi8+Cjwvc3ZnPgo=" alt="RU" class="flag-icon">
+                                    <span>Русский</span>
+                                </div>
+                                <div class="language-option" data-lang="en">
+                                    <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMTUiIHZpZXdCb3g9IjAgMCAyMCAxNSIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjIwIiBoZWlnaHQ9IjE1IiBmaWxsPSIjMDEyMTY5Ii8+CjxwYXRoIGQ9Ik0wIDBoMjB2MUgweiIgZmlsbD0iI0ZGRiIvPgo8cGF0aCBkPSJNMCAyaDIwdjFIMHoiIGZpbGw9IiNGRkYiLz4KPHBhdGggZD0iTTAgNGgyMHYxSDB6IiBmaWxsPSIjRkZGIi8+CjxwYXRoIGQ9Ik0wIDZoMjB2MUgweiIgZmlsbD0iI0ZGRiIvPgo8cGF0aCBkPSJNMCA4aDIwdjFIMHoiIGZpbGw9IiNGRkYiLz4KPHBhdGggZD0iTTAgMTBoMjB2MUgweiIgZmlsbD0iI0ZGRiIvPgo8cGF0aCBkPSJNMCAxMmgyMHYxSDB6IiBmaWxsPSIjRkZGIi8+CjxwYXRoIGQ9Ik0wIDE0aDIwdjFIMHoiIGZpbGw9IiNGRkYiLz4KPHJlY3Qgd2lkdGg9IjgiIGhlaWdodD0iOCIgZmlsbD0iIzAxMjE2OSIvPgo8L3N2Zz4K" alt="EN" class="flag-icon">
+                                    <span>English</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Mobile Menu Toggle -->
+                        <button id="mobileMenuToggle" class="lg:hidden text-white text-xl">
+                            <i class="fas fa-bars"></i>
+                        </button>
+
+                        <!-- Guest Menu -->
+                        <div id="guestMenu" class="hidden md:flex items-center space-x-3">
+                            <button id="loginBtn" class="px-4 py-2 bg-white bg-opacity-10 rounded-lg hover:bg-opacity-20 transition-all">
+                                <i class="fas fa-sign-in-alt mr-2"></i>Kirish
+                            </button>
+                            <button id="signupBtn" class="px-4 py-2 bg-white bg-opacity-20 rounded-lg hover:bg-opacity-30 transition-all">
+                                <i class="fas fa-user-plus mr-2"></i>Ro'yxat
+                            </button>
+                        </div>
+
+                        <!-- User Menu (Hidden by default) -->
+                        <div id="userMenu" class="hidden relative">
+                            <button id="profileDropdown" class="flex items-center space-x-3 px-4 py-2 bg-white bg-opacity-10 rounded-lg hover:bg-opacity-20 transition-all">
+                                <div class="w-8 h-8 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
+                                    <i class="fas fa-user text-sm"></i>
+                                </div>
+                                <span id="userName" class="font-medium hidden md:block">Foydalanuvchi</span>
+                                <i class="fas fa-chevron-down text-xs"></i>
+                            </button>
+                            
+                            <div id="dropdownMenu" class="hidden absolute right-0 mt-2 w-64 glass-morphism rounded-xl shadow-2xl py-2">
+                                <div class="px-4 py-3 border-b border-white border-opacity-20">
+                                    <p class="font-medium text-white" id="userNameFull">Foydalanuvchi</p>
+                                    <p class="text-sm text-gray-300" id="userPhone">+998 90 123 45 67</p>
+                                </div>
+                                <a href="#" class="flex items-center px-4 py-3 text-white hover:bg-white hover:bg-opacity-10 transition-all">
+                                    <i class="fas fa-user mr-3"></i>Profil
+                                </a>
+                                <a href="#" class="flex items-center px-4 py-3 text-white hover:bg-white hover:bg-opacity-10 transition-all">
+                                    <i class="fas fa-heart mr-3"></i>Mening xayriyalarim
+                                </a>
+                                <a href="#" id="applyCharityLink" class="flex items-center px-4 py-3 text-white hover:bg-white hover:bg-opacity-10 transition-all">
+                                    <i class="fas fa-file-alt mr-3"></i>Xayriya uchun ariza
+                                </a>
+                                <a href="#" class="flex items-center px-4 py-3 text-white hover:bg-white hover:bg-opacity-10 transition-all">
+                                    <i class="fas fa-cog mr-3"></i>Sozlamalar
+                                </a>
+                                <a href="#" class="flex items-center px-4 py-3 text-white hover:bg-white hover:bg-opacity-10 transition-all">
+                                    <i class="fas fa-bell mr-3"></i>Bildirishnomalar
+                                </a>
+                                <div id="adminPanelLink" class="hidden">
+                                    <a href="#" class="flex items-center px-4 py-3 text-yellow-300 hover:bg-white hover:bg-opacity-10 transition-all">
+                                        <i class="fas fa-crown mr-3"></i>Admin Panel
+                                    </a>
+                                </div>
+                                <div class="border-t border-white border-opacity-20 mt-2">
+                                    <button id="logoutBtn" class="flex items-center w-full px-4 py-3 text-red-300 hover:bg-white hover:bg-opacity-10 transition-all">
+                                        <i class="fas fa-sign-out-alt mr-3"></i>Chiqish
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Hero Section -->
+        <div class="relative z-10 py-20">
+            <div class="container mx-auto px-6 text-center">
+                <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 neon-glow gradient-text typewriter">
+                    Dunyoni O'zgartiring
+                </h1>
+                <p class="text-lg md:text-xl lg:text-2xl mb-8 opacity-90 fade-in">
+                    Professional xayriya platformasi orqali yaxshi ishlarni qo'llab-quvvatlang
+                </p>
+                
+                <!-- Global Statistics -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mb-12">
+                    <div class="stat-card p-4 md:p-6 rounded-2xl text-center elastic-bounce">
+                        <div class="impact-counter text-2xl md:text-3xl font-bold mb-2" id="heroTotalRaised">$2.5M+</div>
+                        <div class="text-xs md:text-sm opacity-80">Jami Xayriya</div>
+                    </div>
+                    <div class="stat-card p-4 md:p-6 rounded-2xl text-center elastic-bounce" style="animation-delay: 0.1s;">
+                        <div class="impact-counter text-2xl md:text-3xl font-bold mb-2" id="heroActiveDonors">15,678</div>
+                        <div class="text-xs md:text-sm opacity-80">Faol Donorlar</div>
+                    </div>
+                    <div class="stat-card p-4 md:p-6 rounded-2xl text-center elastic-bounce" style="animation-delay: 0.2s;">
+                        <div class="impact-counter text-2xl md:text-3xl font-bold mb-2" id="heroActiveCampaigns">1,247</div>
+                        <div class="text-xs md:text-sm opacity-80">Kampaniyalar</div>
+                    </div>
+                    <div class="stat-card p-4 md:p-6 rounded-2xl text-center elastic-bounce" style="animation-delay: 0.3s;">
+                        <div class="impact-counter text-2xl md:text-3xl font-bold mb-2">47</div>
+                        <div class="text-xs md:text-sm opacity-80">Mamlakatlar</div>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-6">
+                    <button id="startDonatingBtn" class="btn-primary text-white px-6 md:px-8 py-3 md:py-4 rounded-xl font-bold text-base md:text-lg elastic-hover">
+                        <i class="fas fa-heart mr-2 md:mr-3 heartbeat"></i>Xayriya Qilishni Boshlash
+                    </button>
+                    <button id="createCampaignBtn" class="btn-secondary text-white px-6 md:px-8 py-3 md:py-4 rounded-xl font-bold text-base md:text-lg elastic-hover">
+                        <i class="fas fa-bullhorn mr-2 md:mr-3"></i>Kampaniya Yaratish
+                    </button>
+                    <button id="viewGlobalStatsBtn" class="btn-admin text-white px-6 md:px-8 py-3 md:py-4 rounded-xl font-bold text-base md:text-lg elastic-hover">
+                        <i class="fas fa-chart-line mr-2 md:mr-3"></i>Global Statistika
+                    </button>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="mt-12 flex flex-wrap justify-center gap-4">
+                    <button id="emergencyHelpBtn" class="btn-danger text-white px-4 py-2 rounded-lg font-medium text-sm">
+                        <i class="fas fa-exclamation-triangle mr-2"></i>Shoshilinch Yordam
+                    </button>
+                    <button id="volunteerBtn" class="btn-warning text-white px-4 py-2 rounded-lg font-medium text-sm">
+                        <i class="fas fa-hands-helping mr-2"></i>Ko'ngilli Bo'lish
+                    </button>
+                    <button id="partnershipBtn" class="btn-info text-white px-4 py-2 rounded-lg font-medium text-sm">
+                        <i class="fas fa-handshake mr-2"></i>Hamkorlik
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main id="mainContent">
+        <!-- Advertisement Section -->
+        <section class="py-8 bg-gradient-to-r from-purple-600 to-pink-600">
+            <div class="container mx-auto px-6">
+                <div id="advertisementContainer">
+                    <!-- Advertisements will be loaded here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Campaign Categories -->
+        <section class="py-12 md:py-16 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-8 md:mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Kampaniya Kategoriyalari</h2>
+                    <p class="text-lg md:text-xl text-gray-600">Qiziqtirgan sohani tanlang</p>
+                </div>
+                
+                <div class="flex flex-wrap justify-center gap-3 md:gap-4 mb-8 md:mb-12">
+                    <button class="category-filter active px-4 md:px-6 py-2 md:py-3 rounded-full bg-gray-100 text-gray-700 font-medium transition-all text-sm md:text-base" data-category="all">
+                        <i class="fas fa-globe mr-2"></i>Barchasi
+                    </button>
+                    <button class="category-filter px-4 md:px-6 py-2 md:py-3 rounded-full bg-gray-100 text-gray-700 font-medium transition-all text-sm md:text-base" data-category="health">
+                        <i class="fas fa-heartbeat mr-2"></i>Sog'liq
+                    </button>
+                    <button class="category-filter px-4 md:px-6 py-2 md:py-3 rounded-full bg-gray-100 text-gray-700 font-medium transition-all text-sm md:text-base" data-category="education">
+                        <i class="fas fa-graduation-cap mr-2"></i>Ta'lim
+                    </button>
+                    <button class="category-filter px-4 md:px-6 py-2 md:py-3 rounded-full bg-gray-100 text-gray-700 font-medium transition-all text-sm md:text-base" data-category="emergency">
+                        <i class="fas fa-exclamation-triangle mr-2"></i>Favqulodda
+                    </button>
+                    <button class="category-filter px-4 md:px-6 py-2 md:py-3 rounded-full bg-gray-100 text-gray-700 font-medium transition-all text-sm md:text-base" data-category="children">
+                        <i class="fas fa-child mr-2"></i>Bolalar
+                    </button>
+                    <button class="category-filter px-4 md:px-6 py-2 md:py-3 rounded-full bg-gray-100 text-gray-700 font-medium transition-all text-sm md:text-base" data-category="elderly">
+                        <i class="fas fa-user-friends mr-2"></i>Keksalar
+                    </button>
+                    <button class="category-filter px-4 md:px-6 py-2 md:py-3 rounded-full bg-gray-100 text-gray-700 font-medium transition-all text-sm md:text-base" data-category="environment">
+                        <i class="fas fa-leaf mr-2"></i>Atrof-muhit
+                    </button>
+                    <button class="category-filter px-4 md:px-6 py-2 md:py-3 rounded-full bg-gray-100 text-gray-700 font-medium transition-all text-sm md:text-base" data-category="housing">
+                        <i class="fas fa-home mr-2"></i>Uy-joy
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Active Campaigns -->
+        <section id="campaigns" class="py-12 md:py-16 bg-gray-50">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-8 md:mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Faol Kampaniyalar</h2>
+                    <p class="text-lg md:text-xl text-gray-600">Hozirda yordam kerak bo'lgan kampaniyalar</p>
+                </div>
+                
+                <div id="globalCampaignsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+                    <!-- Campaigns will be loaded here -->
+                </div>
+                
+                <div class="text-center mt-8 md:mt-12">
+                    <button id="loadMoreCampaigns" class="btn-primary text-white px-6 md:px-8 py-3 rounded-lg font-medium">
+                        <i class="fas fa-plus mr-2"></i>Ko'proq Yuklash
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Success Stories -->
+        <section id="success-stories" class="py-12 md:py-16 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-8 md:mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Muvaffaqiyat Hikoyalari</h2>
+                    <p class="text-lg md:text-xl text-gray-600">Sizning yordamingiz bilan amalga oshgan ishlar</p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+                    <div class="success-story">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-heart text-white"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-800">Anvar's Yurak Operatsiyasi</h4>
+                                <p class="text-sm text-gray-600">Muvaffaqiyatli yakunlandi</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-700 mb-4">7 yoshli Anvarning yurak operatsiyasi muvaffaqiyatli o'tkazildi. 234 xayriyachi yordamida 50 million so'm yig'ildi.</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-green-600 font-bold">100% muvaffaqiyat</span>
+                            <span class="text-sm text-gray-500">2 oy oldin</span>
+                        </div>
+                    </div>
+                    
+                    <div class="success-story">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-graduation-cap text-white"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-800">Qashqadaryo Maktabi</h4>
+                                <p class="text-sm text-gray-600">Qurilish yakunlandi</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-700 mb-4">200 nafar bola uchun yangi maktab qurildi. 567 xayriyachi ishtirokida 200 million so'm yig'ildi.</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-green-600 font-bold">100% muvaffaqiyat</span>
+                            <span class="text-sm text-gray-500">1 oy oldin</span>
+                        </div>
+                    </div>
+                    
+                    <div class="success-story">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 bg-yellow-500 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-home text-white"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-800">5 Bolali Oila Uyi</h4>
+                                <p class="text-sm text-gray-600">Qurilish tugallandi</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-700 mb-4">Katta oila uchun yangi uy qurildi. 189 xayriyachi yordamida 80 million so'm yig'ildi.</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-green-600 font-bold">100% muvaffaqiyat</span>
+                            <span class="text-sm text-gray-500">3 hafta oldin</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-center mt-8 md:mt-12">
+                    <button id="viewAllStoriesBtn" class="btn-success text-white px-6 md:px-8 py-3 rounded-lg font-medium">
+                        <i class="fas fa-book-open mr-2"></i>Barcha Hikoyalarni Ko'rish
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Volunteer Section -->
+        <section id="volunteer" class="py-12 md:py-16 bg-gradient-to-r from-yellow-400 to-orange-500">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-8 md:mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Ko'ngilli Bo'ling</h2>
+                    <p class="text-lg md:text-xl text-white opacity-90">Vaqtingiz va ko'nikmalaringiz bilan yordam bering</p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+                    <div class="volunteer-card">
+                        <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-hands-helping text-yellow-600 text-2xl"></i>
+                        </div>
+                        <h4 class="font-bold text-gray-800 mb-2">Yordam Berish</h4>
+                        <p class="text-gray-700 text-sm mb-4">Kampaniyalarni targ'ib qilish va yordam yig'ishda ishtirok eting</p>
+                        <button class="btn-warning text-white px-4 py-2 rounded-lg font-medium text-sm w-full">
+                            Ko'ngilli Bo'lish
+                        </button>
+                    </div>
+                    
+                    <div class="volunteer-card">
+                        <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-camera text-yellow-600 text-2xl"></i>
+                        </div>
+                        <h4 class="font-bold text-gray-800 mb-2">Media Yaratish</h4>
+                        <p class="text-gray-700 text-sm mb-4">Foto, video va dizayn ishlarida yordam bering</p>
+                        <button class="btn-warning text-white px-4 py-2 rounded-lg font-medium text-sm w-full">
+                            Ishtirok Etish
+                        </button>
+                    </div>
+                    
+                    <div class="volunteer-card">
+                        <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-language text-yellow-600 text-2xl"></i>
+                        </div>
+                        <h4 class="font-bold text-gray-800 mb-2">Tarjimon</h4>
+                        <p class="text-gray-700 text-sm mb-4">Turli tillarda tarjima qilish va yordam berish</p>
+                        <button class="btn-warning text-white px-4 py-2 rounded-lg font-medium text-sm w-full">
+                            Tarjimon Bo'lish
+                        </button>
+                    </div>
+                    
+                    <div class="volunteer-card">
+                        <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-code text-yellow-600 text-2xl"></i>
+                        </div>
+                        <h4 class="font-bold text-gray-800 mb-2">Texnik Yordam</h4>
+                        <p class="text-gray-700 text-sm mb-4">Veb-sayt va texnik masalalarda yordam berish</p>
+                        <button class="btn-warning text-white px-4 py-2 rounded-lg font-medium text-sm w-full">
+                            Texnik Yordam
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials -->
+        <section class="py-12 md:py-16 bg-gray-50">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-8 md:mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Foydalanuvchi Fikrlari</h2>
+                    <p class="text-lg md:text-xl text-gray-600">Bizning platformamiz haqida nima deyishadi</p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+                    <div class="testimonial-card">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-user text-white"></i>
+                            </div>
+                            <div>
+                                <h5 class="font-bold text-gray-800">Aziza Abdullayeva</h5>
+                                <div class="rating-stars">
+                                    <i class="fas fa-star star"></i>
+                                    <i class="fas fa-star star"></i>
+                                    <i class="fas fa-star star"></i>
+                                    <i class="fas fa-star star"></i>
+                                    <i class="fas fa-star star"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-gray-700">Bu platforma orqali ko'plab yaxshi ishlarga yordam berdim. Juda oson va ishonchli. Har bir so'mning qayerga ketganini ko'rish mumkin.</p>
+                    </div>
+                    
+                    <div class="testimonial-card">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-user text-white"></i>
+                            </div>
+                            <div>
+                                <h5 class="font-bold text-gray-800">Bekzod Tursunov</h5>
+                                <div class="rating-stars">
+                                    <i class="fas fa-star star"></i>
+                                    <i class="fas fa-star star"></i>
+                                    <i class="fas fa-star star"></i>
+                                    <i class="fas fa-star star"></i>
+                                    <i class="fas fa-star star"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-gray-700">Professional xizmat va shaffoflik. Mening xayriyam haqiqatan ham muhtoj odamlarga yetib bordi. Rahmat!</p>
+                    </div>
+                    
+                    <div class="testimonial-card">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 bg-purple-500 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-user text-white"></i>
+                            </div>
+                            <div>
+                                <h5 class="font-bold text-gray-800">Malika Saidova</h5>
+                                <div class="rating-stars">
+                                    <i class="fas fa-star star"></i>
+                                    <i class="fas fa-star star"></i>
+                                    <i class="fas fa-star star"></i>
+                                    <i class="fas fa-star star"></i>
+                                    <i class="fas fa-star star"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-gray-700">Eng yaxshi xayriya platformasi! Faqat bir necha daqiqada xayriya qilish mumkin. Barcha jarayonlar aniq va tushunarli.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Partnership Section -->
+        <section class="py-12 md:py-16 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-8 md:mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Bizning Hamkorlarimiz</h2>
+                    <p class="text-lg md:text-xl text-gray-600">Ishonchli tashkilotlar bilan hamkorlik</p>
+                </div>
+                
+                <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6 md:gap-8">
+                    <div class="partner-logo">
+                        <i class="fas fa-university text-3xl text-gray-400"></i>
+                    </div>
+                    <div class="partner-logo">
+                        <i class="fas fa-hospital text-3xl text-gray-400"></i>
+                    </div>
+                    <div class="partner-logo">
+                        <i class="fas fa-school text-3xl text-gray-400"></i>
+                    </div>
+                    <div class="partner-logo">
+                        <i class="fas fa-building text-3xl text-gray-400"></i>
+                    </div>
+                    <div class="partner-logo">
+                        <i class="fas fa-handshake text-3xl text-gray-400"></i>
+                    </div>
+                    <div class="partner-logo">
+                        <i class="fas fa-globe text-3xl text-gray-400"></i>
+                    </div>
+                </div>
+                
+                <div class="text-center mt-8 md:mt-12">
+                    <button id="becomePartnerBtn" class="btn-info text-white px-6 md:px-8 py-3 rounded-lg font-medium">
+                        <i class="fas fa-handshake mr-2"></i>Hamkor Bo'lish
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="py-12 md:py-16 bg-gray-50">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-8 md:mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Tez-tez So'raladigan Savollar</h2>
+                    <p class="text-lg md:text-xl text-gray-600">Eng ko'p so'raladigan savollar va javoblar</p>
+                </div>
+                
+                <div class="max-w-3xl mx-auto">
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h4 class="font-bold text-gray-800 flex-1">Xayriya qilish qanchalik xavfsiz?</h4>
+                            <i class="fas fa-chevron-down faq-icon text-gray-600"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p class="text-gray-700">Bizning platformamiz eng yuqori xavfsizlik standartlariga ega. Barcha to'lovlar SSL shifrlash bilan himoyalangan va ishonchli to'lov tizimlari orqali amalga oshiriladi.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h4 class="font-bold text-gray-800 flex-1">Xayriyam qayerga ketganini qanday bilaman?</h4>
+                            <i class="fas fa-chevron-down faq-icon text-gray-600"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p class="text-gray-700">Har bir xayriya to'liq shaffoflik bilan kuzatiladi. Siz o'z profilingizda barcha xayriyalaringiz va ularning qanday ishlatilganini ko'rishingiz mumkin.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h4 class="font-bold text-gray-800 flex-1">Kampaniya yaratish uchun haq to'lanmi?</h4>
+                            <i class="fas fa-chevron-down faq-icon text-gray-600"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p class="text-gray-700">Yo'q, kampaniya yaratish mutlaqo bepul. Biz faqat muvaffaqiyatli yig'ilgan mablag'dan kichik foiz olamiz (5%), bu platformani ishlab turishga sarflanadi.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h4 class="font-bold text-gray-800 flex-1">Qanday to'lov usullari mavjud?</h4>
+                            <i class="fas fa-chevron-down faq-icon text-gray-600"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p class="text-gray-700">Click, Payme, UzCard, Humo va boshqa barcha mashhur to'lov tizimlarini qo'llab-quvvatlaymiz. Shuningdek, bank o'tkazmasi ham mumkin.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Newsletter Section -->
+        <section class="py-12 md:py-16">
+            <div class="container mx-auto px-6">
+                <div class="newsletter-section">
+                    <h2 class="text-2xl md:text-3xl font-bold mb-4">Yangiliklar va Kampaniyalardan Xabardor Bo'ling</h2>
+                    <p class="text-lg mb-6 opacity-90">Eng muhim yangiliklar va yangi kampaniyalar haqida birinchi bo'lib bilib oling</p>
+                    
+                    <form id="newsletterForm" class="flex flex-col md:flex-row gap-4 max-w-md mx-auto">
+                        <input type="email" class="flex-1 px-4 py-3 rounded-lg text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-white" placeholder="Email manzilingiz" required>
+                        <button type="submit" class="btn-success text-white px-6 py-3 rounded-lg font-medium">
+                            <i class="fas fa-paper-plane mr-2"></i>Obuna Bo'lish
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="py-12 md:py-16 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center">
+                    <div class="fade-in">
+                        <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-6">E-Ehson Global Haqida</h2>
+                        <p class="text-lg text-gray-600 mb-6">
+                            Biz dunyodagi eng katta va ishonchli xayriya platformalaridan biriyiz. 
+                            Bizning maqsadimiz - har bir inson o'z hissasini qo'shib, dunyoni 
+                            yaxshiroq joyga aylantirish imkoniyatini berish.
+                        </p>
+                        <div class="space-y-4">
+                            <div class="flex items-center">
+                                <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mr-4">
+                                    <i class="fas fa-shield-alt text-green-600 text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-gray-800">100% Xavfsiz</h4>
+                                    <p class="text-gray-600">Barcha to'lovlar himoyalangan</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center">
+                                <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mr-4">
+                                    <i class="fas fa-eye text-blue-600 text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-gray-800">Shaffoflik</h4>
+                                    <p class="text-gray-600">Har bir so'm qayerga ketganini ko'ring</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center">
+                                <div class="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center mr-4">
+                                    <i class="fas fa-clock text-yellow-600 text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-gray-800">24/7 Qo'llab-quvvatlash</h4>
+                                    <p class="text-gray-600">Har doim sizning xizmatingizdamiz</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center">
+                                <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mr-4">
+                                    <i class="fas fa-globe text-purple-600 text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-gray-800">Global Tarmoq</h4>
+                                    <p class="text-gray-600">47 mamlakatda faoliyat</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slide-in-right">
+                        <div class="bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl p-6 md:p-8 text-white">
+                            <h3 class="text-xl md:text-2xl font-bold mb-6">Bizning Yutuqlarimiz</h3>
+                            <div class="grid grid-cols-2 gap-4 md:gap-6">
+                                <div class="text-center">
+                                    <div class="text-2xl md:text-3xl font-bold mb-2" id="aboutTotalRaised">2.5M+</div>
+                                    <div class="text-xs md:text-sm opacity-90">Dollar Yig'ildi</div>
+                                </div>
+                                <div class="text-center">
+                                    <div class="text-2xl md:text-3xl font-bold mb-2" id="aboutActiveDonors">15K+</div>
+                                    <div class="text-xs md:text-sm opacity-90">Faol Donorlar</div>
+                                </div>
+                                <div class="text-center">
+                                    <div class="text-2xl md:text-3xl font-bold mb-2" id="aboutActiveCampaigns">1.2K+</div>
+                                    <div class="text-xs md:text-sm opacity-90">Kampaniyalar</div>
+                                </div>
+                                <div class="text-center">
+                                    <div class="text-2xl md:text-3xl font-bold mb-2">47</div>
+                                    <div class="text-xs md:text-sm opacity-90">Mamlakatlar</div>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-6 pt-6 border-t border-white border-opacity-20">
+                                <h4 class="font-bold mb-3">Bizning Missiyamiz</h4>
+                                <p class="text-sm opacity-90">Har bir inson o'z imkoniyatlari doirasida yaxshi ishlar qilishi va muhtoj odamlarga yordam berishi uchun qulay va ishonchli platforma yaratish.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-12 md:py-16 bg-gray-50">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-8 md:mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Biz Bilan Bog'laning</h2>
+                    <p class="text-lg md:text-xl text-gray-600">Savollaringiz bormi? Biz sizga yordam berishga tayyormiz</p>
+                </div>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12">
+                    <!-- Contact Form -->
+                    <div class="bg-white rounded-2xl shadow-lg p-6 md:p-8">
+                        <h3 class="text-xl md:text-2xl font-bold text-gray-800 mb-6">Xabar Yuborish</h3>
+                        <form id="contactForm" class="space-y-6">
+                            <div>
+                                <label class="block text-gray-700 font-medium mb-2">Ism</label>
+                                <input type="text" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Ismingiz" required>
+                            </div>
+                            <div>
+                                <label class="block text-gray-700 font-medium mb-2">Email</label>
+                                <input type="email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="email@example.com" required>
+                            </div>
+                            <div>
+                                <label class="block text-gray-700 font-medium mb-2">Telefon</label>
+                                <input type="tel" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="+998 90 123 45 67">
+                            </div>
+                            <div>
+                                <label class="block text-gray-700 font-medium mb-2">Mavzu</label>
+                                <select class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                                    <option value="">Mavzuni tanlang</option>
+                                    <option value="general">Umumiy savol</option>
+                                    <option value="donation">Xayriya haqida</option>
+                                    <option value="campaign">Kampaniya yaratish</option>
+                                    <option value="technical">Texnik yordam</option>
+                                    <option value="partnership">Hamkorlik</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-gray-700 font-medium mb-2">Xabar</label>
+                                <textarea class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 h-32" placeholder="Xabaringizni yozing..." required></textarea>
+                            </div>
+                            <button type="submit" class="w-full btn-primary text-white py-3 rounded-lg font-medium">
+                                <i class="fas fa-paper-plane mr-2"></i>Xabar Yuborish
+                            </button>
+                        </form>
+                    </div>
+                    
+                    <!-- Contact Information -->
+                    <div class="space-y-6 md:space-y-8">
+                        <div class="bg-white rounded-2xl shadow-lg p-6 md:p-8">
+                            <h3 class="text-xl md:text-2xl font-bold text-gray-800 mb-6">Aloqa Ma'lumotlari</h3>
+                            <div class="space-y-4">
+                                <div class="flex items-center">
+                                    <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mr-4">
+                                        <i class="fas fa-phone text-blue-600"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-gray-800">Telefon</h4>
+                                        <p class="text-gray-600">+998 95 888 38 51</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mr-4">
+                                        <i class="fas fa-envelope text-green-600"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-gray-800">Email</h4>
+                                        <p class="text-gray-600">jasurbekjolanboyev349@gmail.com</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center mr-4">
+                                        <i class="fas fa-map-marker-alt text-yellow-600"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-gray-800">Manzil</h4>
+                                        <p class="text-gray-600">Toshkent, O'zbekiston</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mr-4">
+                                        <i class="fas fa-clock text-purple-600"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-gray-800">Ish Vaqti</h4>
+                                        <p class="text-gray-600">24/7 - Har doim</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Social Media -->
+                        <div class="bg-white rounded-2xl shadow-lg p-6 md:p-8">
+                            <h3 class="text-xl md:text-2xl font-bold text-gray-800 mb-6">Ijtimoiy Tarmoqlar</h3>
+                            <div class="social-links">
+                                <a href="#" class="social-link linkedin" target="_blank" rel="noopener noreferrer">
+                                    <i class="fab fa-linkedin-in text-white"></i>
+                                </a>
+                                <a href="#" class="social-link telegram" target="_blank" rel="noopener noreferrer">
+                                    <i class="fab fa-telegram-plane text-white"></i>
+                                </a>
+                                <a href="#" class="social-link instagram" target="_blank" rel="noopener noreferrer">
+                                    <i class="fab fa-instagram text-white"></i>
+                                </a>
+                                <a href="#" class="social-link facebook" target="_blank" rel="noopener noreferrer">
+                                    <i class="fab fa-facebook-f text-white"></i>
+                                </a>
+                                <a href="#" class="social-link youtube" target="_blank" rel="noopener noreferrer">
+                                    <i class="fab fa-youtube text-white"></i>
+                                </a>
+                                <a href="#" class="social-link twitter" target="_blank" rel="noopener noreferrer">
+                                    <i class="fab fa-twitter text-white"></i>
+                                </a>
+                            </div>
+                            <p class="text-gray-600 mt-4 text-sm">Bizni ijtimoiy tarmoqlarda kuzatib boring va eng so'nggi yangiliklar bilan tanishing</p>
+                        </div>
+                        
+                        <!-- Quick Links -->
+                        <div class="bg-white rounded-2xl shadow-lg p-6 md:p-8">
+                            <h3 class="text-xl md:text-2xl font-bold text-gray-800 mb-6">Tezkor Havolalar</h3>
+                            <div class="grid grid-cols-2 gap-4">
+                                <button class="btn-info text-white px-4 py-2 rounded-lg font-medium text-sm">
+                                    <i class="fas fa-question-circle mr-2"></i>Yordam
+                                </button>
+                                <button class="btn-warning text-white px-4 py-2 rounded-lg font-medium text-sm">
+                                    <i class="fas fa-file-alt mr-2"></i>Qo'llanma
+                                </button>
+                                <button class="btn-success text-white px-4 py-2 rounded-lg font-medium text-sm">
+                                    <i class="fas fa-shield-alt mr-2"></i>Xavfsizlik
+                                </button>
+                                <button class="btn-danger text-white px-4 py-2 rounded-lg font-medium text-sm">
+                                    <i class="fas fa-exclamation-triangle mr-2"></i>Shikoyat
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Chat Widget -->
+    <div id="chatWidget" class="chat-widget">
+        <div class="bg-gradient-to-r from-blue-500 to-indigo-600 text-white p-4 rounded-t-2xl">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center">
+                    <div class="w-10 h-10 bg-white bg-opacity-20 rounded-full flex items-center justify-center mr-3">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold">Yordam Xizmati</h4>
+                        <p class="text-xs opacity-90">Onlayn</p>
+                    </div>
+                </div>
+                <button id="closeChatWidget" class="text-white hover:text-gray-300">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+        
+        <div class="flex-1 p-4 bg-gray-50 overflow-y-auto" style="height: 350px;">
+            <div id="chatMessages" class="space-y-3">
+                <div class="flex">
+                    <div class="bg-blue-500 text-white p-3 rounded-lg rounded-bl-none max-w-xs">
+                        <p class="text-sm">Salom! Sizga qanday yordam bera olaman?</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="p-4 bg-white rounded-b-2xl border-t">
+            <form id="chatForm" class="flex space-x-2">
+                <input type="text" id="chatInput" class="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Xabar yozing...">
+                <button type="submit" class="btn-primary text<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'98464a06e2dca9d3',t:'MTc1ODc1ODkyOS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
