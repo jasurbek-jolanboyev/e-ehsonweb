@@ -1,0 +1,196 @@
+{
+  "campaigns": [
+    {
+      "id": "campaign_1759524685745",
+      "title": "Yangi elon ",
+      "category": "talim",
+      "description": "tezro kere",
+      "targetAmount": 100000000000,
+      "currentAmount": 10000,
+      "donors": 107,
+      "daysLeft": 30,
+      "urgent": true,
+      "cardNumber": "5614680600880997",
+      "cardOwner": "Jolanboyev jasurbek",
+      "contactPhone": "+998958883851",
+      "contactName": "Jasurbek Jolanboyev Gayrat ogli",
+      "image": "📚",
+      "createdBy": "Admin",
+      "createdAt": "2025-10-03T20:51:25.745Z"
+    },
+    {
+      "id": "campaign_1",
+      "title": "Anvar's Yurak Operatsiyasi",
+      "category": "tibbiyot",
+      "description": "7 yoshli Anvarning yurak operatsiyasi uchun yordam kerak. Oila imkoniyatlari cheklangan. Operatsiya Koreya Respublikasida o'tkazilishi kerak.",
+      "targetAmount": 50000000,
+      "currentAmount": 35000000,
+      "donors": 234,
+      "daysLeft": 15,
+      "urgent": true,
+      "cardNumber": "8600 1234 5678 9012",
+      "cardOwner": "ANVAR OTASI KARIM UMAROV",
+      "contactPhone": "+998-95-888-38-51",
+      "contactName": "Karim Umarov (Anvar otasi)",
+      "image": "🏥",
+      "createdBy": "Admin",
+      "createdAt": "2025-10-03T20:50:03.692Z"
+    },
+    {
+      "id": "campaign_2",
+      "title": "Maryam's Onkologiya Davolash",
+      "category": "tibbiyot",
+      "description": "45 yoshli Maryam onaning onkologiya kasalligi uchun kimyoterapiya kursi kerak. Davolash Turkiyada o'tkaziladi.",
+      "targetAmount": 80000000,
+      "currentAmount": 25000000,
+      "donors": 156,
+      "daysLeft": 30,
+      "urgent": true,
+      "cardNumber": "8600 2345 6789 0123",
+      "cardOwner": "MARYAM QIZI FOTIMA KARIMOVA",
+      "contactPhone": "+998-95-888-38-51",
+      "contactName": "Fotima Karimova (Maryam qizi)",
+      "image": "🏥",
+      "createdBy": "Admin",
+      "createdAt": "2025-10-03T20:50:03.692Z"
+    },
+    {
+      "id": "campaign_3",
+      "title": "Nogironlik Aravachasi",
+      "category": "nogironlik",
+      "description": "Harakat qilish imkoniyati cheklangan Dilshod uchun elektr aravachasi kerak. Nemis ishlab chiqargan yuqori sifatli aravachasi.",
+      "targetAmount": 15000000,
+      "currentAmount": 8500000,
+      "donors": 89,
+      "daysLeft": 25,
+      "urgent": false,
+      "cardNumber": "8600 6789 0123 4567",
+      "cardOwner": "DILSHOD ONASI NARGIZA UMAROVA",
+      "contactPhone": "+998-95-888-38-51",
+      "contactName": "Nargiza Umarova (Dilshod onasi)",
+      "image": "♿",
+      "createdBy": "Admin",
+      "createdAt": "2025-10-03T20:50:03.692Z"
+    }
+  ],
+  "ads": [
+    {
+      "id": "ad_1",
+      "type": "banner",
+      "title": "🏥 Zamonaviy Tibbiy Markaz - Eng Yaxshi Xizmatlar!",
+      "description": "Eng yaxshi tibbiy xizmatlar va zamonaviy uskunalar",
+      "linkUrl": "https://t.me/serinaqu",
+      "contact": "@serinaqu",
+      "showDuration": 12,
+      "banner": true,
+      "createdAt": "2025-10-03T20:50:03.692Z"
+    },
+    {
+      "id": "ad_2",
+      "type": "banner",
+      "title": "⚖️ Bepul Yuridik Maslahat - 24/7 Xizmat!",
+      "description": "Har qanday huquqiy masalalar bo'yicha bepul maslahat",
+      "linkUrl": "https://t.me/serinaqu",
+      "contact": "@serinaqu",
+      "showDuration": 15,
+      "banner": true,
+      "createdAt": "2025-10-03T20:50:03.693Z"
+    }
+  ],
+  "teamMembers": [
+    {
+      "id": 1,
+      "name": "Jasurbek Jo'lanboyev",
+      "role": "CEO & Founder",
+      "description": "Platformani yaratish va boshqarishda yetakchi rol o'ynaydi.",
+      "image": "/home/serinaqu/Desktop/e-ehsonweb/assets/jasurbek.png",
+      "socials": {
+        "telegram": "https://t.me/Vscoderr",
+        "youtube": "https://www.youtube.com/@Jasurbek_Jolanboyev",
+        "instagram": "https://www.instagram.com/jasurbek.official.uz",
+        "linkedin": "https://www.linkedin.com/in/jasurbek-jo-lanboyev-74b758351",
+        "twitter": "https://x.com/Jolanboyev",
+        "tiktok": "https://tiktok.com/@jasurbek_jolanboyev"
+      }
+    },
+    {
+      "id": 2,
+      "name": "Ism Familiya 2",
+      "role": "CTO",
+      "description": "Texnik rivojlantirish va infratuzilmani boshqaradi.",
+      "image": "https://via.placeholder.com/400x200?text=Team+Member+2",
+      "socials": {
+        "telegram": "https://t.me/Vscoderr",
+        "linkedin": "https://www.linkedin.com/in/jasurbek-jo-lanboyev-74b758351"
+      }
+    },
+    {
+      "id": 3,
+      "name": "Ism Familiya 3",
+      "role": "Marketing Manager",
+      "description": "Marketing strategiyalari va reklama ishlarini olib boradi.",
+      "image": "https://via.placeholder.com/400x200?text=Team+Member+3",
+      "socials": {
+        "instagram": "https://www.instagram.com/jasurbek.official.uz",
+        "twitter": "https://x.com/Jolanboyev"
+      }
+    },
+    {
+      "id": 4,
+      "name": "Ism Familiya 4",
+      "role": "Developer",
+      "description": "Frontend va backend rivojlantirishda ishtirok etadi.",
+      "image": "https://via.placeholder.com/400x200?text=Team+Member+4",
+      "socials": {
+        "youtube": "https://www.youtube.com/@Jasurbek_Jolanboyev",
+        "tiktok": "https://tiktok.com/@jasurbek_jolanboyev"
+      }
+    },
+    {
+      "id": 5,
+      "name": "Ism Familiya 5",
+      "role": "Designer",
+      "description": "UI/UX dizayn va grafik ishlarni amalga oshiradi.",
+      "image": "https://via.placeholder.com/400x200?text=Team+Member+5",
+      "socials": {
+        "instagram": "https://www.instagram.com/jasurbek.official.uz"
+      }
+    },
+    {
+      "id": 6,
+      "name": "Ism Familiya 6",
+      "role": "Content Manager",
+      "description": "Kontent yaratish va boshqarish bilan shug'ullanadi.",
+      "image": "https://via.placeholder.com/400x200?text=Team+Member+6",
+      "socials": {
+        "telegram": "https://t.me/Vscoderr"
+      }
+    },
+    {
+      "id": 7,
+      "name": "Ism Familiya 7",
+      "role": "Support Specialist",
+      "description": "Foydalanuvchilar yordami va texnik qo'llab-quvvatlash.",
+      "image": "https://via.placeholder.com/400x200?text=Team+Member+7",
+      "socials": {
+        "linkedin": "https://www.linkedin.com/in/jasurbek-jo-lanboyev-74b758351"
+      }
+    },
+    {
+      "id": 8,
+      "name": "Ism Familiya 8",
+      "role": "Analyst",
+      "description": "Ma'lumotlar tahlili va statistika bilan ishlaydi.",
+      "image": "https://via.placeholder.com/400x200?text=Team+Member+8",
+      "socials": {
+        "twitter": "https://x.com/Jolanboyev"
+      }
+    }
+  ],
+  "adSettings": {
+    "overlayDuration": 8,
+    "skipAfter": 3,
+    "showBanner": true,
+    "bannerText": "🎯 Maxsus Taklif! Eng Yaxshi Xizmatlar"
+  }
+}
