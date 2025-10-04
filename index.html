@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>E-Ehson Professional - Xayriya Platformasi</title>
+    <title data-i18n="title">E-Ehson Professional - Xayriya Platformasi</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     
@@ -159,8 +159,8 @@
             z-index: 10000;
         }
         
-        /* Top Banner Ad */
-        .top-banner-ad {
+        /* Top and Bottom Banner Ad */
+        .top-banner-ad, .bottom-banner-ad {
             background: linear-gradient(45deg, #ff6b6b, #feca57);
             color: white;
             padding: 10px 0;
@@ -169,7 +169,11 @@
             overflow: hidden;
         }
         
-        .top-banner-ad::before {
+        .bottom-banner-ad {
+            margin-top: 20px;
+        }
+        
+        .top-banner-ad::before, .bottom-banner-ad::before {
             content: '';
             position: absolute;
             top: 0;
@@ -183,6 +187,26 @@
         @keyframes shine {
             0% { left: -100%; }
             100% { left: 100%; }
+        }
+
+        /* Update Ticker */
+        .update-ticker {
+            background: linear-gradient(45deg, #10b981, #059669);
+            color: white;
+            padding: 8px 0;
+            overflow: hidden;
+            white-space: nowrap;
+            position: relative;
+        }
+        
+        .ticker-text {
+            display: inline-block;
+            animation: scroll-left 20s linear infinite;
+        }
+        
+        @keyframes scroll-left {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
         }
         
         /* Mobile optimizations */
@@ -432,6 +456,26 @@
             box-shadow: 0 10px 25px rgba(16, 185, 129, 0.3);
         }
 
+        /* Language Selector */
+        .lang-selector {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .lang-btn {
+            padding: 0.5rem 1rem;
+            border: 1px solid #ddd;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            background: white;
+            transition: all 0.3s;
+        }
+        
+        .lang-btn.active {
+            background: #3b82f6;
+            color: white;
+        }
+
         /* Admin List Styles */
         .admin-list-item {
             background: rgba(255, 255, 255, 0.1);
@@ -530,30 +574,30 @@
             <button id="privacyCloseBtn" class="privacy-close-btn" onclick="closePrivacyModal()">
                 <i class="fas fa-times"></i>
             </button>
-            <h2 class="text-3xl font-bold mb-6 text-gray-800">🔒 Maxfiylik Siyosati</h2>
+            <h2 class="text-3xl font-bold mb-6 text-gray-800" data-i18n="privacyTitle">🔒 Maxfiylik Siyosati</h2>
             <div class="text-gray-600 space-y-4">
-                <p><strong>E-Ehson Professional</strong> platformasi foydalanuvchilarning maxfiyligini himoya qilishga bag'ishlangan.</p>
+                <p data-i18n="privacyIntro"><strong data-i18n="siteName">E-Ehson Professional</strong> platformasi foydalanuvchilarning maxfiyligini himoya qilishga bag'ishlangan.</p>
                 
-                <h3 class="text-xl font-bold text-gray-800 mt-6">📊 Ma'lumotlar To'plash</h3>
-                <p>Biz faqat xayriya maqsadlari uchun zarur bo'lgan ma'lumotlarni to'playmiz:</p>
+                <h3 class="text-xl font-bold text-gray-800 mt-6" data-i18n="dataCollection">📊 Ma'lumotlar To'plash</h3>
+                <p data-i18n="dataCollectDesc">Biz faqat xayriya maqsadlari uchun zarur bo'lgan ma'lumotlarni to'playmiz:</p>
                 <ul class="list-disc ml-6">
-                    <li>Ism va familiya</li>
-                    <li>Telefon raqami</li>
-                    <li>Xayriya miqdori</li>
+                    <li data-i18n="fullName">Ism va familiya</li>
+                    <li data-i18n="phone">Telefon raqami</li>
+                    <li data-i18n="donationAmount">Xayriya miqdori</li>
                 </ul>
                 
-                <h3 class="text-xl font-bold text-gray-800 mt-6">🛡️ Ma'lumotlar Himoyasi</h3>
-                <p>Barcha shaxsiy ma'lumotlar shifrlangan holda saqlanadi va uchinchi shaxslarga berilmaydi.</p>
+                <h3 class="text-xl font-bold text-gray-800 mt-6" data-i18n="dataProtection">🛡️ Ma'lumotlar Himoyasi</h3>
+                <p data-i18n="dataProtectDesc">Barcha shaxsiy ma'lumotlar shifrlangan holda saqlanadi va uchinchi shaxslarga berilmaydi.</p>
                 
-                <h3 class="text-xl font-bold text-gray-800 mt-6">📞 Aloqa</h3>
-                <p>Savollar bo'lsa, biz bilan bog'laning:</p>
+                <h3 class="text-xl font-bold text-gray-800 mt-6" data-i18n="contact">📞 Aloqa</h3>
+                <p data-i18n="contactDesc">Savollar bo'lsa, biz bilan bog'laning:</p>
                 <ul class="list-disc ml-6">
-                    <li>📱 Telegram: @serinaqu</li>
-                    <li>📞 Telefon: +998-95-888-38-51</li>
-                    <li>📧 Email: info@eehson.uz</li>
+                    <li data-i18n="telegram">📱 Telegram: @serinaqu</li>
+                    <li data-i18n="phoneContact">📞 Telefon: +998-95-888-38-51</li>
+                    <li data-i18n="email">📧 Email: info@eehson.uz</li>
                 </ul>
                 
-                <p class="text-sm text-gray-500 mt-6">Oxirgi yangilanish: 2025 yil</p>
+                <p class="text-sm text-gray-500 mt-6" data-i18n="lastUpdate">Oxirgi yangilanish: 2025 yil</p>
             </div>
         </div>
     </div>
@@ -579,9 +623,7 @@
                 <i class="fas fa-times"></i>
             </button>
             <div id="adTimer" class="ad-timer">5</div>
-            <button id="adSkipBtn" class="ad-skip-btn hidden" onclick="closeAdOverlay()">
-                Reklamani o'tkazib yuborish
-            </button>
+            <button id="adSkipBtn" class="ad-skip-btn hidden" onclick="closeAdOverlay()" data-i18n="skipAd">Reklamani o'tkazib yuborish</button>
             <div id="adContentArea">
                 <!-- Ad content will be loaded here -->
             </div>
@@ -592,7 +634,7 @@
     <div id="topBannerAd" class="top-banner-ad hidden">
         <div class="max-w-7xl mx-auto px-4 flex items-center justify-between mobile-padding">
             <div class="flex-1 text-center">
-                <span id="bannerAdText" class="font-bold mobile-text">🎯 Maxsus Taklif! Eng Yaxshi Xizmatlar</span>
+                <span id="bannerAdText" class="font-bold mobile-text" data-i18n="bannerDefault">🎯 Maxsus Taklif! Eng Yaxshi Xizmatlar</span>
             </div>
             <button onclick="hideBannerAd()" class="text-white hover:text-gray-200 ml-4">
                 <i class="fas fa-times"></i>
@@ -600,24 +642,42 @@
         </div>
     </div>
 
-    <!-- Local Storage Indicator (Admin uchun) -->
-    <div id="storageIndicator" class="storage-indicator">
-        💾 Ma'lumotlar local saqlandi. Deploy qiling!
+    <!-- Update Ticker (for non-video ads) -->
+    <div id="updateTicker" class="update-ticker hidden">
+        <div class="ticker-text" id="tickerText"></div>
     </div>
+
+    <!-- Bottom Banner Ad -->
+    <div id="bottomBannerAd" class="bottom-banner-ad hidden">
+        <div class="max-w-7xl mx-auto px-4 flex items-center justify-between mobile-padding">
+            <div class="flex-1 text-center">
+                <span id="bottomBannerAdText" class="font-bold mobile-text" data-i18n="bannerDefault">🎯 Maxsus Taklif! Eng Yaxshi Xizmatlar</span>
+            </div>
+            <button onclick="hideBottomBannerAd()" class="text-white hover:text-gray-200 ml-4">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Local Storage Indicator (Admin uchun) -->
+    <div id="storageIndicator" class="storage-indicator" data-i18n="storageSaved">💾 Ma'lumotlar local saqlandi. Deploy qiling!</div>
 
     <!-- Language Bar -->
     <div class="bg-gradient-to-r from-blue-500 to-purple-500 text-white py-2">
         <div class="max-w-7xl mx-auto px-4 flex justify-between items-center mobile-padding">
             <div class="flex items-center space-x-3">
                 <div class="live-indicator w-3 h-3 rounded-full bg-green-400"></div>
-                <span class="text-sm font-medium mobile-text">💝 E-Ehson Professional</span>
-                <span class="text-xs opacity-75">Xayriya Platformasi</span>
+                <span class="text-sm font-medium mobile-text" data-i18n="siteNameShort">💝 E-Ehson Professional</span>
+                <span class="text-xs opacity-75" data-i18n="siteSubtitle">Xayriya Platformasi</span>
             </div>
             <div class="flex items-center space-x-4">
-                <span class="text-sm mobile-text">Foydalanuvchi: <span id="currentUserName" class="font-bold">Mehmon</span></span>
-                <button onclick="showAdminPanel()" id="adminBtn" class="text-sm bg-yellow-500 px-3 py-1 rounded hover:bg-yellow-600 transition-colors hidden">
-                    👑 Admin Panel
-                </button>
+                <span class="text-sm mobile-text" data-i18n="user">Foydalanuvchi: <span id="currentUserName" class="font-bold">Mehmon</span></span>
+                <div class="lang-selector">
+                    <button class="lang-btn active" onclick="setLanguage('uz')">🇺🇿 UZ</button>
+                    <button class="lang-btn" onclick="setLanguage('ru')">🇷🇺 RU</button>
+                    <button class="lang-btn" onclick="setLanguage('en')">🇺🇸 EN</button>
+                </div>
+                <button onclick="showAdminPanel()" id="adminBtn" class="text-sm bg-yellow-500 px-3 py-1 rounded hover:bg-yellow-600 transition-colors hidden" data-i18n="adminPanel">👑 Admin Panel</button>
             </div>
         </div>
     </div>
@@ -629,33 +689,25 @@
                 <div class="flex items-center space-x-3">
                     <div class="text-3xl">❤️</div>
                     <div>
-                        <h1 class="text-xl font-bold text-gray-800">E-Ehson Professional</h1>
-                        <p class="text-xs text-gray-500">Xayriya Platformasi</p>
+                        <h1 class="text-xl font-bold text-gray-800" data-i18n="siteNameFull">E-Ehson Professional</h1>
+                        <p class="text-xs text-gray-500" data-i18n="siteSubtitle">Xayriya Platformasi</p>
                     </div>
                 </div>
                 
                 <div class="hidden md:flex space-x-8">
-                    <a href="#home" onclick="scrollToSection('home')" class="nav-link text-blue-600 font-semibold cursor-pointer">Bosh sahifa</a>
-                    <a href="#campaigns" onclick="scrollToSection('campaigns')" class="nav-link text-gray-600 hover:text-blue-600 cursor-pointer">E'lonlar</a>
-                    <a href="#about" onclick="scrollToSection('about')" class="nav-link text-gray-600 hover:text-blue-600 cursor-pointer">Biz haqimizda</a>
-                    <a href="#team" onclick="scrollToSection('team')" class="nav-link text-gray-600 hover:text-blue-600 cursor-pointer">Loyiha Jamoasi</a>
-                    <a href="#contact" onclick="scrollToSection('contact')" class="nav-link text-gray-600 hover:text-blue-600 cursor-pointer">Aloqa</a>
-                    <a onclick="showPrivacyModal()" class="nav-link text-gray-600 hover:text-blue-600 cursor-pointer">Maxfiylik</a>
+                    <a href="#home" onclick="scrollToSection('home')" class="nav-link text-blue-600 font-semibold cursor-pointer" data-i18n="home">Bosh sahifa</a>
+                    <a href="#campaigns" onclick="scrollToSection('campaigns')" class="nav-link text-gray-600 hover:text-blue-600 cursor-pointer" data-i18n="campaigns">E'lonlar</a>
+                    <a href="#about" onclick="scrollToSection('about')" class="nav-link text-gray-600 hover:text-blue-600 cursor-pointer" data-i18n="about">Biz haqimizda</a>
+                    <a href="#team" onclick="scrollToSection('team')" class="nav-link text-gray-600 hover:text-blue-600 cursor-pointer" data-i18n="team">Loyiha Jamoasi</a>
+                    <a href="#contact" onclick="scrollToSection('contact')" class="nav-link text-gray-600 hover:text-blue-600 cursor-pointer" data-i18n="contact">Aloqa</a>
+                    <a onclick="showPrivacyModal()" class="nav-link text-gray-600 hover:text-blue-600 cursor-pointer" data-i18n="privacy">Maxfiylik</a>
                 </div>
                 
                 <div class="flex items-center space-x-3">
-                    <button onclick="requestCampaign()" class="telegram-btn text-white px-4 py-2 rounded-lg transition-all duration-300 transform hover:scale-105 mobile-button touch-button">
-                        📢 E'lon So'rash
-                    </button>
-                    <button onclick="getHelp()" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg transition-all duration-300 transform hover:scale-105 mobile-button touch-button">
-                        🆘 Yordam
-                    </button>
-                    <button onclick="checkAdminAccess()" class="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg transition-all duration-300 transform hover:scale-105 mobile-button touch-button">
-                        👑 Admin
-                    </button>
-                    <button onclick="showAddAdModal()" id="addAdBtn" class="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-lg transition-all duration-300 transform hover:scale-105 mobile-button touch-button hidden">
-                        📺 Reklama Qo'yish
-                    </button>
+                    <button onclick="requestCampaign()" class="telegram-btn text-white px-4 py-2 rounded-lg transition-all duration-300 transform hover:scale-105 mobile-button touch-button" data-i18n="requestAd">📢 E'lon So'rash</button>
+                    <button onclick="getHelp()" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg transition-all duration-300 transform hover:scale-105 mobile-button touch-button" data-i18n="help">🆘 Yordam</button>
+                    <button onclick="checkAdminAccess()" class="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg transition-all duration-300 transform hover:scale-105 mobile-button touch-button" data-i18n="admin">👑 Admin</button>
+                    <button onclick="showAddAdModal()" id="addAdBtn" class="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-lg transition-all duration-300 transform hover:scale-105 mobile-button touch-button hidden" data-i18n="addAd">📺 Reklama Qo'yish</button>
                 </div>
             </div>
         </div>
@@ -665,7 +717,7 @@
     <div id="adminModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4 hidden">
         <div class="admin-panel w-full max-w-6xl max-h-96 overflow-y-auto rounded-2xl p-6 text-white">
             <div class="flex justify-between items-center mb-6">
-                <h2 class="text-3xl font-bold">👑 Admin Panel</h2>
+                <h2 class="text-3xl font-bold" data-i18n="adminPanel">👑 Admin Panel</h2>
                 <button onclick="closeAdminPanel()" class="text-white hover:text-gray-300 text-2xl">
                     <i class="fas fa-times"></i>
                 </button>
@@ -673,37 +725,37 @@
             
             <!-- Admin Controls -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-                <button onclick="showAddCampaignModal()" class="user-card rounded-xl p-4 text-center hover:bg-white hover:bg-opacity-20 transition-all">
+                <button onclick="showAddCampaignModal()" class="user-card rounded-xl p-4 text-center hover:bg-white hover:bg-opacity-20 transition-all" data-i18n="addCampaign"> 
                     <div class="text-2xl mb-2">📢</div>
-                    <div class="font-bold">E'lon Qo'shish</div>
+                    <div class="font-bold" data-i18n="addCampaignBtn">E'lon Qo'shish</div>
                 </button>
                 <button onclick="showManageCampaigns()" class="user-card rounded-xl p-4 text-center hover:bg-white hover:bg-opacity-20 transition-all">
                     <div class="text-2xl mb-2">✏️</div>
-                    <div class="font-bold">E'lonlarni Boshqarish</div>
+                    <div class="font-bold" data-i18n="manageCampaigns">E'lonlarni Boshqarish</div>
                 </button>
                 <button onclick="showAddAdModal()" class="user-card rounded-xl p-4 text-center hover:bg-white hover:bg-opacity-20 transition-all">
                     <div class="text-2xl mb-2">📺</div>
-                    <div class="font-bold">Reklama Qo'shish</div>
+                    <div class="font-bold" data-i18n="addAd">Reklama Qo'shish</div>
                 </button>
                 <button onclick="showManageAds()" class="user-card rounded-xl p-4 text-center hover:bg-white hover:bg-opacity-20 transition-all">
                     <div class="text-2xl mb-2">🔧</div>
-                    <div class="font-bold">Reklamalarni Boshqarish</div>
+                    <div class="font-bold" data-i18n="manageAds">Reklamalarni Boshqarish</div>
                 </button>
                 <button onclick="showManageTeam()" class="user-card rounded-xl p-4 text-center hover:bg-white hover:bg-opacity-20 transition-all">
                     <div class="text-2xl mb-2">👥</div>
-                    <div class="font-bold">Jamoani Boshqarish</div>
+                    <div class="font-bold" data-i18n="manageTeam">Jamoani Boshqarish</div>
                 </button>
                 <button onclick="showAdSettings()" class="user-card rounded-xl p-4 text-center hover:bg-white hover:bg-opacity-20 transition-all">
                     <div class="text-2xl mb-2">⚙️</div>
-                    <div class="font-bold">Sozlamalar</div>
+                    <div class="font-bold" data-i18n="settings">Sozlamalar</div>
                 </button>
                 <button onclick="exportData()" class="user-card rounded-xl p-4 text-center hover:bg-white hover:bg-opacity-20 transition-all">
                     <div class="text-2xl mb-2">📤</div>
-                    <div class="font-bold">Ma'lumotlarni Export</div>
+                    <div class="font-bold" data-i18n="exportData">Ma'lumotlarni Export</div>
                 </button>
                 <button onclick="clearLocalData()" class="user-card rounded-xl p-4 text-center hover:bg-white hover:bg-opacity-20 transition-all bg-red-500">
                     <div class="text-2xl mb-2">🗑️</div>
-                    <div class="font-bold">Local Tozalash</div>
+                    <div class="font-bold" data-i18n="clearLocal">Local Tozalash</div>
                 </button>
             </div>
             
@@ -711,19 +763,19 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
                 <div class="user-card rounded-xl p-4 text-center">
                     <div class="text-2xl font-bold" id="adminTotalCampaigns">0</div>
-                    <div class="text-sm opacity-75">Jami E'lonlar</div>
+                    <div class="text-sm opacity-75" data-i18n="totalCampaigns">Jami E'lonlar</div>
                 </div>
                 <div class="user-card rounded-xl p-4 text-center">
                     <div class="text-2xl font-bold" id="adminTotalAds">0</div>
-                    <div class="text-sm opacity-75">Jami Reklamalar</div>
+                    <div class="text-sm opacity-75" data-i18n="totalAds">Jami Reklamalar</div>
                 </div>
                 <div class="user-card rounded-xl p-4 text-center">
                     <div class="text-2xl font-bold" id="adminTotalDonations">0M</div>
-                    <div class="text-sm opacity-75">Jami Xayriya</div>
+                    <div class="text-sm opacity-75" data-i18n="totalDonations">Jami Xayriya</div>
                 </div>
                 <div class="user-card rounded-xl p-4 text-center">
                     <div class="text-2xl font-bold" id="adminTotalTeam">0</div>
-                    <div class="text-sm opacity-75">Jamoa A'zolari</div>
+                    <div class="text-sm opacity-75" data-i18n="totalTeam">Jamoa A'zolari</div>
                 </div>
             </div>
         </div>
@@ -733,7 +785,7 @@
     <div id="manageCampaignsModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4 hidden">
         <div class="bg-white rounded-2xl p-6 max-w-4xl w-full max-h-[80vh] overflow-y-auto">
             <div class="flex justify-between items-center mb-6">
-                <h3 class="text-2xl font-bold">📋 E'lonlarni Boshqarish</h3>
+                <h3 class="text-2xl font-bold" data-i18n="manageCampaigns">📋 E'lonlarni Boshqarish</h3>
                 <button onclick="closeManageCampaigns()" class="text-gray-500 hover:text-gray-700 text-2xl">
                     <i class="fas fa-times"></i>
                 </button>
@@ -748,7 +800,7 @@
     <div id="manageAdsModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4 hidden">
         <div class="bg-white rounded-2xl p-6 max-w-4xl w-full max-h-[80vh] overflow-y-auto">
             <div class="flex justify-between items-center mb-6">
-                <h3 class="text-2xl font-bold">📺 Reklamalarni Boshqarish</h3>
+                <h3 class="text-2xl font-bold" data-i18n="manageAds">📺 Reklamalarni Boshqarish</h3>
                 <button onclick="closeManageAds()" class="text-gray-500 hover:text-gray-700 text-2xl">
                     <i class="fas fa-times"></i>
                 </button>
@@ -763,7 +815,7 @@
     <div id="manageTeamModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4 hidden">
         <div class="bg-white rounded-2xl p-6 max-w-4xl w-full max-h-[80vh] overflow-y-auto">
             <div class="flex justify-between items-center mb-6">
-                <h3 class="text-2xl font-bold">👥 Jamoani Boshqarish</h3>
+                <h3 class="text-2xl font-bold" data-i18n="manageTeam">👥 Jamoani Boshqarish</h3>
                 <button onclick="closeManageTeam()" class="text-gray-500 hover:text-gray-700 text-2xl">
                     <i class="fas fa-times"></i>
                 </button>
@@ -779,25 +831,25 @@
         <div class="absolute inset-0 bg-black opacity-20"></div>
         <div class="max-w-7xl mx-auto px-4 text-center relative z-10 mobile-padding">
             <div class="fade-in-up">
-                <h1 class="text-4xl md:text-6xl font-bold mb-6 text-shadow">Yaxshilik Qiling</h1>
-                <p class="text-lg md:text-xl mb-8 max-w-3xl mx-auto text-shadow mobile-text">Professional xayriya platformasi orqali yaxshi ishlarni qo'llab-quvvatlang va jamiyatga hissa qo'shing</p>
+                <h1 class="text-4xl md:text-6xl font-bold mb-6 text-shadow" data-i18n="heroTitle">Yaxshilik Qiling</h1>
+                <p class="text-lg md:text-xl mb-8 max-w-3xl mx-auto text-shadow mobile-text" data-i18n="heroDesc">Professional xayriya platformasi orqali yaxshi ishlarni qo'llab-quvvatlang va jamiyatga hissa qo'shing</p>
                 
                 <!-- Platform Features -->
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
                     <div class="glass-effect rounded-xl p-6 transform hover:scale-105 transition-all duration-300 mobile-card">
                         <div class="text-3xl mb-3">💝</div>
-                        <div class="text-lg font-bold mb-2">Xavfsiz Xayriya</div>
-                        <div class="text-sm opacity-90 mobile-text">Ishonchli va shaffof tizim</div>
+                        <div class="text-lg font-bold mb-2" data-i18n="secureDonation">Xavfsiz Xayriya</div>
+                        <div class="text-sm opacity-90 mobile-text" data-i18n="secureDesc">Ishonchli va shaffof tizim</div>
                     </div>
                     <div class="glass-effect rounded-xl p-6 transform hover:scale-105 transition-all duration-300 mobile-card">
                         <div class="text-3xl mb-3">🌍</div>
-                        <div class="text-lg font-bold mb-2">Global Ta'sir</div>
-                        <div class="text-sm opacity-90 mobile-text">Dunyo bo'ylab yordam</div>
+                        <div class="text-lg font-bold mb-2" data-i18n="globalImpact">Global Ta'sir</div>
+                        <div class="text-sm opacity-90 mobile-text" data-i18n="globalDesc">Dunyo bo'ylab yordam</div>
                     </div>
                     <div class="glass-effect rounded-xl p-6 transform hover:scale-105 transition-all duration-300 mobile-card">
                         <div class="text-3xl mb-3">📱</div>
-                        <div class="text-lg font-bold mb-2">Oson Foydalanish</div>
-                        <div class="text-sm opacity-90 mobile-text">Mobil va desktop uchun</div>
+                        <div class="text-lg font-bold mb-2" data-i18n="easyUse">Oson Foydalanish</div>
+                        <div class="text-sm opacity-90 mobile-text" data-i18n="easyDesc">Mobil va desktop uchun</div>
                     </div>
                 </div>
                 
@@ -805,33 +857,29 @@
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
                     <div class="glass-effect rounded-xl p-6 transform hover:scale-105 transition-all duration-300 mobile-card">
                         <div class="text-3xl md:text-4xl font-bold mb-2" id="totalDonations">2.5M</div>
-                        <div class="text-sm opacity-90 mobile-text">Jami Xayriya</div>
-                        <div class="text-xs opacity-75 mt-1">💰 so'm</div>
+                        <div class="text-sm opacity-90 mobile-text" data-i18n="totalDonations">Jami Xayriya</div>
+                        <div class="text-xs opacity-75 mt-1" data-i18n="currency">💰 so'm</div>
                     </div>
                     <div class="glass-effect rounded-xl p-6 transform hover:scale-105 transition-all duration-300 mobile-card">
                         <div class="text-3xl md:text-4xl font-bold mb-2" id="totalUsers">1,234</div>
-                        <div class="text-sm opacity-90 mobile-text">Xayriyachilar</div>
-                        <div class="text-xs opacity-75 mt-1">👥 kishi</div>
+                        <div class="text-sm opacity-90 mobile-text" data-i18n="totalUsers">Xayriyachilar</div>
+                        <div class="text-xs opacity-75 mt-1" data-i18n="people">👥 kishi</div>
                     </div>
                     <div class="glass-effect rounded-xl p-6 transform hover:scale-105 transition-all duration-300 mobile-card">
                         <div class="text-3xl md:text-4xl font-bold mb-2" id="activeCampaigns">15</div>
-                        <div class="text-sm opacity-90 mobile-text">Faol E'lonlar</div>
-                        <div class="text-xs opacity-75 mt-1">📢 ta</div>
+                        <div class="text-sm opacity-90 mobile-text" data-i18n="activeCampaigns">Faol E'lonlar</div>
+                        <div class="text-xs opacity-75 mt-1" data-i18n="count">📢 ta</div>
                     </div>
                     <div class="glass-effect rounded-xl p-6 transform hover:scale-105 transition-all duration-300 mobile-card">
                         <div class="text-3xl md:text-4xl font-bold mb-2" id="completedCampaigns">89</div>
-                        <div class="text-sm opacity-90 mobile-text">Tugallangan</div>
-                        <div class="text-xs opacity-75 mt-1">✅ ta</div>
+                        <div class="text-sm opacity-90 mobile-text" data-i18n="completed">Tugallangan</div>
+                        <div class="text-xs opacity-75 mt-1" data-i18n="completedCount">✅ ta</div>
                     </div>
                 </div>
                 
                 <div class="flex flex-col sm:flex-row gap-6 justify-center">
-                    <button onclick="scrollToCampaigns()" class="bg-white text-blue-600 px-8 py-4 rounded-xl font-bold hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 shadow-lg mobile-button touch-button">
-                        💝 Xayriya Qilish
-                    </button>
-                    <button onclick="scrollToAbout()" class="border-2 border-white text-white px-8 py-4 rounded-xl font-bold hover:bg-white hover:text-blue-600 transition-all duration-300 transform hover:scale-105 mobile-button touch-button">
-                        📖 Batafsil
-                    </button>
+                    <button onclick="scrollToCampaigns()" class="bg-white text-blue-600 px-8 py-4 rounded-xl font-bold hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 shadow-lg mobile-button touch-button" data-i18n="donate">💝 Xayriya Qilish</button>
+                    <button onclick="scrollToAbout()" class="border-2 border-white text-white px-8 py-4 rounded-xl font-bold hover:bg-white hover:text-blue-600 transition-all duration-300 transform hover:scale-105 mobile-button touch-button" data-i18n="details">📖 Batafsil</button>
                 </div>
             </div>
         </div>
@@ -841,42 +889,42 @@
     <section class="py-16 gradient-bg-2">
         <div class="max-w-7xl mx-auto px-4 mobile-padding">
             <div class="text-center mb-12">
-                <h2 class="text-3xl md:text-4xl font-bold text-white mb-4 text-shadow">Xayriya Yo'nalishlari</h2>
-                <p class="text-white text-lg opacity-90 mobile-text">Har bir yo'nalishda yordam berishingiz mumkin</p>
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-4 text-shadow" data-i18n="categoriesTitle">Xayriya Yo'nalishlari</h2>
+                <p class="text-white text-lg opacity-90 mobile-text" data-i18n="categoriesDesc">Har bir yo'nalishda yordam berishingiz mumkin</p>
             </div>
             
             <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-4">
                 <div onclick="filterCampaigns('tibbiyot')" class="category-card rounded-xl p-4 text-center cursor-pointer transform hover:scale-105 transition-all duration-300 touch-button">
                     <div class="text-3xl mb-2">🏥</div>
-                    <div class="text-white text-sm font-medium mobile-text">Tibbiy Yordam</div>
+                    <div class="text-white text-sm font-medium mobile-text" data-i18n="medical">Tibbiy Yordam</div>
                 </div>
                 <div onclick="filterCampaigns('nogironlik')" class="category-card rounded-xl p-4 text-center cursor-pointer transform hover:scale-105 transition-all duration-300 touch-button">
                     <div class="text-3xl mb-2">♿</div>
-                    <div class="text-white text-sm font-medium mobile-text">Nogironlik</div>
+                    <div class="text-white text-sm font-medium mobile-text" data-i18n="disability">Nogironlik</div>
                 </div>
                 <div onclick="filterCampaigns('talim')" class="category-card rounded-xl p-4 text-center cursor-pointer transform hover:scale-105 transition-all duration-300 touch-button">
                     <div class="text-3xl mb-2">📚</div>
-                    <div class="text-white text-sm font-medium mobile-text">Ta'lim</div>
+                    <div class="text-white text-sm font-medium mobile-text" data-i18n="education">Ta'lim</div>
                 </div>
                 <div onclick="filterCampaigns('uy-joy')" class="category-card rounded-xl p-4 text-center cursor-pointer transform hover:scale-105 transition-all duration-300 touch-button">
                     <div class="text-3xl mb-2">🏠</div>
-                    <div class="text-white text-sm font-medium mobile-text">Uy-Joy</div>
+                    <div class="text-white text-sm font-medium mobile-text" data-i18n="housing">Uy-Joy</div>
                 </div>
                 <div onclick="filterCampaigns('hayvonlar')" class="category-card rounded-xl p-4 text-center cursor-pointer transform hover:scale-105 transition-all duration-300 touch-button">
                     <div class="text-3xl mb-2">🐾</div>
-                    <div class="text-white text-sm font-medium mobile-text">Hayvonlar</div>
+                    <div class="text-white text-sm font-medium mobile-text" data-i18n="animals">Hayvonlar</div>
                 </div>
                 <div onclick="filterCampaigns('ijtimoiy')" class="category-card rounded-xl p-4 text-center cursor-pointer transform hover:scale-105 transition-all duration-300 touch-button">
                     <div class="text-3xl mb-2">🤝</div>
-                    <div class="text-white text-sm font-medium mobile-text">Ijtimoiy</div>
+                    <div class="text-white text-sm font-medium mobile-text" data-i18n="social">Ijtimoiy</div>
                 </div>
                 <div onclick="filterCampaigns('ayollar')" class="category-card rounded-xl p-4 text-center cursor-pointer transform hover:scale-105 transition-all duration-300 touch-button">
                     <div class="text-3xl mb-2">👩</div>
-                    <div class="text-white text-sm font-medium mobile-text">Ayollar Uchun</div>
+                    <div class="text-white text-sm font-medium mobile-text" data-i18n="women">Ayollar Uchun</div>
                 </div>
                 <div onclick="filterCampaigns('yetimlar')" class="category-card rounded-xl p-4 text-center cursor-pointer transform hover:scale-105 transition-all duration-300 touch-button">
                     <div class="text-3xl mb-2">👶</div>
-                    <div class="text-white text-sm font-medium mobile-text">Yetimlar</div>
+                    <div class="text-white text-sm font-medium mobile-text" data-i18n="orphans">Yetimlar</div>
                 </div>
             </div>
         </div>
@@ -886,39 +934,21 @@
     <section id="campaigns" class="py-20 bg-gray-50">
         <div class="max-w-7xl mx-auto px-4 mobile-padding">
             <div class="text-center mb-16">
-                <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-6">Faol E'lonlar</h2>
-                <p class="text-gray-600 max-w-3xl mx-auto text-lg mobile-text">Har bir xayriya kimgadir umid va yordam beradi. Siz ham bu yaxshi ishning bir qismi bo'ling.</p>
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-6" data-i18n="activeCampaignsTitle">Faol E'lonlar</h2>
+                <p class="text-gray-600 max-w-3xl mx-auto text-lg mobile-text" data-i18n="activeCampaignsDesc">Har bir xayriya kimgadir umid va yordam beradi. Siz ham bu yaxshi ishning bir qismi bo'ling.</p>
             </div>
             
             <!-- Filter Buttons -->
             <div class="flex flex-wrap justify-center gap-3 mb-12">
-                <button onclick="filterCampaigns('all')" class="filter-btn bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-full font-medium shadow-lg transform hover:scale-105 transition-all duration-300 mobile-button touch-button">
-                    Barchasi
-                </button>
-                <button onclick="filterCampaigns('tibbiyot')" class="filter-btn bg-white text-gray-700 px-4 py-3 rounded-full font-medium hover:bg-gray-100 shadow-md transition-all duration-300 mobile-button touch-button">
-                    🏥 <span class="mobile-text">Tibbiy</span>
-                </button>
-                <button onclick="filterCampaigns('nogironlik')" class="filter-btn bg-white text-gray-700 px-4 py-3 rounded-full font-medium hover:bg-gray-100 shadow-md transition-all duration-300 mobile-button touch-button">
-                    ♿ <span class="mobile-text">Nogironlik</span>
-                </button>
-                <button onclick="filterCampaigns('talim')" class="filter-btn bg-white text-gray-700 px-4 py-3 rounded-full font-medium hover:bg-gray-100 shadow-md transition-all duration-300 mobile-button touch-button">
-                    📚 <span class="mobile-text">Ta'lim</span>
-                </button>
-                <button onclick="filterCampaigns('uy-joy')" class="filter-btn bg-white text-gray-700 px-4 py-3 rounded-full font-medium hover:bg-gray-100 shadow-md transition-all duration-300 mobile-button touch-button">
-                    🏠 <span class="mobile-text">Uy-Joy</span>
-                </button>
-                <button onclick="filterCampaigns('hayvonlar')" class="filter-btn bg-white text-gray-700 px-4 py-3 rounded-full font-medium hover:bg-gray-100 shadow-md transition-all duration-300 mobile-button touch-button">
-                    🐾 <span class="mobile-text">Hayvonlar</span>
-                </button>
-                <button onclick="filterCampaigns('ijtimoiy')" class="filter-btn bg-white text-gray-700 px-4 py-3 rounded-full font-medium hover:bg-gray-100 shadow-md transition-all duration-300 mobile-button touch-button">
-                    🤝 <span class="mobile-text">Ijtimoiy</span>
-                </button>
-                <button onclick="filterCampaigns('ayollar')" class="filter-btn bg-white text-gray-700 px-4 py-3 rounded-full font-medium hover:bg-gray-100 shadow-md transition-all duration-300 mobile-button touch-button">
-                    👩 <span class="mobile-text">Ayollar</span>
-                </button>
-                <button onclick="filterCampaigns('yetimlar')" class="filter-btn bg-white text-gray-700 px-4 py-3 rounded-full font-medium hover:bg-gray-100 shadow-md transition-all duration-300 mobile-button touch-button">
-                    👶 <span class="mobile-text">Yetimlar</span>
-                </button>
+                <button onclick="filterCampaigns('all')" class="filter-btn bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-full font-medium shadow-lg transform hover:scale-105 transition-all duration-300 mobile-button touch-button" data-i18n="all">Barchasi</button>
+                <button onclick="filterCampaigns('tibbiyot')" class="filter-btn bg-white text-gray-700 px-4 py-3 rounded-full font-medium hover:bg-gray-100 shadow-md transition-all duration-300 mobile-button touch-button" data-i18n="medicalFilter">🏥 <span class="mobile-text">Tibbiy</span></button>
+                <button onclick="filterCampaigns('nogironlik')" class="filter-btn bg-white text-gray-700 px-4 py-3 rounded-full font-medium hover:bg-gray-100 shadow-md transition-all duration-300 mobile-button touch-button" data-i18n="disabilityFilter">♿ <span class="mobile-text">Nogironlik</span></button>
+                <button onclick="filterCampaigns('talim')" class="filter-btn bg-white text-gray-700 px-4 py-3 rounded-full font-medium hover:bg-gray-100 shadow-md transition-all duration-300 mobile-button touch-button" data-i18n="educationFilter">📚 <span class="mobile-text">Ta'lim</span></button>
+                <button onclick="filterCampaigns('uy-joy')" class="filter-btn bg-white text-gray-700 px-4 py-3 rounded-full font-medium hover:bg-gray-100 shadow-md transition-all duration-300 mobile-button touch-button" data-i18n="housingFilter">🏠 <span class="mobile-text">Uy-Joy</span></button>
+                <button onclick="filterCampaigns('hayvonlar')" class="filter-btn bg-white text-gray-700 px-4 py-3 rounded-full font-medium hover:bg-gray-100 shadow-md transition-all duration-300 mobile-button touch-button" data-i18n="animalsFilter">🐾 <span class="mobile-text">Hayvonlar</span></button>
+                <button onclick="filterCampaigns('ijtimoiy')" class="filter-btn bg-white text-gray-700 px-4 py-3 rounded-full font-medium hover:bg-gray-100 shadow-md transition-all duration-300 mobile-button touch-button" data-i18n="socialFilter">🤝 <span class="mobile-text">Ijtimoiy</span></button>
+                <button onclick="filterCampaigns('ayollar')" class="filter-btn bg-white text-gray-700 px-4 py-3 rounded-full font-medium hover:bg-gray-100 shadow-md transition-all duration-300 mobile-button touch-button" data-i18n="womenFilter">👩 <span class="mobile-text">Ayollar</span></button>
+                <button onclick="filterCampaigns('yetimlar')" class="filter-btn bg-white text-gray-700 px-4 py-3 rounded-full font-medium hover:bg-gray-100 shadow-md transition-all duration-300 mobile-button touch-button" data-i18n="orphansFilter">👶 <span class="mobile-text">Yetimlar</span></button>
             </div>
             
             <!-- Campaigns Grid -->
@@ -932,25 +962,25 @@
     <section id="about" class="py-20 bg-white">
         <div class="max-w-7xl mx-auto px-4 mobile-padding">
             <div class="text-center mb-16">
-                <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-6">Biz Haqimizda</h2>
-                <p class="text-gray-600 max-w-4xl mx-auto text-lg mobile-text">E-Ehson Professional - bu zamonaviy xayriya platformasi bo'lib, odamlar o'rtasida yaxshilik va yordam ko'rsatish uchun yaratilgan.</p>
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-6" data-i18n="aboutTitle">Biz Haqimizda</h2>
+                <p class="text-gray-600 max-w-4xl mx-auto text-lg mobile-text" data-i18n="aboutDesc">E-Ehson Professional - bu zamonaviy xayriya platformasi bo'lib, odamlar o'rtasida yaxshilik va yordam ko'rsatish uchun yaratilgan.</p>
             </div>
             
             <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16">
                 <div class="text-center group mobile-card">
                     <div class="text-6xl mb-6 transform group-hover:scale-110 transition-transform duration-300">🎯</div>
-                    <h3 class="text-2xl font-bold mb-4">Maqsadimiz</h3>
-                    <p class="text-gray-600 text-lg mobile-text">Har bir inson o'z hissasini qo'shib, jamiyatni yaxshilashga yordam berish</p>
+                    <h3 class="text-2xl font-bold mb-4" data-i18n="mission">Maqsadimiz</h3>
+                    <p class="text-gray-600 text-lg mobile-text" data-i18n="missionDesc">Har bir inson o'z hissasini qo'shib, jamiyatni yaxshilashga yordam berish</p>
                 </div>
                 <div class="text-center group mobile-card">
                     <div class="text-6xl mb-6 transform group-hover:scale-110 transition-transform duration-300">💝</div>
-                    <h3 class="text-2xl font-bold mb-4">Qadriyatlarimiz</h3>
-                    <p class="text-gray-600 text-lg mobile-text">Shaffoflik, ishonch va har bir xayriyaning o'z o'rniga yetishi</p>
+                    <h3 class="text-2xl font-bold mb-4" data-i18n="values">Qadriyatlarimiz</h3>
+                    <p class="text-gray-600 text-lg mobile-text" data-i18n="valuesDesc">Shaffoflik, ishonch va har bir xayriyaning o'z o'rniga yetishi</p>
                 </div>
                 <div class="text-center group mobile-card">
                     <div class="text-6xl mb-6 transform group-hover:scale-110 transition-transform duration-300">🌍</div>
-                    <h3 class="text-2xl font-bold mb-4">Ta'sir</h3>
-                    <p class="text-gray-600 text-lg mobile-text">Minglab odamlarning hayotini yaxshilashga hissa qo'shamiz</p>
+                    <h3 class="text-2xl font-bold mb-4" data-i18n="impact">Ta'sir</h3>
+                    <p class="text-gray-600 text-lg mobile-text" data-i18n="impactDesc">Minglab odamlarning hayotini yaxshilashga hissa qo'shamiz</p>
                 </div>
             </div>
 
@@ -958,9 +988,9 @@
             <div class="bg-gradient-to-r from-blue-50 to-purple-50 rounded-2xl p-8 text-center mobile-card">
                 <div class="text-6xl mb-4">👨‍💼</div>
                 <h3 class="text-2xl font-bold text-gray-800 mb-2">Jasurbek Jo'lanboyev G'ayrat o'g'li</h3>
-                <p class="text-blue-600 font-semibold mb-4">CEO & Founder</p>
-                <p class="text-gray-600 max-w-2xl mx-auto mobile-text">"Bizning maqsadimiz - har bir inson o'z imkoniyatlari doirasida yaxshilik qilishi va jamiyatga hissa qo'shishi uchun professional platforma yaratish."</p>
-                <div class="mt-4 text-sm text-gray-500 mobile-text">📱 Telegram: @Vscoderr</div>
+                <p class="text-blue-600 font-semibold mb-4" data-i18n="ceo">CEO & Founder</p>
+                <p class="text-gray-600 max-w-2xl mx-auto mobile-text" data-i18n="ceoQuote">"Bizning maqsadimiz - har bir inson o'z imkoniyatlari doirasida yaxshilik qilishi va jamiyatga hissa qo'shishi uchun professional platforma yaratish."</p>
+                <div class="mt-4 text-sm text-gray-500 mobile-text" data-i18n="telegramCeo">📱 Telegram: @Vscoderr</div>
             </div>
         </div>
     </section>
@@ -969,11 +999,9 @@
     <section id="team" class="py-20 bg-gray-50">
         <div class="max-w-7xl mx-auto px-4 mobile-padding">
             <div class="text-center mb-16">
-                <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-6">Loyiha Jamoasi</h2>
-                <p class="text-gray-600 max-w-4xl mx-auto text-lg mobile-text">Bizning jamoamiz 8 ta tajribali mutaxassislaridan iborat bo'lib, loyihani rivojlantirishda faol ishtirok etmoqda.</p>
-                <button onclick="joinTeam()" class="join-team-btn mt-8">
-                    👥 Jamoaga Qo'shilish - Ariza Yuborish
-                </button>
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-6" data-i18n="teamTitle">Loyiha Jamoasi</h2>
+                <p class="text-gray-600 max-w-4xl mx-auto text-lg mobile-text" data-i18n="teamDesc">Bizning jamoamiz 8 ta tajribali mutaxassislaridan iborat bo'lib, loyihani rivojlantirishda faol ishtirok etmoqda.</p>
+                <button onclick="joinTeam()" class="join-team-btn mt-8" data-i18n="joinTeam">👥 Jamoaga Qo'shilish - Ariza Yuborish</button>
             </div>
             
             <div id="teamGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -986,8 +1014,8 @@
     <section id="contact" class="py-20 bg-white">
         <div class="max-w-6xl mx-auto px-4 mobile-padding">
             <div class="text-center mb-16">
-                <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-6">Biz Bilan Bog'laning</h2>
-                <p class="text-gray-600 text-lg mb-8 mobile-text">Savollaringiz bormi? Biz bilan bog'laning!</p>
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-6" data-i18n="contactTitle">Biz Bilan Bog'laning</h2>
+                <p class="text-gray-600 text-lg mb-8 mobile-text" data-i18n="contactDesc">Savollaringiz bormi? Biz bilan bog'laning!</p>
             </div>
             
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
@@ -995,35 +1023,35 @@
                     <div class="w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-4 transform group-hover:scale-110 transition-all duration-300">
                         <i class="fas fa-envelope text-white text-xl"></i>
                     </div>
-                    <h3 class="font-bold mb-2 mobile-text">Email</h3>
+                    <h3 class="font-bold mb-2 mobile-text" data-i18n="email">Email</h3>
                     <p class="text-gray-600 mobile-text">info@eehson.uz</p>
                 </div>
                 <div class="text-center group mobile-card">
                     <div class="w-16 h-16 bg-gradient-to-r from-green-500 to-blue-500 rounded-full flex items-center justify-center mx-auto mb-4 transform group-hover:scale-110 transition-all duration-300">
                         <i class="fab fa-telegram text-white text-xl"></i>
                     </div>
-                    <h3 class="font-bold mb-2 mobile-text">Telegram</h3>
+                    <h3 class="font-bold mb-2 mobile-text" data-i18n="telegram">Telegram</h3>
                     <a href="https://t.me/serinaqu" target="_blank" class="text-blue-600 hover:text-blue-800 mobile-text">@serinaqu</a>
                 </div>
                 <div class="text-center group mobile-card">
                     <div class="w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center mx-auto mb-4 transform group-hover:scale-110 transition-all duration-300">
                         <i class="fas fa-phone text-white text-xl"></i>
                     </div>
-                    <h3 class="font-bold mb-2 mobile-text">Telefon</h3>
+                    <h3 class="font-bold mb-2 mobile-text" data-i18n="phone">Telefon</h3>
                     <p class="text-gray-600 mobile-text">+998-95-888-38-51</p>
                 </div>
                 <div class="text-center group mobile-card">
                     <div class="w-16 h-16 bg-gradient-to-r from-red-500 to-orange-500 rounded-full flex items-center justify-center mx-auto mb-4 transform group-hover:scale-110 transition-all duration-300">
                         <i class="fas fa-map-marker-alt text-white text-xl"></i>
                     </div>
-                    <h3 class="font-bold mb-2 mobile-text">Manzil</h3>
+                    <h3 class="font-bold mb-2 mobile-text" data-i18n="address">Manzil</h3>
                     <p class="text-gray-600 mobile-text">Toshkent, O'zbekiston</p>
                 </div>
             </div>
 
             <!-- Social Media -->
             <div class="text-center">
-                <h3 class="text-2xl font-bold text-gray-800 mb-8 mobile-text">Ijtimoiy Tarmoqlar</h3>
+                <h3 class="text-2xl font-bold text-gray-800 mb-8 mobile-text" data-i18n="socialTitle">Ijtimoiy Tarmoqlar</h3>
                 <div class="flex justify-center space-x-6 flex-wrap gap-4">
                     <a href="https://www.linkedin.com/in/jasurbek-jo-lanboyev-74b758351?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" rel="noopener noreferrer" class="social-icon w-14 h-14 bg-blue-600 rounded-full flex items-center justify-center text-white text-xl hover:bg-blue-700 touch-button">
                         <i class="fab fa-linkedin-in"></i>
@@ -1059,57 +1087,435 @@
                     <div class="flex items-center space-x-3 mb-6">
                         <div class="text-3xl">❤️</div>
                         <div>
-                            <h3 class="text-xl font-bold">E-Ehson Professional</h3>
-                            <p class="text-sm text-gray-400">Xayriya Platformasi</p>
+                            <h3 class="text-xl font-bold" data-i18n="siteNameFull">E-Ehson Professional</h3>
+                            <p class="text-sm text-gray-400" data-i18n="siteSubtitle">Xayriya Platformasi</p>
                         </div>
                     </div>
-                    <p class="text-gray-400 mb-4 mobile-text">Professional xayriya platformasi - yaxshilik uchun birlashamiz</p>
-                    <p class="text-sm text-gray-500 mobile-text">CEO: Jasurbek Jo'lanboyev G'ayrat o'g'li</p>
-                    <div class="mt-4 text-xs text-gray-600 mobile-text">📱 Telegram: @serinaqu</div>
+                    <p class="text-gray-400 mb-4 mobile-text" data-i18n="footerDesc">Professional xayriya platformasi - yaxshilik uchun birlashamiz</p>
+                    <p class="text-sm text-gray-500 mobile-text" data-i18n="ceoFooter">CEO: Jasurbek Jo'lanboyev G'ayrat o'g'li</p>
+                    <div class="mt-4 text-xs text-gray-600 mobile-text" data-i18n="telegramCeo">📱 Telegram: @serinaqu</div>
                 </div>
                 
                 <div class="mobile-card">
-                    <h4 class="font-bold mb-6 text-lg mobile-text">Tezkor Havolalar</h4>
+                    <h4 class="font-bold mb-6 text-lg mobile-text" data-i18n="quickLinks">Tezkor Havolalar</h4>
                     <ul class="space-y-3 text-gray-400">
-                        <li><a href="#home" onclick="scrollToSection('home')" class="hover:text-white transition-colors mobile-text cursor-pointer">Bosh sahifa</a></li>
-                        <li><a href="#campaigns" onclick="scrollToSection('campaigns')" class="hover:text-white transition-colors mobile-text cursor-pointer">E'lonlar</a></li>
-                        <li><a href="#about" onclick="scrollToSection('about')" class="hover:text-white transition-colors mobile-text cursor-pointer">Biz haqimizda</a></li>
-                        <li><a href="#team" onclick="scrollToSection('team')" class="hover:text-white transition-colors mobile-text cursor-pointer">Loyiha Jamoasi</a></li>
-                        <li><a href="#contact" onclick="scrollToSection('contact')" class="hover:text-white transition-colors mobile-text cursor-pointer">Aloqa</a></li>
+                        <li><a href="#home" onclick="scrollToSection('home')" class="hover:text-white transition-colors mobile-text cursor-pointer" data-i18n="home">Bosh sahifa</a></li>
+                        <li><a href="#campaigns" onclick="scrollToSection('campaigns')" class="hover:text-white transition-colors mobile-text cursor-pointer" data-i18n="campaigns">E'lonlar</a></li>
+                        <li><a href="#about" onclick="scrollToSection('about')" class="hover:text-white transition-colors mobile-text cursor-pointer" data-i18n="about">Biz haqimizda</a></li>
+                        <li><a href="#team" onclick="scrollToSection('team')" class="hover:text-white transition-colors mobile-text cursor-pointer" data-i18n="team">Loyiha Jamoasi</a></li>
+                        <li><a href="#contact" onclick="scrollToSection('contact')" class="hover:text-white transition-colors mobile-text cursor-pointer" data-i18n="contact">Aloqa</a></li>
                     </ul>
                 </div>
                 
                 <div class="mobile-card">
-                    <h4 class="font-bold mb-6 text-lg mobile-text">Kategoriyalar</h4>
+                    <h4 class="font-bold mb-6 text-lg mobile-text" data-i18n="categories">Kategoriyalar</h4>
                     <ul class="space-y-3 text-gray-400 text-sm mobile-text">
-                        <li><span onclick="filterCampaigns('tibbiyot')" class="cursor-pointer hover:text-white transition-colors">Tibbiy Yordam</span></li>
-                        <li><span onclick="filterCampaigns('talim')" class="cursor-pointer hover:text-white transition-colors">Ta'lim</span></li>
-                        <li><span onclick="filterCampaigns('uy-joy')" class="cursor-pointer hover:text-white transition-colors">Uy-Joy</span></li>
-                        <li><span onclick="filterCampaigns('ijtimoiy')" class="cursor-pointer hover:text-white transition-colors">Ijtimoiy Yordam</span></li>
-                        <li><span onclick="filterCampaigns('hayvonlar')" class="cursor-pointer hover:text-white transition-colors">Hayvonlar</span></li>
+                        <li><span onclick="filterCampaigns('tibbiyot')" class="cursor-pointer hover:text-white transition-colors" data-i18n="medical">Tibbiy Yordam</span></li>
+                        <li><span onclick="filterCampaigns('talim')" class="cursor-pointer hover:text-white transition-colors" data-i18n="education">Ta'lim</span></li>
+                        <li><span onclick="filterCampaigns('uy-joy')" class="cursor-pointer hover:text-white transition-colors" data-i18n="housing">Uy-Joy</span></li>
+                        <li><span onclick="filterCampaigns('ijtimoiy')" class="cursor-pointer hover:text-white transition-colors" data-i18n="socialHelp">Ijtimoiy Yordam</span></li>
+                        <li><span onclick="filterCampaigns('hayvonlar')" class="cursor-pointer hover:text-white transition-colors" data-i18n="animals">Hayvonlar</span></li>
                     </ul>
                 </div>
                 
                 <div class="mobile-card">
-                    <h4 class="font-bold mb-6 text-lg mobile-text">Aloqa</h4>
+                    <h4 class="font-bold mb-6 text-lg mobile-text" data-i18n="contact">Aloqa</h4>
                     <ul class="space-y-3 text-gray-400 text-sm mobile-text">
-                        <li>📧 info@eehson.uz</li>
-                        <li>📱 +998-95-888-38-51</li>
-                        <li>📍 Toshkent, O'zbekiston</li>
-                        <li>💬 @serinaqu</li>
+                        <li data-i18n="email">📧 info@eehson.uz</li>
+                        <li data-i18n="phoneContact">📱 +998-95-888-38-51</li>
+                        <li data-i18n="address">📍 Toshkent, O'zbekiston</li>
+                        <li data-i18n="telegramContact">💬 @serinaqu</li>
                     </ul>
                 </div>
             </div>
             
             <div class="border-t border-gray-700 pt-8 text-center">
-                <p class="text-gray-400 mb-4 mobile-text">&copy; 2025 E-Ehson Professional. Barcha huquqlar himoyalangan.</p>
-                <p class="text-sm text-gray-500 mobile-text">Jasurbek Jo'lanboyev G'ayrat o'g'li tomonidan yaratilgan. Professional Platform.</p>
-                <div class="mt-2 text-xs text-gray-600 mobile-text">💝 Xayriya Platformasi • 📱 Flutter WebView Ready • 🌍 Global Impact • 🔒 Local Storage Saqlash</div>
+                <p class="text-gray-400 mb-4 mobile-text" data-i18n="copyright">&copy; 2025 E-Ehson Professional. Barcha huquqlar himoyalangan.</p>
+                <p class="text-sm text-gray-500 mobile-text" data-i18n="createdBy">Jasurbek Jo'lanboyev G'ayrat o'g'li tomonidan yaratilgan. Professional Platform.</p>
+                <div class="mt-2 text-xs text-gray-600 mobile-text" data-i18n="footerTags">💝 Xayriya Platformasi • 📱 Flutter WebView Ready • 🌍 Global Impact • 🔒 Local Storage Saqlash</div>
             </div>
         </div>
     </footer>
 
     <script>
+        // ========================================
+        // TRANSLATIONS
+        // ========================================
+        const translations = {
+            uz: {
+                title: 'E-Ehson Professional - Xayriya Platformasi',
+                siteName: 'E-Ehson Professional',
+                siteNameShort: '💝 E-Ehson Professional',
+                siteNameFull: 'E-Ehson Professional',
+                siteSubtitle: 'Xayriya Platformasi',
+                user: 'Foydalanuvchi: ',
+                adminPanel: '👑 Admin Panel',
+                home: 'Bosh sahifa',
+                campaigns: "E'lonlar",
+                about: 'Biz haqimizda',
+                team: 'Loyiha Jamoasi',
+                contact: 'Aloqa',
+                privacy: 'Maxfiylik',
+                requestAd: "📢 E'lon So'rash",
+                help: '🆘 Yordam',
+                admin: '👑 Admin',
+                addAd: '📺 Reklama Qo\'yish',
+                addCampaign: '📢',
+                addCampaignBtn: "E'lon Qo'shish",
+                manageCampaigns: "E'lonlarni Boshqarish",
+                manageAds: 'Reklamalarni Boshqarish',
+                manageTeam: 'Jamoani Boshqarish',
+                settings: 'Sozlamalar',
+                exportData: 'Ma\'lumotlarni Export',
+                clearLocal: 'Local Tozalash',
+                totalCampaigns: 'Jami E\'lonlar',
+                totalAds: 'Jami Reklamalar',
+                totalDonations: 'Jami Xayriya',
+                totalTeam: 'Jamoa A\'zolari',
+                heroTitle: 'Yaxshilik Qiling',
+                heroDesc: 'Professional xayriya platformasi orqali yaxshi ishlarni qo\'llab-quvvatlang va jamiyatga hissa qo\'shing',
+                secureDonation: 'Xavfsiz Xayriya',
+                secureDesc: 'Ishonchli va shaffof tizim',
+                globalImpact: 'Global Ta\'sir',
+                globalDesc: 'Dunyo bo\'ylab yordam',
+                easyUse: 'Oson Foydalanish',
+                easyDesc: 'Mobil va desktop uchun',
+                currency: '💰 so\'m',
+                totalUsers: 'Xayriyachilar',
+                people: '👥 kishi',
+                activeCampaigns: 'Faol E\'lonlar',
+                count: '📢 ta',
+                completed: 'Tugallangan',
+                completedCount: '✅ ta',
+                donate: '💝 Xayriya Qilish',
+                details: '📖 Batafsil',
+                categoriesTitle: "Xayriya Yo'nalishlari",
+                categoriesDesc: 'Har bir yo\'nalishda yordam berishingiz mumkin',
+                medical: 'Tibbiy Yordam',
+                disability: 'Nogironlik',
+                education: 'Ta\'lim',
+                housing: 'Uy-Joy',
+                animals: 'Hayvonlar',
+                social: 'Ijtimoiy',
+                women: 'Ayollar Uchun',
+                orphans: 'Yetimlar',
+                activeCampaignsTitle: 'Faol E\'lonlar',
+                activeCampaignsDesc: 'Har bir xayriya kimgadir umid va yordam beradi. Siz ham bu yaxshi ishning bir qismi bo\'ling.',
+                all: 'Barchasi',
+                medicalFilter: '🏥 <span class="mobile-text">Tibbiy</span>',
+                disabilityFilter: '♿ <span class="mobile-text">Nogironlik</span>',
+                educationFilter: '📚 <span class="mobile-text">Ta\'lim</span>',
+                housingFilter: '🏠 <span class="mobile-text">Uy-Joy</span>',
+                animalsFilter: '🐾 <span class="mobile-text">Hayvonlar</span>',
+                socialFilter: '🤝 <span class="mobile-text">Ijtimoiy</span>',
+                womenFilter: '👩 <span class="mobile-text">Ayollar</span>',
+                orphansFilter: '👶 <span class="mobile-text">Yetimlar</span>',
+                aboutTitle: 'Biz Haqimizda',
+                aboutDesc: 'E-Ehson Professional - bu zamonaviy xayriya platformasi bo\'lib, odamlar o\'rtasida yaxshilik va yordam ko\'rsatish uchun yaratilgan.',
+                mission: 'Maqsadimiz',
+                missionDesc: 'Har bir inson o\'z hissasini qo\'shib, jamiyatni yaxshilashga yordam berish',
+                values: 'Qadriyatlarimiz',
+                valuesDesc: 'Shaffoflik, ishonch va har bir xayriyaning o\'z o\'rniga yetishi',
+                impact: 'Ta\'sir',
+                impactDesc: 'Minglab odamlarning hayotini yaxshilashga hissa qo\'shamiz',
+                ceo: 'CEO & Founder',
+                ceoQuote: '"Bizning maqsadimiz - har bir inson o\'z imkoniyatlari doirasida yaxshilik qilishi va jamiyatga hissa qo\'shishi uchun professional platforma yaratish."',
+                telegramCeo: '📱 Telegram: @Vscoderr',
+                teamTitle: 'Loyiha Jamoasi',
+                teamDesc: 'Bizning jamoamiz 8 ta tajribali mutaxassislaridan iborat bo\'lib, loyihani rivojlantirishda faol ishtirok etmoqda.',
+                joinTeam: '👥 Jamoaga Qo\'shilish - Ariza Yuborish',
+                contactTitle: 'Biz Bilan Bog\'laning',
+                contactDesc: 'Savollaringiz bormi? Biz bilan bog\'laning!',
+                email: 'Email',
+                telegram: 'Telegram',
+                phone: 'Telefon',
+                address: 'Manzil',
+                socialTitle: 'Ijtimoiy Tarmoqlar',
+                quickLinks: 'Tezkor Havolalar',
+                categories: 'Kategoriyalar',
+                socialHelp: 'Ijtimoiy Yordam',
+                contact: 'Aloqa',
+                phoneContact: '📱 +998-95-888-38-51',
+                telegramContact: '💬 @serinaqu',
+                copyright: '&copy; 2025 E-Ehson Professional. Barcha huquqlar himoyalangan.',
+                createdBy: 'Jasurbek Jo\'lanboyev G\'ayrat o\'g\'li tomonidan yaratilgan. Professional Platform.',
+                footerTags: '💝 Xayriya Platformasi • 📱 Flutter WebView Ready • 🌍 Global Impact • 🔒 Local Storage Saqlash',
+                privacyTitle: '🔒 Maxfiylik Siyosati',
+                privacyIntro: '<strong data-i18n="siteName">E-Ehson Professional</strong> platformasi foydalanuvchilarning maxfiyligini himoya qilishga bag\'ishlangan.',
+                dataCollection: '📊 Ma\'lumotlar To\'plash',
+                dataCollectDesc: 'Biz faqat xayriya maqsadlari uchun zarur bo\'lgan ma\'lumotlarni to\'playmiz:',
+                fullName: 'Ism va familiya',
+                phone: 'Telefon raqami',
+                donationAmount: 'Xayriya miqdori',
+                dataProtection: '🛡️ Ma\'lumotlar Himoyasi',
+                dataProtectDesc: 'Barcha shaxsiy ma\'lumotlar shifrlangan holda saqlanadi va uchinchi shaxslarga berilmaydi.',
+                contact: '📞 Aloqa',
+                contactDesc: 'Savollar bo\'lsa, biz bilan bog\'laning:',
+                telegram: '📱 Telegram: @serinaqu',
+                phoneContact: '📞 Telefon: +998-95-888-38-51',
+                email: '📧 Email: info@eehson.uz',
+                lastUpdate: 'Oxirgi yangilanish: 2025 yil',
+                skipAd: 'Reklamani o\'tkazib yuborish',
+                bannerDefault: '🎯 Maxsus Taklif! Eng Yaxshi Xizmatlar',
+                storageSaved: '💾 Ma\'lumotlar local saqlandi. Deploy qiling!'
+            },
+            ru: {
+                title: 'E-Ehson Professional - Платформа Благотворительности',
+                siteName: 'E-Ehson Professional',
+                siteNameShort: '💝 E-Ehson Professional',
+                siteNameFull: 'E-Ehson Professional',
+                siteSubtitle: 'Платформа Благотворительности',
+                user: 'Пользователь: ',
+                adminPanel: '👑 Админ Панель',
+                home: 'Главная',
+                campaigns: 'Объявления',
+                about: 'О Нас',
+                team: 'Команда Проекта',
+                contact: 'Контакты',
+                privacy: 'Конфиденциальность',
+                requestAd: '📢 Запросить Объявление',
+                help: '🆘 Помощь',
+                admin: '👑 Админ',
+                addAd: '📺 Разместить Рекламу',
+                addCampaign: '📢',
+                addCampaignBtn: 'Добавить Объявление',
+                manageCampaigns: 'Управление Объявлениями',
+                manageAds: 'Управление Рекламой',
+                manageTeam: 'Управление Командой',
+                settings: 'Настройки',
+                exportData: 'Экспорт Данных',
+                clearLocal: 'Очистить Локальные',
+                totalCampaigns: 'Всего Объявлений',
+                totalAds: 'Всего Рекламы',
+                totalDonations: 'Общая Благотворительность',
+                totalTeam: 'Члены Команды',
+                heroTitle: 'Делайте Добро',
+                heroDesc: 'Поддерживайте хорошие дела через профессиональную платформу благотворительности и вносите вклад в общество',
+                secureDonation: 'Безопасная Благотворительность',
+                secureDesc: 'Надежная и прозрачная система',
+                globalImpact: 'Глобальное Влияние',
+                globalDesc: 'Помощь по всему миру',
+                easyUse: 'Легкое Использование',
+                easyDesc: 'Для мобильных и десктопов',
+                currency: '💰 сум',
+                totalUsers: 'Благотворители',
+                people: '👥 человек',
+                activeCampaigns: 'Активные Объявления',
+                count: '📢 шт',
+                completed: 'Завершенные',
+                completedCount: '✅ шт',
+                donate: '💝 Сделать Пожертвование',
+                details: '📖 Подробнее',
+                categoriesTitle: 'Направления Благотворительности',
+                categoriesDesc: 'Вы можете помочь в каждом направлении',
+                medical: 'Медицинская Помощь',
+                disability: 'Инвалидность',
+                education: 'Образование',
+                housing: 'Жилье',
+                animals: 'Животные',
+                social: 'Социальное',
+                women: 'Для Женщин',
+                orphans: 'Сироты',
+                activeCampaignsTitle: 'Активные Объявления',
+                activeCampaignsDesc: 'Каждое пожертвование дает надежду и помощь кому-то. Станьте частью этого доброго дела.',
+                all: 'Все',
+                medicalFilter: '🏥 <span class="mobile-text">Медицинская</span>',
+                disabilityFilter: '♿ <span class="mobile-text">Инвалидность</span>',
+                educationFilter: '📚 <span class="mobile-text">Образование</span>',
+                housingFilter: '🏠 <span class="mobile-text">Жилье</span>',
+                animalsFilter: '🐾 <span class="mobile-text">Животные</span>',
+                socialFilter: '🤝 <span class="mobile-text">Социальное</span>',
+                womenFilter: '👩 <span class="mobile-text">Женщины</span>',
+                orphansFilter: '👶 <span class="mobile-text">Сироты</span>',
+                aboutTitle: 'О Нас',
+                aboutDesc: 'E-Ehson Professional - это современная платформа благотворительности, созданная для распространения добра и помощи между людьми.',
+                mission: 'Наша Цель',
+                missionDesc: 'Каждый человек может внести свой вклад и помочь улучшить общество',
+                values: 'Наши Ценности',
+                valuesDesc: 'Прозрачность, доверие и доставка каждого пожертвования по назначению',
+                impact: 'Влияние',
+                impactDesc: 'Мы вносим вклад в улучшение жизни тысяч людей',
+                ceo: 'CEO & Основатель',
+                ceoQuote: '"Наша цель - создать профессиональную платформу, где каждый человек может делать добро в пределах своих возможностей и вносить вклад в общество."',
+                telegramCeo: '📱 Telegram: @Vscoderr',
+                teamTitle: 'Команда Проекта',
+                teamDesc: 'Наша команда состоит из 8 опытных специалистов, активно участвующих в развитии проекта.',
+                joinTeam: '👥 Присоединиться к Команде - Отправить Заявку',
+                contactTitle: 'Свяжитесь с Нами',
+                contactDesc: 'Есть вопросы? Свяжитесь с нами!',
+                email: 'Email',
+                telegram: 'Telegram',
+                phone: 'Телефон',
+                address: 'Адрес',
+                socialTitle: 'Социальные Сети',
+                quickLinks: 'Быстрые Ссылки',
+                categories: 'Категории',
+                socialHelp: 'Социальная Помощь',
+                contact: 'Контакты',
+                phoneContact: '📱 +998-95-888-38-51',
+                telegramContact: '💬 @serinaqu',
+                copyright: '&copy; 2025 E-Ehson Professional. Все права защищены.',
+                createdBy: 'Создано Jasurbek Jo\'lanboyev G\'ayrat o\'g\'li. Professional Platform.',
+                footerTags: '💝 Платформа Благотворительности • 📱 Готово для Flutter WebView • 🌍 Глобальное Влияние • 🔒 Локальное Хранение',
+                privacyTitle: '🔒 Политика Конфиденциальности',
+                privacyIntro: '<strong data-i18n="siteName">E-Ehson Professional</strong> платформа посвящена защите конфиденциальности пользователей.',
+                dataCollection: '📊 Сбор Данных',
+                dataCollectDesc: 'Мы собираем только необходимые данные для целей благотворительности:',
+                fullName: 'Имя и Фамилия',
+                phone: 'Номер Телефона',
+                donationAmount: 'Сумма Пожертвования',
+                dataProtection: '🛡️ Защита Данных',
+                dataProtectDesc: 'Все личные данные хранятся в зашифрованном виде и не передаются третьим лицам.',
+                contact: '📞 Контакты',
+                contactDesc: 'Если есть вопросы, свяжитесь с нами:',
+                telegram: '📱 Telegram: @serinaqu',
+                phoneContact: '📞 Телефон: +998-95-888-38-51',
+                email: '📧 Email: info@eehson.uz',
+                lastUpdate: 'Последнее обновление: 2025 год',
+                skipAd: 'Пропустить Рекламу',
+                bannerDefault: '🎯 Специальное Предложение! Лучшие Услуги',
+                storageSaved: '💾 Данные сохранены локально. Разверните!'
+            },
+            en: {
+                title: 'E-Ehson Professional - Charity Platform',
+                siteName: 'E-Ehson Professional',
+                siteNameShort: '💝 E-Ehson Professional',
+                siteNameFull: 'E-Ehson Professional',
+                siteSubtitle: 'Charity Platform',
+                user: 'User: ',
+                adminPanel: '👑 Admin Panel',
+                home: 'Home',
+                campaigns: 'Campaigns',
+                about: 'About Us',
+                team: 'Project Team',
+                contact: 'Contact',
+                privacy: 'Privacy',
+                requestAd: '📢 Request Campaign',
+                help: '🆘 Help',
+                admin: '👑 Admin',
+                addAd: '📺 Add Ad',
+                addCampaign: '📢',
+                addCampaignBtn: 'Add Campaign',
+                manageCampaigns: 'Manage Campaigns',
+                manageAds: 'Manage Ads',
+                manageTeam: 'Manage Team',
+                settings: 'Settings',
+                exportData: 'Export Data',
+                clearLocal: 'Clear Local',
+                totalCampaigns: 'Total Campaigns',
+                totalAds: 'Total Ads',
+                totalDonations: 'Total Charity',
+                totalTeam: 'Team Members',
+                heroTitle: 'Do Good',
+                heroDesc: 'Support good causes through a professional charity platform and contribute to society',
+                secureDonation: 'Secure Charity',
+                secureDesc: 'Reliable and transparent system',
+                globalImpact: 'Global Impact',
+                globalDesc: 'Help around the world',
+                easyUse: 'Easy to Use',
+                easyDesc: 'For mobile and desktop',
+                currency: '💰 sum',
+                totalUsers: 'Donors',
+                people: '👥 people',
+                activeCampaigns: 'Active Campaigns',
+                count: '📢 pcs',
+                completed: 'Completed',
+                completedCount: '✅ pcs',
+                donate: '💝 Donate',
+                details: '📖 Details',
+                categoriesTitle: 'Charity Directions',
+                categoriesDesc: 'You can help in every direction',
+                medical: 'Medical Aid',
+                disability: 'Disability',
+                education: 'Education',
+                housing: 'Housing',
+                animals: 'Animals',
+                social: 'Social',
+                women: 'For Women',
+                orphans: 'Orphans',
+                activeCampaignsTitle: 'Active Campaigns',
+                activeCampaignsDesc: 'Every charity gives hope and help to someone. Be part of this good deed.',
+                all: 'All',
+                medicalFilter: '🏥 <span class="mobile-text">Medical</span>',
+                disabilityFilter: '♿ <span class="mobile-text">Disability</span>',
+                educationFilter: '📚 <span class="mobile-text">Education</span>',
+                housingFilter: '🏠 <span class="mobile-text">Housing</span>',
+                animalsFilter: '🐾 <span class="mobile-text">Animals</span>',
+                socialFilter: '🤝 <span class="mobile-text">Social</span>',
+                womenFilter: '👩 <span class="mobile-text">Women</span>',
+                orphansFilter: '👶 <span class="mobile-text">Orphans</span>',
+                aboutTitle: 'About Us',
+                aboutDesc: 'E-Ehson Professional is a modern charity platform created to spread goodness and help among people.',
+                mission: 'Our Goal',
+                missionDesc: 'Every person can contribute and help improve society',
+                values: 'Our Values',
+                valuesDesc: 'Transparency, trust, and delivery of every charity to its destination',
+                impact: 'Impact',
+                impactDesc: 'We contribute to improving the lives of thousands of people',
+                ceo: 'CEO & Founder',
+                ceoQuote: '"Our goal is to create a professional platform where every person can do good within their capabilities and contribute to society."',
+                telegramCeo: '📱 Telegram: @Vscoderr',
+                teamTitle: 'Project Team',
+                teamDesc: 'Our team consists of 8 experienced specialists actively participating in project development.',
+                joinTeam: '👥 Join Team - Submit Application',
+                contactTitle: 'Contact Us',
+                contactDesc: 'Have questions? Contact us!',
+                email: 'Email',
+                telegram: 'Telegram',
+                phone: 'Phone',
+                address: 'Address',
+                socialTitle: 'Social Networks',
+                quickLinks: 'Quick Links',
+                categories: 'Categories',
+                socialHelp: 'Social Help',
+                contact: 'Contact',
+                phoneContact: '📱 +998-95-888-38-51',
+                telegramContact: '💬 @serinaqu',
+                copyright: '&copy; 2025 E-Ehson Professional. All rights reserved.',
+                createdBy: 'Created by Jasurbek Jo\'lanboyev G\'ayrat o\'g\'li. Professional Platform.',
+                footerTags: '💝 Charity Platform • 📱 Flutter WebView Ready • 🌍 Global Impact • 🔒 Local Storage Saving',
+                privacyTitle: '🔒 Privacy Policy',
+                privacyIntro: '<strong data-i18n="siteName">E-Ehson Professional</strong> platform is dedicated to protecting user privacy.',
+                dataCollection: '📊 Data Collection',
+                dataCollectDesc: 'We collect only necessary data for charity purposes:',
+                fullName: 'Full Name',
+                phone: 'Phone Number',
+                donationAmount: 'Donation Amount',
+                dataProtection: '🛡️ Data Protection',
+                dataProtectDesc: 'All personal data is stored encrypted and not shared with third parties.',
+                contact: '📞 Contact',
+                contactDesc: 'If you have questions, contact us:',
+                telegram: '📱 Telegram: @serinaqu',
+                phoneContact: '📞 Phone: +998-95-888-38-51',
+                email: '📧 Email: info@eehson.uz',
+                lastUpdate: 'Last Update: 2025',
+                skipAd: 'Skip Ad',
+                bannerDefault: '🎯 Special Offer! Best Services',
+                storageSaved: '💾 Data saved locally. Deploy!'
+            }
+        };
+
+        let currentLang = localStorage.getItem('lang') || 'uz';
+
+        function setLanguage(lang) {
+            currentLang = lang;
+            localStorage.setItem('lang', lang);
+            document.documentElement.lang = lang;
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (translations[lang][key]) {
+                    el.innerHTML = translations[lang][key];
+                }
+            });
+            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            // Reload team and campaigns if needed
+            if (isAdmin) {
+                displayTeam();
+                displayCampaigns();
+            }
+        }
+
         // ========================================
         // GLOBAL VARIABLES
         // ========================================
@@ -1128,7 +1534,9 @@
             overlayDuration: 8,
             skipAfter: 3,
             showBanner: true,
-            bannerText: '🎯 Maxsus Taklif! Eng Yaxshi Xizmatlar'
+            bannerText: '🎯 Maxsus Taklif! Eng Yaxshi Xizmatlar',
+            showBottomBanner: true,
+            updates: ['Yangi xususiyatlar qo\'shildi!', 'Platforma yangilandi!', 'Yangi e\'lonlar yuklandi!']
         };
 
         // Local Storage Keys (Admin uchun alohida, foydalanuvchilar uchun emas)
@@ -1137,6 +1545,13 @@
             ads: 'eehson_admin_ads',
             team: 'eehson_admin_team',
             settings: 'eehson_admin_settings'
+        };
+
+        // Default updates for ticker
+        const DEFAULT_UPDATES = {
+            uz: ['Yangi xususiyatlar qo\'shildi!', 'Platforma yangilandi!', 'Yangi e\'lonlar yuklandi!'],
+            ru: ['Добавлены новые функции!', 'Платформа обновлена!', 'Загружены новые объявления!'],
+            en: ['New features added!', 'Platform updated!', 'New campaigns loaded!']
         };
 
         // Initial default data (hardcoded, admin o'zgarishi mumkin)
@@ -1204,9 +1619,11 @@
                 title: '🏥 Zamonaviy Tibbiy Markaz - Eng Yaxshi Xizmatlar!',
                 description: 'Eng yaxshi tibbiy xizmatlar va zamonaviy uskunalar',
                 linkUrl: 'https://t.me/serinaqu',
+                videoUrl: '',
                 contact: '@serinaqu',
                 showDuration: 12,
                 banner: true,
+                bottom: false,
                 createdAt: new Date().toISOString()
             },
             {
@@ -1215,9 +1632,11 @@
                 title: '⚖️ Bepul Yuridik Maslahat - 24/7 Xizmat!',
                 description: 'Har qanday huquqiy masalalar bo\'yicha bepul maslahat',
                 linkUrl: 'https://t.me/serinaqu',
+                videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ', // Example video
                 contact: '@serinaqu',
                 showDuration: 15,
                 banner: true,
+                bottom: true,
                 createdAt: new Date().toISOString()
             }
         ];
@@ -1325,7 +1744,7 @@
         function saveToStorage(key, data) {
             localStorage.setItem(key, JSON.stringify(data));
             showStorageIndicator();
-            showNotification('💾 Ma\'lumotlar local saqlandi! Deploy qiling (Render.com ga push)', 'success');
+            showNotification(translations[currentLang]['storageSaved'] || '💾 Ma\'lumotlar local saqlandi! Deploy qiling!', 'success');
         }
 
         function showStorageIndicator() {
@@ -1350,17 +1769,17 @@
             a.download = 'eehson_data_export.json';
             a.click();
             URL.revokeObjectURL(url);
-            showNotification('📤 Ma\'lumotlar export qilindi! Bu faylni saqlang va deploy vaqtida ishlatish mumkin.', 'info');
+            showNotification('📤 Данные экспортированы! Сохраните этот файл для развертывания.', 'info');
         }
 
         function clearLocalData() {
-            if (confirm('Barcha local ma\'lumotlarni tozalashni xohlaysizmi? Bu default ga qaytaradi.')) {
+            if (confirm('Вы уверены, что хотите очистить все локальные данные? Это вернет к умолчанию.')) {
                 localStorage.removeItem(STORAGE_KEYS.campaigns);
                 localStorage.removeItem(STORAGE_KEYS.ads);
                 localStorage.removeItem(STORAGE_KEYS.team);
                 localStorage.removeItem(STORAGE_KEYS.settings);
                 loadInitialData();
-                showNotification('🗑️ Local ma\'lumotlar tozalandi! Sahifa yangilang.', 'info');
+                showNotification('🗑️ Локальные данные очищены! Обновите страницу.', 'info');
             }
         }
 
@@ -1398,7 +1817,7 @@
                     behavior: 'smooth',
                     block: 'start'
                 });
-                showNotification(`📍 ${getSectionName(sectionId)} bo'limiga o'tildi`, 'info');
+                showNotification(`📍 Переход к разделу ${getSectionName(sectionId)}`, 'info');
             }
         }
         
@@ -1412,11 +1831,11 @@
         
         function getSectionName(sectionId) {
             const names = {
-                'home': 'Bosh sahifa',
-                'campaigns': 'E\'lonlar',
-                'about': 'Biz haqimizda',
-                'team': 'Loyiha Jamoasi',
-                'contact': 'Aloqa'
+                'home': translations[currentLang]['home'] || 'Bosh sahifa',
+                'campaigns': translations[currentLang]['campaigns'] || "E'lonlar",
+                'about': translations[currentLang]['about'] || 'Biz haqimizda',
+                'team': translations[currentLang]['team'] || 'Loyiha Jamoasi',
+                'contact': translations[currentLang]['contact'] || 'Aloqa'
             };
             return names[sectionId] || sectionId;
         }
@@ -1427,7 +1846,7 @@
         
         function showPrivacyModal() {
             document.getElementById('privacyModal').classList.remove('hidden');
-            showNotification('📋 Maxfiylik siyosati ochildi', 'info');
+            showNotification('📋 Политика конфиденциальности открыта', 'info');
         }
         
         function closePrivacyModal() {
@@ -1464,7 +1883,7 @@
             }
 
             document.getElementById('teamModal').classList.remove('hidden');
-            showNotification(`👤 ${member.name} haqida batafsil ma'lumot`, 'info');
+            showNotification(`👤 Подробности о ${member.name}`, 'info');
         }
 
         function closeTeamModal() {
@@ -1476,32 +1895,32 @@
         // ========================================
         
         function joinTeam() {
-            const message = `👥 *JAMOAGA QO'SHILISH ARIZASI - E-EHSON PROFESSIONAL*
+            const message = `👥 *ЗАЯВКА НА ПРИСОЕДИНЕНИЕ К КОМАНДЕ - E-EHSON PROFESSIONAL*
 
-📝 *Sizning Ma'lumotlaringiz:*
-• Ism va Familiya: [Ismingizni kiriting]
-• Lavozim: [Qaysi lavozimga murojaat qilmoqdasiz? Masalan: Developer, Designer]
-• Tajribangiz: [Qisqa tajribangizni yozing]
-• Portfolio/Havolalar: [GitHub, LinkedIn va boshqa havolalar]
+📝 *Ваши Данные:*
+• Имя и Фамилия: [Введите ваше имя]
+• Должность: [На какую должность подаете? Например: Developer, Designer]
+• Опыт: [Кратко опишите опыт]
+• Портфолио/Ссылки: [GitHub, LinkedIn и другие ссылки]
 
-📞 *Aloqa:*
-• Telefon: [+998xxxxxxxxx]
+📞 *Контакты:*
+• Телефон: [+998xxxxxxxxx]
 • Email: [email@example.com]
 • Telegram: [@username]
 
-💼 *Nima uchun bizning jamoamizga qo'shilmoqchisiz?*
-[Bu yerga motivatsiyangizni yozing]
+💼 *Почему хотите присоединиться к нашей команде?*
+[Напишите вашу мотивацию здесь]
 
-🔗 *Platform:* E-Ehson Professional
+🔗 *Платформа:* E-Ehson Professional
 👨‍💼 *CEO:* Jasurbek Jo'lanboyev G'ayrat o'g'li
-📱 *Admin:* @serinaqu
+📱 *Админ:* @serinaqu
 
-✅ *Ariza yuborildi! Tez orada javob beramiz.*`;
+✅ *Заявка отправлена! Мы ответим скоро.*`;
 
             const telegramUrl = `https://t.me/serinaqu?text=${encodeURIComponent(message)}`;
             window.open(telegramUrl, '_blank');
             
-            showNotification('📝 Jamoaga qo\'shilish arizasi admin ga yuborildi!', 'success');
+            showNotification('📝 Заявка на присоединение к команде отправлена админу!', 'success');
         }
 
         // ========================================
@@ -1509,17 +1928,17 @@
         // ========================================
         
         function checkAdminAccess() {
-            const password = prompt('Admin parolini kiriting:');
+            const password = prompt('Введите пароль админа:');
             if (password === ADMIN_PASSWORD) {
                 isAdmin = true;
                 document.getElementById('adminBtn').classList.remove('hidden');
                 document.getElementById('addAdBtn').classList.remove('hidden');
                 document.getElementById('currentUserName').textContent = 'Admin';
                 loadAdminData(); // Admin uchun local yuklash
-                showNotification('✅ Admin sifatida kirdingiz! Local ma\'lumotlar yuklandi.', 'success');
+                showNotification('✅ Вошли как админ! Локальные данные загружены.', 'success');
                 return true;
             } else if (password !== null) {
-                showNotification('❌ Noto\'g\'ri parol!', 'error');
+                showNotification('❌ Неверный пароль!', 'error');
             }
             return false;
         }
@@ -1562,7 +1981,7 @@
             if (savedCampaigns) campaigns = savedCampaigns;
             if (savedAds) ads = savedAds;
             if (savedTeam) teamMembers = savedTeam;
-            if (savedSettings) adSettings = savedSettings;
+            if (savedSettings) adSettings = {...adSettings, ...savedSettings};
 
             displayCampaigns();
             displayTeam();
@@ -1575,7 +1994,7 @@
         
         function showManageCampaigns() {
             if (!isAdmin) {
-                showNotification('❌ Faqat admin e\'lonlarni boshqara oladi!', 'error');
+                showNotification('❌ Только админ может управлять объявлениями!', 'error');
                 return;
             }
             const list = document.getElementById('campaignsList');
@@ -1595,12 +2014,8 @@
                         <p class="text-sm text-gray-600">${getCategoryName(campaign.category)} | ${formatCurrency(campaign.currentAmount)} / ${formatCurrency(campaign.targetAmount)}</p>
                     </div>
                     <div class="flex space-x-2">
-                        <button onclick="editCampaign('${campaign.id}')" class="admin-edit-btn admin-action-btn">
-                            ✏️ Tahrirlash
-                        </button>
-                        <button onclick="deleteCampaign('${campaign.id}')" class="admin-delete-btn admin-action-btn">
-                            🗑️ O'chirish
-                        </button>
+                        <button onclick="editCampaign('${campaign.id}')" class="admin-edit-btn admin-action-btn" data-i18n="edit">✏️ Tahrirlash</button>
+                        <button onclick="deleteCampaign('${campaign.id}')" class="admin-delete-btn admin-action-btn" data-i18n="delete">🗑️ O'chirish</button>
                     </div>
                 </div>
             `;
@@ -1613,19 +2028,19 @@
         }
 
         function deleteCampaign(campaignId) {
-            if (confirm('Bu e\'loni o\'chirishni xohlaysizmi?')) {
+            if (confirm('Вы уверены, что хотите удалить это объявление?')) {
                 campaigns = campaigns.filter(c => c.id !== campaignId);
                 saveToStorage(STORAGE_KEYS.campaigns, campaigns);
                 displayCampaigns();
                 updateStats();
                 showManageCampaigns();
-                showNotification('🗑️ E\'lon o\'chirildi va local saqlandi!', 'success');
+                showNotification('🗑️ Объявление удалено и сохранено локально!', 'success');
             }
         }
 
         function showManageAds() {
             if (!isAdmin) {
-                showNotification('❌ Faqat admin reklamalarni boshqara oladi!', 'error');
+                showNotification('❌ Только админ может управлять рекламой!', 'error');
                 return;
             }
             const list = document.getElementById('adsList');
@@ -1642,15 +2057,11 @@
                 <div class="admin-list-item">
                     <div class="flex-1">
                         <h4 class="font-bold text-lg">${ad.title}</h4>
-                        <p class="text-sm text-gray-600">${ad.type} | Davomiylik: ${ad.showDuration}s</p>
+                        <p class="text-sm text-gray-600">${ad.type} | Продолжительность: ${ad.showDuration}s</p>
                     </div>
                     <div class="flex space-x-2">
-                        <button onclick="editAd('${ad.id}')" class="admin-edit-btn admin-action-btn">
-                            ✏️ Tahrirlash
-                        </button>
-                        <button onclick="deleteAd('${ad.id}')" class="admin-delete-btn admin-action-btn">
-                            🗑️ O'chirish
-                        </button>
+                        <button onclick="editAd('${ad.id}')" class="admin-edit-btn admin-action-btn" data-i18n="edit">✏️ Tahrirlash</button>
+                        <button onclick="deleteAd('${ad.id}')" class="admin-delete-btn admin-action-btn" data-i18n="delete">🗑️ O'chirish</button>
                     </div>
                 </div>
             `;
@@ -1663,17 +2074,17 @@
         }
 
         function deleteAd(adId) {
-            if (confirm('Bu reklamani o\'chirishni xohlaysizmi?')) {
+            if (confirm('Вы уверены, что хотите удалить эту рекламу?')) {
                 ads = ads.filter(a => a.id !== adId);
                 saveToStorage(STORAGE_KEYS.ads, ads);
                 showManageAds();
-                showNotification('🗑️ Reklama o\'chirildi va local saqlandi!', 'success');
+                showNotification('🗑️ Реклама удалена и сохранена локально!', 'success');
             }
         }
 
         function showManageTeam() {
             if (!isAdmin) {
-                showNotification('❌ Faqat admin jamoani boshqara oladi!', 'error');
+                showNotification('❌ Только админ может управлять командой!', 'error');
                 return;
             }
             const list = document.getElementById('teamList');
@@ -1693,12 +2104,8 @@
                         <p class="text-sm text-gray-600">${member.role}</p>
                     </div>
                     <div class="flex space-x-2">
-                        <button onclick="editTeamMember('${member.id}')" class="admin-edit-btn admin-action-btn">
-                            ✏️ Tahrirlash
-                        </button>
-                        <button onclick="deleteTeamMember('${member.id}')" class="admin-delete-btn admin-action-btn">
-                            🗑️ O'chirish
-                        </button>
+                        <button onclick="editTeamMember('${member.id}')" class="admin-edit-btn admin-action-btn" data-i18n="edit">✏️ Tahrirlash</button>
+                        <button onclick="deleteTeamMember('${member.id}')" class="admin-delete-btn admin-action-btn" data-i18n="delete">🗑️ O'chirish</button>
                     </div>
                 </div>
             `;
@@ -1711,13 +2118,13 @@
         }
 
         function deleteTeamMember(memberId) {
-            if (confirm('Bu jamoa a\'zosini o\'chirishni xohlaysizmi?')) {
+            if (confirm('Вы уверены, что хотите удалить этого члена команды?')) {
                 teamMembers = teamMembers.filter(m => m.id !== memberId);
                 saveToStorage(STORAGE_KEYS.team, teamMembers);
                 displayTeam();
                 updateAdminStats();
                 showManageTeam();
-                showNotification('🗑️ Jamoa a\'zosi o\'chirildi va local saqlandi!', 'success');
+                showNotification('🗑️ Член команды удален и сохранен локально!', 'success');
             }
         }
 
@@ -1728,60 +2135,57 @@
             modal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4';
             modal.innerHTML = `
                 <div class="bg-white rounded-2xl p-6 max-w-md w-full max-h-96 overflow-y-auto">
-                    <h3 class="text-2xl font-bold mb-4">${isEdit ? '✏️ A\'zoni Tahrirlash' : '👥 Yangi A\'zo Qo\'shish'}</h3>
+                    <h3 class="text-2xl font-bold mb-4">${isEdit ? '✏️ Редактировать Члена' : '👥 Добавить Нового Члена'}</h3>
                     <form id="teamForm" onsubmit="saveTeamMember(event, '${existingMember ? existingMember.id : ''}')">
                         <div class="mb-4">
-                            <label class="block text-sm font-medium mb-2">Ism</label>
+                            <label class="block text-sm font-medium mb-2" data-i18n="name">Имя</label>
                             <input type="text" name="name" value="${existingMember ? existingMember.name : ''}" required class="w-full px-3 py-2 border rounded-lg">
                         </div>
                         <div class="mb-4">
-                            <label class="block text-sm font-medium mb-2">Lavozim</label>
+                            <label class="block text-sm font-medium mb-2" data-i18n="role">Должность</label>
                             <input type="text" name="role" value="${existingMember ? existingMember.role : ''}" required class="w-full px-3 py-2 border rounded-lg">
                         </div>
                         <div class="mb-4">
-                            <label class="block text-sm font-medium mb-2">Tavsif</label>
+                            <label class="block text-sm font-medium mb-2" data-i18n="description">Описание</label>
                             <textarea name="description" class="w-full px-3 py-2 border rounded-lg h-20">${existingMember ? existingMember.description : ''}</textarea>
                         </div>
                         <div class="mb-4">
-                            <label class="block text-sm font-medium mb-2">Rasm URL</label>
+                            <label class="block text-sm font-medium mb-2" data-i18n="imageUrl">URL Изображения</label>
                             <input type="url" name="image" value="${existingMember ? existingMember.image : ''}" class="w-full px-3 py-2 border rounded-lg">
                         </div>
                         <div class="mb-4">
-                            <label class="block text-sm font-medium mb-2">Telegram</label>
+                            <label class="block text-sm font-medium mb-2" data-i18n="telegram">Telegram</label>
                             <input type="url" name="telegram" value="${existingMember ? existingMember.socials.telegram : ''}" class="w-full px-3 py-2 border rounded-lg">
                         </div>
                         <div class="mb-4">
-                            <label class="block text-sm font-medium mb-2">Instagram</label>
+                            <label class="block text-sm font-medium mb-2" data-i18n="instagram">Instagram</label>
                             <input type="url" name="instagram" value="${existingMember ? existingMember.socials.instagram : ''}" class="w-full px-3 py-2 border rounded-lg">
                         </div>
                         <div class="mb-4">
-                            <label class="block text-sm font-medium mb-2">YouTube</label>
+                            <label class="block text-sm font-medium mb-2" data-i18n="youtube">YouTube</label>
                             <input type="url" name="youtube" value="${existingMember ? existingMember.socials.youtube : ''}" class="w-full px-3 py-2 border rounded-lg">
                         </div>
                         <div class="mb-4">
-                            <label class="block text-sm font-medium mb-2">LinkedIn</label>
+                            <label class="block text-sm font-medium mb-2" data-i18n="linkedin">LinkedIn</label>
                             <input type="url" name="linkedin" value="${existingMember ? existingMember.socials.linkedin : ''}" class="w-full px-3 py-2 border rounded-lg">
                         </div>
                         <div class="mb-4">
-                            <label class="block text-sm font-medium mb-2">Twitter</label>
+                            <label class="block text-sm font-medium mb-2" data-i18n="twitter">Twitter</label>
                             <input type="url" name="twitter" value="${existingMember ? existingMember.socials.twitter : ''}" class="w-full px-3 py-2 border rounded-lg">
                         </div>
                         <div class="mb-4">
-                            <label class="block text-sm font-medium mb-2">TikTok</label>
+                            <label class="block text-sm font-medium mb-2" data-i18n="tiktok">TikTok</label>
                             <input type="url" name="tiktok" value="${existingMember ? existingMember.socials.tiktok : ''}" class="w-full px-3 py-2 border rounded-lg">
                         </div>
                         <div class="flex gap-3">
-                            <button type="submit" class="flex-1 bg-green-600 text-white py-2 rounded-lg hover:bg-green-700">
-                                ${isEdit ? '💾 Saqlash' : '📤 Qo\'shish'}
-                            </button>
-                            <button type="button" onclick="closeModal()" class="flex-1 bg-gray-300 text-gray-700 py-2 rounded-lg hover:bg-gray-400">
-                                ❌ Bekor qilish
-                            </button>
+                            <button type="submit" class="flex-1 bg-green-600 text-white py-2 rounded-lg hover:bg-green-700" data-i18n="save">${isEdit ? '💾 Сохранить' : '📤 Добавить'}</button>
+                            <button type="button" onclick="closeModal()" class="flex-1 bg-gray-300 text-gray-700 py-2 rounded-lg hover:bg-gray-400" data-i18n="cancel">❌ Отмена</button>
                         </div>
                     </form>
                 </div>
             `;
             document.body.appendChild(modal);
+            setLanguage(currentLang); // Re-apply translations to new modal
         }
 
         function saveTeamMember(event, existingId) {
@@ -1816,7 +2220,7 @@
             displayTeam();
             updateAdminStats();
             closeModal();
-            showNotification(`${isEdit ? 'Tahrirlandi' : 'Qo\'shildi'} va local saqlandi!`, 'success');
+            showNotification(`${isEdit ? 'Отредактировано' : 'Добавлено'} и сохранено локально!`, 'success');
         }
 
         function displayTeam() {
@@ -1846,7 +2250,7 @@
         
         function showAddCampaignModal(existingCampaign = null) {
             if (!isAdmin) {
-                showNotification('❌ Faqat admin e\'lon qo\'sha/ozgartira oladi!', 'error');
+                showNotification('❌ Только админ может добавлять/редактировать объявления!', 'error');
                 return;
             }
             
@@ -1855,77 +2259,74 @@
             modal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4';
             modal.innerHTML = `
                 <div class="bg-white rounded-2xl p-6 max-w-md w-full max-h-96 overflow-y-auto">
-                    <h3 class="text-2xl font-bold mb-4">${isEdit ? '✏️ E\'loni Tahrirlash' : '📢 Yangi E\'lon Qo\'shish'}</h3>
+                    <h3 class="text-2xl font-bold mb-4">${isEdit ? '✏️ Редактировать Объявление' : '📢 Добавить Новое Объявление'}</h3>
                     <form id="campaignForm" onsubmit="saveCampaign(event, '${existingCampaign ? existingCampaign.id : ''}')">
                         <div class="mb-4">
-                            <label class="block text-sm font-medium mb-2">E'lon nomi</label>
+                            <label class="block text-sm font-medium mb-2" data-i18n="title">Название Объявления</label>
                             <input type="text" name="title" value="${existingCampaign ? existingCampaign.title : ''}" required class="w-full px-3 py-2 border rounded-lg">
                         </div>
                         <div class="mb-4">
-                            <label class="block text-sm font-medium mb-2">Kategoriya</label>
+                            <label class="block text-sm font-medium mb-2" data-i18n="category">Категория</label>
                             <select name="category" required class="w-full px-3 py-2 border rounded-lg">
-                                <option value="">Tanlang</option>
-                                <option value="tibbiyot" ${existingCampaign && existingCampaign.category === 'tibbiyot' ? 'selected' : ''}>🏥 Tibbiy Yordam</option>
-                                <option value="nogironlik" ${existingCampaign && existingCampaign.category === 'nogironlik' ? 'selected' : ''}>♿ Nogironlik</option>
-                                <option value="talim" ${existingCampaign && existingCampaign.category === 'talim' ? 'selected' : ''}>📚 Ta'lim</option>
-                                <option value="uy-joy" ${existingCampaign && existingCampaign.category === 'uy-joy' ? 'selected' : ''}>🏠 Uy-Joy</option>
-                                <option value="hayvonlar" ${existingCampaign && existingCampaign.category === 'hayvonlar' ? 'selected' : ''}>🐾 Hayvonlar</option>
-                                <option value="ijtimoiy" ${existingCampaign && existingCampaign.category === 'ijtimoiy' ? 'selected' : ''}>🤝 Ijtimoiy</option>
-                                <option value="ayollar" ${existingCampaign && existingCampaign.category === 'ayollar' ? 'selected' : ''}>👩 Ayollar Uchun</option>
-                                <option value="yetimlar" ${existingCampaign && existingCampaign.category === 'yetimlar' ? 'selected' : ''}>👶 Yetimlar</option>
+                                <option value="">Выберите</option>
+                                <option value="tibbiyot" ${existingCampaign && existingCampaign.category === 'tibbiyot' ? 'selected' : ''}>🏥 Медицинская Помощь</option>
+                                <option value="nogironlik" ${existingCampaign && existingCampaign.category === 'nogironlik' ? 'selected' : ''}>♿ Инвалидность</option>
+                                <option value="talim" ${existingCampaign && existingCampaign.category === 'talim' ? 'selected' : ''}>📚 Образование</option>
+                                <option value="uy-joy" ${existingCampaign && existingCampaign.category === 'uy-joy' ? 'selected' : ''}>🏠 Жилье</option>
+                                <option value="hayvonlar" ${existingCampaign && existingCampaign.category === 'hayvonlar' ? 'selected' : ''}>🐾 Животные</option>
+                                <option value="ijtimoiy" ${existingCampaign && existingCampaign.category === 'ijtimoiy' ? 'selected' : ''}>🤝 Социальное</option>
+                                <option value="ayollar" ${existingCampaign && existingCampaign.category === 'ayollar' ? 'selected' : ''}>👩 Для Женщин</option>
+                                <option value="yetimlar" ${existingCampaign && existingCampaign.category === 'yetimlar' ? 'selected' : ''}>👶 Сироты</option>
                             </select>
                         </div>
                         <div class="mb-4">
-                            <label class="block text-sm font-medium mb-2">Maqsad summasi (so'm)</label>
+                            <label class="block text-sm font-medium mb-2" data-i18n="targetAmount">Целевая сумма (сум)</label>
                             <input type="number" name="targetAmount" value="${existingCampaign ? existingCampaign.targetAmount : ''}" required class="w-full px-3 py-2 border rounded-lg">
                         </div>
                         <div class="mb-4">
-                            <label class="block text-sm font-medium mb-2">Hozirgi summa (so'm)</label>
+                            <label class="block text-sm font-medium mb-2" data-i18n="currentAmount">Текущая сумма (сум)</label>
                             <input type="number" name="currentAmount" value="${existingCampaign ? existingCampaign.currentAmount : 0}" class="w-full px-3 py-2 border rounded-lg">
                         </div>
                         <div class="mb-4">
-                            <label class="block text-sm font-medium mb-2">Tavsif</label>
+                            <label class="block text-sm font-medium mb-2" data-i18n="description">Описание</label>
                             <textarea name="description" required class="w-full px-3 py-2 border rounded-lg h-20">${existingCampaign ? existingCampaign.description : ''}</textarea>
                         </div>
                         <div class="mb-4">
-                            <label class="block text-sm font-medium mb-2">💳 Karta raqami</label>
+                            <label class="block text-sm font-medium mb-2" data-i18n="cardNumber">💳 Номер Карты</label>
                             <input type="text" name="cardNumber" value="${existingCampaign ? existingCampaign.cardNumber : ''}" required placeholder="8600 1234 5678 9012" class="w-full px-3 py-2 border rounded-lg">
                         </div>
                         <div class="mb-4">
-                            <label class="block text-sm font-medium mb-2">👤 Karta egasi (To'liq ism)</label>
+                            <label class="block text-sm font-medium mb-2" data-i18n="cardOwner">👤 Владелец Карты (Полное Имя)</label>
                             <input type="text" name="cardOwner" value="${existingCampaign ? existingCampaign.cardOwner : ''}" required placeholder="ABDULLAYEV JASURBEK KARIM O'G'LI" class="w-full px-3 py-2 border rounded-lg">
                         </div>
                         <div class="mb-4">
-                            <label class="block text-sm font-medium mb-2">📞 Aloqa telefoni</label>
+                            <label class="block text-sm font-medium mb-2" data-i18n="contactPhone">📞 Контактный Телефон</label>
                             <input type="tel" name="contactPhone" value="${existingCampaign ? existingCampaign.contactPhone : ''}" required placeholder="+998901234567" class="w-full px-3 py-2 border rounded-lg">
                         </div>
                         <div class="mb-4">
-                            <label class="block text-sm font-medium mb-2">👤 Aloqa ismi</label>
+                            <label class="block text-sm font-medium mb-2" data-i18n="contactName">👤 Имя Контакта</label>
                             <input type="text" name="contactName" value="${existingCampaign ? existingCampaign.contactName : ''}" required placeholder="Jasurbek Abdullayev" class="w-full px-3 py-2 border rounded-lg">
                         </div>
                         <div class="mb-4">
-                            <label class="block text-sm font-medium mb-2">⏰ Qolgan kunlar</label>
+                            <label class="block text-sm font-medium mb-2" data-i18n="daysLeft">⏰ Оставшиеся Дни</label>
                             <input type="number" name="daysLeft" value="${existingCampaign ? existingCampaign.daysLeft : 30}" min="1" class="w-full px-3 py-2 border rounded-lg">
                         </div>
                         <div class="mb-4">
                             <label class="flex items-center">
                                 <input type="checkbox" name="urgent" ${existingCampaign && existingCampaign.urgent ? 'checked' : ''} class="mr-2">
-                                <span class="text-sm">Shoshilinch e'lon</span>
+                                <span class="text-sm" data-i18n="urgent">Срочное объявление</span>
                             </label>
                         </div>
                         <div class="flex gap-3">
-                            <button type="submit" class="flex-1 bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700">
-                                ${isEdit ? '💾 Saqlash' : '📤 Qo\'shish'}
-                            </button>
-                            <button type="button" onclick="closeModal()" class="flex-1 bg-gray-300 text-gray-700 py-2 rounded-lg hover:bg-gray-400">
-                                ❌ Bekor qilish
-                            </button>
+                            <button type="submit" class="flex-1 bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700" data-i18n="save">${isEdit ? '💾 Сохранить' : '📤 Добавить'}</button>
+                            <button type="button" onclick="closeModal()" class="flex-1 bg-gray-300 text-gray-700 py-2 rounded-lg hover:bg-gray-400" data-i18n="cancel">❌ Отмена</button>
                         </div>
                     </form>
                 </div>
             `;
             
             document.body.appendChild(modal);
+            setLanguage(currentLang); // Apply translations
         }
 
         function saveCampaign(event, existingId) {
@@ -1955,10 +2356,10 @@
             if (isEdit) {
                 const index = campaigns.findIndex(c => c.id === existingId);
                 campaigns[index] = campaignData;
-                showNotification('✅ E\'lon tahrirlandi!', 'success');
+                showNotification('✅ Объявление отредактировано!', 'success');
             } else {
                 campaigns.unshift(campaignData);
-                showNotification('✅ E\'lon muvaffaqiyatli qo\'shildi!', 'success');
+                showNotification('✅ Объявление успешно добавлено!', 'success');
             }
             
             saveToStorage(STORAGE_KEYS.campaigns, campaigns);
@@ -1968,12 +2369,12 @@
         }
 
         // ========================================
-        // AD CREATION (with Local Save)
+        // AD CREATION (with Local Save, Video Support)
         // ========================================
         
         function showAddAdModal(existingAd = null) {
             if (!isAdmin) {
-                showNotification('❌ Faqat admin reklama qo\'sha/ozgartira oladi!', 'error');
+                showNotification('❌ Только админ может добавлять/редактировать рекламу!', 'error');
                 return;
             }
             
@@ -1982,62 +2383,72 @@
             modal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4';
             modal.innerHTML = `
                 <div class="bg-white rounded-2xl p-6 max-w-md w-full max-h-96 overflow-y-auto">
-                    <h3 class="text-2xl font-bold mb-4">${isEdit ? '✏️ Reklamani Tahrirlash' : '📺 Reklama Qo\'shish'}</h3>
+                    <h3 class="text-2xl font-bold mb-4">${isEdit ? '✏️ Редактировать Рекламу' : '📺 Добавить Рекламу'}</h3>
                     <form id="adForm" onsubmit="saveAd(event, '${existingAd ? existingAd.id : ''}')">
                         <div class="mb-4">
-                            <label class="block text-sm font-medium mb-2">Reklama turi</label>
+                            <label class="block text-sm font-medium mb-2" data-i18n="adType">Тип Рекламы</label>
                             <select name="type" required class="w-full px-3 py-2 border rounded-lg">
-                                <option value="">Tanlang</option>
-                                <option value="banner" ${existingAd && existingAd.type === 'banner' ? 'selected' : ''}>📢 Banner Reklama</option>
+                                <option value="">Выберите</option>
+                                <option value="banner" ${existingAd && existingAd.type === 'banner' ? 'selected' : ''}>📢 Баннерная Реклама</option>
                             </select>
                         </div>
                         
                         <div class="mb-4">
-                            <label class="block text-sm font-medium mb-2">Sarlavha</label>
+                            <label class="block text-sm font-medium mb-2" data-i18n="title">Заголовок</label>
                             <input type="text" name="title" value="${existingAd ? existingAd.title : ''}" required class="w-full px-3 py-2 border rounded-lg">
                         </div>
                         
                         <div class="mb-4">
-                            <label class="block text-sm font-medium mb-2">Tavsif</label>
+                            <label class="block text-sm font-medium mb-2" data-i18n="description">Описание</label>
                             <textarea name="description" class="w-full px-3 py-2 border rounded-lg h-16">${existingAd ? existingAd.description : ''}</textarea>
                         </div>
                         
                         <div class="mb-4">
-                            <label class="block text-sm font-medium mb-2">🔗 Reklama havolasi (ixtiyoriy)</label>
+                            <label class="block text-sm font-medium mb-2" data-i18n="linkUrl">🔗 URL Ссылки (опционально)</label>
                             <input type="url" name="linkUrl" value="${existingAd ? existingAd.linkUrl : ''}" class="w-full px-3 py-2 border rounded-lg" placeholder="https://example.com">
-                            <div class="text-xs text-gray-500 mt-1">Banner bosilganda bu havolaga o'tadi</div>
+                            <div class="text-xs text-gray-500 mt-1">Ссылка при клике на баннер</div>
                         </div>
                         
                         <div class="mb-4">
-                            <label class="block text-sm font-medium mb-2">⏰ Ko'rsatish vaqti (soniya)</label>
+                            <label class="block text-sm font-medium mb-2" data-i18n="videoUrl">🎥 URL Видео (опционально)</label>
+                            <input type="url" name="videoUrl" value="${existingAd ? existingAd.videoUrl : ''}" class="w-full px-3 py-2 border rounded-lg" placeholder="https://www.youtube.com/embed/VIDEO_ID">
+                            <div class="text-xs text-gray-500 mt-1">Если указано, покажет видео в поп-апе; иначе - обновления сайта</div>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium mb-2" data-i18n="showDuration">⏰ Время показа (секунды)</label>
                             <input type="number" name="showDuration" value="${existingAd ? existingAd.showDuration : 10}" min="5" max="30" class="w-full px-3 py-2 border rounded-lg">
                         </div>
                         
                         <div class="mb-4">
-                            <label class="block text-sm font-medium mb-2">Aloqa ma'lumotlari</label>
-                            <input type="text" name="contact" value="${existingAd ? existingAd.contact : ''}" class="w-full px-3 py-2 border rounded-lg" placeholder="Telefon yoki Telegram">
+                            <label class="block text-sm font-medium mb-2" data-i18n="contact">Контактные Данные</label>
+                            <input type="text" name="contact" value="${existingAd ? existingAd.contact : ''}" class="w-full px-3 py-2 border rounded-lg" placeholder="Телефон или Telegram">
                         </div>
                         
                         <div class="mb-4">
                             <label class="flex items-center">
                                 <input type="checkbox" name="banner" ${existingAd ? (existingAd.banner ? 'checked' : '') : 'checked'} class="mr-2">
-                                <span class="text-sm">Yuqori banner sifatida ko'rsatish</span>
+                                <span class="text-sm" data-i18n="topBanner">Показывать как верхний баннер</span>
+                            </label>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label class="flex items-center">
+                                <input type="checkbox" name="bottom" ${existingAd ? (existingAd.bottom ? 'checked' : '') : ''} class="mr-2">
+                                <span class="text-sm" data-i18n="bottomBanner">Показывать как нижний баннер</span>
                             </label>
                         </div>
                         
                         <div class="flex gap-3">
-                            <button type="submit" class="flex-1 bg-orange-600 text-white py-2 rounded-lg hover:bg-orange-700">
-                                ${isEdit ? '💾 Saqlash' : '📤 Qo\'shish'}
-                            </button>
-                            <button type="button" onclick="closeModal()" class="flex-1 bg-gray-300 text-gray-700 py-2 rounded-lg hover:bg-gray-400">
-                                ❌ Bekor qilish
-                            </button>
+                            <button type="submit" class="flex-1 bg-orange-600 text-white py-2 rounded-lg hover:bg-orange-700" data-i18n="save">${isEdit ? '💾 Сохранить' : '📤 Добавить'}</button>
+                            <button type="button" onclick="closeModal()" class="flex-1 bg-gray-300 text-gray-700 py-2 rounded-lg hover:bg-gray-400" data-i18n="cancel">❌ Отмена</button>
                         </div>
                     </form>
                 </div>
             `;
             
             document.body.appendChild(modal);
+            setLanguage(currentLang); // Apply translations
         }
 
         function saveAd(event, existingId) {
@@ -2051,9 +2462,11 @@
                 title: formData.get('title'),
                 description: formData.get('description'),
                 linkUrl: formData.get('linkUrl'),
+                videoUrl: formData.get('videoUrl'),
                 contact: formData.get('contact'),
                 showDuration: parseInt(formData.get('showDuration')) || 10,
                 banner: formData.get('banner') === 'on',
+                bottom: formData.get('bottom') === 'on',
                 createdBy: 'Admin',
                 createdAt: new Date().toISOString()
             };
@@ -2061,11 +2474,12 @@
             if (isEdit) {
                 const index = ads.findIndex(a => a.id === existingId);
                 ads[index] = adData;
-                showNotification('✅ Reklama tahrirlandi!', 'success');
+                showNotification('✅ Реклама отредактирована!', 'success');
             } else {
                 ads.unshift(adData);
-                showBannerAd(adData); // Show immediately if new
-                showNotification('📢 Reklama muvaffaqiyatli qo\'shildi!', 'success');
+                if (adData.banner) showBannerAd(adData);
+                if (adData.bottom) showBottomBannerAd(adData);
+                showNotification('📢 Реклама успешно добавлена!', 'success');
             }
             
             saveToStorage(STORAGE_KEYS.ads, ads);
@@ -2079,39 +2493,42 @@
             modal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4';
             modal.innerHTML = `
                 <div class="bg-white rounded-2xl p-6 max-w-md w-full">
-                    <h3 class="text-2xl font-bold mb-4">⚙️ Reklama Sozlamalari</h3>
+                    <h3 class="text-2xl font-bold mb-4" data-i18n="adSettings">⚙️ Настройки Рекламы</h3>
                     <form id="adSettingsForm" onsubmit="updateAdSettings(event)">
                         <div class="mb-4">
-                            <label class="block text-sm font-medium mb-2">Popup davomiyligi (soniya)</label>
+                            <label class="block text-sm font-medium mb-2" data-i18n="overlayDuration">Продолжительность Поп-апа (секунды)</label>
                             <input type="number" name="overlayDuration" value="${adSettings.overlayDuration}" min="3" max="30" class="w-full px-3 py-2 border rounded-lg">
                         </div>
                         <div class="mb-4">
-                            <label class="block text-sm font-medium mb-2">O'tkazib yuborish vaqti (soniya)</label>
+                            <label class="block text-sm font-medium mb-2" data-i18n="skipAfter">Время пропуска (секунды)</label>
                             <input type="number" name="skipAfter" value="${adSettings.skipAfter}" min="1" max="10" class="w-full px-3 py-2 border rounded-lg">
                         </div>
                         <div class="mb-4">
-                            <label class="block text-sm font-medium mb-2">Banner matni</label>
+                            <label class="block text-sm font-medium mb-2" data-i18n="bannerText">Текст Баннера</label>
                             <input type="text" name="bannerText" value="${adSettings.bannerText}" class="w-full px-3 py-2 border rounded-lg">
                         </div>
                         <div class="mb-4">
                             <label class="flex items-center">
                                 <input type="checkbox" name="showBanner" ${adSettings.showBanner ? 'checked' : ''} class="mr-2">
-                                <span class="text-sm">Banner reklamalarni ko'rsatish</span>
+                                <span class="text-sm" data-i18n="showBanner">Показывать баннерную рекламу</span>
+                            </label>
+                        </div>
+                        <div class="mb-4">
+                            <label class="flex items-center">
+                                <input type="checkbox" name="showBottomBanner" ${adSettings.showBottomBanner ? 'checked' : ''} class="mr-2">
+                                <span class="text-sm" data-i18n="showBottomBanner">Показывать нижний баннер</span>
                             </label>
                         </div>
                         <div class="flex gap-3">
-                            <button type="submit" class="flex-1 bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700">
-                                💾 Saqlash
-                            </button>
-                            <button type="button" onclick="closeModal()" class="flex-1 bg-gray-300 text-gray-700 py-2 rounded-lg hover:bg-gray-400">
-                                ❌ Bekor qilish
-                            </button>
+                            <button type="submit" class="flex-1 bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700" data-i18n="save">💾 Сохранить</button>
+                            <button type="button" onclick="closeModal()" class="flex-1 bg-gray-300 text-gray-700 py-2 rounded-lg hover:bg-gray-400" data-i18n="cancel">❌ Отмена</button>
                         </div>
                     </form>
                 </div>
             `;
             
             document.body.appendChild(modal);
+            setLanguage(currentLang); // Apply translations
         }
 
         function updateAdSettings(event) {
@@ -2122,16 +2539,18 @@
                 overlayDuration: parseInt(formData.get('overlayDuration')),
                 skipAfter: parseInt(formData.get('skipAfter')),
                 bannerText: formData.get('bannerText'),
-                showBanner: formData.get('showBanner') === 'on'
+                showBanner: formData.get('showBanner') === 'on',
+                showBottomBanner: formData.get('showBottomBanner') === 'on',
+                updates: adSettings.updates || DEFAULT_UPDATES[currentLang]
             };
             
             saveToStorage(STORAGE_KEYS.settings, adSettings);
             closeModal();
-            showNotification('⚙️ Sozlamalar saqlandi va local saqlandi!', 'success');
+            showNotification('⚙️ Настройки сохранены и локально!', 'success');
         }
 
         // ========================================
-        // BANNER AD SYSTEM
+        // BANNER AD SYSTEM (Top, Bottom)
         // ========================================
         
         function showRandomAd() {
@@ -2142,6 +2561,14 @@
             showBannerAd(randomAd);
         }
 
+        function showRandomBottomAd() {
+            const bottomAds = ads.filter(ad => ad.bottom);
+            if (bottomAds.length === 0) return;
+            
+            const randomAd = bottomAds[Math.floor(Math.random() * bottomAds.length)];
+            showBottomBannerAd(randomAd);
+        }
+
         function showAdOverlay(ad) {
             const overlay = document.getElementById('adOverlay');
             const contentArea = document.getElementById('adContentArea');
@@ -2150,17 +2577,21 @@
             
             let content = '';
             
-            switch (ad.type) {
-                case 'banner':
-                    content = `<div class="flex items-center justify-center h-full bg-gradient-to-r from-blue-500 to-purple-500 text-white p-8">
-                        <div class="text-center">
-                            <h3 class="text-3xl font-bold mb-4">${ad.title}</h3>
-                            <p class="text-lg mb-4">${ad.description}</p>
-                            ${ad.linkUrl ? `<a href="${ad.linkUrl}" target="_blank" class="bg-white text-blue-500 px-6 py-3 rounded-lg font-bold">Batafsil</a>` : ''}
-                            ${ad.contact ? `<div class="mt-4 text-lg font-bold">📞 ${ad.contact}</div>` : ''}
-                        </div>
-                    </div>`;
-                    break;
+            if (ad.videoUrl && isVideoUrl(ad.videoUrl)) {
+                // Show video if URL is video
+                content = `<div class="flex items-center justify-center h-full p-4">
+                    <iframe width="100%" height="100%" src="${ad.videoUrl}" frameborder="0" allowfullscreen></iframe>
+                </div>`;
+            } else {
+                // Show text ad
+                content = `<div class="flex items-center justify-center h-full bg-gradient-to-r from-blue-500 to-purple-500 text-white p-8">
+                    <div class="text-center">
+                        <h3 class="text-3xl font-bold mb-4">${ad.title}</h3>
+                        <p class="text-lg mb-4">${ad.description}</p>
+                        ${ad.linkUrl ? `<a href="${ad.linkUrl}" target="_blank" class="bg-white text-blue-500 px-6 py-3 rounded-lg font-bold">Подробнее</a>` : ''}
+                        ${ad.contact ? `<div class="mt-4 text-lg font-bold">📞 ${ad.contact}</div>` : ''}
+                    </div>
+                </div>`;
             }
             
             contentArea.innerHTML = content;
@@ -2182,6 +2613,10 @@
                     closeAdOverlay();
                 }
             }, 1000);
+        }
+
+        function isVideoUrl(url) {
+            return url.includes('youtube.com') || url.includes('vimeo.com') || url.includes('video');
         }
 
         function closeAdOverlay() {
@@ -2213,6 +2648,38 @@
             document.getElementById('topBannerAd').classList.add('hidden');
         }
 
+        function showBottomBannerAd(ad) {
+            if (!adSettings.showBottomBanner) return;
+            
+            const banner = document.getElementById('bottomBannerAd');
+            const bannerText = document.getElementById('bottomBannerAdText');
+            
+            if (ad.linkUrl) {
+                bannerText.innerHTML = `<a href="${ad.linkUrl}" target="_blank" rel="noopener noreferrer" class="text-white hover:text-yellow-200 transition-colors">${ad.title || adSettings.bannerText}</a>`;
+            } else {
+                bannerText.textContent = ad.title || adSettings.bannerText;
+            }
+            
+            banner.classList.remove('hidden');
+            
+            const duration = (ad.showDuration || 10) * 1000;
+            setTimeout(() => {
+                hideBottomBannerAd();
+            }, duration);
+        }
+
+        function hideBottomBannerAd() {
+            document.getElementById('bottomBannerAd').classList.add('hidden');
+        }
+
+        function showUpdateTicker() {
+            const ticker = document.getElementById('updateTicker');
+            const text = document.getElementById('tickerText');
+            const updates = adSettings.updates || DEFAULT_UPDATES[currentLang];
+            text.textContent = updates.join(' | ') + ' | ';
+            ticker.classList.remove('hidden');
+        }
+
         // ========================================
         // CAMPAIGN SYSTEM
         // ========================================
@@ -2223,6 +2690,7 @@
                 campaigns = DEFAULT_CAMPAIGNS;
                 ads = DEFAULT_ADS;
                 teamMembers = DEFAULT_TEAM;
+                adSettings.updates = DEFAULT_UPDATES[currentLang];
             }
             displayCampaigns();
             displayTeam();
@@ -2242,7 +2710,7 @@
 
         function createCampaignCard(campaign) {
             const progress = (campaign.currentAmount / campaign.targetAmount * 100).toFixed(1);
-            const urgentBadge = campaign.urgent ? '<span class="absolute top-4 right-4 bg-red-500 text-white text-xs px-3 py-1 rounded-full font-medium">Shoshilinch</span>' : '';
+            const urgentBadge = campaign.urgent ? '<span class="absolute top-4 right-4 bg-red-500 text-white text-xs px-3 py-1 rounded-full font-medium">Срочное</span>' : '';
             
             return `
                 <div class="bg-white rounded-2xl shadow-xl overflow-hidden card-hover relative mobile-card">
@@ -2262,35 +2730,33 @@
                         
                         <div class="mb-6">
                             <div class="flex justify-between text-sm mb-3">
-                                <span class="font-semibold text-gray-700 mobile-text">Yig'ildi: ${formatCurrency(campaign.currentAmount)}</span>
+                                <span class="font-semibold text-gray-700 mobile-text">Собрано: ${formatCurrency(campaign.currentAmount)}</span>
                                 <span class="text-blue-600 font-bold text-lg">${progress}%</span>
                             </div>
                             <div class="w-full bg-gray-200 rounded-full h-4">
                                 <div class="progress-bar h-4 rounded-full transition-all duration-500" style="width: ${progress}%"></div>
                             </div>
                             <div class="flex justify-between text-sm mt-3 text-gray-500">
-                                <span class="mobile-text">Maqsad: ${formatCurrency(campaign.targetAmount)}</span>
-                                <span class="mobile-text">${campaign.daysLeft} kun qoldi</span>
+                                <span class="mobile-text">Цель: ${formatCurrency(campaign.targetAmount)}</span>
+                                <span class="mobile-text">${campaign.daysLeft} дней осталось</span>
                             </div>
                         </div>
                         
                         <!-- Card Info -->
                         <div class="bg-blue-50 rounded-lg p-4 mb-4">
-                            <div class="text-sm font-medium text-blue-800 mb-2">💳 To'lov Ma'lumotlari:</div>
+                            <div class="text-sm font-medium text-blue-800 mb-2" data-i18n="paymentInfo">💳 Информация для Платежа:</div>
                             <div class="text-sm text-blue-700">
-                                <div>Karta: ${campaign.cardNumber}</div>
-                                <div>Egasi: ${campaign.cardOwner}</div>
+                                <div>Карта: ${campaign.cardNumber}</div>
+                                <div>Владелец: ${campaign.cardOwner}</div>
                             </div>
                         </div>
                         
                         <div class="flex justify-between items-center mb-4">
                             <div class="flex items-center space-x-2">
-                                <span class="text-sm text-gray-500 font-medium mobile-text">${campaign.donors} xayriyachi</span>
+                                <span class="text-sm text-gray-500 font-medium mobile-text">${campaign.donors} благотворителей</span>
                                 <div class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
                             </div>
-                            <button onclick="donateToCharity('${campaign.id}')" class="telegram-btn text-white px-6 py-3 rounded-xl hover:from-green-700 hover:to-blue-700 transition-all duration-300 transform hover:scale-105 font-semibold shadow-lg mobile-button touch-button">
-                                💝 Yordam Berish
-                            </button>
+                            <button onclick="donateToCharity('${campaign.id}')" class="telegram-btn text-white px-6 py-3 rounded-xl hover:from-green-700 hover:to-blue-700 transition-all duration-300 transform hover:scale-105 font-semibold shadow-lg mobile-button touch-button" data-i18n="help">💝 Помочь</button>
                         </div>
                     </div>
                 </div>
@@ -2301,41 +2767,41 @@
             const campaign = campaigns.find(c => c.id === campaignId);
             if (!campaign) return;
             
-            const donationMessage = `🎯 *XAYRIYA SO'ROVI - E-EHSON PROFESSIONAL*
+            const donationMessage = `🎯 *ЗАПРОС НА БЛАГОТВОРИТЕЛЬНОСТЬ - E-EHSON PROFESSIONAL*
 
-📋 *E'lon Ma'lumotlari:*
-• Nomi: ${campaign.title}
-• Kategoriya: ${getCategoryName(campaign.category)}
+📋 *Информация Объявления:*
+• Название: ${campaign.title}
+• Категория: ${getCategoryName(campaign.category)}
 • ID: ${campaign.id}
 
-💰 *Moliyaviy Ma'lumotlar:*
-• Maqsad: ${formatCurrency(campaign.targetAmount)}
-• Hozirgi: ${formatCurrency(campaign.currentAmount)}
-• Foiz: ${(campaign.currentAmount / campaign.targetAmount * 100).toFixed(1)}%
+💰 *Финансовая Информация:*
+• Цель: ${formatCurrency(campaign.targetAmount)}
+• Текущая: ${formatCurrency(campaign.currentAmount)}
+• Процент: ${(campaign.currentAmount / campaign.targetAmount * 100).toFixed(1)}%
 
-💳 *To'lov Ma'lumotlari:*
-• Karta: ${campaign.cardNumber}
-• Egasi: ${campaign.cardOwner}
+💳 *Информация для Платежа:*
+• Карта: ${campaign.cardNumber}
+• Владелец: ${campaign.cardOwner}
 
-📞 *Aloqa:*
-• Telefon: ${campaign.contactPhone}
-• Ism: ${campaign.contactName}
+📞 *Контакты:*
+• Телефон: ${campaign.contactPhone}
+• Имя: ${campaign.contactName}
 
-📝 *Tavsif:*
+📝 *Описание:*
 ${campaign.description}
 
-⏰ *Qolgan vaqt:* ${campaign.daysLeft} kun
+⏰ *Оставшееся Время:* ${campaign.daysLeft} дней
 
-🔗 *Platform:* E-Ehson Professional
+🔗 *Платформа:* E-Ehson Professional
 👨‍💼 *CEO:* Jasurbek Jo'lanboyev G'ayrat o'g'li
-📱 *Admin:* @serinaqu
+📱 *Админ:* @serinaqu
 
-💝 *Xayriya qiling va yaxshilik tarqating!*`;
+💝 *Сделайте пожертвование и распространяйте добро!*`;
 
             const telegramUrl = `https://t.me/serinaqu?text=${encodeURIComponent(donationMessage)}`;
             window.open(telegramUrl, '_blank');
             
-            showNotification('💝 Xayriya uchun admin bilan bog\'lanish ochildi!', 'success');
+            showNotification('💝 Открыто соединение с админом для благотворительности!', 'success');
         }
 
         function filterCampaigns(category) {
@@ -2355,8 +2821,8 @@ ${campaign.description}
             
             scrollToSection('campaigns');
             
-            const categoryName = category === 'all' ? 'Barcha e\'lonlar' : getCategoryName(category);
-            showNotification(`🔍 ${categoryName} ko'rsatilmoqda`, 'info');
+            const categoryName = category === 'all' ? translations[currentLang]['all'] || 'Barcha e\'lonlar' : getCategoryName(category);
+            showNotification(`🔍 Показывается ${categoryName}`, 'info');
         }
 
         function getCategoryIcon(category) {
@@ -2375,14 +2841,14 @@ ${campaign.description}
 
         function getCategoryName(category) {
             const names = {
-                'tibbiyot': 'Tibbiy Yordam',
-                'nogironlik': 'Nogironlik',
-                'talim': 'Ta\'lim',
-                'uy-joy': 'Uy-Joy',
-                'hayvonlar': 'Hayvonlar',
-                'ijtimoiy': 'Ijtimoiy',
-                'ayollar': 'Ayollar Uchun',
-                'yetimlar': 'Yetimlar'
+                'tibbiyot': translations[currentLang]['medical'] || 'Tibbiy Yordam',
+                'nogironlik': translations[currentLang]['disability'] || 'Nogironlik',
+                'talim': translations[currentLang]['education'] || 'Ta\'lim',
+                'uy-joy': translations[currentLang]['housing'] || 'Uy-Joy',
+                'hayvonlar': translations[currentLang]['animals'] || 'Hayvonlar',
+                'ijtimoiy': translations[currentLang]['social'] || 'Ijtimoiy',
+                'ayollar': translations[currentLang]['women'] || 'Ayollar Uchun',
+                'yetimlar': translations[currentLang]['orphans'] || 'Yetimlar'
             };
             return names[category] || category;
         }
@@ -2417,60 +2883,60 @@ ${campaign.description}
         }
 
         function requestCampaign() {
-            const message = `🎯 *YANGI E'LON SO'ROVI - E-EHSON PROFESSIONAL*
+            const message = `🎯 *НОВЫЙ ЗАПРОС ОБЪЯВЛЕНИЯ - E-EHSON PROFESSIONAL*
 
-📋 *E'lon Ma'lumotlari:*
-• Nomi: [E'lon nomini kiriting]
-• Kategoriya: [Kategoriyani tanlang]
-• Maqsad summasi: [Summani kiriting]
-• Tavsif: [Batafsil tavsif]
+📋 *Информация Объявления:*
+• Название: [Введите название объявления]
+• Категория: [Выберите категорию]
+• Целевая сумма: [Введите сумму]
+• Описание: [Подробное описание]
 
-💳 *To'lov Ma'lumotlari:*
-• Karta raqami: [8600 xxxx xxxx xxxx]
-• Karta egasi: [To'liq ism]
+💳 *Информация для Платежа:*
+• Номер карты: [8600 xxxx xxxx xxxx]
+• Владелец карты: [Полное имя]
 
-📞 *Aloqa Ma'lumotlari:*
-• Telefon: [+998xxxxxxxxx]
-• Ism: [Sizning ismingiz]
+📞 *Контактная Информация:*
+• Телефон: [+998xxxxxxxxx]
+• Имя: [Ваше имя]
 
-📝 *Qo'shimcha Ma'lumotlar:*
-• Shoshilinchmi: [Ha/Yo'q]
-• Qolgan vaqt: [Kunlar soni]
+📝 *Дополнительная Информация:*
+• Срочное ли: [Да/Нет]
+• Оставшееся время: [Количество дней]
 
-🔗 *Platform:* E-Ehson Professional
+🔗 *Платформа:* E-Ehson Professional
 👨‍💼 *CEO:* Jasurbek Jo'lanboyev G'ayrat o'g'li
-📱 *Admin:* @serinaqu
+📱 *Админ:* @serinaqu
 
-💝 *E'lon qo'yish uchun yuqoridagi ma'lumotlarni to'ldiring!*`;
+💝 *Заполните вышеуказанную информацию для размещения объявления!*`;
 
             const telegramUrl = `https://t.me/serinaqu?text=${encodeURIComponent(message)}`;
             window.open(telegramUrl, '_blank');
             
-            showNotification('📢 E\'lon so\'rovi uchun admin bilan bog\'lanish ochildi!', 'success');
+            showNotification('📢 Открыто соединение с админом для запроса объявления!', 'success');
         }
 
         function getHelp() {
-            const message = `🆘 *YORDAM SO'ROVI - E-EHSON PROFESSIONAL*
+            const message = `🆘 *ЗАПРОС ПОМОЩИ - E-EHSON PROFESSIONAL*
 
-📋 *Yordam Turi:*
-• Texnik yordam
-• E'lon qo'yish
-• To'lov masalalari
-• Boshqa savollar
+📋 *Тип Помощи:*
+• Техническая помощь
+• Размещение объявления
+• Проблемы с платежом
+• Другие вопросы
 
-📝 *Sizning savolingiz:*
-[Bu yerga savolingizni yozing]
+📝 *Ваш Вопрос:*
+[Напишите ваш вопрос здесь]
 
-🔗 *Platform:* E-Ehson Professional
+🔗 *Платформа:* E-Ehson Professional
 👨‍💼 *CEO:* Jasurbek Jo'lanboyev G'ayrat o'g'li
-📱 *Admin:* @serinaqu
+📱 *Админ:* @serinaqu
 
-💬 *Biz sizga yordam berishga tayyormiz!*`;
+💬 *Мы готовы помочь вам!*`;
 
             const telegramUrl = `https://t.me/serinaqu?text=${encodeURIComponent(message)}`;
             window.open(telegramUrl, '_blank');
             
-            showNotification('🆘 Yordam uchun admin bilan bog\'lanish ochildi!', 'success');
+            showNotification('🆘 Открыто соединение с админом для помощи!', 'success');
         }
 
         // ========================================
@@ -2478,21 +2944,22 @@ ${campaign.description}
         // ========================================
         
         document.addEventListener('DOMContentLoaded', function() {
+            setLanguage(currentLang);
             loadInitialData();
             
             setInterval(() => {
                 if (Math.random() < 0.3) {
                     showRandomAd();
                 }
-            }, 30000);
-            
-            setInterval(() => {
-                const bannerAds = ads.filter(ad => ad.banner);
-                if (bannerAds.length > 0 && Math.random() < 0.5) {
-                    const randomBannerAd = bannerAds[Math.floor(Math.random() * bannerAds.length)];
-                    showBannerAd(randomBannerAd);
+                if (Math.random() < 0.2) {
+                    showRandomBottomAd();
                 }
-            }, 120000);
+                if (Math.random() < 0.1 && !document.getElementById('adOverlay').classList.contains('hidden')) {
+                    showAdOverlay(ads[Math.floor(Math.random() * ads.length)]);
+                } else if (Math.random() < 0.05) {
+                    showUpdateTicker();
+                }
+            }, 30000);
         });
     </script>
 </body>
